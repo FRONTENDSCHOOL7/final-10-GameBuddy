@@ -8,6 +8,12 @@
 
 ## **3. GameBuddy 프로젝트 팀원**
 
+|                                              방하진                                               |                                              박태준                                               |                                              최연정                                              |                                              박준홍                                              |
+| :-----------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
+| <img width="180" alt="프로필_방하진" src="https://avatars.githubusercontent.com/u/138538168?v=4"> | <img width="180" alt="프로필_박태준" src="https://avatars.githubusercontent.com/u/126474575?v=4"> | <img width="180" alt="프로필_최연정" src="https://avatars.githubusercontent.com/u/62794884?v=4"> | <img width="180" alt="프로필_박준홍" src="https://avatars.githubusercontent.com/u/80045006?v=4"> |
+|                              [Hajin-Bang](https://github.com/D-Sup)                               |                              [GedFlow](https://github.com/jiwon6635)                              |                          [yeonjeonge-e](https://github.com/Eunnnnnnnn)                           |                               [JJamVa](https://github.com/JJamVa)                                |
+|                                               팀원                                                |                                               팀원                                                |                                               팀원                                               |                                               백수                                               |
+
 ## **4. Covention Rules**
 
 ### **4-1. Branch Convention**
@@ -40,38 +46,49 @@ ex) feature-#17-로그인 화면 구현
 ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 ```
 
-### **4-3. Github Issue Template**
+### **4-3. Code Convention**
+
+```jsx
+var data = "123"; // var 변수 사용금지
+```
+
+### **4-4. Github Issue Template**
 
 - Issue Title Convention
 
-| Issue Title  |             설명             |
-| :----------: | :--------------------------: |
-|   `[Feat]`   |    기능 추가, 삭제, 변경     |
-|  `[Design]`  | 디자인 요소 추가, 삭제, 변경 |
-| `[Refactor]` |        코드 리팩토링         |
-|   `[Bug]`    |          버그 수정           |
+|  Issue Title  |             설명             |
+| :-----------: | :--------------------------: |
+|   `[Feat]-`   |    기능 추가, 삭제, 변경     |
+|  `[Design]-`  | 디자인 요소 추가, 삭제, 변경 |
+| `[Refactor]-` |        코드 리팩토링         |
+|   `[Bug]-`    |          버그 수정           |
 
 ```md
 # Title
+
 <!-- [Issue Title]-#(이슈번호)-간단 설명 -->
 <!-- ex) [Design]-#17-버튼 Border 수정-->
 
 # Description
+
 <!--기능 설명해주세요-->
 
 # Todo
+
 - [ ] <!--해야할 작업1-->
 - [x] <!--해야할 작업2-->
 
 # ETC
-<!--기타 작업-->
 
+<!--기타 작업-->
 ```
 
-#### **Github PR template**
+### **4-5. Github PR template**
 
 ```md
-# PR 제목 <!-- ex) 버튼 기능 구현 -->
+# PR 제목
+
+<!-- ex) 버튼 기능 구현 -->
 
 # 변경 사항
 
@@ -81,7 +98,7 @@ ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 # 관련 이슈
 
 <!-- #이슈번호 - 해결 -->
-<!-- ex) #17 - API통신 오류 해결-->
+<!-- ex) #17-API통신 오류 해결-->
 ```
 
 ## **5. GameBuddy 프로젝트 구조**
@@ -98,40 +115,42 @@ GameBuddy file structure
   ├─ API ────────────────────── API 호출 함수 모음
   ├─ Components ─────────────── 컴포넌트 모음
     ├─ Basics ───────────────── 기본 컴포넌트 폴더
-      ├─ header.jsx
-      ├─ footer.jsx
-      └─ 404Error.jsx
+      ├─ Header.jsx
+      ├─ Footer.jsx
+      └─ Error404.jsx
     ├─ Login
-      ├─ splash.jsx ─────────── 스플래시
-      └─ login.jsx ──────────── 로그인
-    ├─ Register
-      └─ register.jsx
-    ├─ main
-      ├─ switchMode.jsx ─────── 모드 변경 토글
-      ├─ postList.jsx ───────── 피드에 올라올 글 리스트
-      └─ postDetail.jsx ─────── 게시글 누르면 나오는 모달
+      └─ Login.jsx ──────────── 로그인
+    ├─ Splash
+      └─ Splash.jsx ─────────── 스플래시
+    ├─ SignUp
+      └─ SignUp.jsx ────────── 회원가입
+    ├─ Main
+      ├─ SwitchMode.jsx ─────── 모드 변경 토글
+      ├─ PostList.jsx ───────── 피드에 올라올 글 리스트
+      └─ PostDetail.jsx ─────── 게시글 누르면 나오는 모달
     ├─ Chat
       ├─ chatList.jsx ───────── 채팅 목록
       └─ dmChat.jsx ─────────── 채팅 누르면 나오는 DM
     ├─ Write
-      └─ write.jsx ──────────── 게시글 작성
+      └─ Write.jsx ──────────── 게시글 작성
     └─ Profile
-      ├─ profile.jsx ────────── 프로필 상세 부분
-      ├─ recruit.jsx ────────── 작성한 게임 모집글 리스트
-      └─ post.jsx ───────────── 작성한 소통글 리스트
+      ├─ Profile.jsx ────────── 프로필 상세 부분
+      ├─ Recruit.jsx ────────── 작성한 게임 모집글 리스트
+      └─ Post.jsx ───────────── 작성한 소통글 리스트
   ├─ Routes ─────────────────── 라우터로 이동할 페이지 모음
-    ├─ registerPage.jsx ─────── 로그인화면에서 회원가입 할 때
-    ├─ mainFeedPage.jsx ─────── 로그인 성공시
-    ├─ dmChatPage.jsx ───────── 채팅 목록 클릭시
+    ├─ SignUpPage.jsx ─────── 로그인화면에서 회원가입 할 때
+    ├─ MainFeedPage.jsx ─────── 로그인 성공시
+    ├─ ChattingListPage.jsx ───────── 채팅 목록 클릭시
     ├─ writePage.jsx ────────── 게시글 작성시
-    ├─ followDetailPage.jsx ─── 유저 팔로워 눌렀을 때
-    └─ profilePage.jsx ──────── 유저 프로필 눌렀을 때
-  ├─ Static ─────────────────── 각종 정적 파일 모음
+    ├─ FollowDetailPage.jsx ─── 유저 팔로워 눌렀을 때
+    └─ ProfilePage.jsx ──────── 유저 프로필 눌렀을 때
+  ├─ assets ─────────────────── 각종 정적 파일 모음
     ├─ font
     └─ image
   ├─ App.js
   ├─ index.js
-  └─ Store.js ───────────────── 전역 상태 관리파일
+  └─ Store
+    └─ Store.js ───────────────── 전역 상태 관리파일
 ├─ .gitignore
 ├─ package-lock.json
 ├─ package.json
