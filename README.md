@@ -46,13 +46,7 @@ ex) feature-#17-로그인 화면 구현
 ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 ```
 
-### **4-3. Code Convention**
-
-```jsx
-var data = "123"; // var 변수 사용금지
-```
-
-### **4-4. Github Issue Template**
+### **4-3. Github Issue Template**
 
 - Issue Title Convention
 
@@ -83,7 +77,7 @@ var data = "123"; // var 변수 사용금지
 <!--기타 작업-->
 ```
 
-### **4-5. Github PR template**
+### **4-4. Github PR template**
 
 ```md
 # PR 제목
@@ -101,6 +95,47 @@ var data = "123"; // var 변수 사용금지
 <!-- ex) #17-API통신 오류 해결-->
 ```
 
+### **4-5. Prettier Convention**
+
+```jsx
+module.exports = {
+  semi: true, // 세미콜론 여부
+  printWidth: 80, // 코드길이 제한
+  tabWidth: 2, // 탭의 길이
+  singleQuote: false, // 쌍따옴표 사용
+  jsxSingleQuote: false, // 쌍따옴표 사용
+  trailingComma: "none", // 배열,객체 마지막 요소에 , 사용
+  bracketSpacing: true, // 중괄호 양옆 공백
+  bracketSameLine: true, // 꺽쇠 줄바꿈 여부
+  jsxBracketSameLine: true, // 꺽쇠 줄바꿈 여부
+  arrowParens: "always" // 파라미터가 1개일때, 괄호 생략
+};
+```
+
+### **4-6. File Convention**
+
+```
+1. 컴포넌트 분리된 파일은 `PasCalCase` 적용
+ex) Header.jsx, Footer.jsx
+
+2. 컴포넌트 아닌 파일은 `camelCase` 적용
+ex) loginApi.jsx, store.js
+
+3. CSS파일은 적용할 파일명과 일치
+ex) Header.jsx의 css파일은 Header.module.css
+
+```
+
+### **4-7. Code Convention**
+
+```
+1. var 변수 사용 금지
+
+2. 변수명 및 함수명은 `CamelCase`로 작성
+ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
+
+```
+
 ## **5. GameBuddy 프로젝트 구조**
 
 ```
@@ -114,7 +149,7 @@ GameBuddy file structure
 ├─ src
   ├─ API ────────────────────── API 호출 함수 모음
   ├─ Components ─────────────── 컴포넌트 모음
-    ├─ Basics ───────────────── 기본 컴포넌트 폴더
+    ├─ Commons ───────────────── 기본 컴포넌트 폴더
       ├─ Header.jsx
       ├─ Footer.jsx
       └─ Error404.jsx
@@ -129,24 +164,26 @@ GameBuddy file structure
       ├─ PostList.jsx ───────── 피드에 올라올 글 리스트
       └─ PostDetail.jsx ─────── 게시글 누르면 나오는 모달
     ├─ Chat
-      ├─ chatList.jsx ───────── 채팅 목록
-      └─ dmChat.jsx ─────────── 채팅 누르면 나오는 DM
+      ├─ ChatList.jsx ───────── 채팅 목록
+      └─ DmChat.jsx ─────────── 채팅창 누르면 나오는 채팅화면
     ├─ Write
       └─ Write.jsx ──────────── 게시글 작성
     └─ Profile
       ├─ Profile.jsx ────────── 프로필 상세 부분
       ├─ Recruit.jsx ────────── 작성한 게임 모집글 리스트
       └─ Post.jsx ───────────── 작성한 소통글 리스트
-  ├─ Routes ─────────────────── 라우터로 이동할 페이지 모음
+  ├─ Pages ─────────────────── 라우터로 이동할 페이지 모음
     ├─ SignUpPage.jsx ─────── 로그인화면에서 회원가입 할 때
     ├─ MainFeedPage.jsx ─────── 로그인 성공시
     ├─ ChattingListPage.jsx ───────── 채팅 목록 클릭시
-    ├─ writePage.jsx ────────── 게시글 작성시
-    ├─ FollowDetailPage.jsx ─── 유저 팔로워 눌렀을 때
+    ├─ WritePage.jsx ────────── 게시글 작성시
+    ├─ FollowDetailPage.jsx ─── 유저의 팔로워를 눌렀을 때
     └─ ProfilePage.jsx ──────── 유저 프로필 눌렀을 때
   ├─ assets ─────────────────── 각종 정적 파일 모음
     ├─ font
     └─ image
+  └─ Router
+    └─ Router.jsx ──────── 라우터로 이동할 페이지 경로 지정
   ├─ App.js
   ├─ index.js
   └─ Store
