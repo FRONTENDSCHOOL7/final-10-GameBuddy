@@ -19,7 +19,7 @@
 ### **4-1. Branch Convention**
 
 ```
-feature-#(이슈번호)-(기능구현설명)
+feature-#(이슈번호)-(간단한 기능구현 설명)
 
 ex) feature-#17-로그인 화면 구현
 ```
@@ -60,8 +60,8 @@ ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 ```md
 # Title
 
-<!-- [Issue Title]-#(이슈번호)-간단 설명 -->
-<!-- ex) [Design]-#17-버튼 Border 수정-->
+<!-- [Issue Title]-간단 설명 -->
+<!-- ex) [Design]-버튼 Border 수정-->
 
 # Description
 
@@ -86,8 +86,8 @@ ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 
 # 변경 사항
 
-<!-- 변경사항 목록을 작성-->
-<!-- ex) 1. 버튼 디자인 변경-->
+- []<!-- 변경사항 목록을 작성-->
+- []<!-- ex) 1. 버튼 디자인 변경-->
 
 # 관련 이슈
 
