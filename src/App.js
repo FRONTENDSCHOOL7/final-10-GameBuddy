@@ -1,6 +1,10 @@
-import Splash from "./Components/Splash/Splash";
+import React from "react";
+import Router from "./Router/Router";
 
 function App() {
-  return <Splash />;
+  return (
+    <Router />
+  );
+
 }
 export default App;

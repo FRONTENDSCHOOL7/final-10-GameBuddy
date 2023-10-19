@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import mainChar from "../../assets/image/main_char.png";
@@ -22,3 +23,4 @@ export default function Splash() {
     </div>
   );
 }
+
