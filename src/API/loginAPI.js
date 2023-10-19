@@ -7,9 +7,9 @@ async function loginAPI(email, passwd) {
         method: 'POST',
         url: "https://api.mandarin.weniv.co.kr/user/login",
         data: {
-          "user":{
-              "email": email,
-              "password": passwd
+          "user": {
+            "email": email,
+            "password": passwd
           }
         }
       }

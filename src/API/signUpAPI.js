@@ -1,5 +1,5 @@
 import axios from "axios";
 
-function signUpAPI() {}
+function signUpAPI() { }
 
 export default signUpAPI
