@@ -5,13 +5,13 @@ import mainChar from "../../assets/image/main_char.png";
 import styles from "./splash.module.css";
 
 export default function Splash() {
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       navigate("/login");
-  //     }, 2000);
-  //   }, []);
+    useEffect(() => {
+      setTimeout(() => {
+        navigate("/main");
+      }, 2000);
+    }, []);
 
   return (
     <div className={styles["splash-container"]}>
