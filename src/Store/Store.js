@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil"
 
 //로그인 성공 시, 로그인 API호출 값을 저장할 atom
-export const userData = atom({
-    key: "LoginUserInfo",
+export const userDataAtom = atom({
+    key: "userDataAtom",
     default: {
         "_id": "",
         "username": "",
@@ -13,11 +13,23 @@ export const userData = atom({
     }
 })
 
+// MainFeed에서 SwitchMode를 누를 시, 상태 변경시키는 atom
+export const switchModeAtom = atom({
+    key: "switchModeAtom",
+    default: false
+})
+
+// postListData 저장하는 atom
+export const postListDataAtom = atom({
+    key: "postListDataAtom",
+    default: []
+})
+
 //userData의 token값을 받아올 selector
-export const tokenData = selector({
-    key: "tokenData",
+export const tokenDataSelector = selector({
+    key: "tokenDataSelector",
     get: ({ get }) => {
-        const userToken = get(userData);
+        const userToken = get(userDataAtom);
         return userToken.token
     }
 })

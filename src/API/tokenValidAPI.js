@@ -6,8 +6,8 @@ async function tokenValidAPI(setTokenValid) {
     let result = await axios({
       method: 'get',
       url: `https://api.mandarin.weniv.co.kr/user/myinfo`,
-      headers:{
-        "Authorization" : `Bearer ${token}`
+      headers: {
+        "Authorization": `Bearer ${token}`
       },
       data: {
       }
