@@ -1,14 +1,9 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Error404 from "./Components/Commons/Error404";
+import Router from "./Router/Router";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<Error404 />} />
-      </Routes>
-    </BrowserRouter>
+    <Router />
   );
 
 }
