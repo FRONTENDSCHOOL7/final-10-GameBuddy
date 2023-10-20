@@ -14,6 +14,7 @@ async function followingPostAPI() {
         return post
     } catch (error) {
         console.log("PostList Error", error)
+        return [];
     }
 };
 
