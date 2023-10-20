@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from "react";
-import signUpAPI from "../../API/signUpAPI";
+import React from "react";
+import emailValidAPI from "../../API/emailValidAPI";
 
-function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function SignUp({setCheck, email, setEmail, password, setPassword}) {
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    signUpAPI(email, password);
+    const result = await emailValidAPI(email)
+    
+    if(password.length < 6) {
+      alert('비밀번호는 6자리 이상이어야 합니다.')
+    } else if(result === 0){
+      setCheck(true)
+    } else if(result === 1){ 
+      alert("이미 가입된 이메일 입니다.")
+    }
   };
 
   const onChangeEmail = (e) => {
