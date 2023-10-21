@@ -35,3 +35,38 @@ export const Input = styled.input`
   border: 1px solid #f2f2f2;
   border-radius: 32px;
 `;
+
+//모달
+export const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+export const ModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+`;
+
+export const ModalItem = styled.p`
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #dbdbdb;
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
