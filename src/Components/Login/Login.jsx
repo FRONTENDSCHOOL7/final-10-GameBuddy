@@ -7,7 +7,7 @@ import KakaoLogin from "../../assets/image/kakao-login.png"
 import GoogleLogin from "../../assets/image/google-login.png"
 import FbLogin from "../../assets/image/fb-login.png"
 
-const BackGround = styled.div`
+const Container = styled.div`
     background-color: #000000;
     width: 100%;
     height: 100vh;
@@ -74,7 +74,6 @@ const BackGround = styled.div`
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [btnValid, setBtnValid] = useState("disabled")
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
@@ -99,17 +98,17 @@ function Login() {
 
   return (
     <>
-      <BackGround>
+      <Container>
         <LoginForm onSubmit={onSubmitHandler}>
           <LogoImg src={CharImg} />
             <PTag>아이디</PTag>
             <InputTag type="text" onChange={onChangeEmail} />
             <br />
-            <PTag>비번</PTag>
+            <PTag>비밀번호</PTag>
             <InputTag type="password" onChange={onChangePassword} />
             <br />
             <br />
-            <LoginBtn type="submit" disabled={!email || password.length < 6} >로그인!</LoginBtn>
+            <LoginBtn type="submit" disabled={!email || password.length < 6} >로그인</LoginBtn>
             <SnsLoginGroup>
               <SnsLoginBtn src={KakaoLogin}/>
               <SnsLoginBtn src={GoogleLogin}/>
@@ -118,7 +117,7 @@ function Login() {
 
           <SignupLink onClick={nextPage}>이메일로 회원가입</SignupLink>
         </LoginForm>
-      </BackGround>
+      </Container>
     </>
   );
 }
