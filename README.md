@@ -190,7 +190,7 @@ GameBuddy file structure
     └─ image
   ├─ Router
     └─ Router.jsx ──────── 라우터로 이동할 페이지 경로 지정
-  ├─ App.js
+  ├─ styles
     └─ GlobalStyled.js ──────── reset css 작업 파일
   ├─ App.js
   ├─ index.js

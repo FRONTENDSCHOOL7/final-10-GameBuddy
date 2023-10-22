@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+/* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; */
+/* 위 코드 화면 고정 시키는 코드 */
+
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
