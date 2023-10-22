@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../assets/image/HomeIcon.svg";
 import { ReactComponent as ChatIcon } from "../../assets/image/ChatIcon.svg";
 import { ReactComponent as WriteIcon } from "../../assets/image/WriteIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/image/ProfileIcon.svg";
 
 function Footer() {
-  const [active, setActive] = useState("home");
-  // const navigate = useNavigate();
+  const [$active, setActive] = useState("home");
+  const navigate = useNavigate();
 
   const menus = [
     { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
@@ -24,9 +24,12 @@ function Footer() {
         return (
           <Item
             key={menu.id}
-            onClick={() => setActive(menu.id)}
-            active={active === menu.id}>
-            <Icon active={active === menu.id} />
+            onClick={() => {
+              setActive(menu.id);
+              navigate(menu.path);
+            }}
+            $active={$active === menu.id}>
+            <Icon $active={$active === menu.id} />
             <span>{menu.name}</span>
           </Item>
         );
@@ -57,37 +60,37 @@ const Item = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  color: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
+  color: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
 `;
 
 const StyledHomeIcon = styled(HomeIcon)`
   path {
-    stroke: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
-    /* fill: ${({ active }) => (active ? "#5865F2" : "none")}; */
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
+    /* fill: ${({ $active }) => ($active ? "#5865F2" : "none")}; */
   }
 `;
 
 const StyledChatIcon = styled(ChatIcon)`
   path {
-    stroke: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
-    /* fill: ${({ active }) => (active ? "#5865F2" : "none")}; */
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
+    /* fill: ${({ $active }) => ($active ? "#5865F2" : "none")}; */
   }
 `;
 
 const StyledWriteIcon = styled(WriteIcon)`
   path {
-    stroke: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
-    /* fill: ${({ active }) => (active ? "#5865F2" : "none")}; */
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
+    /* fill: ${({ $active }) => ($active ? "#5865F2" : "none")}; */
   }
   rect {
-    stroke: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
-    /* fill: ${({ active }) => (active ? "#5865F2" : "none")}; */
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
+    /* fill: ${({ $active }) => ($active ? "#5865F2" : "none")}; */
   }
 `;
 
 const StyledProfileIcon = styled(ProfileIcon)`
   path {
-    stroke: ${({ active }) => (active ? "#5865F2" : "#A4A4A4")};
-    /* fill: ${({ active }) => (active ? "#5865F2" : "none")}; */
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#A4A4A4")};
+    /* fill: ${({ $active }) => ($active ? "#5865F2" : "none")}; */
   }
 `;
