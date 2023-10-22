@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-/* position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; */
-/* 위 코드 화면 고정 시키는 코드 */
-
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -13,6 +7,14 @@ export const HeaderContainer = styled.div`
   padding: 13px 20px 12px 12px;
   background-color: #ffff;
   border-bottom: 1px solid #dbdbdb;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  box-sizing: border-box;
 `;
 
 export const Logo = styled.h1`

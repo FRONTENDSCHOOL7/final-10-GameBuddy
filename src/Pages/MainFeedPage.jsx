@@ -12,11 +12,11 @@ function MainFeedPage() {
   tokenValidAPI(setTokenValid);
 
   return tokenValid ? (
-    <div>
+    <>
       <Header type="main" />
       <PostList />
       <Footer />
-    </div>
+    </>
   ) : (
     <Navigate to="/login" />
   );

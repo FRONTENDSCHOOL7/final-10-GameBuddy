@@ -2,14 +2,18 @@ import styled from "styled-components";
 
 export const Article = styled.article`
   display: flex;
-  /* flex: 1 auto; */
-  /* header footer가 영역 외 빈공간을 이 컴포넌트가 다 먹는거다 */
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  padding-right: 16px;
-  padding-top: 11px;
+
+  padding-top: 80px; //첫번째 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
+  padding-bottom: 80px; //마지막 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   width: 100%;
+
+  flex: 1 auto;
+  overflow-y: auto;
+
+  box-sizing: border-box;
 `;
 export const Section = styled.section`
   display: flex;
@@ -17,7 +21,7 @@ export const Section = styled.section`
   padding-top: 5px;
   padding-right: 20px;
   padding-left: 7px;
-  border: 1px solid black;
+  border: 1px solid var(--color-lightpurple);
 `;
 
 export const PostHeaderImg = styled.img`
@@ -84,6 +88,7 @@ export const FooterCount = styled.span`
   color: gray;
   width: 15px;
   height: 15px;
+  line-height: 22px;
 `;
 
 export const Date = styled.span`
