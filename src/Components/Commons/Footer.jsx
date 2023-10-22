@@ -37,6 +37,12 @@ function Footer() {
 
 export default Footer;
 
+/* position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw; */
+/* 하단 Footer 고정시키는 코드 */
+
 const FooterContainer = styled.footer`
   display: flex;
   justify-content: space-around;
