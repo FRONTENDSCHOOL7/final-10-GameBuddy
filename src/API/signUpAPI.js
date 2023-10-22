@@ -19,10 +19,10 @@ async function signUpAPI(userName, email, password, accountName, intro, image) {
       } 
     })
     console.log(result.data)
-    return true
+    return 0
   } catch (error) {
     console.log(error.response.data)
-    return false
+    return 1
   }
 }
 
