@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import DefaultImage from '../../assets/image/char_inactive.png';
+import ImageChangeBtn from '../../assets/image/img-change.png'
 import signUpAPI from '../../API/signUpAPI';
 
 const Container = styled.div`
@@ -24,6 +25,9 @@ const ProfileSettingLogo = styled.p`
   font-size: 25px;
   font-weight:bold;
   color: #000000;
+`
+const ImageChangeButton = styled.input`
+  background-image: ${ImageChangeBtn};
 `
 const PTag = styled.p`
     margin:14px 0 6px 0;
@@ -68,7 +72,10 @@ function SetProfile({email, password}) {
   const [accountName, setAccountName] = useState('');
   const [intro, setIntro] = useState('');
   const [isSignUp, setIsSignUp] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
+
+  const fileInputRef = React.createRef(); // 파일 입력 참조 생성
 
   useEffect(() => {
     if (!userName) setUserName(email.split('@')[0])
@@ -77,7 +84,7 @@ function SetProfile({email, password}) {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const image = '';
+    const image = selectedImage || DefaultImage;
     if(userName.length < 2 || userName.length > 10) {
       setIsSignUp(2)
     } else {
@@ -104,12 +111,38 @@ function SetProfile({email, password}) {
     setIntro(e.target.value);
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleImageClick = () => {
+    fileInputRef.current.click(); // 숨겨진 파일 입력을 트리거
+  };
+
   return (
     <Container>
       <SetProfileForm onSubmit={onSubmitHandler}>
         <ProfileSettingLogo>프로필 설정</ProfileSettingLogo>
 
-        <img src={DefaultImage} alt="디폴트이미지" />
+        <img
+         src={selectedImage || DefaultImage} 
+         alt="프로필 이미지" 
+         onClick={handleImageClick}
+         style={{cursor: 'pointer'}}
+         />
+        <input
+          type='file'
+          onChange={handleImageChange}
+          ref={fileInputRef}
+          accept="image/jpeg, image/png"
+          style={{display:'none'}}
+        />
 
         <PTag>사용자이름</PTag>
         <InputTag type="text" onChange={onChangeUserName} placeholder='2~10자 이내여야 합니다.' />
