@@ -40,23 +40,25 @@ function Footer() {
 
 export default Footer;
 
-/* position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw; */
-/* 하단 Footer 고정시키는 코드 */
-
 const FooterContainer = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: white;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  border-top: 1px solid #dbdbdb;
 `;
 
 const Item = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 12px 6px;
   background: none;
   border: none;
   cursor: pointer;
