@@ -9,6 +9,7 @@ import ChattingListPage from "../Pages/ChattingListPage";
 import WritePage from "../Pages/WritePage";
 import ProfilePage from "../Pages/ProfilePage";
 import Error404 from "../Components/Commons/Error404";
+import Profile from "../Components/Profile/Profile";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/fix" element={<Profile />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

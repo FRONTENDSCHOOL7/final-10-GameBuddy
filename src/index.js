@@ -12,8 +12,8 @@ root.render(
     <React.StrictMode>
         <RecoilRoot>
             <GlobalStyles />
-            <Profile />
-            {/* <App /> */}
+            {/* <Profile /> */}
+            <App />
         </RecoilRoot>
     </React.StrictMode>
 );

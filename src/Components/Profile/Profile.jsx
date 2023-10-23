@@ -1,184 +1,154 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import backImage from '../../assets/image/back_Button.png';
-import Header_backImage from '../../assets/image/Header_Back.png';
+import React, {useRef, useState} from 'react'
+import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import DefaultImage from '../../assets/image/char_inactive.png';
+import Header from '../Commons/Header/Header';
 
-const ProfileForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  div {
-    display: block
-  }
-
-  Input.inputType {
-    color: var(--767676, #767676);
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
+const ProfileContainer = styled.div`
+  background-color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  position:relative;
+  font-size:12px;
 `;
 
-
-const Input = styled.input`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const ProfileInput = styled.div`
+  padding: 0 34px;
 `;
 
-const Footer = styled.footer`
-  position: fixed;
-  bottom: 20px;
-  left: calc(50% - (322px / 2));
+const ProfileImage = styled.img`
+  cursor: pointer;
+
+  width: 110px;
+  height: 110px;
+  border-radius: 100%;
+  margin-top: 77.5px;
 `;
 
-const SaveButton = styled.button`
-  width :322px ;
-  height :44px ;
-  border-radius :32px ;
-  border:none ;
-  background:#5865F2 ;
-  color:white ;
-  font-size :16px ;
+const PTag = styled.p`
+  margin:14px 0 6px 0;
+  text-align:left;
 `;
 
+const InputTag = styled.input`
+    width:100%;
+    height:23px; 
+    border-width :0px 0px 1px ; 
+    padding: 0 0 1px 0;
+    font-size: 20px;
 
-export default function Profile({email, password}) {
-  const [profile, setProfile] = useState({
-    photo:null,
-    userName:'',
-    accountName:'',
-    intro:''
-  });
+    &:focus {
+        outline:none; 
+        border-color:#5865F2; 
+      }
+    
+    &::placeholder {
+      color:#DBDBDB; 
+      font-size:14px;  
+    }
+`;
 
+const SubmitBtn = styled.button`
+width: calc(100% - 68px);
+height: 44px;
+margin-top: 228px;
+border-radius: 44px;
+border: none;
+background-color: #5865f2;
+color: #ffffff;
+`
 
-// export default function Profile({
+const Warning = styled.p`
+  color: #ff0000;
+  text-align:left;
+  font-size: 12px;
+  margin-top: 4px;
+`
 
-//   photo:null,
-//   userName:'',
-//   accountName:'',
-//   intro:'',
-// }) {
-//   const [profile, setProfile] = useState()
-// }
+function Profile() {
 
-  // useEffect(() => {
-  //   if (!profile.username) setProfile(prevProfile => ({...prevProfile, username : email.split('@')[0]}))
-  //   if (!profile.accountId) setProfile(prevProfile => ({...prevProfile, accountId :'_' + email.split('@')[0]}))
-  // }, [email])
+  const [userName, setUserName] = useState('');
+  const [accountName, setAccountName] = useState('');
+  const [intro, setIntro] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isSignUp, setIsSignUp] = useState(0);
+  const navigate = useNavigate();
 
+  const fileInputRef = useRef();
+
+  const onChangeUserName =(e) => {
+    setUserName(e.target.value);
+    if(isSignUp === 2) setIsSignUp(0);
+  };
+
+  const onChangeAccountName =(e) => {
+    setAccountName(e.target.value);
+    if(isSignUp === 1) setIsSignUp(0);
+  };
+
+  const onChangeIntro =(e) => {
+    setIntro(e.target.value);
+  };
+
+  // 이미지 변경 핸들러
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // 이미지 클릭 핸들러
+  const handleImageClick = () => {
+    fileInputRef.current.click(); 
+  };
+
+  // '/main'은 메인 페이지의 경로
+  const handleClick = () => {
+    navigate('/main');
+  };
   
-
-  const handleImageChange=(event)=>{
-    setProfile({
-      ...profile,
-      photo : URL.createObjectURL(event.target.files[0])
-    });
-  };
-
-  // 사용자 이름
-  const handleNameChange=(event)=>{
-      setProfile({
-      ...profile,
-      [event.target.userName]: event.target.value
-    });
-  };
-
-//   const handleNameChange=(event)=>{
-//     const value = event.target.value;
-//     setNameValue(value);
-//     setNameError('');
-// };
-
-  // 계정 ID
-  const handleIdChange=(event)=>{
-    setProfile({
-      ...profile,
-      [event.target.accountName]: event.target.value
-    });
-  };
-
-  // 소개
-  const handleIntroChange=(event)=>{
-    setProfile({
-      ...profile,
-      [event.target.intro]: event.target.value
-    });
-  };
-
-  const handleSubmit=(event)=>{
-    event.preventDefault();
-    // API 호출
-    console.log(profile);
-
-    window.history.back();
-  };
+  // API 코드 작성 (useEffect)
 
   return (
-  <div>
-
-  <header>
-    {/* <img src={Header_backImage} alt="header" /> */}
-    <img src={backImage} alt="뒤로가기" onClick={()=>window.history.back()} />
-  </header>
-
-
-  <ProfileForm onSubmit={handleSubmit}>
-
-
-    {/* <Input type="file" name="photo" multiple onChange={handleImageChange} /> */}
-
-    
-    <div>
-      사용자 이름
-      <Input
-        id='name'
-        inputType='text'
-        labelText='사용자 이름'
-        placeHolder='2~10자 이내여야 합니다.'
-        value={profile.userName}
-        onChange= {handleNameChange}
+    <ProfileContainer>
+      <Header type={"profileMod"} />
+      <ProfileImage
+        src={selectedImage || DefaultImage}
+        alt="프로필 이미지"
+        onClick={handleImageClick} // 이미지 클릭 시 파일 선택 창이 열림
       />
-    </div>
 
-    <div>
-      계정 ID
-      <Input 
-        id='id'
-        inputType='text'
-        labelText='계정 ID'
-        placeHolder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-        value={profile.accountName}
-        onChange= {handleIdChange}
-      />
-    </div>
-
-    <div>
-      소개
-      <Input 
-        id='intro'
-        inputType='text'
-        labelText='소개'
-        placeHolder='자신을 소개해주세요.'
-        value={profile.intro}
-        onChange= {handleIntroChange}
-      />
-    </div>
-</ProfileForm>
-
-<Footer>
-  <SaveButton onClick ={handleSubmit}> <strong>Game Buddy</strong> 저장하기</SaveButton> 
-</Footer>
-
- {/* 프로필 미리보기 */}
-{/* 
-{ profile.username && (<p>Username:{profile.username}</p>) }
-{ profile.accountId && (<p>Account ID:{profile.accountId}</p>) }
-{ profile.introduction && (<p>Introduction:{profile.introduction}</p>) } */}
-
-  </div>
+      <ProfileInput>
+        <input 
+          type='file' 
+          onChange={handleImageChange} 
+          ref={fileInputRef} 
+          accept="image/jpeg,image/png" 
+          style={{display:'none'}} 
+        />
+  
+        <PTag>사용자이름</PTag>
+        <InputTag type="text" placeholder='2~10자 이내여야 합니다.' value={userName} onChange={onChangeUserName} />
+        <Warning style={isSignUp === 2 ? {display:"block"} : {display:"none"}}>*유저이름은 2~10자 이내여야 합니다.</Warning>
+  
+        <PTag>계정 ID</PTag>
+        <InputTag type="text" placeholder='영문 숫자 마침표 밑줄만 사용 가능합니다. ' value={accountName} onChange={onChangeAccountName} />
+        <Warning style={isSignUp === 1 ? {display:"block"} : {display:"none"}}>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</Warning>
+        
+        <PTag>소개</PTag>
+        <InputTag type="text" placeholder='자신을 소개해주세요.' value={intro} onChange={onChangeIntro}/>
+  
+        <SubmitBtn type='submit' onClick={handleClick}>Game Buddy 시작하기!</SubmitBtn>
+      </ProfileInput>
+      
+    </ProfileContainer>
   );
 }
+
+export default Profile;
