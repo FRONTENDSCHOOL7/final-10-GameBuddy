@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import followingPostAPI from "../../API/followingPostAPI";
 import { useRecoilState } from "recoil";
 import { postListDataAtom } from "../../Store/Store";
+import PostItem from "./PostItem/PostItem";
 
 function PostList() {
   const [postData, setPostData] = useRecoilState(postListDataAtom);
@@ -14,19 +15,7 @@ function PostList() {
     fetchData();
   }, []);
 
-  return postData.length === 0 ? (
-    <div>비어있음</div>
-  ) : (
-    <div>
-      {postData.map((post) => {
-        return (
-          <div key={post.id}>
-            <div>{post.id}</div>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <PostItem />;
 }
 
 export default PostList;

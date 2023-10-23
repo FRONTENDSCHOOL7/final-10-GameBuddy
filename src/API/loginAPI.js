@@ -14,26 +14,15 @@ async function loginAPI(email, password) {
       }
     );
 
-    // let result = await axios(
-    //   {
-    //     method: 'POST',
-    //     url: "https://api.mandarin.weniv.co.kr/user/login",
-    //     data: {
-    //       "user": {
-    //         "email": email,
-    //         "password": passwd
-    //       }
-    //     }
-    //   }
-    // )
+    console.log(result.data)
 
     const token = await result.data.user.token
     localStorage.setItem("token", token)
 
   } catch (error) {
-    console.log("에러");
-    alert("로그인에 실패했습니다");
-    return false;
+    console.log("에러 : " + error);
+    alert("이메일 또는 비밀번호가 일치하지 않습니다.");
+    // return false;
   }
 };
 
