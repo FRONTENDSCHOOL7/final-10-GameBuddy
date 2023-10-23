@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Components/Commons/Header/Header";
 import Profile from "../Components/Profile/Profile/Profile";
 import Recruit from "../Components/Profile/Recruit/Recruit";
+import PostView from "../Components/Profile/PostView";
 import Footer from "../Components/Commons/Footer";
 
 function ProfilePage() {
@@ -10,6 +11,7 @@ function ProfilePage() {
       <Header type="userProfile" />
       <Profile />
       <Recruit />
+      <PostView />
       <Footer />
     </div>
   );
