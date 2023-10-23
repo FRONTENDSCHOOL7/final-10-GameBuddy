@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { postListDataAtom } from "../../../Store/Store";
 import * as S from "./PostItemStyle";
@@ -11,13 +11,18 @@ import comment from "../../../assets/image/icon-comment.svg";
 
 function PostItem() {
   const postData = useRecoilValue(postListDataAtom);
+  const [hoveredId, setHoveredId] = useState(null);
   console.log(postData);
 
   return (
     <S.Article>
       {postData.map((post, id) => {
         return (
-          <S.Section key={id}>
+          <S.Section
+            key={id}
+            onMouseEnter={() => setHoveredId(id)}
+            onMouseLeave={() => setHoveredId(null)}
+            isHovered={hoveredId === id}>
             <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
             <S.PostHeader>
               <S.HeaderTextBox>
