@@ -15,6 +15,8 @@ function PostItem() {
   const [hoveredId, setHoveredId] = useState(null);
   console.log(postData);
 
+  const navigate = useNavigate();
+
   return (
     <S.Article>
       {postData.map((post, id) => {
@@ -24,11 +26,7 @@ function PostItem() {
             onMouseEnter={() => setHoveredId(id)}
             onMouseLeave={() => setHoveredId(null)}
             isHovered={hoveredId === id}>
-            <S.PostHeaderImg
-              src={post.author.image}
-              alt="Profile Image"
-              onClick={() => navigate(`/profile/${post.author.id}`)}
-            />
+            <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
             <S.PostWrapper>
               <S.HeaderTextBox>
                 <div className="flexBox">
