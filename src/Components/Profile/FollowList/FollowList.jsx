@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import * as S from "./FollowListStyle";
 import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
-import followerAPI from "../../../API/followerAPI"
+import followerAPI from "../../../API/followAPI/followerAPI"
 import myInfoAPI from '../../../API/myInfoAPI';
+import followAPI from "../../../API/followAPI/followAPI"
+import unFollowAPI from "../../../API/followAPI/unFollowAPI"
 
 function FollowList() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
   const [followData, setFollowData] = useState([])
+  const [render, ReRender] = useState(true)
   const isFollowerList = "follower"; // 팔로잉 목록을 불러올지, 팔로우 목록을 불러올지 정하는 변수. "follower"면 팔로워 목록이, "following"이면 팔로잉 목록을 불러온다.
 
   // 페이지가 렌더링 되면, recoil 아톰에 현재 로그인한 내 정보를 저장하고 followerAPI를 사용해 데이터를 불러온다
@@ -25,7 +28,16 @@ function FollowList() {
       setFollowData(result);
     }
     fetchData();
-  }, []);
+  }, [render]);
+
+  async function follow(ac) {
+    const result = await followAPI(ac)
+    if(result) ReRender(!render);
+  }
+  async function unFollow(ac) {
+    const result = await unFollowAPI(ac)
+    if(result) ReRender(!render);
+  }
 
   return (
     <S.FollowListContainer>
@@ -41,7 +53,7 @@ function FollowList() {
               </S.Article>
             </S.ProfileBox>
             {/* followerAPI를 사용해 불러온 데이터와 현재 로그인한 유저의 팔로우 목록을 비교해 일치할 경우(이미 팔로우한 경우) 언팔로우 버튼이 표시된다. */}
-            {userData.following.includes(data._id)  ? <S.UnFollowBtn>언팔로우</S.UnFollowBtn> : <S.FollowBtn>팔로우</S.FollowBtn>}
+            {userData.following.includes(data._id)  ? <S.UnFollowBtn onClick={() => unFollow(data.accountname)}>언팔로우</S.UnFollowBtn> : <S.FollowBtn onClick={() => follow(data.accountname)}>팔로우</S.FollowBtn>}
           </S.FollowListForm>
         )
       })}
