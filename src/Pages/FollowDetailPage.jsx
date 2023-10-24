@@ -1,7 +1,14 @@
 import React from "react";
+import Header from "../Components/Commons/Header/Header"
+import FollowList from "../Components/Profile/FollowList/FollowList"
 
 function FollowDetailPage() {
-  return <div>FollowDetailPage</div>;
+  return (
+    <>
+      <Header type={"followers"}/>
+      <FollowList />
+    </>
+  )
 }
 
 export default FollowDetailPage;
