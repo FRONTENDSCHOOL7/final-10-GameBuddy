@@ -8,6 +8,7 @@ import SearchPage from "../Pages/SearchPage";
 import ChattingListPage from "../Pages/ChattingListPage";
 import WritePage from "../Pages/WritePage";
 import ProfilePage from "../Pages/ProfilePage";
+import Profile from "../Components/Profile/Profile";
 import Error404 from "../Components/Commons/Error404";
 
 function Router() {
@@ -22,7 +23,8 @@ function Router() {
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/profile/:accountname" element={<ProfilePage />} />
+        <Route path="/fix" element={<Profile />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

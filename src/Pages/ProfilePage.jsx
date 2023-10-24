@@ -8,9 +8,9 @@ import { useParams } from "react-router-dom";
 
 function ProfilePage() {
   // UserProfile의 경로 profile/:id 에서 :id를 가져온 뒤 id 변수에 할당
-  const { id } = useParams();
+  const { accountName } = useParams();
   // id값이 존재하지 않으면 myProfile이 됨
-  const isMyProfile = !id;
+  const isMyProfile = !accountName;
 
   // 팔로우 상태
   const [isFollowing, setIsFollowing] = useState(true);
