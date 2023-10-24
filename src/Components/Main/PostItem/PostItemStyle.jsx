@@ -34,7 +34,7 @@ export const PostHeaderImg = styled.img`
   height: 24px;
 `;
 
-export const PostHeader = styled.header`
+export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;

@@ -24,7 +24,7 @@ function PostItem() {
             onMouseLeave={() => setHoveredId(null)}
             isHovered={hoveredId === id}>
             <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
-            <S.PostHeader>
+            <S.PostWrapper>
               <S.HeaderTextBox>
                 <div className="flexBox">
                   <S.HeaderH3>{post.author.username}</S.HeaderH3>
@@ -41,7 +41,7 @@ function PostItem() {
                 <S.FooterCount>{post.commentCount}</S.FooterCount>
               </S.Footer>
               <S.Date>{post.createdAt}</S.Date>
-            </S.PostHeader>
+            </S.PostWrapper>
           </S.Section>
         );
       })}
