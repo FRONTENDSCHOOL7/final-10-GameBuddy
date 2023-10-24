@@ -10,6 +10,11 @@ import { useNavigate } from "react-router-dom";
 export default function Header({ type }) {
   const navigate = useNavigate();
 
+  // 헤더 검색 아이콘 : /search 페이지 이동
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
+
   // goBack 버튼: 이전 페이지로 이동
   const goBack = () => {
     navigate(-1);
@@ -54,7 +59,7 @@ export default function Header({ type }) {
     main: (
       <S.HeaderContainer>
         <S.Logo>Game Buddy</S.Logo>
-        <S.StyledIconButton type="button">
+        <S.StyledIconButton type="button" onClick={handleSearchClick}>
           <SearchIcon />
         </S.StyledIconButton>
       </S.HeaderContainer>

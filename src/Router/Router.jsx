@@ -4,6 +4,7 @@ import Splash from "../Components/Splash/Splash";
 import Login from "../Components/Login/Login";
 import MainFeedPage from "../Pages/MainFeedPage";
 import SignUpPage from "../Pages/SignUpPage";
+import Home_no_feed from "../Components/Main/Home_no_feed";
 import SearchPage from "../Pages/SearchPage";
 import ChattingListPage from "../Pages/ChattingListPage";
 import WritePage from "../Pages/WritePage";
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/main" element={<MainFeedPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/homenofeed" element={<Home_no_feed />} />
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
