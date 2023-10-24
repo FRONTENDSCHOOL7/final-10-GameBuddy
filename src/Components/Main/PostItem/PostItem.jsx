@@ -5,6 +5,7 @@ import * as S from "./PostItemStyle";
 import siren from "../../../assets/image/icon-small-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
+import { useNavigate } from "react-router-dom";
 
 // {"\u00A0"} 이거 야무지게 사용가능합니다. react에서 스페이스바 안먹히는거 이걸로 사용하면 됩니다.
 // feat 조병민.
@@ -13,12 +14,17 @@ function PostItem() {
   const postData = useRecoilValue(postListDataAtom);
   console.log(postData);
 
+  const navigate = useNavigate();
   return (
     <S.Article>
       {postData.map((post, id) => {
         return (
           <S.Section key={id}>
-            <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
+            <S.PostHeaderImg
+              src={post.author.image}
+              alt="Profile Image"
+              onClick={() => navigate(`/profile/${post.author.id}`)}
+            />
             <S.PostHeader>
               <S.HeaderTextBox>
                 <div className="flexBox">

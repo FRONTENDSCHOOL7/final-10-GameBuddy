@@ -22,6 +22,7 @@ function Router() {
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

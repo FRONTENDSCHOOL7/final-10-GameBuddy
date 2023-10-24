@@ -1,9 +1,12 @@
-import React from "react";
-import * as S from "./ProfileStyle";
+import React, { useState } from "react";
+import * as S from "./ProfileDetailStyle";
 import { useNavigate } from "react-router-dom";
 
-function Profile() {
+function Profile({ isMyProfile }) {
   const navigate = useNavigate();
+
+  //팔로잉 여부
+  const [isFollowing, setIsFollowing] = useState(true);
 
   return (
     <S.ProfileContainer>
@@ -45,8 +48,23 @@ function Profile() {
         <S.DescriptionText>안녕하세요 반갑섭니다리</S.DescriptionText>
       </S.ProfileDescription>
       <S.ButtonContainer>
-        <S.Button onClick={() => navigate("/chat")}>채팅하기</S.Button>
-        <S.Button>언팔로우하기</S.Button>
+        {/* 나의 프로필인지 아닌지에 따라 이동경로와 내용 달라짐 */}
+        <S.Button
+          onClick={() => (isMyProfile ? navigate("/fix") : navigate("/chat"))}>
+          {isMyProfile ? "프로필 수정하기" : "채팅하기"}
+        </S.Button>
+        {/* 나의 프로필인지 아닌지에 따라 이동경로와 내용 달라짐 */}
+        {/* 팔로잉 상태에 따라 버튼 내용 달라짐 */}
+        <S.Button
+          onClick={() =>
+            isMyProfile ? navigate("/write") : setIsFollowing(!isFollowing)
+          }>
+          {isMyProfile
+            ? "게시글 작성하기"
+            : isFollowing
+            ? "언팔로우하기"
+            : "팔로우하기"}
+        </S.Button>
       </S.ButtonContainer>
     </S.ProfileContainer>
   );
