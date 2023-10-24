@@ -10,6 +10,7 @@ import WritePage from "../Pages/WritePage";
 import ProfilePage from "../Pages/ProfilePage";
 import Error404 from "../Components/Commons/Error404";
 import FollowDetailPage from "../Pages/FollowDetailPage";
+import Profile from "../Components/Profile/Profile";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/follow" element={<FollowDetailPage />} />
+        <Route path="/fix" element={<Profile />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

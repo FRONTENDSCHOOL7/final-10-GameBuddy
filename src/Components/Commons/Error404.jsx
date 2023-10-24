@@ -9,9 +9,11 @@ const ErrorContainer = styled.div `
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: "Black Ops One", sans-serif;
 
   h3 {
     color: #767676;
+    margin: 20px 0;
   }
 
   button {
@@ -24,6 +26,13 @@ const ErrorContainer = styled.div `
     height: 44px;
     flex-shrink: 0;
   }
+
+  @font-face {
+  font-family: "Black Ops One";
+  src: url("../../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 `;
 
 export default function Error404() {
