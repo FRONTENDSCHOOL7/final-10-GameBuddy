@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { postListDataAtom } from "../../../Store/Store";
 import * as S from "./PostItemStyle";
@@ -12,20 +12,24 @@ import { useNavigate } from "react-router-dom";
 
 function PostItem() {
   const postData = useRecoilValue(postListDataAtom);
+  const [hoveredId, setHoveredId] = useState(null);
   console.log(postData);
 
-  const navigate = useNavigate();
   return (
     <S.Article>
       {postData.map((post, id) => {
         return (
-          <S.Section key={id}>
+          <S.Section
+            key={id}
+            onMouseEnter={() => setHoveredId(id)}
+            onMouseLeave={() => setHoveredId(null)}
+            isHovered={hoveredId === id}>
             <S.PostHeaderImg
               src={post.author.image}
               alt="Profile Image"
               onClick={() => navigate(`/profile/${post.author.id}`)}
             />
-            <S.PostHeader>
+            <S.PostWrapper>
               <S.HeaderTextBox>
                 <div className="flexBox">
                   <S.HeaderH3>{post.author.username}</S.HeaderH3>
@@ -42,7 +46,7 @@ function PostItem() {
                 <S.FooterCount>{post.commentCount}</S.FooterCount>
               </S.Footer>
               <S.Date>{post.createdAt}</S.Date>
-            </S.PostHeader>
+            </S.PostWrapper>
           </S.Section>
         );
       })}
