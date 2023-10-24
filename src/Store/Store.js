@@ -9,7 +9,9 @@ export const userDataAtom = atom({
         "email": "",
         "accountname": "",
         "image": "",
-        "token": ""
+        "token": "",
+        "following": [],
+        "follower": []
     }
 })
 

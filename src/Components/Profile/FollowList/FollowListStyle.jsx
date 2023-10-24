@@ -20,6 +20,7 @@ export const ProfileBox = styled.div`
 export const Image = styled.img`
   width: 50px;
   height: 50px;
+  border-radius: 50px;
 `
 
 export const Article = styled.article`
@@ -51,6 +52,15 @@ export const Intro = styled.p`
 export const FollowBtn = styled.button`
   background-color: #5865f2;
   color: #ffffff;
+  width: 70px;
+  height: 35px;
+  border-radius: 26px;
+  border: none;
+  text-align: center;
+`
+export const UnFollowBtn = styled.button`
+  background-color: #dbdbdb;
+  color: #000000;
   width: 70px;
   height: 35px;
   border-radius: 26px;

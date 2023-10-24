@@ -6,6 +6,8 @@ import CharImg from "../../assets/image/main_char.png"
 import KakaoLogin from "../../assets/image/kakao-login.png"
 import GoogleLogin from "../../assets/image/google-login.png"
 import FbLogin from "../../assets/image/fb-login.png"
+import { useSetRecoilState } from 'recoil';
+import { userDataAtom } from '../../Store/Store';
 
 const Container = styled.div`
     background-color: #000000;
@@ -72,13 +74,15 @@ const Container = styled.div`
   `
 
 function Login() {
+  const setUserData = useSetRecoilState(userDataAtom);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    await loginAPI(email, password);
+    const response = await loginAPI(email, password);
+
     if (localStorage.getItem("token")) {
       navigate("/main");
     }
