@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import loginAPI from "../../API/loginAPI";
 import styled from "styled-components";
@@ -78,6 +78,10 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.clear();
+  }, [])
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
