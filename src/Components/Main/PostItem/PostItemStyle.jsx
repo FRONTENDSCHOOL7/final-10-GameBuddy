@@ -5,21 +5,21 @@ export const Article = styled.article`
   flex-direction: column;
   align-items: center;
   gap: 18px;
-
   padding-top: 80px; //첫번째 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   padding-bottom: 80px; //마지막 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   width: 100%;
-
   flex: 1 auto;
   overflow-y: auto;
   box-sizing: border-box;
 `;
+
 export const Section = styled.section`
   display: flex;
   gap: 7px;
   padding-top: 20px;
-  padding-right: 20px;
-  padding-left: 7px;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  width: 80%;
   border: 2px solid var(--color-lightpurple);
   border-radius: 10px;
   box-shadow: ${(props) =>
@@ -30,19 +30,21 @@ export const Section = styled.section`
 
 export const PostHeaderImg = styled.img`
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 1.8rem;
+  height: 1.8rem;
 `;
 
 export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  width: calc(100% - 2.3rem);
 `;
 
 export const HeaderTextBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.1rem;
   .flexBox {
     display: flex;
   }
@@ -50,25 +52,25 @@ export const HeaderTextBox = styled.div`
 
 export const HeaderH3 = styled.h3`
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1.1rem;
 `;
 
 export const HeaderP = styled.p`
   color: gray;
-  font-size: 14px;
+  font-size: 0.9rem;
 `;
 
 export const HeaderImg = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 1.3rem;
+  height: 1.3rem;
   margin-left: auto;
 `;
 
 export const PostContent = styled.p`
   font-family: var(--Roboto-B);
-  font-size: 13px;
-  margin-top: 16px;
-  max-width: 297px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  word-wrap: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* 3줄까지 표시 */
@@ -77,34 +79,34 @@ export const PostContent = styled.p`
 
 export const PostContentImg = styled.img`
   margin-top: 16px;
-  width: 300px;
-  height: 165px;
+  width: 16rem;
+  height: 12rem;
 `;
 
 export const Footer = styled.footer`
   display: flex;
-  gap: 10px;
+  gap: 0.4rem;
   margin-top: 9px;
 `;
 
 export const FooterImg = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 1.3rem;
+  height: 1.3rem;
 `;
 
 export const FooterCount = styled.span`
   color: gray;
-  font-size: 14px;
-  width: 15px;
-  height: 15px;
-  line-height: 18px;
+  font-size: 0.9rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  line-height: 1.1rem;
 `;
 
 export const Date = styled.span`
   margin-top: 11px;
-  font-size: 10px;
+  font-size: 0.8rem;
   color: gray;
-  margin-bottom: 10px;
+  margin-bottom: 0.7rem;
 `;
 
 // export const Input = styled.input.attrs(() => ({

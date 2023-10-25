@@ -1,99 +1,135 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./PostDetailStyle";
 import siren from "../../../assets/image/icon-small-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
-import main from "../../../assets/image/참쉽죠.jpg";
 import profile from "../../../assets/image/char_inactive.png";
+import {
+  commentListDataAtom,
+  getPostDataSelector,
+  isTouchFeed
+} from "../../../Store/Store";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState
+} from "recoil";
+import { showDate } from "../../../Functional/DateFunction";
+import commentAPI from "../../../API/commentAPI";
+import commentWriteAPI from "../../../API/commentWriteAPI";
 
 function PostDetailModal() {
+  const setIsVisible = useSetRecoilState(isTouchFeed);
+  const data = useRecoilValue(getPostDataSelector);
+  const [commentListData, setCommentListData] =
+    useRecoilState(commentListDataAtom);
+  const resetCommentList = useResetRecoilState(commentListDataAtom);
+  const [writing, setWriting] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const obj = await commentAPI(data.id);
+      setCommentListData(obj);
+    }
+    fetchData();
+  }, []);
+
+  const closeModal = () => {
+    setIsVisible(false);
+    resetCommentList();
+  };
+
+  const typingComment = (e) => {
+    setWriting(e.target.value);
+  };
+
+  const sendCommentData = async (e) => {
+    e.preventDefault();
+    const sendComment = await commentWriteAPI(data.id, writing);
+    console.log("댓글 데이터", sendComment);
+    if (sendComment.length !== 0 && sendComment !== undefined) {
+      setCommentListData([sendComment, ...commentListData]);
+    }
+  };
+
   return (
     <S.PostDetailBackground>
       {/* 뒷배경 */}
       <S.PostDetailBox>
         {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
-          <S.PostDetailHeaderProfile src={profile} />
+          <S.PostDetailHeaderProfile src={data.author.image} />
           <S.PostDetailHeaderTextBox>
             <div className="flexBox">
-              <S.PostDetailHeaderUserName>꾸꾸룽</S.PostDetailHeaderUserName>
-              {/* user_name 들어갈 자리 */}
+              <S.PostDetailHeaderUserName>
+                {data.author.username}
+              </S.PostDetailHeaderUserName>
               <S.PostDetailHeaderImg src={siren} alt="Siren" />
             </div>
             <S.PostDetailHeaderAccountName>
-              @Weniv
+              {data.author.accountname}
             </S.PostDetailHeaderAccountName>
-            {/* account_name 들어갈 자리 */}
           </S.PostDetailHeaderTextBox>
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
-          <S.PostDetailContent>안녕안녕</S.PostDetailContent>
-          <S.PostDetailContentImg src={main} alt="PostDetail Image" />
+          <S.PostDetailContent>{data.content}</S.PostDetailContent>
+          {data.image !== undefined ? (
+            <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
+          ) : (
+            <></>
+          )}
           <S.PostDetailFooter>
             <S.PostDetailFooterImg src={heart} />
-            <S.PostDetailFooterCount>1</S.PostDetailFooterCount>
+            <S.PostDetailFooterCount>{data.heartCount}</S.PostDetailFooterCount>
             <S.PostDetailFooterImg src={comment} />
-            <S.PostDetailFooterCount>1</S.PostDetailFooterCount>
+            <S.PostDetailFooterCount>
+              {data.commentCount}
+            </S.PostDetailFooterCount>
           </S.PostDetailFooter>
-          <S.PostDetailFooterDate>2023년 12월 23일</S.PostDetailFooterDate>
+          <S.PostDetailFooterDate>
+            {showDate(data.createdAt)}
+          </S.PostDetailFooterDate>
         </S.PostDetailContentWrapper>
 
         <S.PostDetailHr />
 
         <S.PostDetailCommentWrapper>
           <S.PostDetailCommentTitle>댓글</S.PostDetailCommentTitle>
-
-          <S.PostDetailCommentItem>
-            <S.PostDetailCommentHeaderProfile src={profile} />
-            <S.PostDetailCommentItemTextBox>
-              <div className="flexBox">
-                <S.PostDetailCommentHeaderUserName>
-                  머슬뱅
-                  <S.PostDetailCommentHeaderMinutesAgo>
-                    5분전
-                  </S.PostDetailCommentHeaderMinutesAgo>
-                </S.PostDetailCommentHeaderUserName>
-                <S.PostDetailCommentHeaderImg src={siren} />
-              </div>
-              <S.PostDetailCommentContent>
-                안녕 반가워
-              </S.PostDetailCommentContent>
-            </S.PostDetailCommentItemTextBox>
-          </S.PostDetailCommentItem>
-          <S.PostDetailCommentItem>
-            <S.PostDetailCommentHeaderProfile src={profile} />
-            <S.PostDetailCommentItemTextBox>
-              <div className="flexBox">
-                <S.PostDetailCommentHeaderUserName>
-                  벤치뱅
-                  <S.PostDetailCommentHeaderMinutesAgo>
-                    5분전
-                  </S.PostDetailCommentHeaderMinutesAgo>
-                </S.PostDetailCommentHeaderUserName>
-                <S.PostDetailCommentHeaderImg src={siren} />
-              </div>
-              <S.PostDetailCommentContent>
-                안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕
-                반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕
-                반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕
-                반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕
-                반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워안녕
-                반가워안녕 반가워안녕 반가워안녕 반가워안녕 반가워
-              </S.PostDetailCommentContent>
-            </S.PostDetailCommentItemTextBox>
-          </S.PostDetailCommentItem>
+          {commentListData.map((post, id) => (
+            <S.PostDetailCommentItem key={id}>
+              <S.PostDetailCommentHeaderProfile
+                src={post.author.image}
+                alt="PostDetailCommentHeaderProfile"
+              />
+              <S.PostDetailCommentItemTextBox>
+                <div className="flexBox">
+                  <S.PostDetailCommentHeaderUserName>
+                    {post.author.username}
+                    <S.PostDetailCommentHeaderMinutesAgo>
+                      5분전
+                    </S.PostDetailCommentHeaderMinutesAgo>
+                  </S.PostDetailCommentHeaderUserName>
+                  <S.PostDetailCommentHeaderImg src={siren} />
+                </div>
+                <S.PostDetailCommentContent>
+                  {post.content}
+                </S.PostDetailCommentContent>
+              </S.PostDetailCommentItemTextBox>
+            </S.PostDetailCommentItem>
+          ))}
         </S.PostDetailCommentWrapper>
 
         <S.PostDetailHr />
 
-        <S.PostDetailWriteWrapper>
+        <S.PostDetailWriteForm onSubmit={sendCommentData}>
           <S.PostDetailWriteProfile src={profile} />
-          <S.PostDetailWriteInput />
+          <S.PostDetailWriteInput onChange={typingComment} />
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
-        </S.PostDetailWriteWrapper>
+        </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton>X</S.PostDetailBackButton>
+      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
     </S.PostDetailBackground>
   );
 }
