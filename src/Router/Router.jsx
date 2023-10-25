@@ -12,6 +12,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import Error404 from "../Components/Commons/Error404";
 import FollowDetailPage from "../Pages/FollowDetailPage";
 import Profile from "../Components/Profile/Profile";
+import ChattingRoom from "../Components/Chat/ChattingRoom";
 
 function Router() {
   return (
@@ -29,6 +30,8 @@ function Router() {
         <Route path="/follow" element={<FollowDetailPage />} />
         <Route path="/profile/:accountname" element={<ProfilePage />} />
         <Route path="/fix" element={<Profile />} />
+        <Route path="/chat" element={<ChattingListPage />} />
+        <Route path="/chat/room" element={<ChattingRoom />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

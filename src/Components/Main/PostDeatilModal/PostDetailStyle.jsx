@@ -116,7 +116,7 @@ export const PostDetailFooterCount = styled.span`
 
 export const PostDetailFooterDate = styled.span`
   margin-top: 0.6rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: gray;
   margin-bottom: 0.6rem;
 `;
@@ -181,7 +181,7 @@ export const PostDetailCommentContent = styled.p`
   font-size: 0.8rem;
 `;
 
-export const PostDetailWriteWrapper = styled.div`
+export const PostDetailWriteForm = styled.form`
   padding: 0.5rem 1rem 1rem 1rem;
   width: 100%;
   display: flex;
