@@ -12,12 +12,9 @@ async function commentWriteAPI(post_id, comment) {
                 "Authorization": `Bearer ${token}`
             },
         })
-        // console.log(commentWrite.data.comment)
         const postCommentList = await commentWrite.data.comment;
-        console.log(postCommentList)
         return postCommentList;
     } catch (error) {
-        // console.log("PostList Error", error)
         return [];
     }
 };

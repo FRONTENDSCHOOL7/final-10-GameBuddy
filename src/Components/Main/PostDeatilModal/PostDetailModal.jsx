@@ -3,7 +3,8 @@ import * as S from "./PostDetailStyle";
 import siren from "../../../assets/image/icon-small-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
-import profile from "../../../assets/image/char_inactive.png";
+import close from "../../../assets/image/icon-close.svg";
+
 import {
   commentListDataAtom,
   getPostDataSelector,
@@ -15,7 +16,7 @@ import {
   useResetRecoilState,
   useSetRecoilState
 } from "recoil";
-import { showDate } from "../../../Functional/DateFunction";
+import { fewMinutesAgo, showDate } from "../../../Functional/DateFunction";
 import commentAPI from "../../../API/commentAPI";
 import commentWriteAPI from "../../../API/commentWriteAPI";
 
@@ -47,7 +48,6 @@ function PostDetailModal() {
   const sendCommentData = async (e) => {
     e.preventDefault();
     const sendComment = await commentWriteAPI(data.id, writing);
-    console.log("댓글 데이터", sendComment);
     if (sendComment.length !== 0 && sendComment !== undefined) {
       setCommentListData([sendComment, ...commentListData]);
     }
@@ -108,7 +108,7 @@ function PostDetailModal() {
                   <S.PostDetailCommentHeaderUserName>
                     {post.author.username}
                     <S.PostDetailCommentHeaderMinutesAgo>
-                      5분전
+                      {fewMinutesAgo(post.createdAt)}
                     </S.PostDetailCommentHeaderMinutesAgo>
                   </S.PostDetailCommentHeaderUserName>
                   <S.PostDetailCommentHeaderImg src={siren} />
@@ -124,7 +124,8 @@ function PostDetailModal() {
         <S.PostDetailHr />
 
         <S.PostDetailWriteForm onSubmit={sendCommentData}>
-          <S.PostDetailWriteProfile src={profile} />
+          <S.PostDetailWriteProfile src={data.author.image} />
+          {/* 태준님과 이야기 후, 내 정보의 이미지를 가져올 Atom 생성해서 등록하기 */}
           <S.PostDetailWriteInput onChange={typingComment} />
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
