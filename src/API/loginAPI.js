@@ -4,7 +4,6 @@ import axios from "axios";
 // qwer1234
 
 async function loginAPI(email, password) {
-  localStorage.clear();
   try {
     let result = await axios.post("https://api.mandarin.weniv.co.kr/user/login",
       {
