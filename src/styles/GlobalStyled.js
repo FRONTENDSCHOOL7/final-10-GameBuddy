@@ -18,21 +18,21 @@ ${reset}
 
 @font-face {
     font-family: "Black Ops One";
-    src: url("../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
+    src: url("../assets/font/BlackOpsOne-Regular.ttf") format("font/ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto-Bold";
-    src: url("../assets/font/Roboto-Bold.ttf") format("truetype");
+    src: url("../assets/font/Roboto-Bold.ttf") format("font/ttf");
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto-Medium";
-    src: url("../assets/font/Roboto-Medium.ttf") format("truetype");
+    src: url("../assets/font/Roboto-Medium.ttf") format("font/ttf");
     font-weight: 500;
     font-style: normal;
 }
@@ -48,6 +48,6 @@ ${reset}
     padding: 0;
     position: absolute;
 }
-`
+`;
 
 export default GlobalStyles;
