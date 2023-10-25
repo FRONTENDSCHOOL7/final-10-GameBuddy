@@ -9,7 +9,7 @@ export const Article = styled.article`
   padding-bottom: 80px; //마지막 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   width: 100%;
   flex: 1 auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   box-sizing: border-box;
 `;
 
@@ -22,16 +22,16 @@ export const Section = styled.section`
   width: 80%;
   border: 2px solid var(--color-lightpurple);
   border-radius: 10px;
-  box-shadow: ${(props) =>
-    props.isHovered
+  box-shadow: ${({ isHovered }) =>
+    isHovered
       ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"
       : "0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1)"};
 `;
 
 export const PostHeaderImg = styled.img`
   border-radius: 50%;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.5rem;
+  height: 2.5rem;
 `;
 
 export const PostWrapper = styled.div`
@@ -81,6 +81,7 @@ export const PostContentImg = styled.img`
   margin-top: 16px;
   width: 16rem;
   height: 12rem;
+  border-radius: 10%;
 `;
 
 export const Footer = styled.footer`

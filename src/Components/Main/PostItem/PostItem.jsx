@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import {
   isTouchFeed,
@@ -18,7 +18,13 @@ function PostItem() {
   const postData = useRecoilValue(postListDataAtom);
   const [hoveredId, setHoveredId] = useState(null);
   const setIsVisible = useSetRecoilState(isTouchFeed);
-  const [index, setIndex] = useRecoilState(postListDataIndexAtom);
+  const setIndex = useSetRecoilState(postListDataIndexAtom);
+  const isVisible = useRecoilValue(isTouchFeed);
+
+  // Modal의 상태에 따라 스크롤을 제어합니다.
+  useEffect(() => {
+    document.body.style.overflow = isVisible ? "hidden" : "auto";
+  }, [isVisible]);
 
   const navigate = useNavigate();
 
