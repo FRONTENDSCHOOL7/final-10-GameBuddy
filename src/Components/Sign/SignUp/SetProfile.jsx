@@ -1,11 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import * as S from "./SignUpStyle";
 import ImageCompressor from 'image-compressor.js';
-import DefaultImage from '../../assets/image/char_inactive.png';
-import signUpAPI from '../../API/signUpAPI';
+import signUpAPI from '../../../API/signUpAPI';
+import Header from '../../Commons/Header/Header';
+import * as S from "./SignUpStyle";
+import DefaultImage from '../../../assets/image/char_inactive.png'
+import { useRecoilState, useResetRecoilState  } from "recoil";
+import { signUpAtom } from "../../../Store/Store";
 
-function SetProfile({email, password}) {
+function SetProfile() {
+  const [signUpData] = useRecoilState(signUpAtom);
+  const resetSignUpData = useResetRecoilState(signUpAtom);
+  const [email] = useState(signUpData.email);
+  const [password] = useState(signUpData.password);
   const [userName, setUserName] = useState('');
   const [accountName, setAccountName] = useState('');
   const [intro, setIntro] = useState('');
@@ -28,8 +35,9 @@ function SetProfile({email, password}) {
     } else {
       const signupResult = await signUpAPI(userName, email, password, accountName, intro, image);
 
-      if(signupResult === 0) {
+      if(signupResult === "회원가입 성공") {
         alert('회원가입 성공했습니다! 가입한 이메일과 비밀번호로 로그인해주세요!')
+        resetSignUpData();
         navigate("/login")
       } else {
         setIsSignUp(signupResult)
@@ -74,6 +82,7 @@ function SetProfile({email, password}) {
 
   return (
     <S.Container>
+      <Header type={"profileMod"} />
       <S.SetProfileForm onSubmit={onSubmitHandler}>
         <S.ProfileSettingLogo>프로필 설정</S.ProfileSettingLogo>
 

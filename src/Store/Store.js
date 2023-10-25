@@ -15,6 +15,15 @@ export const userDataAtom = atom({
     }
 })
 
+//회원가입할 때, 이메일과 비밀번호를 저장할 atom
+export const signUpAtom = atom({
+    key: "",
+    default: {
+        "email": "",
+        "password": ""
+    }
+})
+
 // MainFeed에서 SwitchMode를 누를 시, 상태 변경시키는 atom
 export const switchModeAtom = atom({
     key: "switchModeAtom",

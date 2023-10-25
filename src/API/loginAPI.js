@@ -5,7 +5,7 @@ import emailValidAPI from "./emailValidAPI";
 // qwer1234
 
 async function loginAPI(email, password) {
-  const isEmailSigned = await emailValidAPI(email) === 1 ? true : false
+  const isEmailSigned = await emailValidAPI(email) === "이미 가입된 이메일 주소 입니다." ? true : false
   if(isEmailSigned) {
 
     try {
