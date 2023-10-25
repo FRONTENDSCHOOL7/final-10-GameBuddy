@@ -5,7 +5,7 @@ import emailValidAPI from "./emailValidAPI";
 // qwer1234
 
 async function loginAPI(email, password) {
-  const isEmailSigned = await emailValidAPI(email) === 3 ? true : false
+  const isEmailSigned = await emailValidAPI(email) === 1 ? true : false
   if(isEmailSigned) {
 
     try {

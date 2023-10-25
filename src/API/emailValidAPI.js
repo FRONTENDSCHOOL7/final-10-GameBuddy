@@ -15,9 +15,9 @@ async function emailValidAPI(email) {
     if (result.data.message === '사용 가능한 이메일 입니다.') {
       return 0
     } else if (result.data.message === "이미 가입된 이메일 주소 입니다.") {
-      return 3
-    } else {
       return 1
+    } else {
+      return 3
     }
 
   } catch (error) {

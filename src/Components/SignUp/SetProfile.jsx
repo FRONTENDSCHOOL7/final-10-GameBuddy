@@ -31,7 +31,9 @@ function SetProfile({email, password}) {
       if(signupResult === 0) {
         alert('회원가입 성공했습니다! 가입한 이메일과 비밀번호로 로그인해주세요!')
         navigate("/login")
-      } else if(signupResult === 1) setIsSignUp(1)
+      } else {
+        setIsSignUp(signupResult)
+      }
     }
   };
 
@@ -94,6 +96,7 @@ function SetProfile({email, password}) {
         <S.PTag>계정ID</S.PTag>
         <S.InputTag type="text" onChange={onChangeAccountName} placeholder='영문, 숫자, 마침표, 밑줄만 사용 가능합니다. ' />
         <S.Warning style={isSignUp === 1 ? {display:"block"} : {display:"none"}}>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</S.Warning>
+        <S.Warning style={isSignUp === 3 ? {display:"block"} : {display:"none"}}>*이미 사용중인 계정ID입니다.</S.Warning>
         
         <S.PTag>소개</S.PTag>
         <S.InputTag type="text" onChange={onChangeIntro} placeholder='자신을 소개해주세요!' />
