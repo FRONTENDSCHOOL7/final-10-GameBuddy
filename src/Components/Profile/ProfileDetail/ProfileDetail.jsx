@@ -5,7 +5,7 @@ import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
 import { userPostListAtom } from "../../../Store/Store";
 
-function Profile({ isMyProfile }) {
+function Profile({ isMyProfile, accountname }) {
   const [userData, setUserData] = useRecoilState(userDataAtom);
   const [userPostList] = useRecoilState(userPostListAtom);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Profile({ isMyProfile }) {
           <S.ProfileImage src={userData.image} alt="" />
           <S.ProfileStat>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate("/follow")}>
+              <S.StatButton onClick={() => navigate(`/follow/${accountname}/follower`)}>
                 {/* 팔로워 수 */}
                 <strong>{userData.followerCount}</strong>
                 <div>followers</div>
@@ -37,7 +37,7 @@ function Profile({ isMyProfile }) {
               </S.Stat>
             </S.StatContent>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate("/follow")}>
+              <S.StatButton onClick={() => navigate(`/follow/${accountname}/following`)}>
                 {/* 팔로잉 수 */}
                 <strong>{userData.followingCount}</strong>
                 <div>followings</div>

@@ -29,7 +29,7 @@ function Router() {
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/follow" element={<FollowDetailPage />} />
+        <Route path="/follow/:accountname/:type" element={<FollowDetailPage />} />
         <Route path="/profile/:accountname" element={<ProfilePage />} />
         <Route path="/fix" element={<Profile />} />
         <Route path="/chat" element={<ChattingListPage />} />

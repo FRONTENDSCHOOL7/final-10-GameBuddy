@@ -53,6 +53,7 @@ function ProfilePage() {
         isMyProfile={isMyProfile}
         isFollowing={isFollowing}
         setIsFollowing={setIsFollowing}
+        accountname={accountname}
       />
       {/* 팔로우가 되어있을 때만 Recruit, MyPostList 컴포넌트가 렌더링 됨 */}
       {/* 현재 팔로우 기능이 구현되지 않았기 때문에, 초기값은 true(팔로잉)이므로 두 컴포넌트 다 렌더링됩니다. */}
