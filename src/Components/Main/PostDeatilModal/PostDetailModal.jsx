@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./PostDetailStyle";
-import siren from "../../../assets/image/icon-small-siren.svg";
+import siren from "../../../assets/image/icon-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
 
 import {
+  checkMyInfo,
   commentListDataAtom,
   getPostDataSelector,
   isTouchFeed
@@ -19,6 +20,8 @@ import {
 import { fewMinutesAgo, showDate } from "../../../Functional/DateFunction";
 import commentAPI from "../../../API/commentAPI";
 import commentWriteAPI from "../../../API/commentWriteAPI";
+import removeCommentAPI from "../../../API/removeCommentAPI";
+import reportCommentAPI from "../../../API/reportCommentAPI";
 
 function PostDetailModal() {
   const setIsVisible = useSetRecoilState(isTouchFeed);
@@ -26,7 +29,9 @@ function PostDetailModal() {
   const [commentListData, setCommentListData] =
     useRecoilState(commentListDataAtom);
   const resetCommentList = useResetRecoilState(commentListDataAtom);
+  const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
+  console.log(commentListData);
 
   useEffect(() => {
     async function fetchData() {
@@ -50,6 +55,17 @@ function PostDetailModal() {
     const sendComment = await commentWriteAPI(data.id, writing);
     if (sendComment.length !== 0 && sendComment !== undefined) {
       setCommentListData([sendComment, ...commentListData]);
+    }
+  };
+
+  const commentEvent = async (e, commentId, username) => {
+    const commentImg = e.target.src;
+    console.log(data.id);
+    console.log(commentId);
+    if (commentImg.includes("icon-close")) {
+      alert(await removeCommentAPI(data.id, commentId));
+    } else if (commentImg.includes("icon-siren")) {
+      alert(await reportCommentAPI(data.id, commentId, username));
     }
   };
 
@@ -97,8 +113,8 @@ function PostDetailModal() {
 
         <S.PostDetailCommentWrapper>
           <S.PostDetailCommentTitle>댓글</S.PostDetailCommentTitle>
-          {commentListData.map((post, id) => (
-            <S.PostDetailCommentItem key={id}>
+          {commentListData.map((post, index) => (
+            <S.PostDetailCommentItem key={index}>
               <S.PostDetailCommentHeaderProfile
                 src={post.author.image}
                 alt="PostDetailCommentHeaderProfile"
@@ -111,7 +127,17 @@ function PostDetailModal() {
                       {fewMinutesAgo(post.createdAt)}
                     </S.PostDetailCommentHeaderMinutesAgo>
                   </S.PostDetailCommentHeaderUserName>
-                  <S.PostDetailCommentHeaderImg src={siren} />
+                  <S.PostDetailCommentHeaderImg
+                    src={`${
+                      post.author.accountname ===
+                      commentMyProfile.user.accountname
+                        ? close
+                        : siren
+                    }`}
+                    onClick={(e) =>
+                      commentEvent(e, post.id, post.author.username)
+                    }
+                  />
                 </div>
                 <S.PostDetailCommentContent>
                   {post.content}
@@ -124,8 +150,7 @@ function PostDetailModal() {
         <S.PostDetailHr />
 
         <S.PostDetailWriteForm onSubmit={sendCommentData}>
-          <S.PostDetailWriteProfile src={data.author.image} />
-          {/* 태준님과 이야기 후, 내 정보의 이미지를 가져올 Atom 생성해서 등록하기 */}
+          <S.PostDetailWriteProfile src={commentMyProfile.user.image} />
           <S.PostDetailWriteInput onChange={typingComment} />
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>

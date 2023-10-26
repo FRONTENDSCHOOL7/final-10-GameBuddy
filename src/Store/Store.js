@@ -92,3 +92,11 @@ export const commentListDataAtom = atom({
     key: "commentListDataAtom",
     default: []
 })
+
+
+// 댓글창에 내 유저정보 확인하기 위해 사용되는 Atom
+export const checkMyInfo = atom({
+    key: "checkMyInfo",
+    default: {}
+})
+
