@@ -63,8 +63,8 @@ function SetProfile() {
     const file = e.target.files[0];
     if (file) {
       new ImageCompressor(file, {
-        maxWidth: 100,
-        maxHeight: 100,
+        maxWidth: 130,
+        maxHeight: 130,
         quality: 1, // 압축 품질 조정. 필요에 따라 이 값을 조절하세요.
         success(result) {
           const imageUrl = URL.createObjectURL(result);
