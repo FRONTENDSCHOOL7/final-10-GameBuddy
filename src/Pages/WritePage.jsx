@@ -100,8 +100,10 @@ const SubmitBtn = styled.button`
 `;
 
 export default function WritePage() {
-  const [selectedImage, setSelectedImage] = useState(RecruitDefaultImage); // 모집 글 버튼에 해당하는 이미지로 초기화
-  const [selectedBtn, setSelectedBtn] = useState(1); // 모집 글 버튼을 선택한 상태로 초기화
+  const [selectedImage, setSelectedImage] = useState(RecruitDefaultImage);
+  // 모집 글 버튼에 해당하는 이미지로 초기화
+  const [selectedBtn, setSelectedBtn] = useState(1);
+  // 모집 글 버튼을 선택한 상태로 초기화
   // const [name, setName]
 
   const navigate = useNavigate();
@@ -130,8 +132,6 @@ export default function WritePage() {
   //     reader.readAsDataURL(file);
   //   }
   // };
-
-
 
   const handleWriteImageChange = async (e) => {
     const file = e.target.files[0];
@@ -186,9 +186,6 @@ export default function WritePage() {
 
       <ImageContainer>
         <h5>이미지 등록</h5>
-
-        {/* <img src="/uploadFiles/1698219189961.png" alt="모집 게임 이미지" /> */}
-         {/* 현재 주소 기준으로 경로가 설정되어버립니다. https://loc */}
 
         <WriteImage
           src={selectedImage}
