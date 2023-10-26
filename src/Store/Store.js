@@ -9,9 +9,28 @@ export const userDataAtom = atom({
         "email": "",
         "accountname": "",
         "image": "",
+        "intro": "",
         "token": "",
         "following": [],
-        "follower": []
+        "follower": [],
+        "followerCount": 0,
+        "followingCount": 0
+    }
+})
+
+//푸터에서 사용하며, 푸터가 있는 모든 페이지에서 사용가능한 userAccount 저장용 atom
+export const userAccountNameAtom = atom({
+    key: "userAccountNameAtom",
+    default: {
+        "accountname": ""
+    }
+})
+
+// 원하는 유저의 게시글 목록을 저장하는 atom
+export const userPostListAtom = atom({
+    key: "userPostListAtom",
+    default: {
+        "postList": []
     }
 })
 
@@ -74,8 +93,10 @@ export const commentListDataAtom = atom({
     default: []
 })
 
+
 // 댓글창에 내 유저정보 확인하기 위해 사용되는 Atom
 export const checkMyInfo = atom({
     key: "checkMyInfo",
     default: {}
 })
+

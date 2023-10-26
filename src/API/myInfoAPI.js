@@ -12,7 +12,7 @@ async function myInfoAPI() {
             },
         })
         const myInfo = result.data
-        return await myInfo
+        return myInfo
     } catch (error) {
         console.log("myinfo api 에러: ", error)
     }
