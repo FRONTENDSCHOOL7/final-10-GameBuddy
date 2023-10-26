@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import loginAPI from "../../API/loginAPI";
+import loginAPI from "../../../API/loginAPI"
 import * as S from "./LoginStyle";
-import CharImg from "../../assets/image/main_char.png"
-import KakaoLogin from "../../assets/image/kakao-login.png"
-import GoogleLogin from "../../assets/image/google-login.png"
-import FbLogin from "../../assets/image/fb-login.png"
+import CharImg from "../../../assets/image/main_char.png"
+import KakaoLogin from "../../../assets/image/kakao-login.png"
+import GoogleLogin from "../../../assets/image/google-login.png"
+import FbLogin from "../../../assets/image/fb-login.png"
 
 function Login() {
   const [email, setEmail] = useState("");

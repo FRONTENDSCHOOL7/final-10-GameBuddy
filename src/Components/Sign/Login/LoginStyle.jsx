@@ -31,7 +31,7 @@ export const InputTag = styled.input`
   height: 48px;
   border: 0px;
   padding: 0 3%;
-  font-size: 20px;
+  font-size: 16px;
 `
 
 export const LoginBtn = styled.button`

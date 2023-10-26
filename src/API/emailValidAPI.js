@@ -12,17 +12,10 @@ async function emailValidAPI(email) {
       }
     })
 
-    if (result.data.message === '사용 가능한 이메일 입니다.') {
-      return 0
-    } else if (result.data.message === "이미 가입된 이메일 주소 입니다.") {
-      return 1
-    } else {
-      return 3
-    }
+    return result.data.message
 
   } catch (error) {
-    // alert("잘못된 이메일 형식입니다. 올바른 이메일 형식을 입력해주세요!")
-    return 2
+    return 0
   }
 };
 

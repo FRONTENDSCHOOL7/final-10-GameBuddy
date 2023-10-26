@@ -1,21 +1,37 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router";
 import * as S from "./SignUpStyle";
-import emailValidAPI from "../../API/emailValidAPI";
+import emailValidAPI from "../../../API/emailValidAPI";
+import Header from "../../Commons/Header/Header";
+import { useRecoilState  } from "recoil";
+import { signUpAtom } from "../../../Store/Store";
 
-
-function SignUp({setCheck, email, setEmail, password, setPassword}) {
+function SignUp() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [signUpData, setSignUpData] = useRecoilState(signUpAtom);
   const [emailValidResult, setEmailValidResult] = useState(0)
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const result = await emailValidAPI(email)
     
-    if(password.length < 6) {
-      setEmailValidResult(3)
-    } else if(result === 0){
-      setCheck(true)
+    // if(password.length < 6) {
+    //   setEmailValidResult(3)
+    // } else 
+    if(result === "사용 가능한 이메일 입니다."){
+      // setCheck(true)
+      // 프로필세팅화면으로 넘어가야 한다.
+      setSignUpData({
+        email: email,
+        password: password
+      })
+      navigate('/signup/setprofile')
+    } else if (result === "이미 가입된 이메일 주소 입니다.") {
+      setEmailValidResult(1)
     } else {
-      setEmailValidResult(result)
+      setEmailValidResult(2)
     }
   };
 
@@ -30,6 +46,7 @@ function SignUp({setCheck, email, setEmail, password, setPassword}) {
 
   return (
     <S.Container>
+      <Header type={"profileMod"}/>
       <S.SignUpForm action="" onSubmit={onSubmitHandler}>
         <S.SignUpLogo>이메일로 회원가입</S.SignUpLogo>
         <S.PTag>이메일</S.PTag>
