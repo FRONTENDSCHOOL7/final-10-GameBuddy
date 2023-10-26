@@ -3,21 +3,19 @@ import axios from "axios";
 async function tokenValidAPI(setTokenValid) {
   try {
     const token = localStorage.getItem("token");
-    let result = await axios({
-      method: 'get',
-      url: `https://api.mandarin.weniv.co.kr/user/myinfo`,
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
-      data: {
-      }
-    })
+    const result = await axios.get(`https://api.mandarin.weniv.co.kr/user/checktoken`,
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+      })
 
-    return `<div>메인페이지</div>`
+    const { isValid } = await result.data;
+    setTokenValid(isValid);
 
   } catch (error) {
     localStorage.removeItem("token");
-    setTokenValid(false)
+    setTokenValid(false);
   }
 };
 
