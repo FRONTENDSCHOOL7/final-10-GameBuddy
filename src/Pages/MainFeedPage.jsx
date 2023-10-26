@@ -7,19 +7,26 @@ import Footer from "../Components/Commons/Footer";
 import PostList from "../Components/Main/PostList";
 import PostDetailModal from "../Components/Main/PostDeatilModal/PostDetailModal";
 import Loading from "../Components/Commons/Loading";
-import { useRecoilValue } from "recoil";
-import { isTouchFeed } from "../Store/Store";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { checkMyInfo, isTouchFeed } from "../Store/Store";
+import myInfoAPI from "../API/myInfoAPI";
 
 function MainFeedPage() {
   const [tokenValid, setTokenValid] = useState(true);
   const [isLoading, setIsLoading] = useState(true); //로딩 상태 관리
   const isVisible = useRecoilValue(isTouchFeed);
+  const setMyInfo = useSetRecoilState(checkMyInfo);
 
   useEffect(() => {
-    setIsLoading(true); // API 호출 시작 전에 로딩 상태를 true로 설정
-    tokenValidAPI(setTokenValid).finally(() => {
-      setIsLoading(false); // API 호출이 끝나면 로딩 상태를 false로 설정
-    });
+    async function fetchData() {
+      const obj = await myInfoAPI();
+      setMyInfo(obj);
+      setIsLoading(true); // API 호출 시작 전에 로딩 상태를 true로 설정
+      tokenValidAPI(setTokenValid).finally(() => {
+        setIsLoading(false); // API 호출이 끝나면 로딩 상태를 false로 설정
+      });
+    }
+    fetchData();
   }, []);
 
   if (isLoading) {
