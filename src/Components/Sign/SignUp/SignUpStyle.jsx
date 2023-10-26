@@ -31,7 +31,7 @@ export const InputTag = styled.input`
   height: 23px;
   border-width: 0 0 1px;
   padding: 0 0 1px 0;
-  font-size: 20px;
+  font-size: 16px;
   &:focus {
     outline: none;
     border-color: #DBDBDB;
@@ -74,8 +74,8 @@ export const ProfileSettingLogo = styled.p`
 `
 export const ProfileImage = styled.img`
   cursor: pointer;
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50px;
 `
 export const ProfileImageChange = styled.input`
