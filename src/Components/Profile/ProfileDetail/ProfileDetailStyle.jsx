@@ -32,11 +32,11 @@ export const ProfileSection = styled.div`
   width: 100%;
 `;
 
-export const ProfileImage = styled.div`
-  width: 110px;
+export const ProfileImage = styled.img`
+  width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #ece8e8;
+  /* background-color: #ece8e8; */
   margin-right: 30px;
 `;
 
