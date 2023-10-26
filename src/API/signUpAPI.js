@@ -18,11 +18,11 @@ async function signUpAPI(userName, email, password, accountName, intro, image) {
         }
       } 
     })
-    console.log(result.data)
-    return 0
+
+    return result.data.message
   } catch (error) {
-    console.log(error.response.data)
-    return 1
+    if(error.response.data.message === "이미 사용중인 계정 ID입니다.") return 3
+    else return 1
   }
 }
 

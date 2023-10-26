@@ -55,6 +55,7 @@ export const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000; //다른 요소보다 항상 앞에 있어야함
 `;
 
 export const ModalContent = styled.div`
