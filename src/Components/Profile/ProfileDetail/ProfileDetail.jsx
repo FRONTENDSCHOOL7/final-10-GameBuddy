@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import * as S from "./ProfileDetailStyle";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState  } from "recoil";
+import { userDataAtom } from "../../../Store/Store";
+import { userPostListAtom } from "../../../Store/Store";
 
 function Profile({ isMyProfile }) {
+  const [userData, setUserData] = useRecoilState(userDataAtom);
+  const [userPostList] = useRecoilState(userPostListAtom);
   const navigate = useNavigate();
 
   //팔로잉 여부
@@ -12,29 +17,29 @@ function Profile({ isMyProfile }) {
     <S.ProfileContainer>
       <S.ProfileHeader>
         {/* AccountName 넣을 자리 */}
-        <S.AccountName>@game_buddy12</S.AccountName>
+        <S.AccountName>{userData.accountname}</S.AccountName>
         <S.ProfileSection>
           {/* 프로필 사진 */}
-          <S.ProfileImage alt="프로필 이미지" />
+          <S.ProfileImage src={userData.image} alt="" />
           <S.ProfileStat>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate("/followers")}>
+              <S.StatButton onClick={() => navigate("/follow")}>
                 {/* 팔로워 수 */}
-                <strong>2950</strong>
+                <strong>{userData.followerCount}</strong>
                 <div>followers</div>
               </S.StatButton>
             </S.StatContent>
             <S.StatContent>
               <S.Stat>
                 {/* 게시글 수 */}
-                <strong>128</strong>
+                <strong>{userPostList.postList.length}</strong>
                 <div>Post</div>
               </S.Stat>
             </S.StatContent>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate("/followers")}>
+              <S.StatButton onClick={() => navigate("/follow")}>
                 {/* 팔로잉 수 */}
-                <strong>290</strong>
+                <strong>{userData.followingCount}</strong>
                 <div>followings</div>
               </S.StatButton>
             </S.StatContent>
@@ -43,9 +48,9 @@ function Profile({ isMyProfile }) {
       </S.ProfileHeader>
       <S.ProfileDescription>
         {/* userName */}
-        <S.UserName>벌크업뱅</S.UserName>
+        <S.UserName>{userData.username}</S.UserName>
         {/* 소개글 */}
-        <S.DescriptionText>안녕하세요 반갑섭니다리</S.DescriptionText>
+        <S.DescriptionText>{userData.intro}</S.DescriptionText>
       </S.ProfileDescription>
       <S.ButtonContainer>
         {/* 나의 프로필인지 아닌지에 따라 이동경로와 내용 달라짐 */}
