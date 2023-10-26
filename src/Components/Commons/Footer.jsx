@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../assets/image/HomeIcon.svg";
 import { ReactComponent as ChatIcon } from "../../assets/image/ChatIcon.svg";
 import { ReactComponent as WriteIcon } from "../../assets/image/WriteIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/image/ProfileIcon.svg";
-import myInfoAPI from '../../API/myInfoAPI';
-import { useRecoilState  } from "recoil";
+import myInfoAPI from "../../API/myInfoAPI";
+import { useRecoilState } from "recoil";
 import { userAccountNameAtom } from "../../Store/Store";
 
 function Footer() {
   const [userData, setUserData] = useRecoilState(userAccountNameAtom);
-  const [$active, setActive] = useState("home");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       const myInfo = await myInfoAPI();
       setUserData({
-        accountname: myInfo.user.accountname,
+        accountname: myInfo.user.accountname
       });
-    }
+    };
     fetchData();
   }, []);
 
@@ -28,8 +28,20 @@ function Footer() {
     { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
     { name: "채팅", icon: StyledChatIcon, path: "/chat", id: "chat" },
     { name: "게시물 작성", icon: StyledWriteIcon, path: "/write", id: "write" },
-    { name: "프로필", icon: StyledProfileIcon, path: `/profile/${userData.accountname}`, id: "profile" }
+    {
+      name: "프로필",
+      icon: StyledProfileIcon,
+      path: `/profile/${userData.accountname}`,
+      id: "profile"
+    }
   ];
+
+  const getInitialActive = () => {
+    const matchedMenu = menus.find((menu) => menu.path === location.pathname);
+    return matchedMenu ? matchedMenu.id : "home";
+  };
+
+  const [$active, setActive] = useState(getInitialActive);
 
   return (
     <FooterContainer>
