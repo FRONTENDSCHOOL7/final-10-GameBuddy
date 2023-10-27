@@ -125,6 +125,7 @@ export const AlbumContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 24px 20px;
+  margin-bottom: 50px;
 `;
 
 export const ImageItem = styled.img`
@@ -145,23 +146,23 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  position: fixed; // 고정된 위치에 배치
-  bottom: 60px; // 화면 아래에 붙이기 위해
-  left: 0; // 화면 왼쪽에 정렬
-  right: 0; // 화면 오른쪽에 정렬
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  right: 0;
   background: white;
   padding: 20px;
-  border-radius: 15px 15px 0 0; // 위쪽 둥근 모서리만 적용
+  border-radius: 15px 15px 0 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  transform: translateY(100%); // 아래로 밀어냄
-  animation: slideUp 0.3s forwards; // 애니메이션 효과
+  transform: translateY(100%);
+  animation: slideUp 0.3s forwards;
 
   @keyframes slideUp {
     to {
-      transform: translateY(0); // 원래 위치로 돌아옴
+      transform: translateY(0);
     }
   }
 `;
@@ -169,11 +170,58 @@ export const ModalContainer = styled.div`
 export const ModalButton = styled.button`
   background-color: #fff;
   border: none;
-  border-bottom: 1px solid #dbdbdb;
   padding: 10px;
   cursor: pointer;
+`;
+
+// 정말 삭제하시겠습니까?
+export const ConfirmDeleteContainer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 23px 0 14px 0; // 좌우 패딩 제거
+  border-radius: 10px;
+  z-index: 100;
+  min-width: 250px;
+  width: auto; // 너비를 auto로 설정
+`;
+
+export const ConfirmContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 55px;
+    bottom: 0;
+    width: 1px;
+    background-color: #dbdbdb;
+    transform: translateX(-50%);
+  }
+`;
+
+export const ConfirmMessage = styled.p`
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 14px;
+  color: #333;
+  border-bottom: 1px solid #dbdbdb;
+  padding-bottom: 15px;
+`;
+
+export const ConfirmButton = styled.button`
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
 
   &:last-child {
-    border-bottom: none;
+    color: var(--color-purple);
+    font-weight: 700;
   }
 `;
