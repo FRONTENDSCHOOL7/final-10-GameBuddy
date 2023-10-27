@@ -231,19 +231,6 @@ export default function WritePage() {
     }
 };
 
-
-
-  // const onChangeRecruitGame = (e) => {
-  //   const recruitGame = e.target.value;
-  //   console.log("모집 게임: ", recruitGame);
-  //   if(recruitGame.length < 2 || recruitGame.length > 15) {
-  //     setIsGameTitleValid(false);
-  //   } else {
-  //     setIsGameTitleValid(true);
-  //   }
-  //   setRecruitGame(recruitGame);
-  // };
-
   const onChangeRecruitGame = (e) => {
     try {
       const recruitGame = e.target.value;
@@ -258,18 +245,6 @@ export default function WritePage() {
       console.error('모집 게임 입력 오류: ', error);
     }
   };
-  
-
-  // const onChangeRecruitPeople = (e) => {
-  //   const recruitPeople = e.target.value;
-  //   console.log("모집 인원: ", recruitPeople);
-  //   if(!/^\d+$/.test(recruitPeople)) { 
-  //     setIsPeopleValid(false);
-  //   } else {
-  //     setIsPeopleValid(true);
-  //   }
-  //   setRecruitPeople(recruitPeople);
-  // };
 
   const onChangeRecruitPeople = (e) => {
     try {
@@ -285,18 +260,6 @@ export default function WritePage() {
       console.error('모집 인원 입력 오류: ', error);
     }
   };
-  
-
-  // const onChangeRecruitDetail = (e) => {
-  //   const recruitDetail = e.target.value;
-  //   console.log("모집 상세: ", recruitDetail);
-  //   if(recruitDetail === '') { 
-  //     setIsDetailValid(false);
-  //   } else {
-  //     setIsDetailValid(true);
-  //   }
-  //   setRecruitDetail(recruitDetail);
-  // };
 
   const onChangeRecruitDetail = (e) => {
     try {
@@ -313,16 +276,6 @@ export default function WritePage() {
     }
   };
 
-  // const onChangePostContent = (e) => {
-  //   const postContent = e.target.value;
-  //   console.log("게시글: ", postContent);
-  //   if(postContent === '') {
-  //     setIsContentValid(false);
-  //   } else {
-  //     setIsContentValid(true);
-  //   }
-  //   setPostContent(postContent);
-  // };
 
   const onChangePostContent = (e) => {
     try {
@@ -338,13 +291,6 @@ export default function WritePage() {
       console.error('게시글 입력 오류: ', error);
     }
   };
-  
-
-
-
-
-
-
 
   const handleWriteImageClick = () => {
     fileInputRef.current.click();
