@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const NoPostsMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; // 높이를 원하는대로 설정할 수 있습니다.
+  font-size: 15px;
+  color: gray;
+`;
+
 export const ListContainer = styled.div`
   background-color: #fff;
   display: flex;
@@ -120,7 +129,7 @@ export const AlbumContainer = styled.div`
 
 export const ImageItem = styled.img`
   width: 100%;
-  height: auto;
+  height: 114px;
 `;
 
 export const ModalOverlay = styled.div`

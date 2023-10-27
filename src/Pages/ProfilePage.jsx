@@ -5,13 +5,12 @@ import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
 import Footer from "../Components/Commons/Footer";
 import { useParams } from "react-router-dom";
-import { useRecoilState  } from "recoil";
+import { useRecoilState } from "recoil";
 import { userDataAtom } from "../Store/Store";
-import { userAccountNameAtom } from "../Store/Store"
-import { userPostListAtom } from "../Store/Store"
+import { userAccountNameAtom } from "../Store/Store";
+import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
-
 
 function ProfilePage() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
@@ -19,7 +18,6 @@ function ProfilePage() {
   const [nowAccountName] = useRecoilState(userAccountNameAtom);
   const { accountname } = useParams();
 
-  // UserProfile의 경로 profile/:id 에서 :id를 가져온 뒤 id 변수에 할당
   useEffect(() => {
     const fetchData = async () => {
       const userInfo = await userInfoAPI(accountname);
@@ -32,16 +30,16 @@ function ProfilePage() {
         followingCount: userInfo.profile.followingCount
       });
       const userPostList = await userPostListAPI(accountname);
-      console.log(userPostList)
+      console.log(userPostList);
       setUserPostList({
         postList: userPostList
-      })
-    }
+      });
+    };
     fetchData();
   }, []);
 
-    // true면 마이 프로필
-    let isMyProfile = accountname === nowAccountName.accountname
+  // true면 마이 프로필
+  let isMyProfile = accountname === nowAccountName.accountname;
 
   // 팔로우 상태
   const [isFollowing, setIsFollowing] = useState(true);
@@ -60,7 +58,7 @@ function ProfilePage() {
       {isFollowing && (
         <>
           <Recruit />
-          <MyPostList isMyProfile={isMyProfile} />
+          <MyPostList isMyProfile={isMyProfile} accountname={accountname} />
         </>
       )}
       <Footer />
