@@ -100,3 +100,9 @@ export const checkMyInfo = atom({
     default: {}
 })
 
+
+// 게시글 작성에 필요한 데이터 이미지
+export const uploadImageAtom = atom({
+    key: "uploadImageAtom",
+    default: ""
+})
