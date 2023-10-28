@@ -12,7 +12,7 @@ export default function Header({ type }) {
 
   // 헤더 검색 아이콘 : /search 페이지 이동
   const handleSearchClick = () => {
-    navigate('/search');
+    navigate("/search");
   };
 
   // goBack 버튼: 이전 페이지로 이동
@@ -64,14 +64,9 @@ export default function Header({ type }) {
         </S.StyledIconButton>
       </S.HeaderContainer>
     ),
-    search: (
-      <S.HeaderContainer>
-        <S.StyledIconButton onClick={goBack}>
-          <GoBackIcon />
-        </S.StyledIconButton>
-        <S.Input id="search" placeholder="계정 검색" />
-      </S.HeaderContainer>
-    ),
+
+    // Search 헤더: Search Component 내부로 이동
+
     userProfile: (
       <S.HeaderContainer>
         <S.StyledIconButton type="button" onClick={goBack}>
