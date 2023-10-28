@@ -11,7 +11,7 @@ import ChattingListPage from "../Pages/ChattingListPage";
 import ProfilePage from "../Pages/ProfilePage";
 import Error404 from "../Components/Commons/Error404";
 import FollowDetailPage from "../Pages/FollowDetailPage";
-import Profile from "../Components/Profile/Profile";
+import ProfileFix from "../Components/Profile/ProfileFix/ProfileFix";
 import ChattingRoom from "../Components/Chat/ChattingRoom";
 import Write from "../Components/Write/Write";
 
@@ -34,7 +34,7 @@ function Router() {
           element={<FollowDetailPage />}
         />
         <Route path="/profile/:accountname" element={<ProfilePage />} />
-        <Route path="/fix" element={<Profile />} />
+        <Route path="/fix" element={<ProfileFix />} />
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/chat/room" element={<ChattingRoom />} />
         <Route path="*" element={<Error404 />} />
