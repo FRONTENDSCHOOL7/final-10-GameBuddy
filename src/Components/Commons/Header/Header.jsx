@@ -87,12 +87,20 @@ export default function Header({ type }) {
         </S.StyledIconButton>
       </S.HeaderContainer>
     ),
-    followers: (
+    follower: (
       <S.HeaderContainer>
         <S.StyledIconButton type="button" onClick={goBack}>
           <GoBackIcon />
         </S.StyledIconButton>
         <S.FollowersTitle>followers</S.FollowersTitle>
+      </S.HeaderContainer>
+    ),
+    following: (
+      <S.HeaderContainer>
+        <S.StyledIconButton type="button" onClick={goBack}>
+          <GoBackIcon />
+        </S.StyledIconButton>
+        <S.FollowersTitle>followings</S.FollowersTitle>
       </S.HeaderContainer>
     ),
     profileMod: (
