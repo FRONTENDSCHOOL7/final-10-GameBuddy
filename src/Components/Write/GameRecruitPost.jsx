@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as S from "./WriteStyle";
-import DefaultImage from "../../assets/image/WriteDefault.png";
-import axios from "axios";
+import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { uploadImageAtom } from "../../Store/Store";
 import gameRecruitAPI from "../../API/gameRecruitAPI";

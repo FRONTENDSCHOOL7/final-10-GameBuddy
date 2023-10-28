@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as S from "./WriteStyle";
-import DefaultImage from "../../assets/image/WriteDefault.png";
+import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { uploadImageAtom } from "../../Store/Store";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import postAPI from "../../API/postAPI";

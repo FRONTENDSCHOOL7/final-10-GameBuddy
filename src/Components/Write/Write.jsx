@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as S from "./WriteStyle";
-import DefaultImage from "../../assets/image/WriteDefault.png";
+import DefaultImage from "../../assets/image/WriteDefault.svg";
 import Header from "../Commons/Header/Header";
 import Post from "./Post";
 import GameRecruitPost from "./GameRecruitPost";
