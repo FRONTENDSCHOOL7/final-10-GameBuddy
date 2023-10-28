@@ -78,7 +78,9 @@ function ListView({ isMyProfile, postsData }) {
                 <S.HeaderP>{post.author.id}</S.HeaderP>
               </S.HeaderTextBox>
               <S.PostContent>{post.content}</S.PostContent>
-              <S.PostContentImg src={post.image} alt="Post Content Image" />
+              {post.image && (
+                <S.PostContentImg src={post.image} alt="Post Content Image" />
+              )}
               <S.Footer>
                 <S.FooterImg src={heart} alt="Heart" />
                 <S.FooterCount>{post.heartCount}</S.FooterCount>
@@ -104,9 +106,12 @@ function AlbumView({ postsData, accountname }) {
   // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
-      {postsData.map((post, id) => (
-        <S.ImageItem key={id} src={post.image} alt="Post Image" />
-      ))}
+      {postsData.map(
+        (post, id) =>
+          post.image && (
+            <S.ImageItem key={id} src={post.image} alt="Post Image" />
+          )
+      )}
     </S.AlbumContainer>
   );
 }
