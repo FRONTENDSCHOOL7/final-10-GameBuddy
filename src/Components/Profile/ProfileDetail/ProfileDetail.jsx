@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./ProfileDetailStyle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
 import { userPostListAtom } from "../../../Store/Store";
@@ -9,6 +9,7 @@ function Profile({ isMyProfile, accountname }) {
   const [userData, setUserData] = useRecoilState(userDataAtom);
   const [userPostList] = useRecoilState(userPostListAtom);
   const navigate = useNavigate();
+  // const { accountname } = useParams()
 
   //팔로잉 여부
   const [isFollowing, setIsFollowing] = useState(true);
