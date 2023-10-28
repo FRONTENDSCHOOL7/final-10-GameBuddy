@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import * as S from "./FollowListStyle";
 import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
@@ -9,6 +10,7 @@ import unFollowAPI from "../../../API/followAPI/unFollowAPI"
 import myInfoAPI from '../../../API/myInfoAPI';
 
 function FollowList() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useRecoilState(userDataAtom);
   const [followData, setFollowData] = useState([])
   const [render, ReRender] = useState(true)
@@ -47,7 +49,7 @@ function FollowList() {
       {followData.map((data, id) => {
         return (
           <S.FollowListForm key={id}>
-            <S.ProfileBox>
+            <S.ProfileBox onClick={() => {navigate(`/profile/${data.accountname}`)}}>
               <S.Image src={data.image}/>
               <S.Article>
                 <S.UserName>{data.username}</S.UserName>
