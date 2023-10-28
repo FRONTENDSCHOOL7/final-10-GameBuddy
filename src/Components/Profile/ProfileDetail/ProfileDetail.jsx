@@ -23,7 +23,7 @@ function Profile({ isMyProfile, accountname }) {
           <S.ProfileImage src={userData.image} alt="" />
           <S.ProfileStat>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate(`/follow/${accountname}/follower`)}>
+              <S.StatButton onClick={() => navigate(`/profile/${accountname}/follower`)}>
                 {/* 팔로워 수 */}
                 <strong>{userData.followerCount}</strong>
                 <div>followers</div>
@@ -37,7 +37,7 @@ function Profile({ isMyProfile, accountname }) {
               </S.Stat>
             </S.StatContent>
             <S.StatContent>
-              <S.StatButton onClick={() => navigate(`/follow/${accountname}/following`)}>
+              <S.StatButton onClick={() => navigate(`/profile/${accountname}/following`)}>
                 {/* 팔로잉 수 */}
                 <strong>{userData.followingCount}</strong>
                 <div>followings</div>

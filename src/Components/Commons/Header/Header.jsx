@@ -10,6 +10,11 @@ import { useNavigate } from "react-router-dom";
 export default function Header({ type }) {
   const navigate = useNavigate();
 
+  function logout() {
+    localStorage.removeItem("token");
+    navigate('/')
+  }
+
   // 헤더 검색 아이콘 : /search 페이지 이동
   const handleSearchClick = () => {
     navigate("/search");
@@ -40,7 +45,7 @@ export default function Header({ type }) {
 
   const openLogoutModal = () => {
     setModalContent([
-      { text: "로그아웃하기", action: closeModal },
+      { text: "로그아웃", action: logout },
       { text: "뒤로가기", action: closeModal }
     ]);
     openModal();
@@ -87,12 +92,20 @@ export default function Header({ type }) {
         </S.StyledIconButton>
       </S.HeaderContainer>
     ),
-    followers: (
+    follower: (
       <S.HeaderContainer>
         <S.StyledIconButton type="button" onClick={goBack}>
           <GoBackIcon />
         </S.StyledIconButton>
         <S.FollowersTitle>followers</S.FollowersTitle>
+      </S.HeaderContainer>
+    ),
+    following: (
+      <S.HeaderContainer>
+        <S.StyledIconButton type="button" onClick={goBack}>
+          <GoBackIcon />
+        </S.StyledIconButton>
+        <S.FollowersTitle>followings</S.FollowersTitle>
       </S.HeaderContainer>
     ),
     profileMod: (
@@ -122,7 +135,7 @@ export default function Header({ type }) {
         <S.ModalContainer onClick={closeModal}>
           <S.ModalContent onClick={(e) => e.stopPropagation()}>
             {modalContent.map((item, index) => (
-              <S.ModalItem key={index} onClick={item.action}>
+              <S.ModalItem key={index} onClick={() => item.action()}>
                 {item.text}
               </S.ModalItem>
             ))}

@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { uploadImageAtom } from "../../Store/Store";
 import gameRecruitAPI from "../../API/gameRecruitAPI";
+import { useNavigate } from "react-router-dom";
 
 function GameRecruitPost() {
-  const [currentImage, setCurrentImage] = useRecoilState(uploadImageAtom);
-
+  const currentImage = useRecoilValue(uploadImageAtom);
+  const navigate = useNavigate();
   const resetRecoilState = useResetRecoilState(uploadImageAtom);
 
   const [recruitGameTitle, setRecruitGameTitle] = useState("");
@@ -50,14 +51,20 @@ function GameRecruitPost() {
   };
 
   const handlePostSubmit = async () => {
-    console.log("현재 이미지", currentImage);
-    const result = await gameRecruitAPI(
-      recruitGameTitle,
-      recruitPeople,
-      recruitDetail,
-      currentImage
-    );
-    console.log(result);
+    // console.log("현재 이미지", currentImage);
+    if (currentImage === DefaultImage) {
+      alert("게임 모집 시, 이미지를 등록 해야합니다.");
+    } else {
+      const result = await gameRecruitAPI(
+        recruitGameTitle,
+        recruitPeople,
+        recruitDetail,
+        currentImage
+      );
+      alert(result);
+      resetRecoilState();
+      navigate("/main");
+    }
   };
 
   return (

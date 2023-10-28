@@ -67,3 +67,12 @@ export const UnFollowBtn = styled.button`
   border: none;
   text-align: center;
 `
+export const ItsMeBtn = styled.button`
+  background-color: #ff9900;
+  color: #ffffff;
+  width: 70px;
+  height: 35px;
+  border-radius: 26px;
+  border: none;
+  text-align: center;
+`

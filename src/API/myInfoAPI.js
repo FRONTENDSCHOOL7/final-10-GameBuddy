@@ -4,12 +4,10 @@ import axios from "axios";
 async function myInfoAPI() {
     try {
         const token = localStorage.getItem("token");
-        let result = await axios({
-            method: 'get',
-            url: `https://api.mandarin.weniv.co.kr/user/myinfo`,
+        let result = await axios.get(`https://api.mandarin.weniv.co.kr/user/myinfo`, {
             headers: {
                 "Authorization": `Bearer ${token}`
-            },
+            }
         })
         const myInfo = result.data
         return myInfo
@@ -19,3 +17,20 @@ async function myInfoAPI() {
 };
 
 export default myInfoAPI;
+
+// async function myInfoAPI() {
+//     try {
+//         const token = localStorage.getItem("token");
+//         let result = await axios({
+//             method: 'get',
+//             url: `https://api.mandarin.weniv.co.kr/user/myinfo`,
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             },
+//         })
+//         const myInfo = result.data
+//         return myInfo
+//     } catch (error) {
+//         console.log("myinfo api 에러: ", error)
+//     }
+// };

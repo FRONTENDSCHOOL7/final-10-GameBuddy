@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { uploadImageAtom } from "../../Store/Store";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import postAPI from "../../API/postAPI";
 import { useNavigate } from "react-router-dom";
 
 function Post() {
-  const [currentImage, setCurrentImage] = useRecoilState(uploadImageAtom);
+  const currentImage = useRecoilValue(uploadImageAtom);
 
   const resetRecoilState = useResetRecoilState(uploadImageAtom);
 
@@ -26,9 +26,17 @@ function Post() {
   };
 
   const handlePostSubmit = async () => {
-    const result = await postAPI(postContent);
+    let result = "";
+    if (currentImage === DefaultImage) {
+      console.log("이거  실행");
+      result = await postAPI(postContent);
+    } else {
+      result = await postAPI(postContent, currentImage);
+    }
+
     if (result.includes("완료")) {
       alert(result);
+      resetRecoilState();
       navigate("/main");
     } else {
       alert(result);
