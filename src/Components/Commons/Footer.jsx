@@ -36,8 +36,11 @@ function Footer() {
     }
   ];
 
+  // 경로가 메뉴 항목의 경로로 시작하는지 검사 (ex. /profile/:accountname은 profile로 시작)
   const getInitialActive = () => {
-    const matchedMenu = menus.find((menu) => menu.path === location.pathname);
+    const matchedMenu = menus.find((menu) =>
+      location.pathname.startsWith(menu.path)
+    );
     return matchedMenu ? matchedMenu.id : "home";
   };
 
