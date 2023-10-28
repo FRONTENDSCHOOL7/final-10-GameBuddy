@@ -80,7 +80,7 @@ function ListView({ isMyProfile, postsData }) {
                     }}
                   />
                 </div>
-                <S.HeaderP>{post.author.id}</S.HeaderP>
+                <S.HeaderP>@{post.author.accountname}</S.HeaderP>
               </S.HeaderTextBox>
               <S.PostContent>{post.content}</S.PostContent>
               <S.PostContentImg
