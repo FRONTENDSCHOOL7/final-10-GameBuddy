@@ -77,5 +77,5 @@ export const Intro = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 180px; /* 원하는 최대 너비로 조정 가능 */
+  width: 180px;
 `;

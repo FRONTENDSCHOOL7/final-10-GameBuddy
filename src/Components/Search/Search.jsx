@@ -3,7 +3,7 @@ import * as S from "./SearchStyle";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { searchKeywordAtom, userSearchResultAtom } from "../../Store/Store";
 import searchUserAPI from "../../API/searchUserAPI";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as GoBackIcon } from "../../assets/image/icon-goback.svg";
 
 function Search() {
@@ -11,26 +11,32 @@ function Search() {
   const setSearchKeyword = useSetRecoilState(searchKeywordAtom);
   const [searchResult, setSearchResult] = useRecoilState(userSearchResultAtom);
 
-  // 디바운스를 위한 입력값 타이머
-  const [timer, setTimer] = useState(null);
-
   // input에 검색어를 입력하면 호출되는 핸들러
   const handleInputChange = (e) => {
     setSearchKeyword(e.target.value); // 검색 키워드 상태 업데이트
+  };
 
+  // 디바운스를 위한 입력값 타이머
+  const [timer, setTimer] = useState(null);
+
+  useEffect(() => {
     if (timer) {
       clearTimeout(timer); // 타이머 초기화
     }
 
-    // 사용자가 키워드를 입력한지 700ms 후에 api를 호출
+    // 사용자가 키워드를 입력한 뒤 600ms 뒤에 api 호출
     const newTimer = setTimeout(async () => {
-      if (e.target.value) {
-        const results = await searchUserAPI(e.target.value);
+      if (searchKeyword) {
+        const results = await searchUserAPI(searchKeyword);
         setSearchResult(results); // 검색 결과 상태 업데이트
       }
     }, 600);
-    setTimer(newTimer); // 타이머 상태 업데이트
-  };
+    setTimer(newTimer);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchKeyword]);
 
   // goBack 버튼: 이전 페이지로 이동
   const navigate = useNavigate();
