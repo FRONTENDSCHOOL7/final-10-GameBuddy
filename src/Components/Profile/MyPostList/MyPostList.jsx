@@ -57,6 +57,9 @@ function ListView({ isMyProfile, postsData }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const transparentPlaceholder =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
+
   // 사용자의 게시글이 있는 경우
   return (
     <S.ListContainer>
@@ -80,9 +83,10 @@ function ListView({ isMyProfile, postsData }) {
                 <S.HeaderP>{post.author.id}</S.HeaderP>
               </S.HeaderTextBox>
               <S.PostContent>{post.content}</S.PostContent>
-              {post.image && (
-                <S.PostContentImg src={post.image} alt="Post Content Image" />
-              )}
+              <S.PostContentImg
+                src={post.image || transparentPlaceholder} // 이미지가 없을 때 투명 이미지로 공간을 차지하도록 설정
+                alt="Post Content Image"
+              />
               <S.Footer>
                 <S.FooterImg src={heart} alt="Heart" />
                 <S.FooterCount>{post.heartCount}</S.FooterCount>
