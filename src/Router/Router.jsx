@@ -30,7 +30,7 @@ function Router() {
         <Route path="/write" element={<Write />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route
-          path="/follow/:accountname/:type"
+          path="/profile/:accountname/:type"
           element={<FollowDetailPage />}
         />
         <Route path="/profile/:accountname" element={<ProfilePage />} />
