@@ -8,6 +8,7 @@ import comment from "../../../assets/image/icon-comment.svg";
 import { useRecoilState } from "recoil";
 import { userPostListAtom } from "../../../Store/Store";
 import { showDate } from "../../../Functional/DateFunction";
+import Modal from "./Modal/Modal";
 
 function MyPostList({ isMyProfile, accountname }) {
   const [userPostList] = useRecoilState(userPostListAtom);
@@ -54,6 +55,7 @@ function RenderView({ isMyProfile, postsData, viewType, accountname }) {
 function ListView({ isMyProfile, postsData }) {
   // 게시글의 신고하기,더보기 버튼을 누름에 따라 변하는 상태값 설정
   const [isModalVisible, setModalVisible] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // 사용자의 게시글이 있는 경우
   return (
@@ -94,15 +96,20 @@ function ListView({ isMyProfile, postsData }) {
       ))}
       <Modal
         isVisible={isModalVisible}
-        onClose={() => setModalVisible(false)}
+        onClose={() => {
+          setModalVisible(false);
+          setShowConfirm(false); // 이 부분도 초기화
+        }}
         isMyProfile={isMyProfile}
+        showConfirm={showConfirm} // prop 추가
+        setShowConfirm={setShowConfirm} // prop 추가
       />
     </S.ListContainer>
   );
 }
 
 // AlbumView 레이아웃
-function AlbumView({ postsData, accountname }) {
+function AlbumView({ postsData }) {
   // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
@@ -113,68 +120,6 @@ function AlbumView({ postsData, accountname }) {
           )
       )}
     </S.AlbumContainer>
-  );
-}
-
-// 모달 컨트롤
-function Modal({ isVisible, onClose, isMyProfile }) {
-  const [showConfirm, setShowConfirm] = useState(false);
-  const preventPropagation = (e) => e.stopPropagation();
-
-  return (
-    isVisible && (
-      <S.ModalOverlay onClick={onClose}>
-        {showConfirm ? (
-          <ConfirmModal
-            isMyProfile={isMyProfile}
-            onClose={onClose}
-            preventPropagation={preventPropagation}
-          />
-        ) : (
-          <ActionModal
-            isMyProfile={isMyProfile}
-            setShowConfirm={setShowConfirm}
-            preventPropagation={preventPropagation}
-          />
-        )}
-      </S.ModalOverlay>
-    )
-  );
-}
-
-function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
-  return (
-    <S.ModalContainer onClick={preventPropagation}>
-      {isMyProfile ? (
-        <>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
-            수정하기
-          </S.ModalButton>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
-            삭제하기
-          </S.ModalButton>
-        </>
-      ) : (
-        <S.ModalButton onClick={() => setShowConfirm(true)}>
-          신고하기
-        </S.ModalButton>
-      )}
-    </S.ModalContainer>
-  );
-}
-
-// 최종 확인 모달
-function ConfirmModal({ isMyProfile, onClose, preventPropagation }) {
-  return (
-    <S.ConfirmDeleteContainer onClick={preventPropagation}>
-      <S.ConfirmMessage>
-        {isMyProfile ? "정말 삭제하시겠습니까?" : "정말 신고하시겠습니까?"}
-      </S.ConfirmMessage>
-      <S.ConfirmContainer>
-        <S.ConfirmButton onClick={onClose}>아니오</S.ConfirmButton>
-        <S.ConfirmButton>예</S.ConfirmButton>
-      </S.ConfirmContainer>
-    </S.ConfirmDeleteContainer>
   );
 }
 
