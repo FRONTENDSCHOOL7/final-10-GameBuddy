@@ -17,7 +17,7 @@ async function followerAPI(accountName, isFollowerList) {
     })
 
     console.log("성공")
-    // console.log(result.data)
+    console.log(result.data)
     return result.data
   } catch (error) {
     console.log("실패")

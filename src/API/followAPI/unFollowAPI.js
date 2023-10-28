@@ -13,8 +13,10 @@ async function unFollowAPI(accountName) {
         
         console.log("언팔로우 완료")
         console.log(result)
+        return true
     } catch (error) {
         console.log("언팔로우 api 에러: ", error)
+        return false
     }
 };
 
