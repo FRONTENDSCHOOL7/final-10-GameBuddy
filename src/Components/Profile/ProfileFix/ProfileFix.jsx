@@ -1,42 +1,79 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultImage from "../../../assets/image/char_inactive.png";
 import Header from "../../Commons/Header/Header";
 import * as S from "./ProfileFixStyled";
+import uploadImageAPI from "../../../API/uploadImageAPI";
+import ImageCompressor from "image-compressor.js";
+import myInfoAPI from "../../../API/myInfoAPI";
+import profileFixAPI from "../../../API/profileFixAPI";
 
 function Profile() {
   const [userName, setUserName] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [writeUserName, setWriteUserName] = useState("");
+  const [writeAccountName, setWriteAccountName] = useState("");
+  const [writeIntro, setWriteIntro] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState("");
   const [isSignUp, setIsSignUp] = useState(0);
   const navigate = useNavigate();
-
   const fileInputRef = useRef();
 
+  useEffect(() => {
+    async function fetchData() {
+      const result = await myInfoAPI();
+      console.log(result);
+      setUserName(result.user.username);
+      setAccountName(result.user.accountname);
+      setIntro(result.user.intro);
+      setSelectedImage(result.user.image);
+    }
+    fetchData();
+  }, []);
+
   const onChangeUserName = (e) => {
-    setUserName(e.target.value);
+    setWriteUserName(e.target.value);
     if (isSignUp === 2) setIsSignUp(0);
   };
 
   const onChangeAccountName = (e) => {
-    setAccountName(e.target.value);
+    setWriteAccountName(e.target.value);
     if (isSignUp === 1) setIsSignUp(0);
   };
 
   const onChangeIntro = (e) => {
-    setIntro(e.target.value);
+    setWriteIntro(e.target.value);
   };
 
   // 이미지 변경 핸들러
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      new ImageCompressor(file, {
+        maxWidth: 130,
+        maxHeight: 130,
+        quality: 1, // 압축 품질 조정. 필요에 따라 이 값을 조절하세요.
+        async success(result) {
+          const compressedFile = new File([result], `${file.name}`, {
+            type: "image/jpeg"
+          });
+
+          try {
+            const updateImage = await uploadImageAPI(compressedFile);
+            setSelectedImage("https://api.mandarin.weniv.co.kr/" + updateImage);
+          } catch (e) {
+            console.log("잘못된 이미지", e);
+          }
+        },
+        error(err) {
+          console.log(err.message);
+        }
+      });
+    } else {
+      setSelectedImage("");
     }
   };
 
@@ -46,8 +83,25 @@ function Profile() {
   };
 
   // '/main'은 메인 페이지의 경로
-  const handleClick = () => {
-    navigate("/main");
+  const handleClick = async () => {
+    const updatedUserName = writeUserName || userName;
+    const updatedAccountName = writeAccountName || accountName;
+    const updatedIntro = writeIntro || intro;
+    const updatedImage = selectedImage === DefaultImage ? "" : selectedImage;
+
+    const result = await profileFixAPI(
+      updatedUserName,
+      updatedAccountName,
+      updatedIntro,
+      updatedImage
+    );
+
+    if (result.includes("사용중")) {
+      alert(result);
+    } else {
+      alert(result);
+      navigate("/main");
+    }
   };
 
   // API 코드 작성 (useEffect)
@@ -56,7 +110,7 @@ function Profile() {
     <S.ProfileContainer>
       <Header type={"profileMod"} />
       <S.ProfileImage
-        src={selectedImage || DefaultImage}
+        src={selectedImage === "" ? DefaultImage : selectedImage}
         alt="프로필 이미지"
         onClick={handleImageClick} // 이미지 클릭 시 파일 선택 창이 열림
       />
@@ -73,8 +127,8 @@ function Profile() {
         <S.PTag>사용자이름</S.PTag>
         <S.InputTag
           type="text"
-          placeholder="2~10자 이내여야 합니다."
-          value={userName}
+          placeholder={userName}
+          value={writeUserName}
           onChange={onChangeUserName}
         />
         <S.Warning
@@ -85,8 +139,8 @@ function Profile() {
         <S.PTag>계정 ID</S.PTag>
         <S.InputTag
           type="text"
-          placeholder="영문 숫자 마침표 밑줄만 사용 가능합니다. "
-          value={accountName}
+          placeholder={accountName}
+          value={writeAccountName}
           onChange={onChangeAccountName}
         />
         <S.Warning
@@ -97,8 +151,8 @@ function Profile() {
         <S.PTag>소개</S.PTag>
         <S.InputTag
           type="text"
-          placeholder="자신을 소개해주세요."
-          value={intro}
+          placeholder={intro}
+          value={writeIntro}
           onChange={onChangeIntro}
         />
 
