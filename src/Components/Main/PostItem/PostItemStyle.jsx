@@ -69,7 +69,8 @@ export const HeaderImg = styled.img`
 export const PostContent = styled.p`
   font-family: var(--Roboto-B);
   font-size: 0.9rem;
-  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -78,7 +79,6 @@ export const PostContent = styled.p`
 `;
 
 export const PostContentImg = styled.img`
-  margin-top: 16px;
   width: 16rem;
   height: 12rem;
   border-radius: 10%;
