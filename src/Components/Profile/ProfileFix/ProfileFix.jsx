@@ -157,7 +157,7 @@ function Profile() {
         />
 
         <S.SubmitBtn type="submit" onClick={handleClick}>
-          프로필 이미지 변경하기
+          프로필 정보 변경하기
         </S.SubmitBtn>
       </S.ProfileInput>
     </S.ProfileContainer>
