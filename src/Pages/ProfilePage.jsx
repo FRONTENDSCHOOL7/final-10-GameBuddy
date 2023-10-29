@@ -36,7 +36,7 @@ function ProfilePage() {
       });
     };
     fetchData();
-  }, []);
+  }, [accountname]);
 
   // true면 마이 프로필
   let isMyProfile = accountname === nowAccountName.accountname;

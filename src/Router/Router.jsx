@@ -28,7 +28,7 @@ function Router() {
         <Route path="/homenofeed" element={<Home_no_feed />} />
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route
           path="/profile/:accountname/:type"
           element={<FollowDetailPage />}
