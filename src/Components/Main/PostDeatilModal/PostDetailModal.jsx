@@ -6,43 +6,43 @@ import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
 import more from "../../../assets/image/icon-more.svg";
 import Modal from "../../Profile/MyPostList/Modal/Modal";
-
-import {
-  checkMyInfo,
-  getCommentDataSelector,
-  getPostDataSelector,
-  isTouchFeed,
-  mainFeedCommentListDataAtom,
-  sourceAtom,
-  userAccountNameAtom,
-  userProfileCommentListDataAtom
-} from "../../../Store/Store";
 import {
   useRecoilState,
   useRecoilValue,
   useResetRecoilState,
   useSetRecoilState
 } from "recoil";
+import {
+  checkMyInfo,
+  getPostDataSelector,
+  isTouchFeed,
+  mainFeedCommentListDataAtom,
+  sourceAtom,
+  userProfileCommentListDataAtom
+} from "../../../Store/Store";
 import { fewMinutesAgo, showDate } from "../../../Functional/DateFunction";
 import commentAPI from "../../../API/commentAPI";
 import commentWriteAPI from "../../../API/commentWriteAPI";
 import removeCommentAPI from "../../../API/removeCommentAPI";
 import reportCommentAPI from "../../../API/reportCommentAPI";
+import Comment from "./Comment/Comment";
 
-function PostDetailModal({ isMyProfile }) {
+function PostDetailModal() {
   const setIsVisible = useSetRecoilState(isTouchFeed);
-  const data = useRecoilValue(getPostDataSelector);
+  const data = useRecoilValue(getPostDataSelector); // 게시글 데이터
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
 
-  const source = useRecoilValue(sourceAtom);
+  const source = useRecoilValue(sourceAtom); // 데이터의 출처 (유저 포스트리스트 vs 메인 피드)
 
+  // 댓글 리스트의 상태 정의 (userPost, MainFeed)
   const [userProfileCommentListData, setUserProfileCommentListData] =
     useRecoilState(userProfileCommentListDataAtom);
   const [mainFeedCommentListData, setMainFeedCommentListData] = useRecoilState(
     mainFeedCommentListDataAtom
   );
 
+  // source에 따라 사용할 댓글 리스트 결정
   let commentListData =
     source === "userPostList"
       ? userProfileCommentListData
@@ -52,8 +52,7 @@ function PostDetailModal({ isMyProfile }) {
       ? setUserProfileCommentListData
       : setMainFeedCommentListData;
 
-  console.log(commentListData);
-
+  // 댓글 데이터 가져오기
   useEffect(() => {
     async function fetchData() {
       const obj = await commentAPI(data.id);
@@ -62,6 +61,7 @@ function PostDetailModal({ isMyProfile }) {
     fetchData();
   }, [data.id, setCommentListData]);
 
+  // 댓글 리스트 초기화
   const resetUserProfileCommentListData = useResetRecoilState(
     userProfileCommentListDataAtom
   );
@@ -78,22 +78,23 @@ function PostDetailModal({ isMyProfile }) {
     }
   };
 
+  // 댓글 입력 이벤트 핸들러
   const typingComment = (e) => {
     setWriting(e.target.value);
   };
 
+  // 댓글 작성
   const sendCommentData = async (e) => {
     e.preventDefault();
     const sendComment = await commentWriteAPI(data.id, writing);
-    if (sendComment.length !== 0 && sendComment !== undefined) {
+    if (sendComment && sendComment.length) {
       setCommentListData([sendComment, ...commentListData]);
     }
   };
 
+  // 댓글 이벤트 (삭제 또는 신고)
   const commentEvent = async (e, commentId, username) => {
     const commentImg = e.target.src;
-    console.log(data.id);
-    console.log(commentId);
     if (commentImg.includes("icon-close")) {
       alert(await removeCommentAPI(data.id, commentId));
     } else if (commentImg.includes("icon-siren")) {
@@ -101,11 +102,13 @@ function PostDetailModal({ isMyProfile }) {
     }
   };
 
+  // 모달
   const [isModalVisible, setModalVisible] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  // isAuthor로 본인인지 아닌지 판단
   let isAuthor = commentMyProfile.user.accountname === data.author.accountname;
-  console.log("isAuthor:", isAuthor);
+
   return (
     <S.PostDetailBackground>
       {/* 뒷배경 */}
@@ -124,7 +127,7 @@ function PostDetailModal({ isMyProfile }) {
                   alt="More Icon"
                   onClick={(event) => {
                     event.stopPropagation();
-                    setModalVisible(true); // 수정/삭제하기 모달을 여는 로직
+                    setModalVisible(true);
                   }}
                 />
               ) : (
@@ -166,42 +169,13 @@ function PostDetailModal({ isMyProfile }) {
 
         <S.PostDetailHr />
 
-        <S.PostDetailCommentWrapper>
-          <S.PostDetailCommentTitle>댓글</S.PostDetailCommentTitle>
-          {commentListData.map((post, index) => (
-            <S.PostDetailCommentItem key={index}>
-              <S.PostDetailCommentHeaderProfile
-                src={post.author.image}
-                alt="PostDetailCommentHeaderProfile"
-              />
-              <S.PostDetailCommentItemTextBox>
-                <div className="flexBox">
-                  <S.PostDetailCommentHeaderUserName>
-                    {post.author.username}
-                    <S.PostDetailCommentHeaderMinutesAgo>
-                      {fewMinutesAgo(post.createdAt)}
-                    </S.PostDetailCommentHeaderMinutesAgo>
-                  </S.PostDetailCommentHeaderUserName>
-                  <S.PostDetailCommentHeaderImg
-                    src={`${
-                      post.author.accountname ===
-                      commentMyProfile.user.accountname
-                        ? close
-                        : siren
-                    }`}
-                    onClick={(e) =>
-                      commentEvent(e, post.id, post.author.username)
-                    }
-                  />
-                </div>
-                <S.PostDetailCommentContent>
-                  {post.content}
-                </S.PostDetailCommentContent>
-              </S.PostDetailCommentItemTextBox>
-            </S.PostDetailCommentItem>
-          ))}
-        </S.PostDetailCommentWrapper>
-
+        <Comment
+          commentListData={commentListData}
+          commentEvent={commentEvent}
+          commentMyProfile={commentMyProfile}
+          typingComment={typingComment}
+          sendCommentData={sendCommentData}
+        />
         <S.PostDetailHr />
 
         <S.PostDetailWriteForm onSubmit={sendCommentData}>
@@ -217,10 +191,9 @@ function PostDetailModal({ isMyProfile }) {
           setModalVisible(false);
           setShowConfirm(false);
         }}
-        isMyProfile={isMyProfile}
-        showConfirm={showConfirm} // prop 추가
+        showConfirm={showConfirm}
         setShowConfirm={setShowConfirm}
-        isAuthor={isAuthor} // prop 추가
+        isAuthor={isAuthor}
       />
     </S.PostDetailBackground>
   );

@@ -14,14 +14,12 @@ import {
 } from "../../../Store/Store";
 import { showDate } from "../../../Functional/DateFunction";
 import Modal from "./Modal/Modal";
-import { isVisible } from "@testing-library/user-event/dist/utils";
 import PostDetailModal from "../../Main/PostDeatilModal/PostDetailModal";
 
 function MyPostList({ isMyProfile, accountname }) {
   const [userPostList] = useRecoilState(userPostListAtom);
-  // PostView를 설정하기 위한 상태
-  const [viewType, setViewType] = useState("list");
   const [isVisible, setIsVisible] = useRecoilState(isTouchFeed);
+  const [viewType, setViewType] = useState("list"); // 게시글 viewType 설정
 
   const setSource = useSetRecoilState(sourceAtom);
   const setPostIndex = useSetRecoilState(postListDataIndexAtom);
@@ -29,9 +27,10 @@ function MyPostList({ isMyProfile, accountname }) {
   const handlePostClick = (index) => {
     setPostIndex(index); // 클릭한 게시글의 인덱스로 설정
     setSource("userPostList"); // sourceAtom을 "userPostList"로 설정
-    setIsVisible(true); // Modal을 띄웁니다.
+    setIsVisible(true);
   };
 
+  // 모달이 띄워져 있을 때 스크롤 방지
   useEffect(() => {
     document.body.style.overflow = isVisible ? "hidden" : "auto";
   }, [isVisible]);
@@ -92,6 +91,7 @@ function ListView({ isMyProfile, postsData, handlePostClick }) {
     document.body.style.overflow = isModalVisible ? "hidden" : "auto";
   }, [isModalVisible]);
 
+  // 투명 이미지
   const transparentPlaceholder =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
 
@@ -103,14 +103,13 @@ function ListView({ isMyProfile, postsData, handlePostClick }) {
           <S.Section
             onMouseEnter={() => setHoveredId(id)} // 마우스가 들어갔을 때
             onMouseLeave={() => setHoveredId(null)} // 마우스가 나갔을 때
-            isHovered={hoveredId === id} // 스타일링을 위해 prop 추가. 해당 prop에 따라 스타일 변경 필요.
-          >
+            isHovered={hoveredId === id}>
             <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
             <S.PostHeader>
               <S.HeaderTextBox>
                 <div className="flexBox">
                   <S.HeaderH3>{post.author.username}</S.HeaderH3>
-                  {/* myProfile -> more 일 경우에만 모달 띄움 */}
+                  {/* myProfile인지 아닌지에 따라 렌더링 하는 아이콘이 달라짐 */}
                   <S.HeaderImg
                     src={isMyProfile ? more : siren}
                     alt="Action Icon"
@@ -142,11 +141,11 @@ function ListView({ isMyProfile, postsData, handlePostClick }) {
         isVisible={isModalVisible}
         onClose={() => {
           setModalVisible(false);
-          setShowConfirm(false); // 이 부분도 초기화
+          setShowConfirm(false);
         }}
         isMyProfile={isMyProfile}
-        showConfirm={showConfirm} // prop 추가
-        setShowConfirm={setShowConfirm} // prop 추가
+        showConfirm={showConfirm}
+        setShowConfirm={setShowConfirm}
       />
     </S.ListContainer>
   );
@@ -154,7 +153,6 @@ function ListView({ isMyProfile, postsData, handlePostClick }) {
 
 // AlbumView 레이아웃
 function AlbumView({ postsData, handlePostClick }) {
-  // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
       {postsData.map(
