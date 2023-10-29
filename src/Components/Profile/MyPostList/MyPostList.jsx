@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./MyPostListStyle";
 import PostView from "../PostView";
 import more from "../../../assets/image/icon-more.svg";
 import siren from "../../../assets/image/icon-small-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
-import { useRecoilState } from "recoil";
-import { userPostListAtom } from "../../../Store/Store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  isTouchFeed,
+  postListDataIndexAtom,
+  sourceAtom,
+  userPostListAtom
+} from "../../../Store/Store";
 import { showDate } from "../../../Functional/DateFunction";
 import Modal from "./Modal/Modal";
+import { isVisible } from "@testing-library/user-event/dist/utils";
+import PostDetailModal from "../../Main/PostDeatilModal/PostDetailModal";
 
 function MyPostList({ isMyProfile, accountname }) {
   const [userPostList] = useRecoilState(userPostListAtom);
   // PostView를 설정하기 위한 상태
   const [viewType, setViewType] = useState("list");
+  const [isVisible, setIsVisible] = useRecoilState(isTouchFeed);
+
+  const setSource = useSetRecoilState(sourceAtom);
+  const setPostIndex = useSetRecoilState(postListDataIndexAtom);
+
+  const handlePostClick = (index) => {
+    setPostIndex(index); // 클릭한 게시글의 인덱스로 설정
+    setSource("userPostList"); // sourceAtom을 "userPostList"로 설정
+    setIsVisible(true); // Modal을 띄웁니다.
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = isVisible ? "hidden" : "auto";
+  }, [isVisible]);
 
   return (
     <div>
@@ -23,13 +44,21 @@ function MyPostList({ isMyProfile, accountname }) {
         postsData={userPostList.postList}
         viewType={viewType}
         accountname={accountname}
+        handlePostClick={handlePostClick}
       />
+      {isVisible && <PostDetailModal />}
     </div>
   );
 }
 
 // 사용자의 게시글이 없을 때, 뷰타입 지정
-function RenderView({ isMyProfile, postsData, viewType, accountname }) {
+function RenderView({
+  isMyProfile,
+  postsData,
+  viewType,
+  accountname,
+  handlePostClick
+}) {
   if (postsData.length === 0) {
     return (
       <S.ListContainer>
@@ -45,17 +74,23 @@ function RenderView({ isMyProfile, postsData, viewType, accountname }) {
       isMyProfile={isMyProfile}
       postsData={postsData}
       accountname={accountname}
+      handlePostClick={handlePostClick}
     />
   ) : (
-    <AlbumView postsData={postsData} />
+    <AlbumView postsData={postsData} handlePostClick={handlePostClick} />
   );
 }
 
 // ListView 레이아웃
-function ListView({ isMyProfile, postsData }) {
+function ListView({ isMyProfile, postsData, handlePostClick }) {
   // 게시글의 신고하기,더보기 버튼을 누름에 따라 변하는 상태값 설정
   const [isModalVisible, setModalVisible] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [hoveredId, setHoveredId] = useState(null);
+
+  useEffect(() => {
+    document.body.style.overflow = isModalVisible ? "hidden" : "auto";
+  }, [isModalVisible]);
 
   const transparentPlaceholder =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
@@ -64,8 +99,12 @@ function ListView({ isMyProfile, postsData }) {
   return (
     <S.ListContainer>
       {postsData.map((post, id) => (
-        <S.Article key={id}>
-          <S.Section>
+        <S.Article key={id} onClick={() => handlePostClick(id)}>
+          <S.Section
+            onMouseEnter={() => setHoveredId(id)} // 마우스가 들어갔을 때
+            onMouseLeave={() => setHoveredId(null)} // 마우스가 나갔을 때
+            isHovered={hoveredId === id} // 스타일링을 위해 prop 추가. 해당 prop에 따라 스타일 변경 필요.
+          >
             <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
             <S.PostHeader>
               <S.HeaderTextBox>
@@ -75,7 +114,8 @@ function ListView({ isMyProfile, postsData }) {
                   <S.HeaderImg
                     src={isMyProfile ? more : siren}
                     alt="Action Icon"
-                    onClick={() => {
+                    onClick={(event) => {
+                      event.stopPropagation();
                       setModalVisible(true);
                     }}
                   />
@@ -113,14 +153,19 @@ function ListView({ isMyProfile, postsData }) {
 }
 
 // AlbumView 레이아웃
-function AlbumView({ postsData }) {
+function AlbumView({ postsData, handlePostClick }) {
   // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
       {postsData.map(
         (post, id) =>
           post.image && (
-            <S.ImageItem key={id} src={post.image} alt="Post Image" />
+            <S.ImageItem
+              key={id}
+              src={post.image}
+              alt="Post Image"
+              onClick={() => handlePostClick(id)}
+            />
           )
       )}
     </S.AlbumContainer>

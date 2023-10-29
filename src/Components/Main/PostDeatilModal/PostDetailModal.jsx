@@ -4,12 +4,18 @@ import siren from "../../../assets/image/icon-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
+import more from "../../../assets/image/icon-more.svg";
+import Modal from "../../Profile/MyPostList/Modal/Modal";
 
 import {
   checkMyInfo,
-  commentListDataAtom,
+  getCommentDataSelector,
   getPostDataSelector,
-  isTouchFeed
+  isTouchFeed,
+  mainFeedCommentListDataAtom,
+  sourceAtom,
+  userAccountNameAtom,
+  userProfileCommentListDataAtom
 } from "../../../Store/Store";
 import {
   useRecoilState,
@@ -23,14 +29,29 @@ import commentWriteAPI from "../../../API/commentWriteAPI";
 import removeCommentAPI from "../../../API/removeCommentAPI";
 import reportCommentAPI from "../../../API/reportCommentAPI";
 
-function PostDetailModal() {
+function PostDetailModal({ isMyProfile }) {
   const setIsVisible = useSetRecoilState(isTouchFeed);
   const data = useRecoilValue(getPostDataSelector);
-  const [commentListData, setCommentListData] =
-    useRecoilState(commentListDataAtom);
-  const resetCommentList = useResetRecoilState(commentListDataAtom);
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
+
+  const source = useRecoilValue(sourceAtom);
+
+  const [userProfileCommentListData, setUserProfileCommentListData] =
+    useRecoilState(userProfileCommentListDataAtom);
+  const [mainFeedCommentListData, setMainFeedCommentListData] = useRecoilState(
+    mainFeedCommentListDataAtom
+  );
+
+  let commentListData =
+    source === "userPostList"
+      ? userProfileCommentListData
+      : mainFeedCommentListData;
+  let setCommentListData =
+    source === "userPostList"
+      ? setUserProfileCommentListData
+      : setMainFeedCommentListData;
+
   console.log(commentListData);
 
   useEffect(() => {
@@ -39,11 +60,22 @@ function PostDetailModal() {
       setCommentListData(obj);
     }
     fetchData();
-  }, []);
+  }, [data.id, setCommentListData]);
+
+  const resetUserProfileCommentListData = useResetRecoilState(
+    userProfileCommentListDataAtom
+  );
+  const resetMainFeedCommentListData = useResetRecoilState(
+    mainFeedCommentListDataAtom
+  );
 
   const closeModal = () => {
     setIsVisible(false);
-    resetCommentList();
+    if (source === "userPostList") {
+      resetUserProfileCommentListData();
+    } else {
+      resetMainFeedCommentListData();
+    }
   };
 
   const typingComment = (e) => {
@@ -69,6 +101,11 @@ function PostDetailModal() {
     }
   };
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  let isAuthor = commentMyProfile.user.accountname === data.author.accountname;
+  console.log("isAuthor:", isAuthor);
   return (
     <S.PostDetailBackground>
       {/* 뒷배경 */}
@@ -81,7 +118,25 @@ function PostDetailModal() {
               <S.PostDetailHeaderUserName>
                 {data.author.username}
               </S.PostDetailHeaderUserName>
-              <S.PostDetailHeaderImg src={siren} alt="Siren" />
+              {commentMyProfile.user.accountname === data.author.accountname ? (
+                <S.PostDetailHeaderImg
+                  src={more}
+                  alt="More Icon"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setModalVisible(true); // 수정/삭제하기 모달을 여는 로직
+                  }}
+                />
+              ) : (
+                <S.PostDetailHeaderImg
+                  src={siren}
+                  alt="Report Icon"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setModalVisible(true);
+                  }}
+                />
+              )}
             </div>
             <S.PostDetailHeaderAccountName>
               {data.author.accountname}
@@ -156,6 +211,17 @@ function PostDetailModal() {
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
       <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={() => {
+          setModalVisible(false);
+          setShowConfirm(false);
+        }}
+        isMyProfile={isMyProfile}
+        showConfirm={showConfirm} // prop 추가
+        setShowConfirm={setShowConfirm}
+        isAuthor={isAuthor} // prop 추가
+      />
     </S.PostDetailBackground>
   );
 }

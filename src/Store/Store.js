@@ -43,7 +43,7 @@ export const signUpAtom = atom({
   }
 });
 
-// MainFeed에서 SwitchMode를 누를 시, 상태 변경시키는 atom
+// MainFeed에서 SwitchMode를 누를 시, 상태 변경시키는 atomㅎ
 export const switchModeAtom = atom({
   key: "switchModeAtom",
   default: false
@@ -76,20 +76,54 @@ export const isTouchFeed = atom({
   default: false
 });
 
+// 게시글의 원천을 나타내는 atom (예: 'postListData' 또는 'userPostList')
+export const sourceAtom = atom({
+  key: "sourceAtom",
+  default: "postListData"
+});
+
 //PostDetail에 표현할 데이터를 저장해 놓는 Selector
 export const getPostDataSelector = selector({
   key: "getPostDataSelector",
   get: ({ get }) => {
-    const postDetailDataItem = get(postListDataAtom);
-    const postDetailDataItemIndex = get(postListDataIndexAtom);
-    return postDetailDataItem[postDetailDataItemIndex];
+    const source = get(sourceAtom);
+
+    let list;
+    if (source === "userPostList") {
+      const userPosts = get(userPostListAtom);
+      list = userPosts.postList;
+    } else {
+      list = get(postListDataAtom);
+    }
+
+    const index = get(postListDataIndexAtom);
+    return list[index];
   }
 });
 
-// PostDetail에 들어갔을 때, 댓글 리스트 목록 데이터 저장용 Atom
-export const commentListDataAtom = atom({
-  key: "commentListDataAtom",
+// 메인 피드의 게시글 상세정보를 위한 댓글 데이터 Atom
+export const mainFeedCommentListDataAtom = atom({
+  key: "mainFeedCommentListDataAtom",
   default: []
+});
+
+// 유저 프로필 페이지의 게시글 상세정보를 위한 댓글 데이터 Atom
+export const userProfileCommentListDataAtom = atom({
+  key: "userProfileCommentListDataAtom",
+  default: []
+});
+
+export const getCommentDataSelector = selector({
+  key: "getCommentDataSelector",
+  get: ({ get }) => {
+    const source = get(sourceAtom);
+
+    if (source === "userPostList") {
+      return get(userProfileCommentListDataAtom);
+    } else {
+      return get(mainFeedCommentListDataAtom);
+    }
+  }
 });
 
 // 댓글창에 내 유저정보 확인하기 위해 사용되는 Atom

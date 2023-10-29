@@ -6,8 +6,10 @@ function Modal({
   onClose,
   isMyProfile,
   showConfirm,
-  setShowConfirm
+  setShowConfirm,
+  isAuthor
 }) {
+  console.log("Is Author in Modal?", isAuthor);
   const preventPropagation = (e) => e.stopPropagation();
 
   const handleClose = () => {
@@ -23,12 +25,14 @@ function Modal({
             isMyProfile={isMyProfile}
             onClose={onClose}
             preventPropagation={preventPropagation}
+            isAuthor={isAuthor}
           />
         ) : (
           <ActionModal
             isMyProfile={isMyProfile}
             setShowConfirm={setShowConfirm}
             preventPropagation={preventPropagation}
+            isAuthor={isAuthor}
           />
         )}
       </S.ModalOverlay>
@@ -36,10 +40,15 @@ function Modal({
   );
 }
 
-function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
+function ActionModal({
+  isMyProfile,
+  setShowConfirm,
+  preventPropagation,
+  isAuthor
+}) {
   return (
     <S.ModalContainer onClick={preventPropagation}>
-      {isMyProfile ? (
+      {isMyProfile || isAuthor ? (
         <>
           <S.ModalButton>수정하기</S.ModalButton>
           <S.ModalButton onClick={() => setShowConfirm(true)}>
@@ -56,11 +65,13 @@ function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
 }
 
 // 최종 확인 모달
-function ConfirmModal({ isMyProfile, onClose, preventPropagation }) {
+function ConfirmModal({ isMyProfile, onClose, preventPropagation, isAuthor }) {
   return (
     <S.ConfirmDeleteContainer onClick={preventPropagation}>
       <S.ConfirmMessage>
-        {isMyProfile ? "정말 삭제하시겠습니까?" : "정말 신고하시겠습니까?"}
+        {isMyProfile || isAuthor
+          ? "정말 삭제하시겠습니까?"
+          : "정말 신고하시겠습니까?"}
       </S.ConfirmMessage>
       <S.ConfirmContainer>
         <S.ConfirmButton onClick={onClose}>아니오</S.ConfirmButton>
