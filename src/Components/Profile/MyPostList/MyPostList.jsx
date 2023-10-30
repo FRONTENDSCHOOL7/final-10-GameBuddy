@@ -91,6 +91,10 @@ function MyPostList({ isMyProfile, accountname }) {
     );
   }
 
+  // 게시글에 이미지가 등록되지 않았을 때 대체할 이미지
+  const transparentPlaceholder =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
+
   return (
     <>
       <PostView viewType={viewType} setViewType={setViewType} />
@@ -125,11 +129,11 @@ function MyPostList({ isMyProfile, accountname }) {
                   <S.HeaderP>{post.author.id}</S.HeaderP>
                 </S.HeaderTextBox>
                 <S.PostContent>{post.content}</S.PostContent>
-                {post.image !== "" ? (
-                  <S.PostContentImg src={post.image} alt="Post Content Image" />
-                ) : (
-                  <></>
-                )}
+                <S.PostContentImg
+                  src={post.image || transparentPlaceholder} // 이미지가 없을 때 투명 이미지로 공간을 차지하도록 설정
+                  alt="Post Content Image"
+                  style={post.image ? {} : { height: "10px" }}
+                />
                 <S.Footer>
                   <S.FooterImg
                     src={post.hearted ? heart : unheart}
