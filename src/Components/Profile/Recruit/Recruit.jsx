@@ -3,13 +3,16 @@ import * as S from "./RecruitStyle";
 import { useParams } from "react-router-dom";
 import productListAPI from "../../../API/productListAPI";
 
-function Recruit() {
+function Recruit({isMyProfile}) {
   const { accountname } = useParams();
   const [recruit, setRecruit] = useState([]);
+  const [modalOn, setModalOn] = useState(false);
+  const [recruitId, setRecruitId] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const list = await productListAPI(accountname);
+      console.log(list)
       setRecruit(list);
     };
     fetchData();
@@ -21,7 +24,10 @@ function Recruit() {
       <S.GameList>
         {recruit.map((recruit, id) => {
           return (
-            <S.GameCard key={id}>
+            <S.GameCard key={id} onClick={() => {
+                setRecruitId(id)
+                setModalOn(true);
+              }}>
               {/* 모집글 상세 */}
               <S.GameImage src={recruit.itemImage} alt="게임 스크린샷" />
               <p className="gameName">{recruit.itemName}</p>
@@ -30,6 +36,26 @@ function Recruit() {
           );
         })}
       </S.GameList>
+
+      {modalOn && 
+        <S.ModalContainer onClick={() => setModalOn(false)}>
+          <S.ModalContent onClick={(event) => event.stopPropagation()}>
+            <S.ModalProfile>
+              <S.ModalProfileImage src={recruit[recruitId].author.image}/>
+              <S.ModalArticle>
+                <S.ModalUsername>{recruit[recruitId].author.username}</S.ModalUsername>
+                <S.ModalAccountname>{recruit[recruitId].author.accountname}</S.ModalAccountname>
+              </S.ModalArticle>
+            </S.ModalProfile>
+            <S.ModalImage src={recruit[recruitId].itemImage}/>
+            <S.ModalIntro>{recruit[recruitId].link}</S.ModalIntro>
+            {isMyProfile ? 
+              <S.ModalBtn>모집글 수정하기</S.ModalBtn>
+              : <S.ModalBtn>모집 참여하기</S.ModalBtn>
+            }
+          </S.ModalContent>
+        </S.ModalContainer>
+      }
     </S.RecruitContainer>
   );
 }

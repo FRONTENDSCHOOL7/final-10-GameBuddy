@@ -43,3 +43,76 @@ export const GameImage = styled.img`
   width: 110px;
   height: 90px;
 `;
+
+//모달
+export const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000; //다른 요소보다 항상 앞에 있어야함
+`;
+export const ModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  font-size: 16px;
+`;
+export const ModalProfile = styled.div`
+  display: flex;
+  width: 100%;
+`;
+export const ModalProfileImage = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  align-items: center;
+`;
+export const ModalArticle = styled.article`
+  margin-left: 10px;
+  line-height: 20px;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+export const ModalUsername = styled.p`
+  color:#000000;
+  font-size: 16px;
+  font-weight: 500;
+`;
+export const ModalAccountname = styled.p`
+  color:#767676;
+  font-size: 14px;
+`;
+export const ModalImage = styled.img`
+  width: 95%;
+  height: calc(100vw - 55vw);
+  border-radius: 20px;
+`;
+export const ModalIntro = styled.p`
+  width: 90%;
+  flex-grow: 1;
+  overflow-y: auto;
+`;
+export const ModalBtn = styled.button`
+  width: 75%;
+  height: 35px;
+  font-size: 19px;
+  color: #ffffff;
+  border-radius: 24px;
+  border: none;
+  background-color: #5865f2;
+`;

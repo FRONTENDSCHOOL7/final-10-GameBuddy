@@ -58,7 +58,7 @@ function ProfilePage() {
       {/* 현재 팔로우 기능이 구현되지 않았기 때문에, 초기값은 true(팔로잉)이므로 두 컴포넌트 다 렌더링됩니다. */}
       {isFollowing && (
         <>
-          <Recruit />
+          <Recruit isMyProfile={isMyProfile} />
           <MyPostList isMyProfile={isMyProfile} accountname={accountname} />
         </>
       )}
