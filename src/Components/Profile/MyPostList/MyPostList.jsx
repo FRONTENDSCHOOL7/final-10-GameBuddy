@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as S from "./MyPostListStyle";
 import PostView from "../PostView";
 import more from "../../../assets/image/icon-more.svg";
@@ -9,7 +9,6 @@ import comment from "../../../assets/image/icon-comment.svg";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   isTouchFeed,
-  postListDataIndexAtom,
   userPostListAtom,
   userPostListDataIndexAtom
 } from "../../../Store/Store";
@@ -27,12 +26,14 @@ function MyPostList({ isMyProfile, accountname }) {
   const setIsVisible = useSetRecoilState(isTouchFeed);
   const setIndex = useSetRecoilState(userPostListDataIndexAtom);
   const isVisible = useRecoilValue(isTouchFeed);
+  const [selectedPostId, setSelectedPostId] = useState(null);
 
   // Modal의 상태에 따라 스크롤을 제어합니다.
   useEffect(() => {
     document.body.style.overflow = isVisible ? "hidden" : "auto";
   }, [isVisible]);
 
+  // 좋아요
   const handleHeartClick = async (e, post_id) => {
     e.stopPropagation();
     const currentHeart = e.target.getAttribute("src");
@@ -68,8 +69,10 @@ function MyPostList({ isMyProfile, accountname }) {
     }
   };
 
+  // 더보기 / 신고하기 모달 상태
   const [isModalVisible, setModalVisible] = useState(false);
 
+  // 게시글이 없는 경우와 album view일 때
   if (postData.length === 0 || viewType === "album") {
     return (
       <>
@@ -79,9 +82,9 @@ function MyPostList({ isMyProfile, accountname }) {
           postData={postData}
           viewType={viewType}
           accountname={accountname}
-          setHoveredId={setHoveredId} // 추가
-          hoveredId={hoveredId} // 추가
-          setIsVisible={setIsVisible} // 추가
+          setHoveredId={setHoveredId}
+          hoveredId={hoveredId}
+          setIsVisible={setIsVisible}
           setIndex={setIndex}
         />
       </>
@@ -91,7 +94,6 @@ function MyPostList({ isMyProfile, accountname }) {
   return (
     <>
       <PostView viewType={viewType} setViewType={setViewType} />
-      {/* ListView의 레이아웃 코드 */}
       <S.ListContainer>
         {postData.map((post, index) => (
           <S.Article key={index}>
@@ -100,23 +102,23 @@ function MyPostList({ isMyProfile, accountname }) {
               onMouseEnter={() => setHoveredId(index)}
               onMouseLeave={() => setHoveredId(null)}
               isHovered={hoveredId === index}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setIsVisible(true);
                 setIndex(index);
-                // console.log("Section clicked");
-                // console.log("isTouchFeed after click:", isVisible);
               }}>
               <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
               <S.PostHeader>
                 <S.HeaderTextBox>
                   <div className="flexBox">
                     <S.HeaderH3>{post.author.username}</S.HeaderH3>
-                    {/* myProfile -> more 일 경우에만 모달 띄움 */}
                     <S.HeaderImg
                       src={isMyProfile ? more : siren}
                       alt="Action Icon"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setModalVisible(true);
+                        setSelectedPostId(post.id);
                       }}
                     />
                   </div>
@@ -147,6 +149,7 @@ function MyPostList({ isMyProfile, accountname }) {
           isMoreModalVisible={isModalVisible}
           onClose={() => setModalVisible(false)}
           isMyProfile={isMyProfile}
+          postId={selectedPostId}
         />
       </S.ListContainer>
     </>
@@ -194,7 +197,6 @@ function AlbumView({
   setIsVisible,
   setIndex
 }) {
-  // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
       {postData.map(

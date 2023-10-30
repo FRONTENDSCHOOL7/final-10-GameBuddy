@@ -29,12 +29,9 @@ function MyPostDetailModal() {
   const data = useRecoilValue(getUserPostDataSelector);
   const [commentListData, setCommentListData] =
     useRecoilState(commentListDataAtom);
-  const resetCommentList = useRecoilValue(commentListDataAtom);
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
-  // console.log(postData);
-  // console.log("데이터", data);
-  console.log(commentMyProfile);
+
   const [isMoreModalVisible, setIsMoreModalVisible] = useState(false);
   const isMyProfile =
     data.author.accountname === commentMyProfile.user.accountname;
@@ -142,11 +139,12 @@ function MyPostDetailModal() {
     }
   };
 
+  // postId를 저장해서 moreModal에 넘겨주기 위함
+  const [selectedPostId, setSelectedPostId] = useState(null);
+
   return (
     <S.PostDetailBackground>
-      {/* 뒷배경 */}
       <S.PostDetailBox>
-        {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile src={data.author.image} />
           <S.PostDetailHeaderTextBox>
@@ -158,7 +156,10 @@ function MyPostDetailModal() {
                 <S.PostDetailHeaderImg
                   src={more}
                   alt="More"
-                  onClick={() => setIsMoreModalVisible(true)}
+                  onClick={() => {
+                    setIsMoreModalVisible(true);
+                    setSelectedPostId(data.id);
+                  }}
                 />
               ) : (
                 <S.PostDetailHeaderImg
@@ -248,6 +249,7 @@ function MyPostDetailModal() {
         isMoreModalVisible={isMoreModalVisible}
         onClose={() => setIsMoreModalVisible(false)}
         isMyProfile={isMyProfile}
+        postId={selectedPostId}
       />
     </S.PostDetailBackground>
   );
