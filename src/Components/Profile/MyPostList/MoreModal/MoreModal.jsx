@@ -8,6 +8,11 @@ export function Modal({ isMoreModalVisible, onClose, isMyProfile, postId }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const preventPropagation = (e) => e.stopPropagation();
 
+  const handleModalClose = () => {
+    onClose(); // 원래 onClose 호출
+    setShowConfirm(false); // 상태 초기화
+  };
+
   // 신고하면 alert창 띄우기
   const handleReport = async () => {
     alert("신고되었습니다.");
@@ -16,11 +21,11 @@ export function Modal({ isMoreModalVisible, onClose, isMyProfile, postId }) {
 
   return (
     isMoreModalVisible && (
-      <S.ModalOverlay onClick={onClose}>
+      <S.ModalOverlay onClick={handleModalClose}>
         {showConfirm ? (
           <ConfirmModal
             isMyProfile={isMyProfile}
-            onClose={onClose}
+            onClose={handleModalClose}
             preventPropagation={preventPropagation}
             onReport={handleReport}
             postId={postId}
@@ -43,9 +48,8 @@ function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
     <S.ModalContainer onClick={preventPropagation}>
       {isMyProfile ? (
         <>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
-            수정하기
-          </S.ModalButton>
+          {/* 게시글 수정 페이지로 이동해야함 */}
+          <S.ModalButton>수정하기</S.ModalButton>
           <S.ModalButton onClick={() => setShowConfirm(true)}>
             삭제하기
           </S.ModalButton>
