@@ -19,7 +19,6 @@ import heartPostAPI from "../../../API/heartPostAPI";
 import unheartPostAPI from "../../../API/unheartPostAPI";
 
 function MyPostList({ isMyProfile, accountname }) {
-  const [userPostList] = useRecoilState(userPostListAtom);
   // PostView를 설정하기 위한 상태
   const [viewType, setViewType] = useState("list");
 
@@ -80,6 +79,10 @@ function MyPostList({ isMyProfile, accountname }) {
           postData={postData}
           viewType={viewType}
           accountname={accountname}
+          setHoveredId={setHoveredId} // 추가
+          hoveredId={hoveredId} // 추가
+          setIsVisible={setIsVisible} // 추가
+          setIndex={setIndex}
         />
       </>
     );
@@ -100,8 +103,8 @@ function MyPostList({ isMyProfile, accountname }) {
               onClick={() => {
                 setIsVisible(true);
                 setIndex(index);
-                console.log("Section clicked");
-                console.log("isTouchFeed after click:", isVisible);
+                // console.log("Section clicked");
+                // console.log("isTouchFeed after click:", isVisible);
               }}>
               <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
               <S.PostHeader>
@@ -151,7 +154,15 @@ function MyPostList({ isMyProfile, accountname }) {
 }
 
 // 게시물이 없거나 앨범뷰를 렌더링해야 하는 경우
-function RenderView({ isMyProfile, postData, viewType, accountname }) {
+function RenderView({
+  postData,
+  viewType,
+  accountname,
+  setHoveredId,
+  hoveredId,
+  setIsVisible,
+  setIndex
+}) {
   if (postData.length === 0) {
     return (
       <S.ListContainer>
@@ -162,20 +173,45 @@ function RenderView({ isMyProfile, postData, viewType, accountname }) {
     );
   }
   if (viewType === "album") {
-    return <AlbumView postData={postData} />;
+    return (
+      <AlbumView
+        postData={postData}
+        setHoveredId={setHoveredId}
+        hoveredId={hoveredId}
+        setIsVisible={setIsVisible}
+        setIndex={setIndex}
+      />
+    );
   }
   return null;
 }
 
 // AlbumView 레이아웃
-function AlbumView({ postData }) {
+function AlbumView({
+  postData,
+  setHoveredId,
+  hoveredId,
+  setIsVisible,
+  setIndex
+}) {
   // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
       {postData.map(
-        (post, id) =>
+        (post, index) =>
           post.image && (
-            <S.ImageItem key={id} src={post.image} alt="Post Image" />
+            <S.ImageItem
+              key={index}
+              src={post.image}
+              alt="Post Image"
+              onMouseEnter={() => setHoveredId(index)}
+              onMouseLeave={() => setHoveredId(null)}
+              isHovered={hoveredId === index}
+              onClick={() => {
+                setIsVisible(true);
+                setIndex(index);
+              }}
+            />
           )
       )}
     </S.AlbumContainer>
