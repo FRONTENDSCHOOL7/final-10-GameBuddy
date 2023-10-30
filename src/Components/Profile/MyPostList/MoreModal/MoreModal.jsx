@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import * as S from "./MoreModalStyle";
+import reportCommentAPI from "../../../../API/reportCommentAPI";
 
-export function Modal({ isMoreModalVisible, onClose, isMyProfile }) {
+export function Modal({
+  isMoreModalVisible,
+  onClose,
+  isMyProfile,
+  commentId,
+  username,
+  onReport
+}) {
   const [showConfirm, setShowConfirm] = useState(false);
   const preventPropagation = (e) => e.stopPropagation();
+
+  const handleReport = async () => {
+    alert("신고되었습니다.");
+    onClose(); // 신고 후 모달 닫기
+  };
+  // 필요하다면 여기에 수정하기, 삭제하기에 대한 로직도 추가
 
   return (
     isMoreModalVisible && (
@@ -13,6 +27,7 @@ export function Modal({ isMoreModalVisible, onClose, isMyProfile }) {
             isMyProfile={isMyProfile}
             onClose={onClose}
             preventPropagation={preventPropagation}
+            onReport={handleReport}
           />
         ) : (
           <ActionModal
@@ -47,7 +62,7 @@ function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
   );
 }
 
-function ConfirmModal({ isMyProfile, onClose, preventPropagation }) {
+function ConfirmModal({ isMyProfile, onClose, onReport, preventPropagation }) {
   return (
     <S.ConfirmDeleteContainer onClick={preventPropagation}>
       <S.ConfirmMessage>
@@ -55,7 +70,9 @@ function ConfirmModal({ isMyProfile, onClose, preventPropagation }) {
       </S.ConfirmMessage>
       <S.ConfirmContainer>
         <S.ConfirmButton onClick={onClose}>아니오</S.ConfirmButton>
-        <S.ConfirmButton>예</S.ConfirmButton>
+        <S.ConfirmButton onClick={isMyProfile ? onClose : onReport}>
+          예
+        </S.ConfirmButton>
       </S.ConfirmContainer>
     </S.ConfirmDeleteContainer>
   );

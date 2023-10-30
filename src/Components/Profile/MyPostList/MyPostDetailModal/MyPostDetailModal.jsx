@@ -5,6 +5,7 @@ import heart from "../../../../assets/image/icon-heart.svg";
 import unheart from "../../../../assets/image/icon-unheart.svg";
 import comment from "../../../../assets/image/icon-comment.svg";
 import close from "../../../../assets/image/icon-close.svg";
+import more from "../../../../assets/image/icon-more.svg";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   checkMyInfo,
@@ -20,6 +21,7 @@ import reportCommentAPI from "../../../../API/reportCommentAPI";
 import heartPostAPI from "../../../../API/heartPostAPI";
 import unheartPostAPI from "../../../../API/unheartPostAPI";
 import { fewMinutesAgo, showDate } from "../../../../Functional/DateFunction";
+import { Modal } from "../MoreModal/MoreModal";
 
 function MyPostDetailModal() {
   const [postData, setPostData] = useRecoilState(userPostListAtom);
@@ -33,6 +35,9 @@ function MyPostDetailModal() {
   // console.log(postData);
   // console.log("데이터", data);
   console.log(commentMyProfile);
+  const [isMoreModalVisible, setIsMoreModalVisible] = useState(false);
+  const isMyProfile =
+    data.author.accountname === commentMyProfile.user.accountname;
 
   useEffect(() => {
     async function fetchData() {
@@ -149,7 +154,19 @@ function MyPostDetailModal() {
               <S.PostDetailHeaderUserName>
                 {data.author.username}
               </S.PostDetailHeaderUserName>
-              <S.PostDetailHeaderImg src={siren} alt="Siren" />
+              {isMyProfile ? (
+                <S.PostDetailHeaderImg
+                  src={more}
+                  alt="More"
+                  onClick={() => setIsMoreModalVisible(true)}
+                />
+              ) : (
+                <S.PostDetailHeaderImg
+                  src={siren}
+                  alt="Siren"
+                  onClick={() => setIsMoreModalVisible(true)}
+                />
+              )}
             </div>
             <S.PostDetailHeaderAccountName>
               {data.author.accountname}
@@ -227,6 +244,11 @@ function MyPostDetailModal() {
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
       <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
+      <Modal
+        isMoreModalVisible={isMoreModalVisible}
+        onClose={() => setIsMoreModalVisible(false)}
+        isMyProfile={isMyProfile}
+      />
     </S.PostDetailBackground>
   );
 }
