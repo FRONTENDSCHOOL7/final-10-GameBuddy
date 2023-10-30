@@ -34,12 +34,12 @@ function FollowList() {
     fetchData();
   }, [render]);
 
-  async function follow(ac) {
-    const result = await followAPI(ac)
+  async function follow(accountName) {
+    const result = await followAPI(accountName)
     if(result) ReRender(!render);
   }
-  async function unFollow(ac) {
-    const result = await unFollowAPI(ac)
+  async function unFollow(accountName) {
+    const result = await unFollowAPI(accountName)
     if(result) ReRender(!render);
   }
 
@@ -58,7 +58,8 @@ function FollowList() {
             </S.ProfileBox>
             {/* followerAPI를 사용해 불러온 데이터와 현재 로그인한 유저의 팔로우 목록을 비교해 일치할 경우(이미 팔로우한 경우) 언팔로우 버튼이 표시된다. */}
             {userData.following.includes(data._id)  ? <S.UnFollowBtn onClick={() => unFollow(data.accountname)}>언팔로우</S.UnFollowBtn> : <S.FollowBtn onClick={() => follow(data.accountname)}>팔로우</S.FollowBtn>}
-          </S.FollowListForm> : <S.FollowListForm key={id}>
+          </S.FollowListForm> : 
+          <S.FollowListForm key={id}>
             <S.ProfileBox onClick={() => {navigate(`/profile/${data.accountname}`)}}>
               <S.Image src={data.image}/>
               <S.Article>
@@ -66,7 +67,6 @@ function FollowList() {
                 <S.Intro>{data.intro}</S.Intro>
               </S.Article>
             </S.ProfileBox>
-            {/* followerAPI를 사용해 불러온 데이터와 현재 로그인한 유저의 팔로우 목록을 비교해 일치할 경우(이미 팔로우한 경우) 언팔로우 버튼이 표시된다. */}
             <S.ItsMeBtn>O</S.ItsMeBtn>
           </S.FollowListForm>
         )

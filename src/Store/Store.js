@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-//로그인 성공 시, 로그인 API호출 값을 저장할 atom
+//현재 로그인한 유저의 데이터를 저장할 atom
 export const userDataAtom = atom({
   key: "userDataAtom",
   default: {
@@ -19,10 +19,13 @@ export const userDataAtom = atom({
 });
 
 //푸터에서 사용하며, 푸터가 있는 모든 페이지에서 사용가능한 userAccount 저장용 atom
-export const userAccountNameAtom = atom({
-  key: "userAccountNameAtom",
+export const myDataAtom = atom({
+  key: "myDataAtom",
   default: {
-    accountname: ""
+    _id: "",
+    accountname: "",
+    following: [],
+    follower: []
   }
 });
 

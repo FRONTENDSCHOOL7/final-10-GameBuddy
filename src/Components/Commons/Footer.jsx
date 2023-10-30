@@ -7,18 +7,21 @@ import { ReactComponent as WriteIcon } from "../../assets/image/WriteIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/image/ProfileIcon.svg";
 import myInfoAPI from "../../API/myInfoAPI";
 import { useRecoilState } from "recoil";
-import { userAccountNameAtom } from "../../Store/Store";
+import { myDataAtom } from "../../Store/Store";
 
 function Footer() {
-  const [userData, setUserData] = useRecoilState(userAccountNameAtom);
+  const [myData, setMyData] = useRecoilState(myDataAtom);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       const myInfo = await myInfoAPI();
-      setUserData({
-        accountname: myInfo.user.accountname
+      setMyData({
+        _id: myInfo.user._id,
+        accountname: myInfo.user.accountname,
+        following: myInfo.user.following,
+        follower: myInfo.user.follower
       });
     };
     fetchData();
@@ -31,7 +34,7 @@ function Footer() {
     {
       name: "프로필",
       icon: StyledProfileIcon,
-      path: `/profile/${userData.accountname}`,
+      path: `/profile/${myData.accountname}`,
       id: "profile"
     }
   ];

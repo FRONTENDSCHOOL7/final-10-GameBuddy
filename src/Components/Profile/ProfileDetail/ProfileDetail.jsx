@@ -4,14 +4,31 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
 import { userPostListAtom } from "../../../Store/Store";
+import { myDataAtom } from "../../../Store/Store";
+import followAPI from "../../../API/followAPI/followAPI";
+import unFollowAPI from "../../../API/followAPI/unFollowAPI";
 
 function Profile({ isMyProfile, accountname }) {
-  const [userData, setUserData] = useRecoilState(userDataAtom);
+  const [userData] = useRecoilState(userDataAtom);
   const [userPostList] = useRecoilState(userPostListAtom);
+  const [myData] = useRecoilState(myDataAtom);
   const navigate = useNavigate();
 
   //팔로잉 여부
-  const [isFollowing, setIsFollowing] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(myData.following.includes(userData._id))
+
+  async function follow(accountName) {
+    const result = await followAPI(accountName)
+    console.log(myData.following)
+    console.log(userData._id)
+    if(result) setIsFollowing(!isFollowing)
+  }
+  async function unFollow(accountName) {
+    const result = await unFollowAPI(accountName)
+    console.log(myData.following)
+    console.log(userData._id)
+    if(result) setIsFollowing(!isFollowing)
+  }
 
   return (
     <S.ProfileContainer>
@@ -60,16 +77,14 @@ function Profile({ isMyProfile, accountname }) {
         </S.Button>
         {/* 나의 프로필인지 아닌지에 따라 이동경로와 내용 달라짐 */}
         {/* 팔로잉 상태에 따라 버튼 내용 달라짐 */}
-        <S.Button
-          onClick={() =>
-            isMyProfile ? navigate("/write") : setIsFollowing(!isFollowing)
-          }>
-          {isMyProfile
-            ? "게시글 작성하기"
-            : isFollowing
-            ? "언팔로우하기"
-            : "팔로우하기"}
-        </S.Button>
+        {isMyProfile 
+        ? <S.Button onClick={() => navigate("/write")}>게시글 작성하기</S.Button> 
+        : (
+          isFollowing
+          ? <S.UnFollowBtn onClick={() => unFollow(accountname)}>언팔로우</S.UnFollowBtn> 
+          : <S.FollowBtn onClick={() => follow(accountname)}>팔로우</S.FollowBtn>
+        )}
+
       </S.ButtonContainer>
     </S.ProfileContainer>
   );
