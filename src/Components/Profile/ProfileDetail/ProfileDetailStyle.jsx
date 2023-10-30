@@ -129,3 +129,21 @@ export const Button = styled.button`
     color: #a4a4a4;
   }
 `;
+export const FollowBtn = styled.button`
+  background-color: #5865f2;
+  color: #ffffff;
+  width: 120px;
+  height: 32px;
+  border-radius: 26px;
+  border: none;
+  text-align: center;
+`;
+export const UnFollowBtn = styled.button`
+  background-color: #dbdbdb;
+  color: #000000;
+  width: 120px;
+  height: 32px;
+  border-radius: 26px;
+  border: none;
+  text-align: center;
+`;

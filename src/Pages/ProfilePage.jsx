@@ -7,7 +7,7 @@ import Footer from "../Components/Commons/Footer";
 import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userDataAtom } from "../Store/Store";
-import { userAccountNameAtom } from "../Store/Store";
+import { myDataAtom } from "../Store/Store";
 import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
@@ -15,13 +15,14 @@ import userPostListAPI from "../API/userPostListAPI";
 function ProfilePage() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
   const [userPostList, setUserPostList] = useRecoilState(userPostListAtom);
-  const [nowAccountName] = useRecoilState(userAccountNameAtom);
+  const [myData] = useRecoilState(myDataAtom);
   const { accountname } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       const userInfo = await userInfoAPI(accountname);
       setUserData({
+        _id: userInfo.profile._id,
         username: userInfo.profile.username,
         accountname: userInfo.profile.accountname,
         image: userInfo.profile.image,
@@ -39,7 +40,7 @@ function ProfilePage() {
   }, [accountname]);
 
   // true면 마이 프로필
-  let isMyProfile = accountname === nowAccountName.accountname;
+  let isMyProfile = accountname === myData.accountname;
 
   // 팔로우 상태
   const [isFollowing, setIsFollowing] = useState(true);
