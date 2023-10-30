@@ -1,35 +1,158 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./MyPostListStyle";
 import PostView from "../PostView";
 import more from "../../../assets/image/icon-more.svg";
 import siren from "../../../assets/image/icon-small-siren.svg";
 import heart from "../../../assets/image/icon-heart.svg";
+import unheart from "../../../assets/image/icon-unheart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
-import { useRecoilState } from "recoil";
-import { userPostListAtom } from "../../../Store/Store";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  isTouchFeed,
+  postListDataIndexAtom,
+  userPostListAtom,
+  userPostListDataIndexAtom
+} from "../../../Store/Store";
 import { showDate } from "../../../Functional/DateFunction";
+import { Modal } from "./MoreModal/MoreModal";
+import heartPostAPI from "../../../API/heartPostAPI";
+import unheartPostAPI from "../../../API/unheartPostAPI";
 
 function MyPostList({ isMyProfile, accountname }) {
   const [userPostList] = useRecoilState(userPostListAtom);
   // PostView를 설정하기 위한 상태
   const [viewType, setViewType] = useState("list");
 
+  const [postData, setPostData] = useRecoilState(userPostListAtom);
+  const [hoveredId, setHoveredId] = useState(null);
+  const setIsVisible = useSetRecoilState(isTouchFeed);
+  const setIndex = useSetRecoilState(userPostListDataIndexAtom);
+  const isVisible = useRecoilValue(isTouchFeed);
+
+  // Modal의 상태에 따라 스크롤을 제어합니다.
+  useEffect(() => {
+    document.body.style.overflow = isVisible ? "hidden" : "auto";
+  }, [isVisible]);
+
+  const handleHeartClick = async (e, post_id) => {
+    e.stopPropagation();
+    const currentHeart = e.target.getAttribute("src");
+    let result = "";
+
+    if (currentHeart === unheart) {
+      result = await heartPostAPI(post_id);
+      if (result.includes("heart success")) {
+        e.target.setAttribute("src", heart);
+      } else {
+        return;
+      }
+    } else {
+      result = await unheartPostAPI(post_id);
+      if (result.includes("unheart success")) {
+        e.target.setAttribute("src", unheart);
+      } else {
+        return;
+      }
+    }
+
+    let updatedPostData = [...postData];
+    let changeDataIndex = postData.findIndex((e) => e.id === post_id);
+    if (changeDataIndex !== -1) {
+      updatedPostData[changeDataIndex] = {
+        ...updatedPostData[changeDataIndex], // 해당 객체의 복사본을 만들고
+        hearted: result.includes("un") ? false : true, // 속성을 수정
+        heartCount:
+          updatedPostData[changeDataIndex].heartCount +
+          (result.includes("un") ? -1 : 1)
+      };
+      setPostData(updatedPostData);
+    }
+  };
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  if (postData.length === 0 || viewType === "album") {
+    return (
+      <>
+        <PostView viewType={viewType} setViewType={setViewType} />
+        <RenderView
+          isMyProfile={isMyProfile}
+          postData={postData}
+          viewType={viewType}
+          accountname={accountname}
+        />
+      </>
+    );
+  }
+
   return (
-    <div>
+    <>
       <PostView viewType={viewType} setViewType={setViewType} />
-      <RenderView
-        isMyProfile={isMyProfile}
-        postsData={userPostList.postList}
-        viewType={viewType}
-        accountname={accountname}
-      />
-    </div>
+      {/* ListView의 레이아웃 코드 */}
+      <S.ListContainer>
+        {postData.map((post, index) => (
+          <S.Article key={index}>
+            <S.Section
+              key={index}
+              onMouseEnter={() => setHoveredId(index)}
+              onMouseLeave={() => setHoveredId(null)}
+              isHovered={hoveredId === index}
+              onClick={() => {
+                setIsVisible(true);
+                setIndex(index);
+                console.log("Section clicked");
+                console.log("isTouchFeed after click:", isVisible);
+              }}>
+              <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
+              <S.PostHeader>
+                <S.HeaderTextBox>
+                  <div className="flexBox">
+                    <S.HeaderH3>{post.author.username}</S.HeaderH3>
+                    {/* myProfile -> more 일 경우에만 모달 띄움 */}
+                    <S.HeaderImg
+                      src={isMyProfile ? more : siren}
+                      alt="Action Icon"
+                      onClick={() => {
+                        setModalVisible(true);
+                      }}
+                    />
+                  </div>
+                  <S.HeaderP>{post.author.id}</S.HeaderP>
+                </S.HeaderTextBox>
+                <S.PostContent>{post.content}</S.PostContent>
+                {post.image !== "" ? (
+                  <S.PostContentImg src={post.image} alt="Post Content Image" />
+                ) : (
+                  <></>
+                )}
+                <S.Footer>
+                  <S.FooterImg
+                    src={post.hearted ? heart : unheart}
+                    alt="Heart"
+                    onClick={(e) => handleHeartClick(e, post.id)}
+                  />
+                  <S.FooterCount>{post.heartCount}</S.FooterCount>
+                  <S.FooterImg src={comment} alt="Comment" />
+                  <S.FooterCount>{post.commentCount}</S.FooterCount>
+                </S.Footer>
+                <S.Date>{showDate(post.createdAt)}</S.Date>
+              </S.PostHeader>
+            </S.Section>
+          </S.Article>
+        ))}
+        <Modal
+          isMoreModalVisible={isModalVisible}
+          onClose={() => setModalVisible(false)}
+          isMyProfile={isMyProfile}
+        />
+      </S.ListContainer>
+    </>
   );
 }
 
-// 사용자의 게시글이 없을 때, 뷰타입 지정
-function RenderView({ isMyProfile, postsData, viewType, accountname }) {
-  if (postsData.length === 0) {
+// 게시물이 없거나 앨범뷰를 렌더링해야 하는 경우
+function RenderView({ isMyProfile, postData, viewType, accountname }) {
+  if (postData.length === 0) {
     return (
       <S.ListContainer>
         <S.NoPostsMessage>
@@ -38,143 +161,24 @@ function RenderView({ isMyProfile, postsData, viewType, accountname }) {
       </S.ListContainer>
     );
   }
-
-  return viewType === "list" ? (
-    <ListView
-      isMyProfile={isMyProfile}
-      postsData={postsData}
-      accountname={accountname}
-    />
-  ) : (
-    <AlbumView postsData={postsData} />
-  );
-}
-
-// ListView 레이아웃
-function ListView({ isMyProfile, postsData }) {
-  // 게시글의 신고하기,더보기 버튼을 누름에 따라 변하는 상태값 설정
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  // 사용자의 게시글이 있는 경우
-  return (
-    <S.ListContainer>
-      {postsData.map((post, id) => (
-        <S.Article key={id}>
-          <S.Section>
-            <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
-            <S.PostHeader>
-              <S.HeaderTextBox>
-                <div className="flexBox">
-                  <S.HeaderH3>{post.author.username}</S.HeaderH3>
-                  {/* myProfile -> more 일 경우에만 모달 띄움 */}
-                  <S.HeaderImg
-                    src={isMyProfile ? more : siren}
-                    alt="Action Icon"
-                    onClick={() => {
-                      setModalVisible(true);
-                    }}
-                  />
-                </div>
-                <S.HeaderP>{post.author.id}</S.HeaderP>
-              </S.HeaderTextBox>
-              <S.PostContent>{post.content}</S.PostContent>
-              {post.image && (
-                <S.PostContentImg src={post.image} alt="Post Content Image" />
-              )}
-              <S.Footer>
-                <S.FooterImg src={heart} alt="Heart" />
-                <S.FooterCount>{post.heartCount}</S.FooterCount>
-                <S.FooterImg src={comment} alt="Comment" />
-                <S.FooterCount>{post.commentCount}</S.FooterCount>
-              </S.Footer>
-              <S.Date>{showDate(post.createdAt)}</S.Date>
-            </S.PostHeader>
-          </S.Section>
-        </S.Article>
-      ))}
-      <Modal
-        isVisible={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        isMyProfile={isMyProfile}
-      />
-    </S.ListContainer>
-  );
+  if (viewType === "album") {
+    return <AlbumView postData={postData} />;
+  }
+  return null;
 }
 
 // AlbumView 레이아웃
-function AlbumView({ postsData, accountname }) {
+function AlbumView({ postData }) {
   // 사용자의 게시글이 있는 경우
   return (
     <S.AlbumContainer>
-      {postsData.map(
+      {postData.map(
         (post, id) =>
           post.image && (
             <S.ImageItem key={id} src={post.image} alt="Post Image" />
           )
       )}
     </S.AlbumContainer>
-  );
-}
-
-// 모달 컨트롤
-function Modal({ isVisible, onClose, isMyProfile }) {
-  const [showConfirm, setShowConfirm] = useState(false);
-  const preventPropagation = (e) => e.stopPropagation();
-
-  return (
-    isVisible && (
-      <S.ModalOverlay onClick={onClose}>
-        {showConfirm ? (
-          <ConfirmModal
-            isMyProfile={isMyProfile}
-            onClose={onClose}
-            preventPropagation={preventPropagation}
-          />
-        ) : (
-          <ActionModal
-            isMyProfile={isMyProfile}
-            setShowConfirm={setShowConfirm}
-            preventPropagation={preventPropagation}
-          />
-        )}
-      </S.ModalOverlay>
-    )
-  );
-}
-
-function ActionModal({ isMyProfile, setShowConfirm, preventPropagation }) {
-  return (
-    <S.ModalContainer onClick={preventPropagation}>
-      {isMyProfile ? (
-        <>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
-            수정하기
-          </S.ModalButton>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
-            삭제하기
-          </S.ModalButton>
-        </>
-      ) : (
-        <S.ModalButton onClick={() => setShowConfirm(true)}>
-          신고하기
-        </S.ModalButton>
-      )}
-    </S.ModalContainer>
-  );
-}
-
-// 최종 확인 모달
-function ConfirmModal({ isMyProfile, onClose, preventPropagation }) {
-  return (
-    <S.ConfirmDeleteContainer onClick={preventPropagation}>
-      <S.ConfirmMessage>
-        {isMyProfile ? "정말 삭제하시겠습니까?" : "정말 신고하시겠습니까?"}
-      </S.ConfirmMessage>
-      <S.ConfirmContainer>
-        <S.ConfirmButton onClick={onClose}>아니오</S.ConfirmButton>
-        <S.ConfirmButton>예</S.ConfirmButton>
-      </S.ConfirmContainer>
-    </S.ConfirmDeleteContainer>
   );
 }
 

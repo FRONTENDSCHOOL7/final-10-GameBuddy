@@ -5,12 +5,13 @@ import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
 import Footer from "../Components/Commons/Footer";
 import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { userDataAtom } from "../Store/Store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isTouchFeed, userDataAtom } from "../Store/Store";
 import { myDataAtom } from "../Store/Store";
 import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
+import MyPostDetailModal from "../Components/Profile/MyPostList/MyPostDetailModal/MyPostDetailModal";
 
 function ProfilePage() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
@@ -18,9 +19,12 @@ function ProfilePage() {
   const [myData] = useRecoilState(myDataAtom);
   const { accountname } = useParams();
 
+  const isVisible = useRecoilValue(isTouchFeed);
+
   useEffect(() => {
     const fetchData = async () => {
       const userInfo = await userInfoAPI(accountname);
+      console.log(userInfo);
       setUserData({
         _id: userInfo.profile._id,
         username: userInfo.profile.username,
@@ -32,9 +36,7 @@ function ProfilePage() {
       });
       const userPostList = await userPostListAPI(accountname);
       console.log(userPostList);
-      setUserPostList({
-        postList: userPostList
-      });
+      setUserPostList(userPostList);
     };
     fetchData();
   }, [accountname]);
@@ -55,7 +57,6 @@ function ProfilePage() {
         accountname={accountname}
       />
       {/* 팔로우가 되어있을 때만 Recruit, MyPostList 컴포넌트가 렌더링 됨 */}
-      {/* 현재 팔로우 기능이 구현되지 않았기 때문에, 초기값은 true(팔로잉)이므로 두 컴포넌트 다 렌더링됩니다. */}
       {isFollowing && (
         <>
           <Recruit />
@@ -63,6 +64,7 @@ function ProfilePage() {
         </>
       )}
       <Footer />
+      {isVisible && <MyPostDetailModal />}
     </div>
   );
 }
