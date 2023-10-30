@@ -8,12 +8,12 @@ async function removeMyPostAPI(post_id) {
                 "Authorization": `Bearer ${token}`
             }
         });
-        console.log("성공");
+        console.log("성공", result);
 
-        //return 문자열
+        return "게시글 삭제 성공"
     } catch (e) {
         console.log("실패");
-        //return 문자열
+        return "게시글 삭제 실패"
     }
 
 }
