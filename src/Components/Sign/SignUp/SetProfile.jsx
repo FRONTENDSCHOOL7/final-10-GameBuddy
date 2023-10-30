@@ -20,6 +20,7 @@ function SetProfile() {
   const [isSignUp, setIsSignUp] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
+  const [successModal, setSuccessModal] = useState(false);
 
   const fileInputRef = React.createRef(); // 파일 입력 참조 생성
 
@@ -44,11 +45,8 @@ function SetProfile() {
       );
 
       if (signupResult === "회원가입 성공") {
-        alert(
-          "회원가입 성공했습니다! 가입한 이메일과 비밀번호로 로그인해주세요!"
-        );
         resetSignUpData();
-        navigate("/login");
+        setSuccessModal(true);
       } else {
         setIsSignUp(signupResult);
       }
@@ -150,6 +148,17 @@ function SetProfile() {
         />
         <S.SubmitBtn type="submit">Game Buddy 시작하기!</S.SubmitBtn>
       </S.SetProfileForm>
+
+      {successModal && <S.ModalContainer>
+        <S.ModalContent>
+          회원가입 성공했습니다!<br />
+          가입한 이메일과 비밀번호로<br />
+          로그인해주세요!
+          <S.ModalBtn onClick={() => navigate("/login")}>
+            알겠어요 시작합시다!
+          </S.ModalBtn>
+        </S.ModalContent>
+      </S.ModalContainer>}
     </S.Container>
   );
 }
