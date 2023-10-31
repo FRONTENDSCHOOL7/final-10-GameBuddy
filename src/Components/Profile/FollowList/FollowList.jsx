@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import * as S from "./FollowListStyle";
 import { useRecoilState  } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
-import followerAPI from "../../../API/followAPI/followerAPI"
-import followAPI from "../../../API/followAPI/followAPI"
+import followListAPI from "../../../API/followAPI/followListAPI"
+import followAPI from "../../../API/followAPI/followingAPI"
 import unFollowAPI from "../../../API/followAPI/unFollowAPI"
 import myInfoAPI from '../../../API/myInfoAPI';
 
@@ -28,7 +28,7 @@ function FollowList() {
         following: myInfo.user.following,
       });
 
-      const result = await followerAPI(accountname, type);
+      const result = await followListAPI(accountname, type);
       setFollowData(result);
     }
     fetchData();

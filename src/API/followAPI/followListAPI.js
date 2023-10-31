@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // accountName에는 계정명(본인 팔로워, 팔로잉을 확인할 땐 본인 계정명), checkFollowAPI는 isFollowerList 파라미터 값에 따라 팔로잉 목록 또는 팔로워 목록을 반환할 수 있다.
-async function followerAPI(accountName, isFollowerList) {
+async function followListAPI(accountName, isFollowerList) {
   const token = localStorage.getItem("token");
   try {
     let result = await axios.get(`https://api.mandarin.weniv.co.kr/profile/${accountName}/${isFollowerList}`, {
@@ -17,7 +17,7 @@ async function followerAPI(accountName, isFollowerList) {
   }
 };
 
-export default followerAPI
+export default followListAPI
 
 // async function followerAPI(accountName, isFollowerList) {
 //   const token = localStorage.getItem("token");
