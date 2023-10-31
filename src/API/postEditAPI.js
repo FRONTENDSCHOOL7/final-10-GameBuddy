@@ -1,11 +1,11 @@
 import axios from "axios";
 
-async function postEditAPI(postID, content, image = "") {
+async function postEditAPI(post_id, content, image = "") {
     const token = localStorage.getItem("token");
 
     try {
         const response = await axios.put(
-            `https://api.mandarin.weniv.co.kr//post/${postID}`,
+            `https://api.mandarin.weniv.co.kr/post/${post_id}`,
             {
                 "post": {
                     "content": content,
