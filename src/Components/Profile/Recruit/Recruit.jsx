@@ -20,6 +20,10 @@ function Recruit({isMyProfile}) {
     fetchData();
   }, []);
 
+  function closeModal() {
+    setModalOn(false);
+  }
+
   return (
     <S.RecruitContainer>
       <h2>모집 중인 게임</h2>
@@ -40,7 +44,7 @@ function Recruit({isMyProfile}) {
       </S.GameList>
 
       {modalOn && 
-        <S.ModalContainer onClick={() => setModalOn(false)}>
+        <S.ModalContainer>
           <S.ModalContent onClick={(event) => event.stopPropagation()}>
             <S.ModalProfile>
               <S.ProfileDetail>
@@ -66,6 +70,7 @@ function Recruit({isMyProfile}) {
               : <S.ModalBtn>모집 참여하기</S.ModalBtn>
             }
           </S.ModalContent>
+          <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
         </S.ModalContainer>
       }
     </S.RecruitContainer>

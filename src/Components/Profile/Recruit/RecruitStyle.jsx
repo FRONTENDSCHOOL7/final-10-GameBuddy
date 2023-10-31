@@ -57,6 +57,7 @@ export const ModalContainer = styled.div`
   line-height: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2000; //다른 요소보다 항상 앞에 있어야함
+  flex-direction: column;
 `;
 export const ModalContent = styled.div`
   background-color: #fff;
@@ -131,4 +132,14 @@ export const ModalBtn = styled.button`
   border-radius: 24px;
   border: none;
   background-color: #5865f2;
+`;
+export const ModalCloseBtn = styled.button`
+  width: 2rem;
+  height: 2rem;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  border-color: white;
+  color: white;
+  background-color: transparent;
 `;
