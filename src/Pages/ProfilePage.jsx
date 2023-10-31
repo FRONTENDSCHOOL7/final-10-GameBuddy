@@ -5,13 +5,14 @@ import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
 import Footer from "../Components/Commons/Footer";
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { isTouchFeed, userDataAtom } from "../Store/Store";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { checkMyInfo, isTouchFeed, userDataAtom } from "../Store/Store";
 import { myDataAtom } from "../Store/Store";
 import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
 import MyPostDetailModal from "../Components/Profile/MyPostList/MyPostDetailModal/MyPostDetailModal";
+import myInfoAPI from "../API/myInfoAPI";
 
 function ProfilePage() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
@@ -20,6 +21,16 @@ function ProfilePage() {
   const { accountname } = useParams();
 
   const isVisible = useRecoilValue(isTouchFeed);
+
+  const setMyInfo = useSetRecoilState(checkMyInfo);
+
+  useEffect(() => {
+    async function fetchData() {
+      const obj = await myInfoAPI();
+      setMyInfo(obj);
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
