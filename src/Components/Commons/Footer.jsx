@@ -40,7 +40,9 @@ function Footer() {
   ];
 
   const getInitialActive = () => {
-    const matchedMenu = menus.find((menu) => menu.path === location.pathname);
+    const matchedMenu = menus.find((menu) =>
+      location.pathname.startsWith(menu.path)
+    );
     return matchedMenu ? matchedMenu.id : "home";
   };
 
