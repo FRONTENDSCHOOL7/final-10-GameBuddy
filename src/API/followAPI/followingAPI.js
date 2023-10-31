@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function followAPI(accountName) {
+async function followingAPI(accountName) {
     try {
         const token = localStorage.getItem("token");
         const result = await axios.post(`https://api.mandarin.weniv.co.kr/profile/${accountName}/follow`, {}, {
@@ -16,7 +16,7 @@ async function followAPI(accountName) {
     }
 }
 
-export default followAPI;
+export default followingAPI;
 
 // async function followAPI(accountName) {
 //     try {

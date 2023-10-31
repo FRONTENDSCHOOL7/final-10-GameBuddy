@@ -59,7 +59,7 @@ function ProfilePage() {
       {/* 팔로우가 되어있을 때만 Recruit, MyPostList 컴포넌트가 렌더링 됨 */}
       {isFollowing && (
         <>
-          <Recruit />
+          <Recruit isMyProfile={isMyProfile} />
           <MyPostList isMyProfile={isMyProfile} accountname={accountname} />
         </>
       )}

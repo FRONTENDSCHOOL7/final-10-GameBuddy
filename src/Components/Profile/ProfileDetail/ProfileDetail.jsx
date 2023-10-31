@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { userDataAtom } from "../../../Store/Store";
 import { userPostListAtom } from "../../../Store/Store";
 import { myDataAtom } from "../../../Store/Store";
-import followAPI from "../../../API/followAPI/followAPI";
+import followAPI from "../../../API/followAPI/followingAPI";
 import unFollowAPI from "../../../API/followAPI/unFollowAPI";
 
 function Profile({ isMyProfile, accountname }) {
