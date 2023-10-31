@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import * as S from "./RecruitStyle";
 import { useParams } from "react-router-dom";
 import productListAPI from "../../../API/productListAPI";
+import siren from "../../../assets/image/icon-siren.svg"
+import update from "../../../assets/image/update.png"
 
 function Recruit({isMyProfile}) {
   const { accountname } = useParams();
@@ -41,11 +43,21 @@ function Recruit({isMyProfile}) {
         <S.ModalContainer onClick={() => setModalOn(false)}>
           <S.ModalContent onClick={(event) => event.stopPropagation()}>
             <S.ModalProfile>
-              <S.ModalProfileImage src={recruit[recruitId].author.image}/>
-              <S.ModalArticle>
-                <S.ModalUsername>{recruit[recruitId].author.username}</S.ModalUsername>
-                <S.ModalAccountname>{recruit[recruitId].author.accountname}</S.ModalAccountname>
-              </S.ModalArticle>
+              <S.ProfileDetail>
+                <S.ModalProfileImage src={recruit[recruitId].author.image}/>
+                <S.ModalArticle>
+                  <S.ModalUsername>{recruit[recruitId].author.username}</S.ModalUsername>
+                  <S.ModalAccountname>{recruit[recruitId].author.accountname}</S.ModalAccountname>
+                </S.ModalArticle>
+              </S.ProfileDetail>
+              {isMyProfile ?
+                <S.ModalControlBtn onClick={() => {}}>
+                  <S.ModalControlBtnImg src={update} />
+                </S.ModalControlBtn>
+              : <S.ModalControlBtn onClick={() => {}}>
+                  <S.ModalControlBtnImg src={siren} />
+                </S.ModalControlBtn>
+              }
             </S.ModalProfile>
             <S.ModalImage src={recruit[recruitId].itemImage}/>
             <S.ModalIntro>{recruit[recruitId].link}</S.ModalIntro>

@@ -73,7 +73,13 @@ export const ModalContent = styled.div`
 export const ModalProfile = styled.div`
   display: flex;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
+export const ProfileDetail = styled.div`
+  display: flex;
+  flex-direction: row;
+`
 export const ModalProfileImage = styled.img`
   width: 70px;
   height: 70px;
@@ -97,6 +103,16 @@ export const ModalAccountname = styled.p`
   color:#767676;
   font-size: 14px;
 `;
+export const ModalControlBtn = styled.button`
+  height: 50px;
+  background-color: white;
+  border: none;
+  margin-right: 10px;
+`;
+export const ModalControlBtnImg = styled.img`
+  width: 25px;
+  height: 25px;
+`
 export const ModalImage = styled.img`
   width: 95%;
   height: calc(100vw - 55vw);
