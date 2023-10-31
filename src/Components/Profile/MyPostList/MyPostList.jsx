@@ -16,6 +16,7 @@ import { showDate } from "../../../Functional/DateFunction";
 import { Modal } from "./MoreModal/MoreModal";
 import heartPostAPI from "../../../API/heartPostAPI";
 import unheartPostAPI from "../../../API/unheartPostAPI";
+import { useLocation } from "react-router-dom";
 
 function MyPostList({ isMyProfile, accountname }) {
   // PostView를 설정하기 위한 상태
@@ -23,17 +24,22 @@ function MyPostList({ isMyProfile, accountname }) {
 
   const [postData, setPostData] = useRecoilState(userPostListAtom);
   const [hoveredId, setHoveredId] = useState(null);
-  const setIsVisible = useSetRecoilState(isTouchFeed);
+  const isPostModalVisible = useRecoilValue(isTouchFeed); // 게시글 상세 모달 표시 값
+  const setIsPostModalVisible = useSetRecoilState(isTouchFeed); // 게시글 상세 모달 표시 상태
+  const [isOptionModalVisible, setIsOptionModalVisible] = useState(false); // 더보기,신고하기 모달 상태
   const setIndex = useSetRecoilState(userPostListDataIndexAtom);
-  const isVisible = useRecoilValue(isTouchFeed);
   const [selectedPostId, setSelectedPostId] = useState(null);
 
-  // Modal의 상태에 따라 스크롤을 제어합니다.
+  // 스크롤 제어
+  const location = useLocation();
   useEffect(() => {
-    document.body.style.overflow = isVisible ? "hidden" : "auto";
-  }, [isVisible]);
+    window.scrollTo(0, 0);
+  }, [location]);
+  useEffect(() => {
+    document.body.style.overflow = isPostModalVisible ? "hidden" : "auto";
+  }, [isPostModalVisible]);
 
-  // 좋아요
+  // 좋아요 기능
   const handleHeartClick = async (e, post_id) => {
     e.stopPropagation();
     const currentHeart = e.target.getAttribute("src");
@@ -69,10 +75,7 @@ function MyPostList({ isMyProfile, accountname }) {
     }
   };
 
-  // 더보기 / 신고하기 모달 상태
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  // 게시글이 없는 경우와 album view일 때
+  // 게시글이 없는 경우와 album view일 경우
   if (postData.length === 0 || viewType === "album") {
     return (
       <>
@@ -84,7 +87,7 @@ function MyPostList({ isMyProfile, accountname }) {
           accountname={accountname}
           setHoveredId={setHoveredId}
           hoveredId={hoveredId}
-          setIsVisible={setIsVisible}
+          setIsPostModalVisible={setIsPostModalVisible}
           setIndex={setIndex}
         />
       </>
@@ -95,10 +98,11 @@ function MyPostList({ isMyProfile, accountname }) {
   const transparentPlaceholder =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
 
+  // 레이아웃
   return (
     <>
       <PostView viewType={viewType} setViewType={setViewType} />
-      <S.ListContainer>
+      <S.ListContainer onClick={() => setIsOptionModalVisible(false)}>
         {postData.map((post, index) => (
           <S.Article key={index}>
             <S.Section
@@ -108,7 +112,7 @@ function MyPostList({ isMyProfile, accountname }) {
               isHovered={hoveredId === index}
               onClick={(e) => {
                 e.stopPropagation();
-                setIsVisible(true);
+                setIsPostModalVisible(true);
                 setIndex(index);
               }}>
               <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
@@ -121,12 +125,12 @@ function MyPostList({ isMyProfile, accountname }) {
                       alt="Action Icon"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setModalVisible(true);
+                        setIsOptionModalVisible(true);
                         setSelectedPostId(post.id);
                       }}
                     />
                   </div>
-                  <S.HeaderP>{post.author.id}</S.HeaderP>
+                  <S.HeaderP>@{post.author.accountname}</S.HeaderP>
                 </S.HeaderTextBox>
                 <S.PostContent>{post.content}</S.PostContent>
                 <S.PostContentImg
@@ -150,9 +154,9 @@ function MyPostList({ isMyProfile, accountname }) {
           </S.Article>
         ))}
         <Modal
-          isMoreModalVisible={isModalVisible}
-          onClose={() => setModalVisible(false)}
-          isMyProfile={isMyProfile}
+          isMyProfile={isMyProfile} // 현재 유저의 프로필인지 상태값을 그대로 넘겨줍니다.
+          isOptionModalVisible={isOptionModalVisible}
+          setIsOptionModalVisible={setIsOptionModalVisible}
           postId={selectedPostId}
         />
       </S.ListContainer>
@@ -167,7 +171,7 @@ function RenderView({
   accountname,
   setHoveredId,
   hoveredId,
-  setIsVisible,
+  setIsPostModalVisible,
   setIndex
 }) {
   if (postData.length === 0) {
@@ -185,7 +189,7 @@ function RenderView({
         postData={postData}
         setHoveredId={setHoveredId}
         hoveredId={hoveredId}
-        setIsVisible={setIsVisible}
+        setIsPostModalVisible={setIsPostModalVisible}
         setIndex={setIndex}
       />
     );
@@ -198,7 +202,7 @@ function AlbumView({
   postData,
   setHoveredId,
   hoveredId,
-  setIsVisible,
+  setIsPostModalVisible,
   setIndex
 }) {
   return (
@@ -214,7 +218,7 @@ function AlbumView({
               onMouseLeave={() => setHoveredId(null)}
               isHovered={hoveredId === index}
               onClick={() => {
-                setIsVisible(true);
+                setIsPostModalVisible(true);
                 setIndex(index);
               }}
             />
