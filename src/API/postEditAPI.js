@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function postListFixAPI(postID, content, image = "") {
+async function postEditAPI(postID, content, image = "") {
     const token = localStorage.getItem("token");
 
     try {
@@ -29,4 +29,4 @@ async function postListFixAPI(postID, content, image = "") {
 }
 
 
-export default postListFixAPI;
+export default postEditAPI;
