@@ -3,16 +3,16 @@ import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { uploadImageAtom } from "../../Store/Store";
 import { useRecoilValue, useResetRecoilState } from "recoil";
-import postAPI from "../../API/postAPI";
+// import postAPI from "../../API/postAPI";
+import postListFixAPI from "../../API/postListFixAPI";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function Post() {
+  const location = useLocation();
   const currentImage = useRecoilValue(uploadImageAtom);
-
   const resetRecoilState = useResetRecoilState(uploadImageAtom);
-
   const [postContent, setPostContent] = useState("");
-
   const [isContentValid, setIsContentValid] = useState(true);
   const navigate = useNavigate();
 
@@ -29,9 +29,9 @@ function Post() {
     let result = "";
     if (currentImage === DefaultImage) {
       console.log("이거  실행");
-      result = await postAPI(postContent);
+      result = await postListFixAPI(postContent);
     } else {
-      result = await postAPI(postContent, currentImage);
+      result = await postListFixAPI(postContent, currentImage);
     }
 
     if (result.includes("완료")) {
@@ -48,7 +48,7 @@ function Post() {
       <S.PTag>게시글</S.PTag>
       <S.InputTag
         type="text"
-        placeholder="게시글 내용을 입력해주세요."
+        placeholder={postContent || location.state?.content || "게시글 내용을 입력해주세요."}
         value={postContent}
         onChange={onChangePostContent}
       />
