@@ -32,9 +32,7 @@ export const myDataAtom = atom({
 // 원하는 유저의 게시글 목록을 저장하는 atom
 export const userPostListAtom = atom({
   key: "userPostListAtom",
-  default: {
-    postList: []
-  }
+  default: []
 });
 
 //회원가입할 때, 이메일과 비밀번호를 저장할 atom
@@ -117,4 +115,20 @@ export const searchKeywordAtom = atom({
 export const userSearchResultAtom = atom({
   key: "userSearchResultAtom",
   default: []
+});
+
+// userPostListData에서 원하는 게시글을 클릭 시, 몇번째 인덱스인지 저장
+export const userPostListDataIndexAtom = atom({
+  key: "userPostListDataIndexAtom",
+  default: 0
+});
+
+//userPostDetail에 표현할 데이터를 저장해 놓는 Selector
+export const getUserPostDataSelector = selector({
+  key: "getUserPostDataSelector",
+  get: ({ get }) => {
+    const userPostDetailDataItem = get(userPostListAtom);
+    const userPostDetailDataItemIndex = get(userPostListDataIndexAtom);
+    return userPostDetailDataItem[userPostDetailDataItemIndex];
+  }
 });
