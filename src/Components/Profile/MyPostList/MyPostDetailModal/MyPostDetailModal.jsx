@@ -22,20 +22,23 @@ import heartPostAPI from "../../../../API/heartPostAPI";
 import unheartPostAPI from "../../../../API/unheartPostAPI";
 import { fewMinutesAgo, showDate } from "../../../../Functional/DateFunction";
 import { Modal } from "../MoreModal/MoreModal";
+import { useNavigate } from "react-router-dom";
 
 function MyPostDetailModal() {
   const [postData, setPostData] = useRecoilState(userPostListAtom);
-  const setIsVisible = useSetRecoilState(isTouchFeed);
+  const setIsPostModalVisible = useSetRecoilState(isTouchFeed); // 게시글 상세 모달 표시 값
   const data = useRecoilValue(getUserPostDataSelector);
   const [commentListData, setCommentListData] =
     useRecoilState(commentListDataAtom);
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
-
-  const [isMoreModalVisible, setIsMoreModalVisible] = useState(false);
+  const [isOptionModalVisible, setIsOptionModalVisible] = useState(false); // 더보기,신고하기 모달 상태
+  const [selectedPostId, setSelectedPostId] = useState(null); // postId를 저장해서 moreModal에 넘겨주기 위함
   const isMyProfile =
     data.author.accountname === commentMyProfile.user.accountname;
+  const navigate = useNavigate();
 
+  // 댓글 기능
   useEffect(() => {
     async function fetchData() {
       const obj = await commentAPI(data.id);
@@ -43,11 +46,6 @@ function MyPostDetailModal() {
     }
     fetchData();
   }, []);
-
-  const closeModal = () => {
-    setIsVisible(false);
-    setCommentListData([]);
-  };
 
   const typingComment = (e) => {
     setWriting(e.target.value);
@@ -105,6 +103,7 @@ function MyPostDetailModal() {
     }
   };
 
+  // 좋아요 기능
   const handleHeartClick = async (e, post_id) => {
     const currentHeart = e.target.getAttribute("src");
     let result = "";
@@ -139,12 +138,10 @@ function MyPostDetailModal() {
     }
   };
 
-  // postId를 저장해서 moreModal에 넘겨주기 위함
-  const [selectedPostId, setSelectedPostId] = useState(null);
-
+  // 레이아웃
   return (
-    <S.PostDetailBackground>
-      <S.PostDetailBox>
+    <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
+      <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile src={data.author.image} />
           <S.PostDetailHeaderTextBox>
@@ -157,7 +154,7 @@ function MyPostDetailModal() {
                   src={more}
                   alt="More"
                   onClick={() => {
-                    setIsMoreModalVisible(true);
+                    setIsOptionModalVisible(true);
                     setSelectedPostId(data.id);
                   }}
                 />
@@ -165,12 +162,12 @@ function MyPostDetailModal() {
                 <S.PostDetailHeaderImg
                   src={siren}
                   alt="Siren"
-                  onClick={() => setIsMoreModalVisible(true)}
+                  onClick={() => setIsOptionModalVisible(true)}
                 />
               )}
             </div>
             <S.PostDetailHeaderAccountName>
-              {data.author.accountname}
+              @{data.author.accountname}
             </S.PostDetailHeaderAccountName>
           </S.PostDetailHeaderTextBox>
         </S.PostDetailHeaderWrapper>
@@ -207,6 +204,10 @@ function MyPostDetailModal() {
               <S.PostDetailCommentHeaderProfile
                 src={post.author.image}
                 alt="PostDetailCommentHeaderProfile"
+                onClick={(e) => {
+                  setIsPostModalVisible(false);
+                  navigate(`/profile/${post.author.accountname}`);
+                }}
               />
               <S.PostDetailCommentItemTextBox>
                 <div className="flexBox">
@@ -244,12 +245,15 @@ function MyPostDetailModal() {
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
+      <S.PostDetailBackButton onClick={() => setIsPostModalVisible(false)}>
+        X
+      </S.PostDetailBackButton>
       <Modal
-        isMoreModalVisible={isMoreModalVisible}
-        onClose={() => setIsMoreModalVisible(false)}
         isMyProfile={isMyProfile}
+        isOptionModalVisible={isOptionModalVisible}
+        setIsOptionModalVisible={setIsOptionModalVisible}
         postId={selectedPostId}
+        setIsPostModalVisible={setIsPostModalVisible}
       />
     </S.PostDetailBackground>
   );
