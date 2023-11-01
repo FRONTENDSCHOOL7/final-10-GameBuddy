@@ -6,7 +6,12 @@ import unheart from "../../../../assets/image/icon-unheart.svg";
 import comment from "../../../../assets/image/icon-comment.svg";
 import close from "../../../../assets/image/icon-close.svg";
 import more from "../../../../assets/image/icon-more.svg";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState
+} from "recoil";
 import {
   checkMyInfo,
   commentListDataAtom,
@@ -30,6 +35,7 @@ function MyPostDetailModal() {
   const data = useRecoilValue(getUserPostDataSelector);
   const [commentListData, setCommentListData] =
     useRecoilState(commentListDataAtom);
+  const resetCommentListData = useResetRecoilState(commentListDataAtom);
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
   const [isOptionModalVisible, setIsOptionModalVisible] = useState(false); // 더보기,신고하기 모달 상태
@@ -245,7 +251,11 @@ function MyPostDetailModal() {
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton onClick={() => setIsPostModalVisible(false)}>
+      <S.PostDetailBackButton
+        onClick={() => {
+          resetCommentListData();
+          setIsPostModalVisible(false);
+        }}>
         X
       </S.PostDetailBackButton>
       <Modal

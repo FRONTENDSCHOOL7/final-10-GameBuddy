@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./RecruitStyle";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import productListAPI from "../../../API/productListAPI";
+import gameRecruitDeleteAPI from "../../../API/gameRecruitDeleteAPI";
 import siren from "../../../assets/image/icon-siren.svg";
 import update from "../../../assets/image/update.png";
 
@@ -11,12 +12,18 @@ function Recruit({ isMyProfile }) {
   const [modalOn, setModalOn] = useState(false);
   const [recruitId, setRecruitId] = useState(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const list = await productListAPI(accountname);
-      console.log("리스트", list);
-      setRecruit(list);
-    };
+  const [joinList, setJoinList] = useState([]);
+  const [closeRecruitModal, setCloseRecruitModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  async function fetchData() {
+    const list = await productListAPI(accountname);
+    console.log("리스트", list);
+    setRecruit(list);
+  };
+
+  useEffect(() => { 
     fetchData();
   }, [accountname]);
 
@@ -35,9 +42,29 @@ function Recruit({ isMyProfile }) {
     };
   }, [modalOn]);
   
+  function reportRecruit() {
+    alert("신고되었습니다!")
+    console.log("신고됨")
+  }
 
+  function addJoinList(id) {
+    setJoinList([...joinList, id])
+    console.log(id)
+  }
+
+  // 모달창 아래 X버튼을 눌러 모달창을 나가는 함수
   function closeModal() {
     setModalOn(false);
+  }
+
+  // 모달창의 "모집 종료하기"를 눌러 모집글을 삭제하고 모달창을 나가는 함수
+  async function closeRecruit(id) {
+    const result = await gameRecruitDeleteAPI(id);
+    if(result) {
+      setModalOn(false)
+      fetchData()
+    }
+    else alert("제대로 삭제가 안되었습니다.")
   }
 
   return (
@@ -77,11 +104,15 @@ function Recruit({ isMyProfile }) {
                 </S.ModalArticle>
               </S.ProfileDetail>
               {isMyProfile ? (
-                <S.ModalControlBtn onClick={() => {}}>
+                <S.ModalControlBtn onClick={() => {
+                  navigate("/recruit/edit", 
+                    { state: { recruitData: recruit[recruitId]}}
+                  )}
+                }>
                   <S.ModalControlBtnImg src={update} />
                 </S.ModalControlBtn>
               ) : (
-                <S.ModalControlBtn onClick={() => {}}>
+                <S.ModalControlBtn onClick={reportRecruit}>
                   <S.ModalControlBtnImg src={siren} />
                 </S.ModalControlBtn>
               )}
@@ -89,14 +120,31 @@ function Recruit({ isMyProfile }) {
             <S.ModalImage src={recruit[recruitId].itemImage} />
             <S.ModalIntro>{recruit[recruitId].link}</S.ModalIntro>
             {isMyProfile ? (
-              <S.ModalBtn>모집글 수정하기</S.ModalBtn>
+              <S.ModalBtn onClick={() => setCloseRecruitModal(true)}>모집 종료하기</S.ModalBtn>
             ) : (
-              <S.ModalBtn>모집 참여하기</S.ModalBtn>
+              joinList.includes(recruit[recruitId].id) ? (
+                <S.ModalBtn style={{backgroundColor: "green"}}>참여완료!</S.ModalBtn>
+              ) : (
+                <S.ModalBtn onClick={() => {
+                  addJoinList(recruit[recruitId].id) 
+                }}>모집 참여하기!</S.ModalBtn>
+              )
             )}
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
         </S.ModalContainer>
       )}
+      {
+        closeRecruitModal && <S.ModalContainer onClick={() => setCloseRecruitModal(false)}>
+          <S.CloseModalContent>
+            모집을 종료하면, 모집글도 삭제됩니다.<br />
+            정말 모집을 끝낼까요?
+            <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)}>
+              이제 됐어요 종료합시다!
+            </S.ModalBtn>
+          </S.CloseModalContent>
+        </S.ModalContainer>
+      }
     </S.RecruitContainer>
   );
 }
