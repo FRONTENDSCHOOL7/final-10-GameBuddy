@@ -150,3 +150,16 @@ export const ModalCloseBtn = styled.button`
   color: white;
   background-color: transparent;
 `;
+
+export const CloseModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  font-size: 16px;
+  text-align: center;
+`;
