@@ -5,8 +5,8 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 13px 20px 12px 12px;
-  background-color: #ffff;
-  border-bottom: 1px solid #dbdbdb;
+  background-color: #2c2f33;
+  border-bottom: 1px solid #5c5c5c;
 
   position: fixed;
   top: 0;
@@ -21,6 +21,11 @@ export const Logo = styled.h1`
   font-family: var(--Black-ops);
   font-size: 22px;
   color: var(--color-purple);
+  margin-left: 13px;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 20px;
+  }
 `;
 
 export const FollowersTitle = styled.div`
@@ -34,6 +39,11 @@ export const StyledIconButton = styled.button`
   background: none;
   cursor: pointer;
   padding: 5px;
+  margin-left: 10px;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 17px;
+  }
 `;
 
 //모달
