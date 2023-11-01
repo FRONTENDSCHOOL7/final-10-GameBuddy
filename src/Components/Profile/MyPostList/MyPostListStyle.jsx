@@ -41,8 +41,9 @@ export const Section = styled.section`
 `;
 
 export const PostHeaderImg = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
   padding-right: 5px;
 `;
 
