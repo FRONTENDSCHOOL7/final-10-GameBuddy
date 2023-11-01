@@ -5,6 +5,7 @@ import heart from "../../../assets/image/icon-heart.svg";
 import unheart from "../../../assets/image/icon-unheart.svg";
 import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
+import DefaultImage from "../../../assets/image/char_inactive.png";
 
 import {
   checkMyInfo,
@@ -149,7 +150,16 @@ function PostDetailModal() {
       <S.PostDetailBox>
         {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
-          <S.PostDetailHeaderProfile src={data.author.image} />
+          <S.PostDetailHeaderProfile
+            src={
+              data.author.image.includes("api.mandarin.weniv.co.kr") &&
+              !data.author.image.includes("null") &&
+              !data.author.image.includes("undefined") &&
+              data.author.image !== ""
+                ? data.author.image
+                : DefaultImage
+            }
+          />
           <S.PostDetailHeaderTextBox>
             <div className="flexBox">
               <S.PostDetailHeaderUserName>
