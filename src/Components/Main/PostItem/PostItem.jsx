@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { showDate } from "../../../Functional/DateFunction";
 import heartPostAPI from "../../../API/heartPostAPI";
 import unheartPostAPI from "../../../API/unheartPostAPI";
+import DefaultImage from "../../../assets/image/char_inactive.png";
 // {"\u00A0"} 이거 야무지게 사용가능합니다. react에서 스페이스바 안먹히는거 이걸로 사용하면 됩니다.
 // feat 조병민.
 
@@ -80,7 +81,17 @@ function PostItem() {
               setIsVisible(true);
               setIndex(index);
             }}>
-            <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
+            <S.PostHeaderImg
+              src={
+                post.author.image.includes("api.mandarin.weniv.co.kr") &&
+                !post.author.image.includes("undefined") &&
+                !post.author.image.includes("null") &&
+                post.author.image !== ""
+                  ? post.author.image
+                  : DefaultImage
+              }
+              alt="Profile Image"
+            />
             <S.PostWrapper>
               <S.HeaderTextBox>
                 <div className="flexBox">
