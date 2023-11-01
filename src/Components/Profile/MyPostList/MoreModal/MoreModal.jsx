@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import * as S from "./MoreModalStyle";
 import removeMyPostAPI from "../../../../API/removeMyPostAPI";
-import { useRecoilState } from "recoil";
-import { userPostListAtom } from "../../../../Store/Store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { isTouchFeed, userPostListAtom } from "../../../../Store/Store";
 import { useNavigate } from "react-router-dom";
 
 export function Modal({
   isMyProfile,
   isOptionModalVisible,
   setIsOptionModalVisible,
-  postId,
-  setIsPostModalVisible
+  postId
 }) {
+  const setIsPostModalVisible = useSetRecoilState(isTouchFeed);
+
   const [showConfirm, setShowConfirm] = useState(false); // 최종 확인 창이 뜨는 상태
   const [isEdit, setIsEdit] = useState(false); // 게시글 수정 상태
 
@@ -44,6 +45,7 @@ export function Modal({
             isMyProfile={isMyProfile}
             setShowConfirm={setShowConfirm}
             handleEdit={handleEdit}
+            setIsEdit={setIsEdit}
           />
         )}
       </S.ModalOverlay>
@@ -52,13 +54,17 @@ export function Modal({
 }
 
 // 수정,삭제 / 신고 구분
-function ActionModal({ isMyProfile, setShowConfirm, handleEdit }) {
+function ActionModal({ isMyProfile, setShowConfirm, handleEdit, setIsEdit }) {
   return (
     <S.ModalContainer onClick={(e) => e.stopPropagation()}>
       {isMyProfile ? (
         <>
           <S.ModalButton onClick={handleEdit}>수정하기</S.ModalButton>
-          <S.ModalButton onClick={() => setShowConfirm(true)}>
+          <S.ModalButton
+            onClick={() => {
+              setIsEdit(false);
+              setShowConfirm(true);
+            }}>
             삭제하기
           </S.ModalButton>
         </>
