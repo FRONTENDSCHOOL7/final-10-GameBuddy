@@ -16,6 +16,10 @@ export const ListContainer = styled.div`
   gap: 10px;
   padding-top: 16px;
   margin-bottom: 70px;
+  @media screen and (min-width: 768px) {
+    margin-left: 260px;
+    /* max-width: calc(100vw - 260px); */
+  }
 `;
 
 export const Article = styled.article`
@@ -38,6 +42,7 @@ export const Section = styled.section`
   padding-top: 5px;
   padding-right: 20px;
   padding-left: 7px;
+  /* width: 80%; */
 `;
 
 export const PostHeaderImg = styled.img`
@@ -128,13 +133,22 @@ export const PostItem = styled.div`
 export const AlbumContainer = styled.div`
   background-color: #fff;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 250px)
+  ); // 각 칼럼의 최대 너비 220px
+  justify-content: center; // 중앙 정렬
   gap: 8px;
   padding: 24px 20px;
   margin-bottom: 50px;
+  @media screen and (min-width: 768px) {
+    max-width: calc(100vw - 260px);
+    margin-left: 260px;
+  }
 `;
 
 export const ImageItem = styled.img`
+  max-width: 250px;
   width: 100%;
-  height: 114px;
+  aspect-ratio: 1/1;
 `;

@@ -11,6 +11,11 @@ export const Article = styled.article`
   flex: 1 auto;
   overflow-y: hidden;
   box-sizing: border-box;
+  @media screen and (min-width: 768px) {
+    margin-left: 260px;
+    padding-right: 300px;
+    /* max-width: calc(100vw - 260px); */
+  }
 `;
 
 export const Section = styled.section`

@@ -10,6 +10,9 @@ export const ProfileContainer = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid #dbdbdb;
   margin-top: 52px;
+  @media screen and (min-width: 768px) {
+    margin-left: 260px;
+  }
 `;
 
 export const ProfileHeader = styled.div`
@@ -28,6 +31,7 @@ export const AccountName = styled.h3`
 
 export const ProfileSection = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
 `;
@@ -92,6 +96,7 @@ export const Stat = styled.div`
 export const ProfileDescription = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-left: 20px;
   width: 100%;
   margin-bottom: 20px;

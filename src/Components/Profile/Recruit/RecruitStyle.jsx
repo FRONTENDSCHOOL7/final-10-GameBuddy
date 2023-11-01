@@ -5,6 +5,9 @@ export const RecruitContainer = styled.div`
   background-color: #fff;
   margin-top: 8px;
   padding-left: 20px;
+  @media screen and (min-width: 768px) {
+    margin-left: 260px;
+  }
 
   h2 {
     font-size: 16px;
@@ -85,7 +88,7 @@ export const ModalProfile = styled.div`
 export const ProfileDetail = styled.div`
   display: flex;
   flex-direction: row;
-`
+`;
 export const ModalProfileImage = styled.img`
   width: 70px;
   height: 70px;
@@ -101,12 +104,12 @@ export const ModalArticle = styled.article`
   justify-content: center;
 `;
 export const ModalUsername = styled.p`
-  color:#000000;
+  color: #000000;
   font-size: 16px;
   font-weight: 500;
 `;
 export const ModalAccountname = styled.p`
-  color:#767676;
+  color: #767676;
   font-size: 14px;
 `;
 export const ModalControlBtn = styled.button`
@@ -118,7 +121,7 @@ export const ModalControlBtn = styled.button`
 export const ModalControlBtnImg = styled.img`
   width: 25px;
   height: 25px;
-`
+`;
 export const ModalImage = styled.img`
   width: 95%;
   height: calc(100vw - 55vw);
