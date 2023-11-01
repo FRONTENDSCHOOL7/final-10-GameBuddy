@@ -19,7 +19,12 @@ export const GameList = styled.div`
   justify-content: flex-start; /* 게임 목록 왼쪽에서부터 시작 */
   width: 100%;
   overflow-x: auto; /* 가로 스크롤 */
+  -ms-overflow-style: none;
   padding-bottom: 15px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const GameCard = styled.div`
@@ -46,7 +51,7 @@ export const GameImage = styled.img`
 
 //모달
 export const ModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

@@ -11,6 +11,8 @@ function Recruit({ isMyProfile }) {
   const [modalOn, setModalOn] = useState(false);
   const [recruitId, setRecruitId] = useState(0);
 
+  const [joinList, setJoinList] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const list = await productListAPI(accountname);
@@ -35,6 +37,10 @@ function Recruit({ isMyProfile }) {
     };
   }, [modalOn]);
   
+  function addJoinList(id) {
+    setJoinList([...joinList, id])
+    console.log(id)
+  }
 
   function closeModal() {
     setModalOn(false);
@@ -89,9 +95,15 @@ function Recruit({ isMyProfile }) {
             <S.ModalImage src={recruit[recruitId].itemImage} />
             <S.ModalIntro>{recruit[recruitId].link}</S.ModalIntro>
             {isMyProfile ? (
-              <S.ModalBtn>모집글 수정하기</S.ModalBtn>
+              <S.ModalBtn>모집 종료하기</S.ModalBtn>
             ) : (
-              <S.ModalBtn>모집 참여하기</S.ModalBtn>
+              joinList.includes(recruit[recruitId].id) ? (
+                <S.ModalBtn style={{backgroundColor: "green"}}>참여완료!</S.ModalBtn>
+              ) : (
+                <S.ModalBtn onClick={() => {
+                  addJoinList(recruit[recruitId].id) 
+                }}>모집 참여하기!</S.ModalBtn>
+              )
             )}
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
