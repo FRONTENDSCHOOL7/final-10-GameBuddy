@@ -11,7 +11,8 @@ import {
   StyledProfileIcon
 } from "./FooterStyle";
 
-function Footer() {
+// isSpecialPage : Footer width-72px을 적용해야하는 경우
+function Footer({ isSpecialPage }) {
   const [myData, setMyData] = useRecoilState(myDataAtom);
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,12 +52,13 @@ function Footer() {
   const [$active, setActive] = useState(getInitialActive);
 
   return (
-    <S.FooterContainer>
+    <S.FooterContainer isSpecialPage={isSpecialPage}>
       {menus.map((menu) => {
         const Icon = menu.icon;
         const isChatItem = menu.id === "chat";
         return (
           <S.Item
+            isSpecialPage={isSpecialPage}
             key={menu.id}
             onClick={() => {
               setActive(menu.id);

@@ -27,6 +27,9 @@ export const FooterContainer = styled.footer`
     align-items: flex-start;
     gap: 20px;
     /* border-right: 1px solid #dbdbdb; */
+
+    // 웹 화면에서 작은 footer 사용시 (ex. chat)
+    width: ${({ isSpecialPage }) => (isSpecialPage ? "72px" : "260px")};
   }
 `;
 
@@ -53,6 +56,11 @@ export const Item = styled.button`
     height: auto;
     padding-top: 30px;
     padding-left: 50px;
+    ${({ isSpecialPage }) =>
+      isSpecialPage &&
+      `
+        padding-left: 23px;
+      `}
   }
 
   span {
@@ -63,6 +71,13 @@ export const Item = styled.button`
         margin-right: 5px;  
         margin-top: 1px;
       `}
+    @media screen and (min-width: 768px) {
+      ${({ isSpecialPage }) =>
+        isSpecialPage &&
+        `
+        font-size: 0; // 글자 사이즈를 0으로 설정하여 텍스트를 숨김
+      `}
+    }
   }
 `;
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import * as S from "./ChattingRoomStyle";
 import Header from "../Commons/Header/Header";
 import Example from "../../assets/image/참쉽죠.jpg";
 
@@ -78,12 +78,12 @@ function ChattingRoom() {
   };
 
   return (
-    <Container>
+    <S.Container>
       <Header type="chat" />
-      <ChattingRoomContainer>
+      <S.ChattingRoomContainer>
         {messages.map((message, index) =>
           message.type === "text" ? (
-            <Message key={index} left={message.left}>
+            <S.Message key={index} left={message.left}>
               {message.left && (
                 <img
                   src={Example}
@@ -93,9 +93,9 @@ function ChattingRoom() {
               )}
               <p>{message.content}</p>
               {message.time && <span>{message.time}</span>}
-            </Message>
+            </S.Message>
           ) : (
-            <ImageMessage key={index} left={message.left}>
+            <S.ImageMessage key={index} left={message.left}>
               {message.left && (
                 <img
                   src={Example}
@@ -105,169 +105,33 @@ function ChattingRoom() {
               )}
               <img src={message.content} alt="Image Message" />
               {message.time && <span>{message.time}</span>}
-            </ImageMessage>
+            </S.ImageMessage>
           )
         )}
-      </ChattingRoomContainer>
-      <InputContainer inputValue={inputMessage}>
-        <form onSubmit={handleFormSubmit}>
-          <ImageUploadButton>
+        <S.InputContainer inputValue={inputMessage}>
+          <form onSubmit={handleFormSubmit}>
+            <S.ImageUploadButton>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleSendImage}
+                style={{ display: "none" }}
+                id="imageUpload"
+              />
+              <label htmlFor="imageUpload">📷</label>
+            </S.ImageUploadButton>
             <input
-              type="file"
-              accept="image/*"
-              onChange={handleSendImage}
-              style={{ display: "none" }}
-              id="imageUpload"
+              type="text"
+              placeholder="메시지 입력하기..."
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
             />
-            <label htmlFor="imageUpload">📷</label>
-          </ImageUploadButton>
-          <input
-            type="text"
-            placeholder="메시지 입력하기..."
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <button type="submit">전송</button>
-        </form>
-      </InputContainer>
-    </Container>
+            <button type="submit">전송</button>
+          </form>
+        </S.InputContainer>
+      </S.ChattingRoomContainer>
+    </S.Container>
   );
 }
 
 export default ChattingRoom;
-
-const Container = styled.div`
-  background-color: #f2f2f2;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ChattingRoomContainer = styled.div`
-  flex: 1;
-  padding: 20px;
-  padding-bottom: 80px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-const Message = styled.div`
-  font-size: 14px;
-  max-width: 60%;
-  padding: 10px 14px;
-  border-radius: ${(props) =>
-    props.left ? "0px 9px 9px 9px" : "9px 0px 9px 9px"};
-  border: ${(props) =>
-    props.left ? "1px solid #c4c4c4" : "1px solid #5865F2"};
-  margin: ${(props) => (props.left ? "10px 20px 10px 35px" : "10px 3px")};
-  background-color: ${(props) => (props.left ? "#ffffff" : "#4c8bf5")};
-  align-self: ${(props) => (props.left ? "flex-start" : "flex-end")};
-  color: ${(props) => (props.left ? "#000" : "#fff")};
-
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  span {
-    font-size: 10px;
-    position: absolute;
-    bottom: 1px;
-    right: ${(props) => (props.left ? "-28px" : "140px")};
-    color: #767676;
-  }
-
-  .profile-image {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    margin-right: 10px;
-    position: absolute;
-    top: -5px;
-    left: ${(props) => (props.left ? "-45px" : "auto")};
-  }
-`;
-
-const InputContainer = styled.div`
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-top: 1px solid #e1e1e1;
-
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-
-  form {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  input[type="text"] {
-    background-color: #fff;
-    flex-grow: 1;
-    padding: 10px;
-    border-radius: 15px;
-    border: none;
-    margin-left: 10px;
-    color: #000000;
-  }
-
-  button {
-    background-color: #fff;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 15px;
-    margin-left: 10px;
-    color: ${(props) => (props.inputValue ? "#5865f2" : "#c4c4c4")};
-  }
-`;
-
-const ImageUploadButton = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  label {
-    padding: 10px;
-    border-radius: 100%;
-    background-color: #c4c4c4;
-  }
-`;
-
-const ImageMessage = styled.div`
-  max-width: 60%;
-  margin: ${(props) => (props.left ? "10px 20px 10px 35px" : "10px 3px")};
-  align-self: ${(props) => (props.left ? "flex-start" : "flex-end")};
-  img {
-    max-width: 100%;
-    border-radius: ${(props) =>
-      props.left ? "0px 9px 9px 9px" : "9px 0px 9px 9px"};
-  }
-
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  span {
-    font-size: 10px;
-    position: absolute;
-    bottom: 1px;
-    right: ${(props) => (props.left ? "-28px" : "140px")};
-    color: #767676;
-  }
-
-  .profile-image {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    margin-right: 10px;
-    position: absolute;
-    top: -5px;
-    left: ${(props) => (props.left ? "-45px" : "auto")};
-  }
-`;
