@@ -20,6 +20,22 @@ function Recruit({isMyProfile}) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (modalOn) {
+      // 모달이 열릴 때 스크롤 막기
+      document.body.style.overflow = 'hidden';
+    } else {
+      // 모달이 닫힐 때 스크롤 해제
+      document.body.style.overflow = 'auto';
+    }
+  
+    // 컴포넌트가 언마운트될 때 스크롤 해제를 확실히 하기 위한 클린업 함수
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [modalOn]);
+  
+
   function closeModal() {
     setModalOn(false);
   }
