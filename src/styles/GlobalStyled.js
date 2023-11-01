@@ -11,7 +11,6 @@ const GlobalStyles = createGlobalStyle`
     --color-lightpurple: #8EA1E1;
     --Black-ops: "Black Ops One", sans-serif;
     --Roboto-M: "Roboto-Medium", sans-serif;
-    --Roboto-B: "Roboto-Bold", sans-serif;
 }
 
 ${reset}
@@ -24,17 +23,25 @@ ${reset}
 }
 
 @font-face {
-    font-family: "Roboto-Bold";
-    src: url("../assets/font/Roboto-Bold.ttf") format("font/ttf");
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
     font-family: "Roboto-Medium";
     src: url("../assets/font/Roboto-Medium.ttf") format("font/ttf");
     font-weight: 500;
     font-style: normal;
+}
+
+
+body {
+    font-family: "Roboto-Medium";
+    font-weight: 400;
+}
+
+button {
+    font-family: "Roboto-Medium";
+    font-size: 12px;
+}
+
+::placeholder {
+    font-family: "Roboto-Medium";
 }
 
 

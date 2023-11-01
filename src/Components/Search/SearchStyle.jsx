@@ -5,8 +5,8 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 13px 20px 12px 12px;
-  background-color: #ffff;
-  border-bottom: 1px solid #dbdbdb;
+  background-color: #2c2f33;
+  /* border-bottom: 1px solid #dbdbdb; */
 
   position: fixed;
   top: 0;
@@ -27,8 +27,8 @@ export const StyledIconButton = styled.button`
 export const Input = styled.input`
   flex: 1;
   padding: 8px;
-  background-color: #f2f2f2;
-  border: 1px solid #f2f2f2;
+  background-color: #dbdbdb;
+  border: 1px solid #dbdbdb;
   border-radius: 32px;
 `;
 

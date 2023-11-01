@@ -3,7 +3,7 @@ import Header from "../Components/Commons/Header/Header";
 import ProfileDetail from "../Components/Profile/ProfileDetail/ProfileDetail";
 import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
-import Footer from "../Components/Commons/Footer";
+import Footer from "../Components/Commons/Footer/Footer";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { checkMyInfo, isTouchFeed, userDataAtom } from "../Store/Store";

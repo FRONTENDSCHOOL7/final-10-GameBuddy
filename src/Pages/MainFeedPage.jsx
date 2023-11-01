@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import tokenValidAPI from "../API/tokenValidAPI";
 import Header from "../Components/Commons/Header/Header";
-import Footer from "../Components/Commons/Footer";
+import Footer from "../Components/Commons/Footer/Footer";
 // import SwitchMode from "../Components/Main/SwitchMode";
 import PostList from "../Components/Main/PostList";
 import PostDetailModal from "../Components/Main/PostDeatilModal/PostDetailModal";

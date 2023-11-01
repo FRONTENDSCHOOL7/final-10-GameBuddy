@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Header from "../Commons/Header/Header";
-import Footer from '../Commons/Footer';
-import NoFeedImage from '../../assets/image/char-noFeed.png';
+import Footer from "../Commons/Footer/Footer";
+import NoFeedImage from "../../assets/image/char-noFeed.png";
 
-const NoFeedContainer = styled.div `
+const NoFeedContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,8 +24,8 @@ const NoFeedContainer = styled.div `
   button {
     border-radius: 44px;
     border: none;
-    background: #5865F2;
-    color: #FFFFFF;
+    background: #5865f2;
+    color: #ffffff;
     font-size: 14px;
     width: 120px;
     height: 44px;
@@ -33,30 +33,31 @@ const NoFeedContainer = styled.div `
   }
 
   @font-face {
-  font-family: "Black Ops One";
-  src: url("../../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-`
+    font-family: "Black Ops One";
+    src: url("../../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+`;
 
 export default function Home_no_feed() {
-
   const navigate = useNavigate();
 
-  const handleSearch = () => {    
-    navigate('/search');
-  }
+  const handleSearch = () => {
+    navigate("/search");
+  };
 
   return (
     <>
       <Header type="main" />
-        <NoFeedContainer>
+      <NoFeedContainer>
         <img src={NoFeedImage} alt="gameBuddy 이미지 " />
         <h3>유저를 검색해 팔로우 해보세요!</h3>
-        <button onClick={handleSearch} type="button">검색하기</button>
-        </NoFeedContainer>
+        <button onClick={handleSearch} type="button">
+          검색하기
+        </button>
+      </NoFeedContainer>
       <Footer />
     </>
-  )
+  );
 }
