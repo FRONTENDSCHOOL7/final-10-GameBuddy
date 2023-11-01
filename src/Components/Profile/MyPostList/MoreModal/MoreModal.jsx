@@ -32,13 +32,13 @@ export function Modal({ isMoreModalVisible, onClose, isMyProfile, postId }) {
             preventPropagation={preventPropagation}
             onReport={handleReport}
             postId={postId}
-            isEdit={isEdit} // ConfirmModal에 isEdit 상태 전달
+            isEdit={isEdit}
           />
         ) : (
           <ActionModal
             isMyProfile={isMyProfile}
             setShowConfirm={setShowConfirm}
-            setIsEdit={setIsEdit} // ActionModal에 setIsEdit 함수 전달
+            setIsEdit={setIsEdit}
             preventPropagation={preventPropagation}
           />
         )}
@@ -108,13 +108,13 @@ function ConfirmModal({
 
   const handleEditConfirm = () => {
     onClose();
-    navigate(`/post/${postId}`);
+    navigate(`/post`, { state: { post_id: postId } }); // navigate 함수에 state를 전달
   };
 
   return (
     <S.ConfirmDeleteContainer onClick={preventPropagation}>
       <S.ConfirmMessage>
-        {isEdit ? "정말 수정하시겠습니까?" : isMyProfile ? "정말 삭제하시겠습니까?" : "정말 신고하시겠습니까?"}
+        {isEdit ? "수정하시겠습니까?" : isMyProfile ? "정말 삭제하시겠습니까?" : "정말 신고하시겠습니까?"}
       </S.ConfirmMessage>
       <S.ConfirmContainer>
         <S.ConfirmButton onClick={onClose}>아니오</S.ConfirmButton>

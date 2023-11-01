@@ -9,17 +9,20 @@ import getPostAPI from "../../API/getPostAPI";
 import postEditAPI from "../../API/postEditAPI";
 import uploadImageAPI from "../../API/uploadImageAPI";
 import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function PostEdit() {
-  const currentImage = useRecoilValue(uploadImageAtom);
   const resetRecoilState = useResetRecoilState(uploadImageAtom);
   const [postContent, setPostContent] = useState("");
-  const { post_id } = useParams();
+  const [postImage, setPostImage] = useState("");
+  // const { post_id } = useParams();
   const [isContentValid, setIsContentValid] = useState(true);
   const [uploadImage, setUploadImage] = useRecoilState(uploadImageAtom);
   const fileInputRef = useRef();
   const navigate = useNavigate();
+
+  const { state } = useLocation(); // useLocation을 사용하여 state를 가져옴
+  const post_id = state.post_id; // state에서 post_id를 가져옴
 
 
   useEffect(() => {
@@ -27,12 +30,14 @@ function PostEdit() {
       const post = await getPostAPI(post_id);
       if (post) {
         setPostContent(post.content);
+        setPostImage(post.image);
         console.log(post_id);
       }
     };
   
     fetchPostContent();
-  }, [post_id]);
+    setUploadImage(postImage);
+  }, [postImage]);
 
   const onChangePostContent = (e) => {
     if (e.target.value === "") {
@@ -44,7 +49,7 @@ function PostEdit() {
   };
 
   const handlePostSubmit = async () => {
-    const result = await postEditAPI(post_id, postContent, currentImage === DefaultImage ? null : currentImage);
+    const result = await postEditAPI(post_id, postContent, uploadImage === postImage ? postImage : uploadImage);
     if (result.includes("완료")) {
       alert(result);
       resetRecoilState();
