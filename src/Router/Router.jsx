@@ -15,6 +15,7 @@ import ProfileFix from "../Components/Profile/ProfileFix/ProfileFix";
 import ChattingRoom from "../Components/Chat/ChattingRoom";
 import Write from "../Components/Write/Write";
 import PostEdit from "../Components/Write/PostEdit";
+import RecruitEdit from "../Components/Profile/Recruit/RecruitEdit/RecruitEdit";
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
         <Route path="/chat" element={<ChattingListPage />} />
         <Route path="/write" element={<Write />} /> 
         <Route path="/post" element={<PostEdit />} />
+        <Route path="/recruit/edit" element={<RecruitEdit />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route
           path="/profile/:accountname/:type"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./RecruitStyle";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import productListAPI from "../../../API/productListAPI";
 import gameRecruitDeleteAPI from "../../../API/gameRecruitDeleteAPI";
 import siren from "../../../assets/image/icon-siren.svg";
@@ -14,6 +14,8 @@ function Recruit({ isMyProfile }) {
 
   const [joinList, setJoinList] = useState([]);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
+
+  const navigate = useNavigate();
 
   async function fetchData() {
     const list = await productListAPI(accountname);
@@ -102,7 +104,11 @@ function Recruit({ isMyProfile }) {
                 </S.ModalArticle>
               </S.ProfileDetail>
               {isMyProfile ? (
-                <S.ModalControlBtn onClick={() => {}}>
+                <S.ModalControlBtn onClick={() => {
+                  navigate("/recruit/edit", 
+                    { state: { recruitData: recruit[recruitId]}}
+                  )}
+                }>
                   <S.ModalControlBtnImg src={update} />
                 </S.ModalControlBtn>
               ) : (
