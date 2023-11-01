@@ -5,6 +5,7 @@ import { searchKeywordAtom, userSearchResultAtom } from "../../Store/Store";
 import searchUserAPI from "../../API/searchUserAPI";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as GoBackIcon } from "../../assets/image/icon-goback.svg";
+import DefaultImage from "../../assets/image/char_inactive.png";
 
 function Search() {
   const searchKeyword = useRecoilValue(searchKeywordAtom);
@@ -30,7 +31,7 @@ function Search() {
         const results = await searchUserAPI(searchKeyword);
         setSearchResult(results); // 검색 결과 상태 업데이트
       }
-    }, 600);
+    }, 300);
     setTimer(newTimer);
 
     return () => {
@@ -62,7 +63,16 @@ function Search() {
             <S.SearchResultForm key={id}>
               <S.SearchUserBox
                 onClick={() => navigate(`/profile/${data.accountname}`)}>
-                <S.Image src={data.image} />
+                <S.Image
+                  src={
+                    data.image.includes("api.mandarin.weniv.co.kr") &&
+                    !data.image.includes("undefined") &&
+                    !data.image.includes("null") &&
+                    data.image !== ""
+                      ? data.image
+                      : DefaultImage
+                  }
+                />
                 <S.Article>
                   <S.UserName>{data.username}</S.UserName>
                   <S.Intro>@{data.accountname}</S.Intro>
