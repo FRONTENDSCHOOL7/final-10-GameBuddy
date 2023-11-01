@@ -14,6 +14,7 @@ import FollowDetailPage from "../Pages/FollowDetailPage";
 import ProfileFix from "../Components/Profile/ProfileFix/ProfileFix";
 import ChattingRoom from "../Components/Chat/ChattingRoom";
 import Write from "../Components/Write/Write";
+import PostEdit from "../Components/Write/PostEdit";
 
 function Router() {
   return (
@@ -27,7 +28,8 @@ function Router() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/homenofeed" element={<Home_no_feed />} />
         <Route path="/chat" element={<ChattingListPage />} />
-        <Route path="/write" element={<Write />} />
+        <Route path="/write" element={<Write />} /> 
+        <Route path="/post" element={<PostEdit />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route
           path="/profile/:accountname/:type"
