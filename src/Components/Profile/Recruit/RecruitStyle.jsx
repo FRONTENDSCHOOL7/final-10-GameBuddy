@@ -46,7 +46,7 @@ export const GameImage = styled.img`
 
 //모달
 export const ModalContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -118,6 +118,8 @@ export const ModalImage = styled.img`
   width: 95%;
   height: calc(100vw - 55vw);
   border-radius: 20px;
+  max-width: 900px;
+  max-height: 600px;
 `;
 export const ModalIntro = styled.p`
   width: 90%;
