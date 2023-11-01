@@ -22,7 +22,7 @@ function PostEdit() {
   const navigate = useNavigate();
 
   const { state } = useLocation(); // useLocation을 사용하여 state를 가져옴
-  const post_id = state.post_id; // state에서 post_id를 가져옴
+  const post_id = state.post_id; // state에서 post_id를 가져옴 
 
 
   useEffect(() => {

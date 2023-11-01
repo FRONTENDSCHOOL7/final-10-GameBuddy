@@ -122,6 +122,6 @@ function ConfirmModal({
           예
         </S.ConfirmButton>
       </S.ConfirmContainer>
-    </S.ConfirmDeleteContainer>
+    </S.ConfirmDeleteContainer> 
   );
 }

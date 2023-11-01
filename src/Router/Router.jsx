@@ -28,7 +28,7 @@ function Router() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/homenofeed" element={<Home_no_feed />} />
         <Route path="/chat" element={<ChattingListPage />} />
-        <Route path="/write" element={<Write />} />
+        <Route path="/write" element={<Write />} /> 
         <Route path="/post" element={<PostEdit />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route
