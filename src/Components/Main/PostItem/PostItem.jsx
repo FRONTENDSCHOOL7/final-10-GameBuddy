@@ -15,6 +15,7 @@ import { showDate } from "../../../Functional/DateFunction";
 import heartPostAPI from "../../../API/heartPostAPI";
 import unheartPostAPI from "../../../API/unheartPostAPI";
 import DefaultImage from "../../../assets/image/char_inactive.png";
+import { isValidImage } from "../../../Functional/isValidImageFunction";
 // {"\u00A0"} 이거 야무지게 사용가능합니다. react에서 스페이스바 안먹히는거 이걸로 사용하면 됩니다.
 // feat 조병민.
 
@@ -83,10 +84,7 @@ function PostItem() {
             }}>
             <S.PostHeaderImg
               src={
-                post.author.image.includes("api.mandarin.weniv.co.kr") &&
-                !post.author.image.includes("undefined") &&
-                !post.author.image.includes("null") &&
-                post.author.image !== ""
+                isValidImage(post.author.image)
                   ? post.author.image
                   : DefaultImage
               }
@@ -96,16 +94,16 @@ function PostItem() {
               <S.HeaderTextBox>
                 <div className="flexBox">
                   <S.HeaderH3>{post.author.username}</S.HeaderH3>
-                  <S.HeaderImg src={siren} alt="Siren" />
+                  {/* <S.HeaderImg src={siren} alt="Siren" /> */}
                 </div>
                 <S.HeaderP>{post.author.accountname}</S.HeaderP>
               </S.HeaderTextBox>
-              <S.PostContent>{post.content}</S.PostContent>
               {post.image !== "" ? (
                 <S.PostContentImg src={post.image} alt="Post Content Image" />
               ) : (
                 <></>
               )}
+              <S.PostContent>{post.content}</S.PostContent>
               <S.Footer>
                 <S.FooterImg
                   src={post.hearted ? heart : unheart}
