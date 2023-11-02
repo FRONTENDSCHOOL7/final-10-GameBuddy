@@ -132,3 +132,9 @@ export const getUserPostDataSelector = selector({
     return userPostDetailDataItem[userPostDetailDataItemIndex];
   }
 });
+
+// MainFeed와 Profile의 위치를 확인하기 위한 path경로 저장용 atom
+export const currentLocation = atom({
+  key: "currentLocation",
+  default: ""
+})
