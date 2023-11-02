@@ -45,12 +45,20 @@ function Search() {
     navigate(-1);
   };
 
+  const goMain = () => {
+    navigate("/main"); // 메인 페이지로 이동
+  };
+
   return (
     <>
       <S.HeaderContainer>
-        <S.StyledIconButton onClick={goBack}>
+        {/* 뒤로가기 아이콘은 768px 미만에서만 보임 */}
+        <S.GoBackIconWrapper onClick={goBack}>
           <GoBackIcon />
-        </S.StyledIconButton>
+        </S.GoBackIconWrapper>
+
+        {/* GameBuddy 텍스트는 768px 이상에서만 보임 */}
+        <S.GameBuddyText onClick={goMain}>GameBuddy</S.GameBuddyText>
         <S.Input
           id="search"
           placeholder="계정 검색"
