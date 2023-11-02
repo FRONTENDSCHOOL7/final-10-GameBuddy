@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RecruitContainer = styled.div`
   font-family: var(--Roboto-M);
-  background-color: #fff;
+  background-color: #2c2f33;
   margin-top: 8px;
   padding-left: 20px;
   @media screen and (min-width: 768px) {

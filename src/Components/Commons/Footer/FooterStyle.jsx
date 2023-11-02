@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #2c2f33;
+  background-color: #25282d;
 
   position: fixed;
   bottom: 0;

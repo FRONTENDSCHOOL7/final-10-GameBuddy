@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const FollowListContainer = styled.div`
   padding-top: 62px;
+  background-color: #25282d;
+  height: 100vh;
 `
 
 export const FollowListForm = styled.div`
@@ -29,7 +31,7 @@ export const Article = styled.article`
 `
 
 export const UserName = styled.p`
-  color: #000;
+  color: #fff;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

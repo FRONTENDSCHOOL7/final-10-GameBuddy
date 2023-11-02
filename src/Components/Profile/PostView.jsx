@@ -27,7 +27,7 @@ const ViewButton = styled.button`
 
 function PostView({ viewType, setViewType }) {
   return (
-    <ViewContainer>
+    <ViewContainer style={{backgroundColor: "#2c2f33", borderBottom: "1px solid #5c5c5c", paddingTop:"7px", paddingBottom:"7px"}}>
       <ViewButton
         img={viewType === "list" ? ListOn : ListOff}
         onClick={() => setViewType("list")}

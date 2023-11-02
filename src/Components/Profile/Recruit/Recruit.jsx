@@ -69,7 +69,7 @@ function Recruit({ isMyProfile }) {
 
   return (
     <S.RecruitContainer>
-      <h2>모집 중인 게임</h2>
+      <h2 style={{color: "#efefef"}}>모집 중인 게임</h2>
       <S.GameList>
         {recruit.map((recruit, id) => {
           return (
@@ -81,7 +81,7 @@ function Recruit({ isMyProfile }) {
               }}>
               {/* 모집글 상세 */}
               <S.GameImage src={recruit.itemImage} alt="게임 스크린샷" />
-              <p className="gameName">{recruit.itemName}</p>
+              <p className="gameName" style={{color: "#cfcfcf"}}>{recruit.itemName}</p>
               <p className="playerCount">{`1명 / ${recruit.price}명`}</p>
             </S.GameCard>
           );
