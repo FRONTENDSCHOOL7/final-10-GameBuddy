@@ -74,7 +74,7 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 20px;
   width: 80%;
-  height: 80%;
+  height: 120vw;
   max-width: 600px;
   max-height: 800px;
   display: flex;
@@ -139,11 +139,11 @@ export const UpdateIcon = styled(UpdateIconForStyle)`
   cursor: pointer;
 `;
 export const ModalImage = styled.img`
-  width: 95%;
-  height: calc(100vw - 55vw);
+  width: 80vw;
+  height: 55vw;
   border-radius: 20px;
-  max-width: 600px;
-  max-height: 400px;
+  max-width: 640px;
+  max-height: 360px;
 `;
 export const ModalIntro = styled.p`
   width: 95%;
