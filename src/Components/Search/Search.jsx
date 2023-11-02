@@ -6,6 +6,7 @@ import searchUserAPI from "../../API/searchUserAPI";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as GoBackIcon } from "../../assets/image/icon-goback.svg";
 import DefaultImage from "../../assets/image/char_inactive.png";
+import { isValidImage } from "../../Functional/isValidImageFunction";
 
 function Search() {
   const searchKeyword = useRecoilValue(searchKeywordAtom);
@@ -64,14 +65,7 @@ function Search() {
               <S.SearchUserBox
                 onClick={() => navigate(`/profile/${data.accountname}`)}>
                 <S.Image
-                  src={
-                    data.image.includes("api.mandarin.weniv.co.kr") &&
-                    !data.image.includes("undefined") &&
-                    !data.image.includes("null") &&
-                    data.image !== ""
-                      ? data.image
-                      : DefaultImage
-                  }
+                  src={isValidImage(data.image) ? data.image : DefaultImage}
                 />
                 <S.Article>
                   <S.UserName>{data.username}</S.UserName>
