@@ -94,7 +94,7 @@ export const PostContent = styled.p`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* 3줄까지 표시 */
-  overflow: hidden; /* 추가된 내용을 숨김 */
+  overflow-y: hidden; /* 추가된 내용을 숨김 */
   color: #ffffff;
 `;
 

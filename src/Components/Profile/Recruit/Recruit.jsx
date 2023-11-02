@@ -119,6 +119,7 @@ function Recruit({ isMyProfile }) {
             </S.ModalProfile>
             <S.ModalImage src={recruit[recruitId].itemImage} />
             <S.ModalIntro>{recruit[recruitId].link}</S.ModalIntro>
+            <S.ModalRecruitNumber>{`1명 / ${recruit[recruitId].price}명`}</S.ModalRecruitNumber>
             {isMyProfile ? (
               <S.ModalBtn onClick={() => setCloseRecruitModal(true)}>모집 종료하기</S.ModalBtn>
             ) : (

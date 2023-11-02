@@ -142,14 +142,18 @@ export const ModalImage = styled.img`
   width: 95%;
   height: calc(100vw - 55vw);
   border-radius: 20px;
-  max-width: 480px;
-  max-height: 320px;
+  max-width: 600px;
+  max-height: 400px;
 `;
 export const ModalIntro = styled.p`
   width: 95%;
   flex-grow: 1;
   overflow-y: auto;
   color: #efefef;
+`;
+export const ModalRecruitNumber = styled.p`
+  color: #f26e22;
+  font-size: 20px;
 `;
 export const ModalBtn = styled.button`
   width: 75%;
