@@ -45,7 +45,7 @@ function Profile({ isMyProfile, accountname }) {
               <S.StatButton
                 onClick={() => navigate(`/profile/${accountname}/follower`)}>
                 {/* 팔로워 수 */}
-                <strong>{userData.followerCount}</strong>
+                <strong style={{color: "#dfdfdf"}}>{userData.followerCount}</strong>
                 <div>followers</div>
               </S.StatButton>
             </S.StatContent>
@@ -60,7 +60,7 @@ function Profile({ isMyProfile, accountname }) {
               <S.StatButton
                 onClick={() => navigate(`/profile/${accountname}/following`)}>
                 {/* 팔로잉 수 */}
-                <strong>{userData.followingCount}</strong>
+                <strong style={{color: "#dfdfdf"}}>{userData.followingCount}</strong>
                 <div>followings</div>
               </S.StatButton>
             </S.StatContent>

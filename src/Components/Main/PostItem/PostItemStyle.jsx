@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+/* max-width: calc(100vw - 260px); */
 export const Article = styled.article`
   display: flex;
   flex-direction: column;
@@ -12,25 +13,27 @@ export const Article = styled.article`
   overflow-y: hidden;
   box-sizing: border-box;
   @media screen and (min-width: 768px) {
-    margin-left: 260px;
+    margin-left: 270px;
     padding-right: 300px;
-    /* max-width: calc(100vw - 260px); */
   }
 `;
 
 export const Section = styled.section`
   display: flex;
   gap: 7px;
-  padding-top: 20px;
+  padding-top: 0.5rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  width: 80%;
-  border: 2px solid var(--color-lightpurple);
+  width: 90%;
+  /* border: 1px solid var(--color-lightpurple); */
   border-radius: 10px;
   box-shadow: ${({ isHovered }) =>
     isHovered
       ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"
-      : "0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1)"};
+      : "none"};
+  @media screen and (min-width: 768px) {
+    width: 95%;
+  }
 `;
 
 export const PostHeaderImg = styled.img`
@@ -73,6 +76,7 @@ export const HeaderImg = styled.img`
 
 export const PostContent = styled.p`
   font-family: var(--Roboto-B);
+  width: 16rem;
   font-size: 0.9rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -81,12 +85,20 @@ export const PostContent = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* 3줄까지 표시 */
   overflow: hidden; /* 추가된 내용을 숨김 */
+  @media screen and (min-width: 768px) {
+    width: 20rem;
+  }
 `;
 
 export const PostContentImg = styled.img`
   width: 16rem;
   height: 12rem;
+  margin-top: 1rem;
   border-radius: 10%;
+  @media screen and (min-width: 768px) {
+    width: 20rem;
+    height: 16rem;
+  }
 `;
 
 export const Footer = styled.footer`

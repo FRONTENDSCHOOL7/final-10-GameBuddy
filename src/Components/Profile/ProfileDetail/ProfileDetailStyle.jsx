@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
+  background-color: #2c2f33;
   font-family: var(--Roboto-M);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: white;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid #dbdbdb;
+  /* border-bottom: 1px solid #dbdbdb; */
   margin-top: 52px;
   @media screen and (min-width: 768px) {
     margin-left: 260px;
@@ -24,7 +24,7 @@ export const ProfileHeader = styled.div`
 `;
 
 export const AccountName = styled.h3`
-  color: #767676;
+  color: #a6a6a6;
   font-size: 12px;
   margin-bottom: 14px;
 `;
@@ -42,6 +42,7 @@ export const ProfileImage = styled.img`
   border-radius: 50%;
   /* background-color: #ece8e8; */
   margin-right: 30px;
+  border: 1px solid #5c5c5c;
 `;
 
 export const ProfileStat = styled.div`
@@ -65,7 +66,7 @@ export const StatButton = styled.button`
   background: none;
   border: none;
   font-size: 10px;
-  color: #767676;
+  color: #a6a6a6;
   cursor: pointer;
   text-align: center;
 
@@ -79,7 +80,7 @@ export const StatButton = styled.button`
 export const Stat = styled.div`
   font-size: 10px;
   font-weight: 400;
-  color: #767676;
+  color: #a6a6a6;
   text-align: center;
 
   div {
@@ -106,11 +107,12 @@ export const UserName = styled.h2`
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 5px;
+  color: #f0f0f0;
 `;
 
 export const DescriptionText = styled.p`
   font-size: 14px;
-  color: #767676;
+  color: #a6a6a6;
 `;
 
 export const ButtonContainer = styled.div`

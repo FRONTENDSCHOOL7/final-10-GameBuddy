@@ -21,6 +21,8 @@ import {
   useSetRecoilState
 } from "recoil";
 import { fewMinutesAgo, showDate } from "../../../Functional/DateFunction";
+import { isValidImage } from "../../../Functional/isValidImageFunction";
+
 import commentAPI from "../../../API/commentAPI";
 import commentWriteAPI from "../../../API/commentWriteAPI";
 import removeCommentAPI from "../../../API/removeCommentAPI";
@@ -152,12 +154,7 @@ function PostDetailModal() {
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile
             src={
-              data.author.image.includes("api.mandarin.weniv.co.kr") &&
-              !data.author.image.includes("null") &&
-              !data.author.image.includes("undefined") &&
-              data.author.image !== ""
-                ? data.author.image
-                : DefaultImage
+              isValidImage(data.author.image) ? data.author.image : DefaultImage
             }
           />
           <S.PostDetailHeaderTextBox>
@@ -165,7 +162,7 @@ function PostDetailModal() {
               <S.PostDetailHeaderUserName>
                 {data.author.username}
               </S.PostDetailHeaderUserName>
-              <S.PostDetailHeaderImg src={siren} alt="Siren" />
+              {/* <S.PostDetailHeaderImg src={siren} alt="Siren" /> */}
             </div>
             <S.PostDetailHeaderAccountName>
               {data.author.accountname}
@@ -174,12 +171,12 @@ function PostDetailModal() {
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
-          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           {data.image !== "" ? (
             <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
           ) : (
             <></>
           )}
+          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
@@ -207,29 +204,24 @@ function PostDetailModal() {
                 alt="PostDetailCommentHeaderProfile"
               />
               <S.PostDetailCommentItemTextBox>
-                <div className="flexBox">
-                  <S.PostDetailCommentHeaderUserName>
-                    {post.author.username}
-                    <S.PostDetailCommentHeaderMinutesAgo>
-                      {fewMinutesAgo(post.createdAt)}
-                    </S.PostDetailCommentHeaderMinutesAgo>
-                  </S.PostDetailCommentHeaderUserName>
-                  <S.PostDetailCommentHeaderImg
-                    src={`${
-                      post.author.accountname ===
-                      commentMyProfile.user.accountname
-                        ? close
-                        : siren
-                    }`}
-                    onClick={(e) =>
-                      commentEvent(e, post.id, post.author.username)
-                    }
-                  />
-                </div>
+                <S.PostDetailCommentHeaderUserName>
+                  {post.author.username}
+                  <S.PostDetailCommentHeaderMinutesAgo>
+                    {fewMinutesAgo(post.createdAt)}
+                  </S.PostDetailCommentHeaderMinutesAgo>
+                </S.PostDetailCommentHeaderUserName>
                 <S.PostDetailCommentContent>
                   {post.content}
                 </S.PostDetailCommentContent>
               </S.PostDetailCommentItemTextBox>
+              <S.PostDetailCommentHeaderImg
+                src={`${
+                  post.author.accountname === commentMyProfile.user.accountname
+                    ? close
+                    : siren
+                }`}
+                onClick={(e) => commentEvent(e, post.id, post.author.username)}
+              />
             </S.PostDetailCommentItem>
           ))}
         </S.PostDetailCommentWrapper>

@@ -85,6 +85,7 @@ export const PostDetailContent = styled.p`
   font-family: var(--Roboto-B);
   font-size: 1.1rem;
   white-space: normal;
+  width: 17rem;
   word-wrap: break-word;
 `;
 
@@ -134,20 +135,21 @@ export const PostDetailCommentTitle = styled.li`
   padding-bottom: 0.5rem;
 `;
 
+// 댓글 1개 전체 박스
 export const PostDetailCommentItem = styled.li`
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem; //댓글별 간격
 `;
 
+// profileimg, closeimg를 제외한 텍스트 박스
 export const PostDetailCommentItemTextBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 100%;
-  padding: 0.3rem 1rem 0.5rem 1rem;
-  .flexBox {
-    display: flex;
-    justify-content: space-between;
-  }
+  width: calc(
+    100% - (0.8rem + 2rem)
+  ); //close아이콘 + 2rem 만큼을 뺀 공간을 너비로 가짐
 `;
 
 export const PostDetailCommentHeaderProfile = styled.img`
@@ -170,15 +172,15 @@ export const PostDetailCommentHeaderMinutesAgo = styled.span`
 `;
 
 export const PostDetailCommentHeaderImg = styled.img`
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-left: auto;
-  margin-top: -0.4rem;
+  width: 0.8rem; // 크기 수정
+  height: 0.8rem; // 크기 수정
 `;
 
 export const PostDetailCommentContent = styled.p`
   margin-top: 0.1rem;
   font-size: 0.8rem;
+  overflow-wrap: break-word; // 단어 단위로 줄바꿈
+  margin-right: 1.6rem; // 아이콘과의 간격
 `;
 
 export const PostDetailWriteForm = styled.form`
@@ -216,4 +218,6 @@ export const PostDetailBackButton = styled.button`
   border-color: white;
   color: white;
   background-color: transparent;
+  text-align: center;
+  line-height: 1rem;
 `;

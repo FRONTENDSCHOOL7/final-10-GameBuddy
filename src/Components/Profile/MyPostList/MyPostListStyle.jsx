@@ -10,12 +10,13 @@ export const NoPostsMessage = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  background-color: #fff;
+
+  background-color: #2c2f33;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding-top: 16px;
-  margin-bottom: 70px;
+  padding-bottom: 50px;
   @media screen and (min-width: 768px) {
     margin-left: 260px;
     /* max-width: calc(100vw - 260px); */
@@ -49,7 +50,8 @@ export const PostHeaderImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 100%;
-  padding-right: 5px;
+  /* padding-right: 5px; */
+  border: 1px solid #5c5c5c; /* 하얀색 테두리를 추가합니다. */
 `;
 
 export const PostHeader = styled.header`
@@ -69,6 +71,7 @@ export const HeaderTextBox = styled.div`
 export const HeaderH3 = styled.h3`
   font-weight: bold;
   font-size: 16px;
+  color: #fff;
 `;
 
 export const HeaderP = styled.p`
@@ -91,7 +94,8 @@ export const PostContent = styled.p`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* 3줄까지 표시 */
-  overflow: hidden; /* 추가된 내용을 숨김 */
+  overflow-y: hidden; /* 추가된 내용을 숨김 */
+  color: #ffffff;
 `;
 
 export const PostContentImg = styled.img`
@@ -131,7 +135,7 @@ export const PostItem = styled.div`
 `;
 
 export const AlbumContainer = styled.div`
-  background-color: #fff;
+  background-color: #2c2f33;
   display: grid;
   grid-template-columns: repeat(
     3,

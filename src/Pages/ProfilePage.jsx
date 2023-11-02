@@ -59,7 +59,7 @@ function ProfilePage() {
   const [isFollowing, setIsFollowing] = useState(true);
 
   return (
-    <div style={{ backgroundColor: "#f2f2f2" }}>
+    <div style={{ backgroundColor: "#3f4246", height:"100vh" }}>
       <Header type={isMyProfile ? "myProfile" : "userProfile"} />
       <ProfileDetail
         isMyProfile={isMyProfile}
