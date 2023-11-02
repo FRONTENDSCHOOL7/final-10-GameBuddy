@@ -59,6 +59,9 @@ export const FollowBtn = styled.button`
   border-radius: 26px;
   border: none;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 export const UnFollowBtn = styled.button`
   background-color: #dbdbdb;
@@ -68,6 +71,9 @@ export const UnFollowBtn = styled.button`
   border-radius: 26px;
   border: none;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 export const ItsMeBtn = styled.button`
   background-color: #ff9900;
