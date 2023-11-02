@@ -10,7 +10,6 @@ export const NoPostsMessage = styled.div`
 `;
 
 export const ListContainer = styled.div`
-
   background-color: #2c2f33;
   display: flex;
   flex-direction: column;
@@ -18,8 +17,8 @@ export const ListContainer = styled.div`
   padding-top: 16px;
   padding-bottom: 50px;
   @media screen and (min-width: 768px) {
-    margin-left: 260px;
-    /* max-width: calc(100vw - 260px); */
+    margin-left: 200px;
+    /* max-width: calc(100vw - 200px); */
   }
 `;
 

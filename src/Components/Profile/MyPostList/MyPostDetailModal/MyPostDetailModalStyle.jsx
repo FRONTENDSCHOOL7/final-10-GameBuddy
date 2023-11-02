@@ -25,7 +25,7 @@ export const PostDetailBox = styled.section`
   max-width: 350px;
   min-width: 330px;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: #2c2f33;
   position: relative;
 
@@ -124,10 +124,10 @@ export const PostDetailContentImg = styled.img`
 
 export const PostDetailContent = styled.p`
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   white-space: normal;
   word-wrap: break-word;
 `;
@@ -206,8 +206,8 @@ export const PostDetailCommentHeaderProfile = styled.img`
 
 export const PostDetailCommentHeaderUserName = styled.h3`
   color: #fff;
-  font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
   margin-right: 0.2rem;
 `;
 
@@ -226,9 +226,10 @@ export const PostDetailCommentHeaderImg = styled.img`
 `;
 
 export const PostDetailCommentContent = styled.p`
-  color: #a4a4a4;
+  color: #fff;
   margin-top: 0.1rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  font-weight: 300;
   overflow-wrap: break-word;
 `;
 
