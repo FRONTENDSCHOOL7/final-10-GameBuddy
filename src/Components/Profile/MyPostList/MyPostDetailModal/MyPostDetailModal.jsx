@@ -179,12 +179,12 @@ function MyPostDetailModal() {
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
-          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           {data.image !== "" ? (
             <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
           ) : (
             <></>
           )}
+          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
@@ -210,35 +210,26 @@ function MyPostDetailModal() {
               <S.PostDetailCommentHeaderProfile
                 src={post.author.image}
                 alt="PostDetailCommentHeaderProfile"
-                onClick={(e) => {
-                  setIsPostModalVisible(false);
-                  navigate(`/profile/${post.author.accountname}`);
-                }}
               />
               <S.PostDetailCommentItemTextBox>
-                <div className="flexBox">
-                  <S.PostDetailCommentHeaderUserName>
-                    {post.author.username}
-                    <S.PostDetailCommentHeaderMinutesAgo>
-                      {fewMinutesAgo(post.createdAt)}
-                    </S.PostDetailCommentHeaderMinutesAgo>
-                  </S.PostDetailCommentHeaderUserName>
-                  <S.PostDetailCommentHeaderImg
-                    src={`${
-                      post.author.accountname ===
-                      commentMyProfile.user.accountname
-                        ? close
-                        : siren
-                    }`}
-                    onClick={(e) =>
-                      commentEvent(e, post.id, post.author.username)
-                    }
-                  />
-                </div>
+                <S.PostDetailCommentHeaderUserName>
+                  {post.author.username}
+                  <S.PostDetailCommentHeaderMinutesAgo>
+                    {fewMinutesAgo(post.createdAt)}
+                  </S.PostDetailCommentHeaderMinutesAgo>
+                </S.PostDetailCommentHeaderUserName>
                 <S.PostDetailCommentContent>
                   {post.content}
                 </S.PostDetailCommentContent>
               </S.PostDetailCommentItemTextBox>
+              <S.PostDetailCommentHeaderImg
+                src={`${
+                  post.author.accountname === commentMyProfile.user.accountname
+                    ? close
+                    : siren
+                }`}
+                onClick={(e) => commentEvent(e, post.id, post.author.username)}
+              />
             </S.PostDetailCommentItem>
           ))}
         </S.PostDetailCommentWrapper>
