@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ReactComponent as SirenIconForStyle } from '../../../assets/image/icon-siren2.svg';
+import { ReactComponent as UpdateIconForStyle } from '../../../assets/image/icon-edit.svg';
 
 export const RecruitContainer = styled.div`
   font-family: var(--Roboto-M);
@@ -68,11 +70,13 @@ export const ModalContainer = styled.div`
   flex-direction: column;
 `;
 export const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: #2c2f33;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   width: 80%;
   height: 80%;
+  max-width: 600px;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -104,12 +108,12 @@ export const ModalArticle = styled.article`
   justify-content: center;
 `;
 export const ModalUsername = styled.p`
-  color: #000000;
+  color: #efefef;
   font-size: 16px;
   font-weight: 500;
 `;
 export const ModalAccountname = styled.p`
-  color: #767676;
+  color: #a6a6a6;
   font-size: 14px;
 `;
 export const ModalControlBtn = styled.button`
@@ -117,22 +121,35 @@ export const ModalControlBtn = styled.button`
   background-color: white;
   border: none;
   margin-right: 10px;
+  background-color: #2c2f33;
+  &:horver {
+    cursor: pointer;
+  }
 `;
-export const ModalControlBtnImg = styled.img`
+export const SirenIcon = styled(SirenIconForStyle)`
   width: 25px;
   height: 25px;
+  fill: #ff0000;
+  cursor: pointer;
+`;
+export const UpdateIcon = styled(UpdateIconForStyle)`
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+  cursor: pointer;
 `;
 export const ModalImage = styled.img`
   width: 95%;
   height: calc(100vw - 55vw);
   border-radius: 20px;
-  max-width: 900px;
-  max-height: 600px;
+  max-width: 480px;
+  max-height: 320px;
 `;
 export const ModalIntro = styled.p`
-  width: 90%;
+  width: 95%;
   flex-grow: 1;
   overflow-y: auto;
+  color: #efefef;
 `;
 export const ModalBtn = styled.button`
   width: 75%;
@@ -142,6 +159,7 @@ export const ModalBtn = styled.button`
   border-radius: 24px;
   border: none;
   background-color: #5865f2;
+  margin-bottom: 0.8rem;
 `;
 export const ModalCloseBtn = styled.button`
   width: 2rem;
@@ -155,7 +173,8 @@ export const ModalCloseBtn = styled.button`
 `;
 
 export const CloseModalContent = styled.div`
-  background-color: #fff;
+  background-color: #2c2f33;
+  color: #ffffff;
   padding: 20px;
   border-radius: 5px;
   width: 300px;

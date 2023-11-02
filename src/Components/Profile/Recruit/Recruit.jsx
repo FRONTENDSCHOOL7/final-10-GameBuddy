@@ -4,7 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import productListAPI from "../../../API/productListAPI";
 import gameRecruitDeleteAPI from "../../../API/gameRecruitDeleteAPI";
 import siren from "../../../assets/image/icon-siren.svg";
-import update from "../../../assets/image/update.png";
+import update from "../../../assets/image/icon-edit.svg";
+import { ReactComponent as SirenIcon } from '../../../assets/image/icon-siren2.svg';
+import { ReactComponent as UpdateIcon } from '../../../assets/image/icon-edit.svg';
 
 function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
@@ -13,6 +15,7 @@ function Recruit({ isMyProfile }) {
   const [recruitId, setRecruitId] = useState(0);
 
   const [joinList, setJoinList] = useState([]);
+  const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
 
   const navigate = useNavigate();
@@ -104,16 +107,13 @@ function Recruit({ isMyProfile }) {
                 </S.ModalArticle>
               </S.ProfileDetail>
               {isMyProfile ? (
-                <S.ModalControlBtn onClick={() => {
-                  navigate("/recruit/edit", 
-                    { state: { recruitData: recruit[recruitId]}}
-                  )}
+                <S.ModalControlBtn onClick={() => setEditRecruitModal(true)
                 }>
-                  <S.ModalControlBtnImg src={update} />
+                  <S.UpdateIcon />
                 </S.ModalControlBtn>
               ) : (
                 <S.ModalControlBtn onClick={reportRecruit}>
-                  <S.ModalControlBtnImg src={siren} />
+                  <S.SirenIcon />
                 </S.ModalControlBtn>
               )}
             </S.ModalProfile>
@@ -141,6 +141,21 @@ function Recruit({ isMyProfile }) {
             정말 모집을 끝낼까요?
             <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)}>
               이제 됐어요 종료합시다!
+            </S.ModalBtn>
+          </S.CloseModalContent>
+        </S.ModalContainer>
+      }
+
+      {
+        editRecruitModal && <S.ModalContainer onClick={() => setEditRecruitModal(false)}>
+          <S.CloseModalContent>
+            모집글을 수정하시겠습니까?
+            <S.ModalBtn onClick={() => {
+                  navigate("/recruit/edit", 
+                    { state: { recruitData: recruit[recruitId]}}
+                  )}
+            }>
+              네 수정합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
         </S.ModalContainer>
