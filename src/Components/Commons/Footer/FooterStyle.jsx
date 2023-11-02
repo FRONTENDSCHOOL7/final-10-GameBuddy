@@ -22,7 +22,7 @@ export const FooterContainer = styled.footer`
   @media screen and (min-width: 768px) {
     left: 0;
     width: 260px;
-    height: 710px;
+    height: calc(100vh - 55px);
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
