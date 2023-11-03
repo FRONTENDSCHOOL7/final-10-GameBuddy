@@ -4,12 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import gameRecruitListAPI from "../../../API/gameRecruitAPI/gameRecruitListAPI";
 import gameRecruitDeleteAPI from "../../../API/gameRecruitAPI/gameRecruitDeleteAPI";
 import myAccountNameAPI from "../../../API/myAccountNameAPI";
-import siren from "../../../assets/image/icon-siren.svg";
-import update from "../../../assets/image/icon-edit.svg";
-import { ReactComponent as SirenIcon } from '../../../assets/image/icon-siren2.svg';
-import { ReactComponent as UpdateIcon } from '../../../assets/image/icon-edit.svg';
 import joinRecruitAPI from "../../../API/gameRecruitAPI/joinRecruitAPI";
 import leaveRecruitAPI from "../../../API/gameRecruitAPI/leaveRecruitAPI";
+import userInfoAPI from "../../../API/userInfoAPI"
 
 function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
@@ -20,7 +17,10 @@ function Recruit({ isMyProfile }) {
   const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
   const [myAccountName, setMyAccountName] = useState("");
-  // const myAccountName = myAccountNameAPI();
+  
+  const [targetUserName, setTargetUserName] = useState("");
+  const [targetAccountName, setTargetAccountName] = useState("");
+  const [targetImage, setTargetImage] = useState("");
 
   const navigate = useNavigate();
 
@@ -54,6 +54,13 @@ function Recruit({ isMyProfile }) {
   function reportRecruit() {
     alert("신고되었습니다!")
     console.log("신고됨")
+  }
+
+  async function getUserInfo(targetAccountName) {
+    const result = await userInfoAPI(targetAccountName);
+    setTargetUserName(result.profile.username);
+    setTargetAccountName(result.profile.accountname);
+    setTargetImage(result.profile.image);
   }
 
   async function joinRecruit(recruitID, myAccountName, recruitData) {
@@ -90,7 +97,7 @@ function Recruit({ isMyProfile }) {
               key={id}
               onClick={() => {
                 setRecruitId(id);
-                // console.log("배열값 제대로 들ㅇ거ㅏ는건가?", JSON.parse(recruit[recruitId].link)[2])
+                getUserInfo(JSON.parse(recruit.itemName)[1]);
                 setModalOn(true);
               }}>
               {/* 모집글 상세 */}
@@ -108,13 +115,13 @@ function Recruit({ isMyProfile }) {
           <S.ModalContent onClick={(event) => event.stopPropagation()}>
             <S.ModalProfile>
               <S.ProfileDetail>
-                <S.ModalProfileImage src={recruit[recruitId].author.image} />
+                <S.ModalProfileImage src={targetImage} />
                 <S.ModalArticle>
                   <S.ModalUsername>
-                    {recruit[recruitId].author.username}
+                    {targetUserName}
                   </S.ModalUsername>
                   <S.ModalAccountname>
-                    {recruit[recruitId].author.accountname}
+                    {targetAccountName}
                   </S.ModalAccountname>
                 </S.ModalArticle>
               </S.ProfileDetail>
