@@ -10,6 +10,7 @@ import Loading from "../Components/Commons/Loading";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { checkMyInfo, isTouchFeed } from "../Store/Store";
 import myInfoAPI from "../API/myInfoAPI";
+import CommonDetailModal from "../Components/Commons/DetailModal/CommonDetailModal";
 
 function MainFeedPage() {
   const [tokenValid, setTokenValid] = useState(true);
@@ -38,7 +39,8 @@ function MainFeedPage() {
       <Header type="main" />
       <PostList />
       <Footer />
-      {isVisible && <PostDetailModal />}
+      {/* {isVisible && <PostDetailModal />} */}
+      {isVisible && <CommonDetailModal />}
     </>
   ) : (
     <Navigate to="/login" />

@@ -1,41 +1,55 @@
 import React, { useEffect, useState } from "react";
-import * as S from "./MyPostDetailModalStyle";
-import siren from "../../../../assets/image/icon-siren.svg";
-import heart from "../../../../assets/image/icon-heart.svg";
-import unheart from "../../../../assets/image/icon-unheart.svg";
-import comment from "../../../../assets/image/icon-comment.svg";
-import close from "../../../../assets/image/icon-close.svg";
-import more from "../../../../assets/image/icon-more.svg";
+import * as S from "./CommonDetailModalStyle";
+import siren from "../../../assets/image/icon-siren.svg";
+import heart from "../../../assets/image/icon-heart.svg";
+import unheart from "../../../assets/image/icon-unheart.svg";
+import comment from "../../../assets/image/icon-comment.svg";
+import close from "../../../assets/image/icon-close.svg";
+import DefaultImage from "../../../assets/image/char_inactive.png";
+import more from "../../../assets/image/icon-more.svg";
+
+import {
+  checkMyInfo,
+  commentListDataAtom,
+  currentLocation,
+  getPostDataSelector,
+  getUserPostDataSelector,
+  isTouchFeed,
+  postListDataAtom,
+  userPostListAtom
+} from "../../../Store/Store";
 import {
   useRecoilState,
   useRecoilValue,
   useResetRecoilState,
   useSetRecoilState
 } from "recoil";
-import {
-  checkMyInfo,
-  commentListDataAtom,
-  getUserPostDataSelector,
-  isTouchFeed,
-  userPostListAtom
-} from "../../../../Store/Store";
-import commentAPI from "../../../../API/commentAPI";
-import commentWriteAPI from "../../../../API/commentWriteAPI";
-import removeCommentAPI from "../../../../API/removeCommentAPI";
-import reportCommentAPI from "../../../../API/reportCommentAPI";
-import heartPostAPI from "../../../../API/heartPostAPI";
-import unheartPostAPI from "../../../../API/unheartPostAPI";
-import { fewMinutesAgo, showDate } from "../../../../Functional/DateFunction";
-import { Modal } from "../MoreModal/MoreModal";
-import { useNavigate } from "react-router-dom";
+import { fewMinutesAgo, showDate } from "../../../Functional/DateFunction";
+import { isValidImage } from "../../../Functional/isValidImageFunction";
 
-function MyPostDetailModal() {
-  const [postData, setPostData] = useRecoilState(userPostListAtom);
-  const setIsPostModalVisible = useSetRecoilState(isTouchFeed); // 게시글 상세 모달 표시 값
-  const data = useRecoilValue(getUserPostDataSelector);
+import commentAPI from "../../../API/commentAPI";
+import commentWriteAPI from "../../../API/commentWriteAPI";
+import removeCommentAPI from "../../../API/removeCommentAPI";
+import reportCommentAPI from "../../../API/reportCommentAPI";
+import unheartPostAPI from "../../../API/unheartPostAPI";
+import heartPostAPI from "../../../API/heartPostAPI";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "../../Profile/MyPostList/MoreModal/MoreModal";
+
+function CommonDetailModal() {
+  const location = useRecoilValue(currentLocation);
+  const [postData, setPostData] = useRecoilState(
+    location.includes("/profile") ? userPostListAtom : postListDataAtom
+  );
+  const setIsPostModalVisible = useSetRecoilState(isTouchFeed);
+  const data = useRecoilValue(
+    location.includes("/profile")
+      ? getUserPostDataSelector
+      : getPostDataSelector
+  );
   const [commentListData, setCommentListData] =
     useRecoilState(commentListDataAtom);
-  const resetCommentListData = useResetRecoilState(commentListDataAtom);
+  const resetCommentList = useResetRecoilState(commentListDataAtom);
   const commentMyProfile = useRecoilValue(checkMyInfo);
   const [writing, setWriting] = useState("");
 
@@ -43,9 +57,11 @@ function MyPostDetailModal() {
   const [selectedPostId, setSelectedPostId] = useState(null); // postId를 저장해서 moreModal에 넘겨주기 위함
   const isMyProfile =
     data.author.accountname === commentMyProfile.user.accountname;
+  // console.log(postData);
+  // console.log("데이터", data);
+
   const navigate = useNavigate();
 
-  // 댓글 기능
   useEffect(() => {
     async function fetchData() {
       const obj = await commentAPI(data.id);
@@ -53,6 +69,11 @@ function MyPostDetailModal() {
     }
     fetchData();
   }, []);
+
+  const closeModal = () => {
+    setIsPostModalVisible(false);
+    resetCommentList();
+  };
 
   const typingComment = (e) => {
     setWriting(e.target.value);
@@ -74,7 +95,7 @@ function MyPostDetailModal() {
           commentCount: copyData[dataIndex].commentCount + 1
         };
         copyData[dataIndex] = updatedItem;
-        setPostData([...copyData]);
+        setPostData([...copyData]); // 복제된 데이터 배열을 새로운 상태로 업데이트
       }
     }
   };
@@ -110,13 +131,13 @@ function MyPostDetailModal() {
     }
   };
 
-  // 좋아요 기능
   const handleHeartClick = async (e, post_id) => {
     const currentHeart = e.target.getAttribute("src");
     let result = "";
 
     if (currentHeart === unheart) {
       result = await heartPostAPI(post_id);
+      //예외처리도 해야댐
       if (result.includes("heart success")) {
         e.target.setAttribute("src", heart);
       } else {
@@ -145,69 +166,53 @@ function MyPostDetailModal() {
     }
   };
 
-  // 더보기 기능 구현
-  const [isContentExpanded, setIsContentExpanded] = useState(false);
+  //   const moveProfilePage = (userAccountName) => {
+  //     setIsPostModalVisible(false);
+  //     navigate(`/profile/${userAccountName}`);
+  //   };
 
-  const getDisplayedContent = () => {
-    const maxLength = 37; // 최대 글자 수
-    return isContentExpanded || data.content.length <= maxLength
-      ? data.content
-      : data.content.substring(0, maxLength) + "...";
-  };
-
-  // 더보기/접기 버튼 클릭 이벤트 핸들러
-  const toggleContent = () => {
-    setIsContentExpanded(!isContentExpanded);
-  };
-
-  // 레이아웃
   return (
-    <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
-      <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
+    <S.PostDetailBackground>
+      {/* 뒷배경 */}
+      <S.PostDetailBox>
+        {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
-          <S.PostDetailHeaderProfile src={data.author.image} />
+          <S.PostDetailHeaderProfile
+            src={
+              isValidImage(data.author.image) ? data.author.image : DefaultImage
+            }
+          />
           <S.PostDetailHeaderTextBox>
-            <S.PostDetailHeaderUserName>
-              {data.author.username}
-            </S.PostDetailHeaderUserName>
+            <div className="flexBox">
+              <S.PostDetailHeaderUserName>
+                {data.author.username}
+              </S.PostDetailHeaderUserName>
+              {isMyProfile ? (
+                <S.PostDetailHeaderImg
+                  src={more}
+                  alt="More"
+                  onClick={() => {
+                    setIsOptionModalVisible(true);
+                    setSelectedPostId(data.id);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
             <S.PostDetailHeaderAccountName>
               @{data.author.accountname}
             </S.PostDetailHeaderAccountName>
           </S.PostDetailHeaderTextBox>
-          {isMyProfile ? (
-            <S.PostDetailHeaderImg
-              src={more}
-              alt="More"
-              onClick={() => {
-                setIsOptionModalVisible(true);
-                setSelectedPostId(data.id);
-              }}
-            />
-          ) : (
-            <S.PostDetailHeaderImg
-              src={siren}
-              alt="Siren"
-              onClick={() => setIsOptionModalVisible(true)}
-            />
-          )}
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
-          {data.image !== "" ? (
+          {isValidImage(data.image) ? (
             <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
           ) : (
-            <></>
+            <S.PostDetailContentImg src={DefaultImage} alt="Default Image" />
           )}
-          <S.PostDetailContent className={isContentExpanded ? "expanded" : ""}>
-            {getDisplayedContent()}
-          </S.PostDetailContent>
-          <S.TextButtonContainer>
-            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
-              <S.ShowMoreButton onClick={toggleContent}>
-                {isContentExpanded ? "접기" : "더보기"}
-              </S.ShowMoreButton>
-            )}
-          </S.TextButtonContainer>
+          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
@@ -231,8 +236,16 @@ function MyPostDetailModal() {
           {commentListData.map((post, index) => (
             <S.PostDetailCommentItem key={index}>
               <S.PostDetailCommentHeaderProfile
-                src={post.author.image}
+                src={
+                  isValidImage(post.author.image)
+                    ? post.author.image
+                    : DefaultImage
+                }
                 alt="PostDetailCommentHeaderProfile"
+                onClick={() => {
+                  setIsPostModalVisible(false);
+                  navigate(`/profile/${post.author.accountname}`);
+                }}
               />
               <S.PostDetailCommentItemTextBox>
                 <S.PostDetailCommentHeaderUserName>
@@ -265,22 +278,18 @@ function MyPostDetailModal() {
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton
-        onClick={() => {
-          resetCommentListData();
-          setIsPostModalVisible(false);
-        }}>
-        X
-      </S.PostDetailBackButton>
-      <Modal
-        isMyProfile={isMyProfile}
-        isOptionModalVisible={isOptionModalVisible}
-        setIsOptionModalVisible={setIsOptionModalVisible}
-        postId={selectedPostId}
-        setIsPostModalVisible={setIsPostModalVisible}
-      />
+      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
+      {isMyProfile && (
+        <Modal
+          isMyProfile={isMyProfile}
+          isOptionModalVisible={isOptionModalVisible}
+          setIsOptionModalVisible={setIsOptionModalVisible}
+          postId={selectedPostId}
+          setIsPostModalVisible={setIsPostModalVisible}
+        />
+      )}
     </S.PostDetailBackground>
   );
 }
 
-export default MyPostDetailModal;
+export default CommonDetailModal;
