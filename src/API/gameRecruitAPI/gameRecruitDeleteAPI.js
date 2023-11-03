@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import masterTokenAPI from "../masterTokenAPI";
 
 async function gameRecruitDeleteAPI(_id) {
     try {
-        const token = localStorage.getItem("token");
+        const token = await masterTokenAPI();
         const response = await axios.delete(`https://api.mandarin.weniv.co.kr/product/${_id}`,
         {
             headers: { "Authorization": `Bearer ${token}` }

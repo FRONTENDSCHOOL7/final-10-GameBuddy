@@ -162,7 +162,7 @@ export const ModalBtn = styled.button`
   color: #ffffff;
   border-radius: 24px;
   border: none;
-  background-color: #5865f2;
+  background-color: ${props => props.btnColor};
   margin-bottom: 0.8rem;
 `;
 export const ModalCloseBtn = styled.button`

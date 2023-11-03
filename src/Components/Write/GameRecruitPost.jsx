@@ -3,7 +3,8 @@ import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { uploadImageAtom } from "../../Store/Store";
-import gameRecruitAPI from "../../API/gameRecruitAPI";
+import gameRecruitAPI from "../../API/gameRecruitAPI/gameRecruitAPI";
+import myAccountNameAPI from "../../API/myAccountNameAPI";
 import { useNavigate } from "react-router-dom";
 
 function GameRecruitPost() {
@@ -55,11 +56,13 @@ function GameRecruitPost() {
     if (currentImage === DefaultImage) {
       alert("게임 모집 시, 이미지를 등록 해야합니다.");
     } else {
+      const myAccountName = await myAccountNameAPI();
       const result = await gameRecruitAPI(
         recruitGameTitle,
         recruitPeople,
         recruitDetail,
-        currentImage
+        currentImage,
+        myAccountName
       );
       alert(result);
       resetRecoilState();

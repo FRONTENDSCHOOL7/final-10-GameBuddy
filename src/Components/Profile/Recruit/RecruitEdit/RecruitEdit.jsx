@@ -3,7 +3,8 @@ import * as S from "./RecruitEditStyle"
 import Header from '../../../Commons/Header/Header';
 import { useLocation, useNavigate } from 'react-router-dom';
 import uploadImageAPI from '../../../../API/uploadImageAPI';
-import gameRecruitEditAPI from '../../../../API/gameRecruitEditAPI';
+import gameRecruitEditAPI from '../../../../API/gameRecruitAPI/gameRecruitEditAPI';
+import myAccountNameAPI from '../../../../API/myAccountNameAPI';
 
 export default function RecruitEdit() {
   const fileInputRef = useRef();
@@ -12,15 +13,17 @@ export default function RecruitEdit() {
   const [uploadImage, setUploadImage] = useState("");
 
   const [isContentValid, setIsContentValid] = useState(true);
-  const [gameName, setGameName] = useState(state.recruitData.itemName);
-  const [gameRecruitNum, setGameRecruitNum] = useState(state.recruitData.price);
-  const [gameDetail, setGameDetail] = useState(state.recruitData.link);
+  const [gameName, setGameName] = useState(JSON.parse(state.recruitData.itemName)[0]);
+  const [gameRecruitNum, setGameRecruitNum] = useState(JSON.parse(state.recruitData.link)[0]);
+  const [gameDetail, setGameDetail] = useState(JSON.parse(state.recruitData.link)[1]);
+  // const [myAccountName, setMyAccountName] = useState("")
 
   console.log(state)
 
   useEffect(() => {
     setUploadImage(state.recruitData.itemImage);
   }, [state.recruitData.itemImage]);
+  
 
   const onChangeGameName = (e) => {
     if (e.target.value === "") {
@@ -63,10 +66,11 @@ export default function RecruitEdit() {
   };
 
   const editRecruit = async () => {
-    const result = gameRecruitEditAPI(state.recruitData.id, gameName, gameRecruitNum, gameDetail, uploadImage)
+    const result = await gameRecruitEditAPI(state.recruitData.id, state.recruitData, gameName, gameRecruitNum, gameDetail, uploadImage)
     if(result) {
+      const myAccountName = await myAccountNameAPI();
       alert("수정 성공!");
-      navigate(`/profile/${state.recruitData.author.accountname}`)
+      navigate(`/profile/${myAccountName}`)
     }
     else {
       alert("수정실패");
