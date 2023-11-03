@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #ffffff;
+  background-color: #2c2f33;
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -14,13 +14,13 @@ export const SignUpForm = styled.form`
   width: 86%;
   position: relative;
   top:20%;
-  color: #767676;
+  color: #a6a6a6;
 `
 export const SignUpLogo = styled.p`
   margin-bottom: 36px;
   font-size: 25px;
   font-weight:bold;
-  color: #000000;
+  color: #ffffff;
 `
 export const PTag = styled.p`
     margin:14px 0 8px 0;
@@ -28,23 +28,26 @@ export const PTag = styled.p`
   `
 export const InputTag = styled.input`
   width: 100%;
-  height: 23px;
-  border-width: 0 0 1px;
-  padding: 0 0 1px 0;
+  height: 40px;
+  box-sizing: border-box;
+  border: none;
+  padding: 0 2%;
   font-size: 16px;
+  background-color: #171717;
+  color: #efefef;
   &:focus {
     outline: none;
     border-color: #DBDBDB;
   }
   &::placeholder {
-    color: #DBDBDB;
+    color: #505050;
     font-size: 14px;
   }
 `
 export const SubmitBtn = styled.button`
 width: 100%;
 height: 44px;
-margin-top: 18px;
+margin-top: 24px;
 border-radius: 44px;
 border: none;
 background-color: ${props => props.disabled ? '#8EA1E1' : '#5865f2'};
@@ -63,20 +66,21 @@ export const SetProfileForm = styled.form`
   margin: 0 auto;
   width: 86%;
   position: relative;
-  top:20%;
-  color: #767676;
+  top:19%;
+  color: #a6a6a6;
 `
 export const ProfileSettingLogo = styled.p`
   margin-bottom: 36px;
   font-size: 25px;
   font-weight:bold;
-  color: #000000;
+  color: #ffffff;
 `
 export const ProfileImage = styled.img`
   cursor: pointer;
   width: 130px;
   height: 130px;
   border-radius: 50px;
+  margin-bottom: 10px;
 `
 export const ProfileImageChange = styled.input`
   display:none;
@@ -97,7 +101,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: #2c2f33;
   padding: 20px;
   border-radius: 5px;
   width: 300px;
@@ -106,6 +110,7 @@ export const ModalContent = styled.div`
   gap: 10px;
   align-items: center;
   font-size: 16px;
+  color: #ffffff;
 `;
 
 export const ModalBtn = styled.button`
