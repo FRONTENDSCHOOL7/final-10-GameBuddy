@@ -15,12 +15,30 @@ export const LoginForm = styled.form`
   position: relative;
   top:20%;
   color: #767676;
+  @media screen and (min-width: 768px) {
+      width: 70%;
+      height: 70%;
+      max-width: 400px;
+      max-height: 600px;
+      padding: 50px 40px 30px;
+      border: 1px solid #afafaf;
+      box-shadow: 0px 0px 15px #ffffff70;
+      border-radius: 25px;
+    }
 `
 
 export const LogoImg = styled.img`
   width: 174px;
   height: 103px;
 `
+
+export const LogoTitle = styled.div`
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+`
+
 export const PTag = styled.p`
   margin:16px 0 2px 0;
   text-align:left;

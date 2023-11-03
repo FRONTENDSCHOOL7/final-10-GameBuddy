@@ -6,6 +6,7 @@ import CharImg from "../../../assets/image/main_char.png"
 import KakaoLogin from "../../../assets/image/kakao-login.png"
 import GoogleLogin from "../../../assets/image/google-login.png"
 import FbLogin from "../../../assets/image/fb-login.png"
+import gbLogo from "../../../assets/image/GAMEBUDDY.svg"
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -42,6 +43,7 @@ function Login() {
       <S.Container>
         <S.LoginForm onSubmit={onSubmitHandler}>
           <S.LogoImg src={CharImg} />
+            <S.LogoTitle><img src={gbLogo} style={{width: "300px", margin: "25px 0 10px"}}></img></S.LogoTitle>
             <S.PTag>아이디</S.PTag>
             <S.InputTag type="text" onChange={onChangeEmail} />
             <S.PTag>비밀번호</S.PTag>
