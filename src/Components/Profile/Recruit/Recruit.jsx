@@ -166,7 +166,7 @@ function Recruit({ isMyProfile }) {
           <S.CloseModalContent>
             모집을 종료하면, 모집글도 삭제됩니다.<br />
             정말 모집을 끝낼까요?
-            <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)}>
+            <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)} btnColor={"#5865f2"}>
               이제 됐어요 종료합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
