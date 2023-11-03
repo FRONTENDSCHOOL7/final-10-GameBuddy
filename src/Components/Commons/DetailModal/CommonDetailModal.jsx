@@ -37,6 +37,7 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from "../../Profile/MyPostList/MoreModal/MoreModal";
 
 function CommonDetailModal() {
+  console.log("현재 페이지 이거 맞음??");
   const location = useRecoilValue(currentLocation);
   const [postData, setPostData] = useRecoilState(
     location.includes("/profile") ? userPostListAtom : postListDataAtom
@@ -171,10 +172,24 @@ function CommonDetailModal() {
   //     navigate(`/profile/${userAccountName}`);
   //   };
 
+  const [isContentExpanded, setIsContentExpanded] = useState(false);
+
+  const getDisplayedContent = () => {
+    const maxLength = 37; // 최대 글자 수
+    return isContentExpanded || data.content.length <= maxLength
+      ? data.content
+      : data.content.substring(0, maxLength) + "...";
+  };
+
+  // 더보기/접기 버튼 클릭 이벤트 핸들러
+  const toggleContent = () => {
+    setIsContentExpanded(!isContentExpanded);
+  };
+
   return (
-    <S.PostDetailBackground>
+    <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
       {/* 뒷배경 */}
-      <S.PostDetailBox>
+      <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
         {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile
@@ -183,36 +198,43 @@ function CommonDetailModal() {
             }
           />
           <S.PostDetailHeaderTextBox>
-            <div className="flexBox">
-              <S.PostDetailHeaderUserName>
-                {data.author.username}
-              </S.PostDetailHeaderUserName>
-              {isMyProfile ? (
-                <S.PostDetailHeaderImg
-                  src={more}
-                  alt="More"
-                  onClick={() => {
-                    setIsOptionModalVisible(true);
-                    setSelectedPostId(data.id);
-                  }}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
+            <S.PostDetailHeaderUserName>
+              {data.author.username}
+            </S.PostDetailHeaderUserName>
             <S.PostDetailHeaderAccountName>
               @{data.author.accountname}
             </S.PostDetailHeaderAccountName>
           </S.PostDetailHeaderTextBox>
+          {isMyProfile ? (
+            <S.PostDetailHeaderImg
+              src={more}
+              alt="More"
+              onClick={() => {
+                setIsOptionModalVisible(true);
+                setSelectedPostId(data.id);
+              }}
+            />
+          ) : (
+            <></>
+          )}
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
           {isValidImage(data.image) ? (
             <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
           ) : (
-            <S.PostDetailContentImg src={DefaultImage} alt="Default Image" />
+            <></>
           )}
-          <S.PostDetailContent>{data.content}</S.PostDetailContent>
+          <S.PostDetailContent className={isContentExpanded ? "expanded" : ""}>
+            {getDisplayedContent()}
+          </S.PostDetailContent>
+          <S.TextButtonContainer>
+            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
+              <S.ShowMoreButton onClick={toggleContent}>
+                {isContentExpanded ? "접기" : "더보기"}
+              </S.ShowMoreButton>
+            )}
+          </S.TextButtonContainer>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
