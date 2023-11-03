@@ -21,8 +21,8 @@ export const LoginForm = styled.form`
       max-width: 400px;
       max-height: 600px;
       padding: 50px 40px 30px;
-      border: 1px solid #afafaf;
-      box-shadow: 0px 0px 15px #ffffff70;
+      /* border: 1px solid #afafaf; */
+      box-shadow: 0px 0px 20px #ffffff90;
       border-radius: 25px;
     }
 `
@@ -48,6 +48,7 @@ export const InputTag = styled.input`
   width: 100%;
   height: 40px;
   border: 0px;
+  border-radius: 5px;
   box-sizing: border-box;
   padding: 0 2%;
   font-size: 16px;

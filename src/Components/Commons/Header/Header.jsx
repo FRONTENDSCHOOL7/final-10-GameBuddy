@@ -124,6 +124,13 @@ export default function Header({ type }) {
           <MoreIcon />
         </S.StyledIconButton>
       </S.HeaderContainer>
+    ), 
+    signUp: (
+      <S.HeaderContainer>
+        <S.StyledIconButton type="button" onClick={goBack}>
+          <GoBackIcon />
+        </S.StyledIconButton>
+      </S.HeaderContainer>
     )
   };
   return (

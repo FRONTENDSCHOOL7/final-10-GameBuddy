@@ -8,6 +8,7 @@ import DefaultImage from "../../../assets/image/char_inactive.png";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { signUpAtom } from "../../../Store/Store";
 import uploadImageAPI from "../../../API/uploadImageAPI";
+import imageChangeBtn from "../../../assets/image/img-change-btn.svg"
 
 function SetProfile() {
   const [signUpData] = useRecoilState(signUpAtom);
@@ -23,6 +24,22 @@ function SetProfile() {
   const [successModal, setSuccessModal] = useState(false);
 
   const fileInputRef = React.createRef(); // 파일 입력 참조 생성
+
+  const [showHeader, setShowHeader] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    // 브라우저 창 크기가 변경될 때 호출될 함수
+    function handleResize() {
+      setShowHeader(window.innerWidth < 768);
+    }
+
+    // resize 이벤트 리스너 등록
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   useEffect(() => {
     if (!userName) setUserName(email.split("@")[0]);
@@ -98,21 +115,24 @@ function SetProfile() {
 
   return (
     <S.Container>
-      <Header type={"profileMod"} />
+      {showHeader && <Header type={"profileMod"} />}
       <S.SetProfileForm onSubmit={onSubmitHandler}>
         <S.ProfileSettingLogo>프로필 설정</S.ProfileSettingLogo>
 
-        <S.ProfileImage
-          src={selectedImage || DefaultImage}
-          alt="프로필 이미지"
-          onClick={handleImageClick}
-        />
-        <S.ProfileImageChange
-          type="file"
-          onChange={handleImageChange}
-          ref={fileInputRef}
-          accept="image/jpeg, image/png"
-        />
+        <S.ProfileImageSetting>
+          <S.ProfileImage
+            src={selectedImage || DefaultImage}
+            alt="프로필 이미지"
+            onClick={handleImageClick}
+          />
+          <S.ProfileImageChange
+            type="file"
+            onChange={handleImageChange}
+            ref={fileInputRef}
+            accept="image/jpeg, image/png"
+          />
+          <S.ImageChangeBtn src={imageChangeBtn} onClick={handleImageClick} />
+        </S.ProfileImageSetting>
 
         <S.PTag>사용자이름</S.PTag>
         <S.InputTag
@@ -147,6 +167,7 @@ function SetProfile() {
           placeholder="자신을 소개해주세요!"
         />
         <S.SubmitBtn type="submit">Game Buddy 시작하기!</S.SubmitBtn>
+        <S.LoginLink onClick={() => navigate("/login")}>로그인 화면으로 돌아가기</S.LoginLink>
       </S.SetProfileForm>
 
       {successModal && <S.ModalContainer>
