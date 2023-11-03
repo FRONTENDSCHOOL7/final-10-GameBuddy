@@ -144,6 +144,21 @@ function MyPostDetailModal() {
     }
   };
 
+  // 더보기 기능 구현
+  const [isContentExpanded, setIsContentExpanded] = useState(false);
+
+  const getDisplayedContent = () => {
+    const maxLength = 37; // 최대 글자 수
+    return isContentExpanded || data.content.length <= maxLength
+      ? data.content
+      : data.content.substring(0, maxLength) + "...";
+  };
+
+  // 더보기/접기 버튼 클릭 이벤트 핸들러
+  const toggleContent = () => {
+    setIsContentExpanded(!isContentExpanded);
+  };
+
   // 레이아웃
   return (
     <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
@@ -151,40 +166,47 @@ function MyPostDetailModal() {
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile src={data.author.image} />
           <S.PostDetailHeaderTextBox>
-            <div className="flexBox">
-              <S.PostDetailHeaderUserName>
-                {data.author.username}
-              </S.PostDetailHeaderUserName>
-              {isMyProfile ? (
-                <S.PostDetailHeaderImg
-                  src={more}
-                  alt="More"
-                  onClick={() => {
-                    setIsOptionModalVisible(true);
-                    setSelectedPostId(data.id);
-                  }}
-                />
-              ) : (
-                <S.PostDetailHeaderImg
-                  src={siren}
-                  alt="Siren"
-                  onClick={() => setIsOptionModalVisible(true)}
-                />
-              )}
-            </div>
+            <S.PostDetailHeaderUserName>
+              {data.author.username}
+            </S.PostDetailHeaderUserName>
             <S.PostDetailHeaderAccountName>
               @{data.author.accountname}
             </S.PostDetailHeaderAccountName>
           </S.PostDetailHeaderTextBox>
+          {isMyProfile ? (
+            <S.PostDetailHeaderImg
+              src={more}
+              alt="More"
+              onClick={() => {
+                setIsOptionModalVisible(true);
+                setSelectedPostId(data.id);
+              }}
+            />
+          ) : (
+            <S.PostDetailHeaderImg
+              src={siren}
+              alt="Siren"
+              onClick={() => setIsOptionModalVisible(true)}
+            />
+          )}
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
-          <S.PostDetailContent>{data.content}</S.PostDetailContent>
           {data.image !== "" ? (
             <S.PostDetailContentImg src={data.image} alt="PostDetail Image" />
           ) : (
             <></>
           )}
+          <S.PostDetailContent className={isContentExpanded ? "expanded" : ""}>
+            {getDisplayedContent()}
+          </S.PostDetailContent>
+          <S.TextButtonContainer>
+            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
+              <S.ShowMoreButton onClick={toggleContent}>
+                {isContentExpanded ? "접기" : "더보기"}
+              </S.ShowMoreButton>
+            )}
+          </S.TextButtonContainer>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
@@ -210,35 +232,26 @@ function MyPostDetailModal() {
               <S.PostDetailCommentHeaderProfile
                 src={post.author.image}
                 alt="PostDetailCommentHeaderProfile"
-                onClick={(e) => {
-                  setIsPostModalVisible(false);
-                  navigate(`/profile/${post.author.accountname}`);
-                }}
               />
               <S.PostDetailCommentItemTextBox>
-                <div className="flexBox">
-                  <S.PostDetailCommentHeaderUserName>
-                    {post.author.username}
-                    <S.PostDetailCommentHeaderMinutesAgo>
-                      {fewMinutesAgo(post.createdAt)}
-                    </S.PostDetailCommentHeaderMinutesAgo>
-                  </S.PostDetailCommentHeaderUserName>
-                  <S.PostDetailCommentHeaderImg
-                    src={`${
-                      post.author.accountname ===
-                      commentMyProfile.user.accountname
-                        ? close
-                        : siren
-                    }`}
-                    onClick={(e) =>
-                      commentEvent(e, post.id, post.author.username)
-                    }
-                  />
-                </div>
+                <S.PostDetailCommentHeaderUserName>
+                  {post.author.username}
+                  <S.PostDetailCommentHeaderMinutesAgo>
+                    {fewMinutesAgo(post.createdAt)}
+                  </S.PostDetailCommentHeaderMinutesAgo>
+                </S.PostDetailCommentHeaderUserName>
                 <S.PostDetailCommentContent>
                   {post.content}
                 </S.PostDetailCommentContent>
               </S.PostDetailCommentItemTextBox>
+              <S.PostDetailCommentHeaderImg
+                src={`${
+                  post.author.accountname === commentMyProfile.user.accountname
+                    ? close
+                    : siren
+                }`}
+                onClick={(e) => commentEvent(e, post.id, post.author.username)}
+              />
             </S.PostDetailCommentItem>
           ))}
         </S.PostDetailCommentWrapper>

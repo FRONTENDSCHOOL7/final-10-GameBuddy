@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ReactComponent as SirenIconForStyle } from '../../../assets/image/icon-siren2.svg';
-import { ReactComponent as UpdateIconForStyle } from '../../../assets/image/icon-edit.svg';
+import { ReactComponent as SirenIconForStyle } from "../../../assets/image/icon-siren2.svg";
+import { ReactComponent as UpdateIconForStyle } from "../../../assets/image/icon-edit.svg";
 
 export const RecruitContainer = styled.div`
   font-family: var(--Roboto-M);
@@ -8,7 +8,7 @@ export const RecruitContainer = styled.div`
   margin-top: 8px;
   padding-left: 20px;
   @media screen and (min-width: 768px) {
-    margin-left: 260px;
+    margin-left: 200px;
   }
 
   h2 {

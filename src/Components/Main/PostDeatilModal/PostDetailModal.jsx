@@ -146,6 +146,22 @@ function PostDetailModal() {
     }
   };
 
+  // 더보기 기능 구현
+  const [isContentExpanded, setIsContentExpanded] = useState(false);
+
+  const getDisplayedContent = () => {
+    const maxLength = 37; // 최대 글자 수
+    return isContentExpanded || data.content.length <= maxLength
+      ? data.content
+      : data.content.substring(0, maxLength) + "...";
+  };
+
+  // 더보기/접기 버튼 클릭 이벤트 핸들러
+  const toggleContent = () => {
+    setIsContentExpanded(!isContentExpanded);
+  };
+
+  // 레이아웃
   return (
     <S.PostDetailBackground>
       {/* 뒷배경 */}
@@ -158,12 +174,10 @@ function PostDetailModal() {
             }
           />
           <S.PostDetailHeaderTextBox>
-            <div className="flexBox">
-              <S.PostDetailHeaderUserName>
-                {data.author.username}
-              </S.PostDetailHeaderUserName>
-              {/* <S.PostDetailHeaderImg src={siren} alt="Siren" /> */}
-            </div>
+            <S.PostDetailHeaderUserName>
+              {data.author.username}
+            </S.PostDetailHeaderUserName>
+            {/* <S.PostDetailHeaderImg src={siren} alt="Siren" /> */}
             <S.PostDetailHeaderAccountName>
               {data.author.accountname}
             </S.PostDetailHeaderAccountName>
@@ -176,7 +190,17 @@ function PostDetailModal() {
           ) : (
             <></>
           )}
-          <S.PostDetailContent>{data.content}</S.PostDetailContent>
+          {/* 더보기 버튼 구현 */}
+          <S.PostDetailContent className={isContentExpanded ? "expanded" : ""}>
+            {getDisplayedContent()}
+          </S.PostDetailContent>
+          <S.TextButtonContainer>
+            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
+              <S.ShowMoreButton onClick={toggleContent}>
+                {isContentExpanded ? "접기" : "더보기"}
+              </S.ShowMoreButton>
+            )}
+          </S.TextButtonContainer>
           <S.PostDetailFooter>
             <S.PostDetailFooterImg
               src={data.hearted ? heart : unheart}
