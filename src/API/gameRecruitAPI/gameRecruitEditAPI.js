@@ -1,13 +1,18 @@
 import axios from "axios";
+import masterTokenAPI from "../masterTokenAPI";
 
-async function gameRecruitEditAPI(_id, gameName, gameRecruitNum, gameDetail, image) {
+async function gameRecruitEditAPI(_id, recruitData, gameName, gameRecruitNum, gameDetail, image) {
     try {
-        const token = localStorage.getItem("token");
+        const token = await masterTokenAPI();
+
+        const itemName = [gameName, JSON.parse(recruitData.itemName)[1]];
+        const link = [gameRecruitNum, gameDetail, JSON.parse(recruitData.link)[2]];
+
         const response = await axios.put(`https://api.mandarin.weniv.co.kr/product/${_id}`, {
         product: {
-            itemName: gameName,
-            price: gameRecruitNum,
-            link: gameDetail,
+            itemName: JSON.stringify(itemName),
+            price: recruitData.price,
+            link: JSON.stringify(link),
             itemImage: image
         }
       },
