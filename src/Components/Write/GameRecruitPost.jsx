@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
 import { useRecoilValue, useResetRecoilState } from "recoil";
@@ -67,12 +68,17 @@ function GameRecruitPost() {
     }
   };
 
+  const PTag = styled.p`
+    margin: 20px 0 18px 0;
+    text-align: left;
+  `;
+
   return (
     <>
       <S.PTag>모집 게임</S.PTag>
       <S.InputTag
         type="text"
-        placeholder="2~15자 이내여야 합니다."
+        placeholder=" 2~15자 이내여야 합니다."
         value={recruitGameTitle}
         onChange={onChangeRecruitGameTitle}
       />
@@ -84,7 +90,7 @@ function GameRecruitPost() {
       <S.PTag>모집 인원</S.PTag>
       <S.InputTag
         type="text"
-        placeholder="숫자만 입력 가능합니다. "
+        placeholder=" 숫자만 입력 가능합니다. "
         value={recruitPeople}
         onChange={onChangeRecruitPeople}
       />
@@ -96,7 +102,7 @@ function GameRecruitPost() {
       <S.PTag>모집 상세</S.PTag>
       <S.InputTag
         type="text"
-        placeholder="포지션, 티어 등 상세 내용을 입력해주세요."
+        placeholder=" 포지션, 티어 등 상세 내용을 입력해주세요."
         value={recruitDetail}
         onChange={onChangeRecruitDetail}
       />
