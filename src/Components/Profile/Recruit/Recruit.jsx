@@ -20,6 +20,7 @@ function Recruit({ isMyProfile }) {
   const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
   const [myAccountName, setMyAccountName] = useState("");
+  // const myAccountName = myAccountNameAPI();
 
   const navigate = useNavigate();
 
@@ -55,12 +56,13 @@ function Recruit({ isMyProfile }) {
     console.log("신고됨")
   }
 
-  function joinRecruit(recruitID, myAccountName, recruitData) {
-    console.log(recruitData);
-    joinRecruitAPI(recruitID, myAccountName, recruitData);
+  async function joinRecruit(recruitID, myAccountName, recruitData) {
+    await joinRecruitAPI(recruitID, myAccountName, recruitData);
+    fetchData();
   }
-  function leaveRecruit(recruitID, myAccountName, recruitData) {
-    leaveRecruitAPI(recruitID, myAccountName, recruitData);
+  async function leaveRecruit(recruitID, myAccountName, recruitData) {
+    await leaveRecruitAPI(recruitID, myAccountName, recruitData);
+    fetchData();
   }
 
   // 모달창 아래 X버튼을 눌러 모달창을 나가는 함수
@@ -130,19 +132,24 @@ function Recruit({ isMyProfile }) {
             <S.ModalImage src={recruit[recruitId].itemImage} />
             <S.ModalIntro>{JSON.parse(recruit[recruitId].link)[1]}</S.ModalIntro>
             <S.ModalRecruitNumber>{`${recruit[recruitId].price}명 / ${JSON.parse(recruit[recruitId].link)[0]}명`}</S.ModalRecruitNumber>
-            {isMyProfile ? (
-              <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
-            ) : (
-              JSON.parse(recruit[recruitId].link)[2].includes(myAccountName) ? (
-                <S.ModalBtn onClick={() => {
-                  leaveRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]) 
-                }} btnColor={"red"}>모집 떠나기!</S.ModalBtn>
+            {
+              // console.log(JSON.parse(recruit[recruitId].link)[2], myAccountName)
+              isMyProfile ? (
+                <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
               ) : (
-                <S.ModalBtn onClick={() => {
-                  joinRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]) 
-                }} btnColor={"green"}>모집 참여하기!</S.ModalBtn>
+                (JSON.parse(recruit[recruitId].link)[2]).includes(myAccountName) ? (
+                  <S.ModalBtn onClick={() => {
+                    leaveRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
+                  }} btnColor={"red"}>모집 떠나기!</S.ModalBtn>
+                ) : ( 
+                  recruit[recruitId].price < JSON.parse(recruit[recruitId].link)[0] ? (
+                    <S.ModalBtn onClick={() => {
+                      joinRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
+                    }} btnColor={"green"}>모집 참여하기!</S.ModalBtn>
+                  ) : <S.ModalBtn btnColor={"orange"}>Full방입니다~!</S.ModalBtn>
+                )
               )
-            )}
+            }
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
         </S.ModalContainer>
