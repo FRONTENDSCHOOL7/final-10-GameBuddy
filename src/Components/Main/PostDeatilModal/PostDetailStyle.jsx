@@ -18,12 +18,14 @@ export const PostDetailBackground = styled.article`
 export const PostDetailBox = styled.section`
   position: relative;
   display: grid;
-  grid-template-rows: auto auto auto 0.2fr;
+  grid-template-rows: auto 1fr 1fr 0.1fr;
+  grid-template-areas: "header" "content" "comments" "write";
 
   width: 90vw;
   height: 85vh;
   max-width: 350px;
   min-width: 330px;
+  min-height: 300px;
   margin: auto;
   border-radius: 15px;
   background-color: #2c2f33;
@@ -47,6 +49,7 @@ export const PostDetailHeaderProfile = styled.img`
 `;
 
 export const PostDetailHeaderWrapper = styled.div`
+  grid-area: header;
   display: flex;
   padding: 1rem 1rem 0.5rem 1rem;
   gap: 0.7rem;
@@ -60,10 +63,7 @@ export const PostDetailHeaderTextBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  .flexBox {
-    display: flex;
-    justify-content: space-between;
-  }
+  min-height: 24px;
 `;
 
 export const PostDetailHeaderUserName = styled.h3`
@@ -88,12 +88,14 @@ export const PostDetailHr = styled.div`
 `;
 
 export const PostDetailContentWrapper = styled(PostDetailHeaderWrapper)`
+  grid-area: content;
   display: flex;
   flex-direction: column;
+  gap: 0.1rem;
   max-width: 100%;
-  max-height: 100%;
-  padding: 0.6rem 2rem 0.2rem 2rem;
-  overflow-y: auto;
+  max-height: auto;
+  padding: 0 2rem 0.2rem 2rem;
+  overflow-y: scroll;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
@@ -103,18 +105,21 @@ export const PostDetailContentWrapper = styled(PostDetailHeaderWrapper)`
     grid-column: 1;
     grid-row: 2 / 4;
     align-self: start;
+    overflow-y: auto;
+    max-height: 390px;
   }
 `;
 
 export const PostDetailContentImg = styled.img`
-  width: 17rem;
-  height: 12rem;
-  max-width: 100%;
-  max-height: 40vw;
+  width: 100%;
   height: auto;
+  max-width: 280px;
+  max-height: 40vh;
   margin: 0 auto;
   display: block;
   border-radius: 5%;
+  max-height: 60%;
+  object-fit: fill;
   @media (min-width: 768px) {
     margin-top: 1rem;
     width: 25rem;
@@ -125,12 +130,48 @@ export const PostDetailContentImg = styled.img`
 export const PostDetailContent = styled.p`
   color: #fff;
   font-size: 1rem;
+  margin-top: 0.4rem;
   margin-left: 1rem;
   margin-right: 1rem;
   font-weight: 400;
   white-space: normal;
   word-wrap: break-word;
+  line-height: 20px;
+  &.isContentExpanded {
+    -webkit-line-clamp: unset;
+    overflow: scroll; /* 스크롤바가 필요한 경우에만 나타나게 */
+    max-height: 20px;
+  }
 `;
+
+// 더보기 버튼 구현
+export const TextButtonContainer = styled.div`
+  display: flex;
+  position: relative; // 이 컨테이너에 대해 상대적 위치 설정
+  align-items: center;
+  max-width: 100%;
+`;
+
+export const ShowMoreButton = styled.button`
+  background: none; // 버튼 배경을 투명하게 설정
+  color: #a4a4a4; // 버튼 글자 색상 설정
+  border: none; // 테두리 없앰
+  cursor: pointer; // 마우스 오버시 포인터 모양 변경
+  font-size: 0.7rem; // 글자 크기 설정
+  text-align: center; // 글자 가운데 정렬
+  position: absolute; // 버튼을 절대 위치로 설정
+  right: 1.3rem;
+  top: 0.3rem; // 바닥에 붙여서 맞춤
+
+  &:hover {
+    text-decoration: underline; // 호버시 밑줄 표시
+  }
+
+  &:focus {
+    outline: none; // 포커스시 아웃라인 제거
+  }
+`;
+
 export const PostDetailFooter = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -152,13 +193,15 @@ export const PostDetailFooterCount = styled.span`
 `;
 
 export const PostDetailFooterDate = styled.span`
-  margin-left: 1rem;
-  font-size: 0.8rem;
+  margin-left: 1.2rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   color: #a4a4a4;
 `;
 
 // 댓글 리스트 구현
 export const PostDetailCommentWrapper = styled.ul`
+  grid-area: comments;
   padding: 1.5rem 1rem 1rem 1rem;
   height: 75%;
   overflow-y: scroll;
@@ -234,6 +277,7 @@ export const PostDetailCommentContent = styled.p`
 `;
 
 export const PostDetailWriteForm = styled.form`
+  grid-area: write;
   padding: 1rem;
   width: 100%;
   display: flex;
@@ -245,7 +289,7 @@ export const PostDetailWriteForm = styled.form`
 
   @media (min-width: 768px) {
     grid-column: 2;
-    grid-row: 4;
+    grid-row: 30;
   }
 `;
 
