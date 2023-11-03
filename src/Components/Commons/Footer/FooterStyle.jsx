@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../../assets/image/HomeIcon.svg";
+import { ReactComponent as SearchIcon } from "../../../assets/image/icon-search.svg";
 import { ReactComponent as ChatIcon } from "../../../assets/image/ChatIcon.svg";
 import { ReactComponent as WriteIcon } from "../../../assets/image/WriteIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../../assets/image/ProfileIcon.svg";
@@ -21,15 +22,15 @@ export const FooterContainer = styled.footer`
   @media screen and (min-width: 768px) {
     left: 0;
     width: 260px;
-    height: 100%;
+    height: calc(100vh - 55px);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
     /* border-right: 1px solid #dbdbdb; */
 
     // 웹 화면에서 작은 footer 사용시 (ex. chat)
-    width: ${({ isSpecialPage }) => (isSpecialPage ? "72px" : "260px")};
+    width: ${({ isSpecialPage }) => (isSpecialPage ? "72px" : "200px")};
   }
 `;
 
@@ -47,6 +48,14 @@ export const Item = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+  @media screen and (max-width: 767px) {
+    // 검색 아이콘에 해당하는 항목만 숨깁니다.
+    ${({ id }) =>
+      id === "search" &&
+      `
+        display: none;
+      `}
+  }
 
   @media screen and (min-width: 768px) {
     font-size: 20px;
@@ -54,8 +63,7 @@ export const Item = styled.button`
     align-items: center;
     gap: 10px;
     height: auto;
-    padding-top: 30px;
-    padding-left: 50px;
+    padding: 50px 0 0 42px;
     ${({ isSpecialPage }) =>
       isSpecialPage &&
       `
@@ -85,6 +93,20 @@ export const StyledHomeIcon = styled(HomeIcon)`
   path {
     stroke: ${({ $active }) => ($active ? "#5865F2" : "#a4a4a4")};
     fill: none;
+  }
+`;
+
+export const StyledSearchIcon = styled(SearchIcon)`
+  path {
+    stroke: ${({ $active }) => ($active ? "#5865F2" : "#a4a4a4")};
+    fill: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    path {
+      stroke: ${({ $active }) => ($active ? "#5865F2" : "#a4a4a4")};
+      fill: none;
+    }
   }
 `;
 

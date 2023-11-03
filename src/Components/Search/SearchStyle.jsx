@@ -24,16 +24,48 @@ export const StyledIconButton = styled.button`
   padding: 5px;
 `;
 
+export const GameBuddyText = styled.div`
+  display: none; // 기본적으로는 숨기고
+
+  @media screen and (min-width: 768px) {
+    display: flex; // 768px 이상에서는 flex로 설정
+    align-items: center; // 세로 중앙 정렬
+    justify-content: center; // 가로 중앙 정렬
+    cursor: pointer;
+
+    font-family: var(--Black-ops);
+    font-size: 22px;
+    color: var(--color-purple);
+    margin-left: 13px;
+  }
+`;
+
+export const GoBackIconWrapper = styled.div`
+  @media screen and (min-width: 768px) {
+    display: none; // 768px 이상에서는 숨김
+  }
+`;
+
 export const Input = styled.input`
   flex: 1;
   padding: 8px;
   background-color: #dbdbdb;
   border: 1px solid #dbdbdb;
   border-radius: 32px;
+  margin-left: 10px;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 150px;
+    margin-right: 40px;
+  }
 `;
 
 export const SearchUserContainer = styled.div`
   padding-top: 62px;
+  @media screen and (min-width: 768px) {
+    margin-left: 270px;
+    padding-left: 30px;
+  }
 `;
 
 export const SearchResultForm = styled.div`

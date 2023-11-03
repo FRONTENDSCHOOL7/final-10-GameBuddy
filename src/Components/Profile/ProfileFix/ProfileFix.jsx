@@ -7,6 +7,8 @@ import uploadImageAPI from "../../../API/uploadImageAPI";
 import ImageCompressor from "image-compressor.js";
 import myInfoAPI from "../../../API/myInfoAPI";
 import profileFixAPI from "../../../API/profileFixAPI";
+import ifProfileEditedAPI from "../../../API/gameRecruitAPI/ifProfileEditedAPI";
+import myAccountNameAPI from "../../../API/myAccountNameAPI";
 
 function Profile() {
   const [userName, setUserName] = useState("");
@@ -89,17 +91,20 @@ function Profile() {
     const updatedIntro = writeIntro || intro;
     const updatedImage = selectedImage === DefaultImage ? "" : selectedImage;
 
+    const prevMyAccountName = await myAccountNameAPI();
     const result = await profileFixAPI(
       updatedUserName,
       updatedAccountName,
       updatedIntro,
       updatedImage
     );
+    const newMyAccountName = await myAccountNameAPI();
 
     if (result.includes("사용중")) {
       alert(result);
     } else {
       alert(result);
+      await ifProfileEditedAPI(prevMyAccountName, newMyAccountName);
       navigate("/main");
     }
   };

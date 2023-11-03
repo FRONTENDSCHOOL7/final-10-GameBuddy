@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { myDataAtom } from "../../../Store/Store";
 import {
   StyledHomeIcon,
+  StyledSearchIcon,
   StyledChatIcon,
   StyledWriteIcon,
   StyledProfileIcon
@@ -32,6 +33,7 @@ function Footer({ isSpecialPage }) {
 
   const menus = [
     { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
+    { name: "검색", icon: StyledSearchIcon, path: "/search", id: "search" },
     { name: "채팅", icon: StyledChatIcon, path: "/chat", id: "chat" },
     { name: "게시물 작성", icon: StyledWriteIcon, path: "/write", id: "write" },
     {
@@ -59,6 +61,7 @@ function Footer({ isSpecialPage }) {
         return (
           <S.Item
             isSpecialPage={isSpecialPage}
+            id={menu.id}
             key={menu.id}
             onClick={() => {
               setActive(menu.id);
