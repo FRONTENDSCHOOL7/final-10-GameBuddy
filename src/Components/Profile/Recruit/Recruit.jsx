@@ -8,6 +8,8 @@ import siren from "../../../assets/image/icon-siren.svg";
 import update from "../../../assets/image/icon-edit.svg";
 import { ReactComponent as SirenIcon } from '../../../assets/image/icon-siren2.svg';
 import { ReactComponent as UpdateIcon } from '../../../assets/image/icon-edit.svg';
+import joinRecruitAPI from "../../../API/gameRecruitAPI/joinRecruitAPI";
+import leaveRecruitAPI from "../../../API/gameRecruitAPI/leaveRecruitAPI";
 
 function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
@@ -53,8 +55,12 @@ function Recruit({ isMyProfile }) {
     console.log("신고됨")
   }
 
-  function joinRecruit(myAccountName) {
-    
+  function joinRecruit(recruitID, myAccountName, recruitData) {
+    console.log(recruitData);
+    joinRecruitAPI(recruitID, myAccountName, recruitData);
+  }
+  function leaveRecruit(recruitID, myAccountName, recruitData) {
+    leaveRecruitAPI(recruitID, myAccountName, recruitData);
   }
 
   // 모달창 아래 X버튼을 눌러 모달창을 나가는 함수
@@ -82,6 +88,7 @@ function Recruit({ isMyProfile }) {
               key={id}
               onClick={() => {
                 setRecruitId(id);
+                // console.log("배열값 제대로 들ㅇ거ㅏ는건가?", JSON.parse(recruit[recruitId].link)[2])
                 setModalOn(true);
               }}>
               {/* 모집글 상세 */}
@@ -127,10 +134,12 @@ function Recruit({ isMyProfile }) {
               <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
             ) : (
               JSON.parse(recruit[recruitId].link)[2].includes(myAccountName) ? (
-                <S.ModalBtn btnColor={"red"}>이탈하기!</S.ModalBtn>
+                <S.ModalBtn onClick={() => {
+                  leaveRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]) 
+                }} btnColor={"red"}>모집 떠나기!</S.ModalBtn>
               ) : (
                 <S.ModalBtn onClick={() => {
-                  joinRecruit(myAccountName) 
+                  joinRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]) 
                 }} btnColor={"green"}>모집 참여하기!</S.ModalBtn>
               )
             )}

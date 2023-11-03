@@ -16,7 +16,6 @@ export default function RecruitEdit() {
   const [gameName, setGameName] = useState(JSON.parse(state.recruitData.itemName)[0]);
   const [gameRecruitNum, setGameRecruitNum] = useState(JSON.parse(state.recruitData.link)[0]);
   const [gameDetail, setGameDetail] = useState(JSON.parse(state.recruitData.link)[1]);
-  // const [myAccountName, setMyAccountName] = useState("")
 
   console.log(state)
 
