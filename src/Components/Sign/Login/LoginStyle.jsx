@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    background-color: #000000;
+    background-color: #2c2f33;
     width: 100%;
     height: 100vh;
     text-align: center;
@@ -27,12 +27,15 @@ export const PTag = styled.p`
 `
 
 export const InputTag = styled.input`
-  width: 94%;
-  height: 48px;
+  width: 100%;
+  height: 40px;
   border: 0px;
-  padding: 0 3%;
+  box-sizing: border-box;
+  padding: 0 2%;
   font-size: 16px;
-`
+  background-color: #171717;
+  color: #efefef;
+`;
 
 export const LoginBtn = styled.button`
   width: 100%;
@@ -41,8 +44,7 @@ export const LoginBtn = styled.button`
   border-radius: 44px;
   border: none;
   background-color: ${props => props.disabled ? '#8EA1E1' : '#5865f2'};
-  /* background-color: #8EA1E1; */
-  /* background-color: #5865f2; */
+  font-size: 18px;
   color: #ffffff;
 `
 
