@@ -13,6 +13,7 @@ import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
 import MyPostDetailModal from "../Components/Profile/MyPostList/MyPostDetailModal/MyPostDetailModal";
 import myInfoAPI from "../API/myInfoAPI";
+import CommonDetailModal from "../Components/Commons/DetailModal/CommonDetailModal";
 
 function ProfilePage() {
   const [userData, setUserData] = useRecoilState(userDataAtom);
@@ -59,7 +60,7 @@ function ProfilePage() {
   const [isFollowing, setIsFollowing] = useState(true);
 
   return (
-    <div style={{ backgroundColor: "#3f4246", height:"100vh" }}>
+    <div style={{ backgroundColor: "#3f4246", height: "100vh" }}>
       <Header type={isMyProfile ? "myProfile" : "userProfile"} />
       <ProfileDetail
         isMyProfile={isMyProfile}
@@ -75,7 +76,8 @@ function ProfilePage() {
         </>
       )}
       <Footer />
-      {isVisible && <MyPostDetailModal />}
+      {/* {isVisible && <MyPostDetailModal />} */}
+      {isVisible && <CommonDetailModal />}
     </div>
   );
 }

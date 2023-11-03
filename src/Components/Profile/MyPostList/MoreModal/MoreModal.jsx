@@ -111,6 +111,7 @@ function ConfirmModal({
         const updatedPostList = postList.filter((post) => post.id !== postId);
         setPostList(updatedPostList);
         setIsOptionModalVisible(false);
+        setShowConfirm(false);
         setIsPostModalVisible(false);
       }
     } catch (error) {

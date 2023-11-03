@@ -98,7 +98,7 @@ function CommonPostList({
     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
 
   return (
-    <S.Article>
+    <S.Article isMyProfile={isMyProfile}>
       {postData.map((post, index) => {
         return (
           <S.Section
@@ -113,27 +113,30 @@ function CommonPostList({
               setIsVisible(true);
               setIndex(index);
             }}>
-            {isValidImage(post.author.image) ? (
-              <S.PostHeaderImg src={post.author.image} alt="Profile Image" />
-            ) : (
-              <S.PostHeaderImg src={DefaultImage} alt="Profile Image" />
-            )}
             <S.PostWrapper>
-              <S.HeaderTextBox>
-                <div className="flexBox">
+              <S.PostHeader>
+                {isValidImage(post.author.image) ? (
+                  <S.PostHeaderImg
+                    src={post.author.image}
+                    alt="Profile Image"
+                  />
+                ) : (
+                  <S.PostHeaderImg src={DefaultImage} alt="Profile Image" />
+                )}
+                <S.HeaderTextBox>
                   <S.HeaderH3>{post.author.username}</S.HeaderH3>
-                  {isMyProfile ? (
-                    <S.HeaderImg
-                      src={more}
-                      alt="Siren"
-                      onClick={(e) => openMoreModal(e, post.id)}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <S.HeaderP>{post.author.accountname}</S.HeaderP>
-              </S.HeaderTextBox>
+                  <S.HeaderP>{post.author.accountname}</S.HeaderP>
+                </S.HeaderTextBox>
+                {isMyProfile ? (
+                  <S.HeaderImg
+                    src={more}
+                    alt="Siren"
+                    onClick={(e) => openMoreModal(e, post.id)}
+                  />
+                ) : (
+                  <></>
+                )}
+              </S.PostHeader>
               {isValidImage(post.image) ? (
                 <S.PostContentImg src={post.image} alt="Post Content Image" />
               ) : (
