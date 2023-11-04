@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
-  background-color: #ffffff;
+  background-color: #2c2f33;
   width: 100%;
   height: 100vh;
   text-align: center;
   position: relative;
   font-size: 12px;
+`;
+
+export const ProfileLogo = styled.p`
+  padding-top: 100px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #dfdfdf;
 `;
 
 export const ProfileInput = styled.div`
@@ -15,40 +22,47 @@ export const ProfileInput = styled.div`
 
 export const ProfileImage = styled.img`
   cursor: pointer;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-top: 35px;
+`;
 
-  width: 110px;
-  height: 110px;
-  border-radius: 100%;
-  margin-top: 77.5px;
+export const ProfileWriteContainer = styled.div`
+  width: 330px;
+  margin: 0 auto;
 `;
 
 export const PTag = styled.p`
-  margin: 14px 0 6px 0;
+  margin: 14px 0 8px 0;
   text-align: left;
+  color: #dfdfdf;
 `;
 
 export const InputTag = styled.input`
   width: 100%;
-  height: 23px;
-  border-width: 0px 0px 1px;
-  padding: 0 0 1px 0;
-  font-size: 20px;
-
+  height: 40px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  padding: 0 2%;
+  font-size: 16px;
+  background-color: #171717;
+  color: #efefef;
   &:focus {
     outline: none;
-    border-color: #5865f2;
+    border-color: #dbdbdb;
   }
-
   &::placeholder {
-    color: #dbdbdb;
+    color: #505050;
     font-size: 14px;
   }
 `;
 
 export const SubmitBtn = styled.button`
-  width: calc(100% - 68px);
+  width: 300px;
   height: 44px;
-  margin-top: 228px;
+  margin-top: 40px;
   border-radius: 44px;
   border: none;
   background-color: #5865f2;
