@@ -1,158 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import LoadingGIF from "../../assets/image/Loading.gif";
-import MainChar from "../../assets/image/main_char.png";
-import MainCharFace from "../../assets/image/main_char_face.svg";
-import MainCharHead from "../../assets/image/main_char_head.svg";
-import MainCharPoint from "../../assets/image/main_char_point.svg";
+import MainChar from "../../assets/image/main_char.svg";
 
-// 헤드폰에 대한 애니메이션 (현재 주석처리(사용x))
-const rubberBand = keyframes`
-  from, to {
-    transform: scale(1);
+// 로딩 바에 대한 애니메이션
+const fillAnimation = keyframes`
+  0% {
+    width: 0;
   }
-  30% {
-    transform: scaleX(1.25);
-  }
-  40% {
-    transform: scaleX(0.75);
-  }
-  50% {
-    transform: scaleX(1.15);
-  }
-  65% {
-    transform: scaleX(0.95);
-  }
-  75% {
-    transform: scaleX(1.05);
+  100% {
+    width: 100%;
   }
 `;
 
-// loading text에 대한 애니메이션 (현재 주석처리(사용x))
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-// pointImage에 대한 애니메이션 (사용중)
-const scaleAnimation = keyframes`
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(2);
-  }
-`;
-
-export const LoadingContainer = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  color: #8ea1e1;
-  z-index: 999;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  background-color: #282c32;
 `;
 
-export const CharacterContainer = styled.div`
-  position: relative;
-  width: 20vmin;
-  max-width: 300px;
+const CharacterImage = styled.div`
+  /* 이미지 파일을 불러옴 */
+  background-image: url(${MainChar});
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 100px;
+  background-color: #282c32; /* 캐릭터 색상 예시 */
 `;
 
-export const FaceImage = styled.img`
-  position: absolute;
-  top: -18vmin;
-  left: 1vmin;
-  width: 15vmin;
-  max-width: 250px;
-`;
+const LoadingBar = styled.div`
+  width: 100px;
+  height: 20px;
+  background-color: #ccc;
+  margin-top: 20px;
+  overflow: hidden;
 
-export const HeadImage = styled.img`
-  position: absolute;
-  top: -26vmin;
-  left: -10vmin;
-  width: 36vmin;
-  max-width: 400px;
-  opacity: 1;
-  /* animation: ${rubberBand} 0.1s 0.05s alternate; */
-`;
-
-export const PointImage = styled.img`
-  position: absolute;
-  top: -21vmin;
-  left: 6vmin;
-  width: 3vmin;
-  max-width: 50px;
-  animation: ${scaleAnimation} 0.5s alternate;
-`;
-
-export const LoadingText = styled.div`
-  font: 1rem "Noto Sans KR";
-  text-align: center;
-  font-size: 5vmin;
-
-  span {
-    display: inline-block;
-    opacity: 1;
-    /* animation: ${fadeIn} 0.125s forwards, ${fadeIn} 0.125s forwards 1.55s; */
-
-    &:nth-child(1) {
-      animation-delay: 0.075s, 1.65s;
-    } // L
-    &:nth-child(2) {
-      animation-delay: 0.15s, 1.725s;
-    } // o
-    &:nth-child(3) {
-      animation-delay: 0.225s, 1.8s;
-    } // a
-    &:nth-child(4) {
-      animation-delay: 0.3s, 1.875s;
-    } // d
-    &:nth-child(5) {
-      animation-delay: 0.375s, 1.95s;
-    } // i
-    &:nth-child(6) {
-      animation-delay: 0.45s, 2.025s;
-    } // n
-    &:nth-child(7) {
-      animation-delay: 0.525s, 2.1s;
-    } // g
-    &:nth-child(9) {
-      animation-delay: 0.6s, 2.175s;
-    } // space
-    &:nth-child(11) {
-      animation-delay: 0.675s, 2.25s;
-    }
-    &:nth-child(13) {
-      animation-delay: 0.75s, 2.325s;
-    }
+  &::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: var(--color-purple); /* 로딩 바 색상 예시 */
+    animation: ${fillAnimation} 2s linear infinite; /* 로딩 바 애니메이션 */
   }
 `;
 
-export default function Loading() {
-  const fullText = "Loading . . .";
+const LoadingText = styled.div`
+  color: white;
+  font-size: 24px;
+  margin-top: 20px;
+  font-family: var(--Black-ops);
+`;
+
+function LoadingPage() {
+  //   const text = "Loading...";
+  //   const [visibleText, setVisibleText] = useState("");
+
+  //   useEffect(() => {
+  //     let index = 0;
+  //     const interval = setInterval(() => {
+  //       setVisibleText(text.slice(0, index));
+  //       index++;
+
+  //       if (index > text.length) {
+  //         clearInterval(interval);
+  //       }
+  //     }, 200); // 글자가 나타나는 속도 (200ms마다)
+  //   }, []);
 
   return (
-    <LoadingContainer>
-      <CharacterContainer>
-        <FaceImage src={MainCharFace} alt="메인 캐릭터 얼굴" />
-        <HeadImage src={MainCharHead} alt="메인 캐릭터 헤드폰" />
-        <PointImage src={MainCharPoint} alt="메인 캐릭터 불빛" />
-      </CharacterContainer>
-      <LoadingText>
-        {fullText.split("").map((char, index) => (
-          <span key={index}>{char}</span>
-        ))}
-      </LoadingText>
-    </LoadingContainer>
+    <Container>
+      <CharacterImage />
+      <LoadingBar />
+      <LoadingText>Loading . . .</LoadingText>
+    </Container>
   );
 }
+
+export default LoadingPage;
