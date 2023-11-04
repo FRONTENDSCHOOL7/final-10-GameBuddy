@@ -78,7 +78,7 @@ function GameRecruitPost() {
 
   return (
     <>
-      <S.PTag>모집 게임</S.PTag>
+      <S.PTag style={{ marginTop: "0", marginBottom: "14px" }}>모집 게임</S.PTag>
       <S.InputTag
         type="text"
         placeholder=" 2~15자 이내여야 합니다."
