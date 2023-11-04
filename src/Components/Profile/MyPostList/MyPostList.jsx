@@ -12,7 +12,6 @@ import CommonPostList from "../../Commons/List/CommonPostList";
 
 function MyPostList({ isMyProfile, accountname }) {
   // PostView를 설정하기 위한 상태
-  console.log("포스트 정보", isMyProfile);
   const [viewType, setViewType] = useState("list");
 
   const [postData, setPostData] = useRecoilState(userPostListAtom);
