@@ -5,7 +5,7 @@ import LoginPage from "../Pages/Sign/Login/LoginPage";
 import SignUpPage from "../Pages/Sign/SignUp/SignUpPage";
 import SetProfilePage from "../Pages/Sign/SignUp/SetProfilePage";
 import MainFeedPage from "../Pages/MainFeedPage";
-import Home_no_feed from "../Components/Main/Home_no_feed";
+import HomeNofeed from "../Components/Main/HomeNoFeed";
 import SearchPage from "../Pages/SearchPage";
 import ChattingListPage from "../Pages/ChattingListPage";
 import ProfilePage from "../Pages/ProfilePage";
@@ -27,9 +27,9 @@ function Router() {
         <Route path="/signup/setprofile" element={<SetProfilePage />} />
         <Route path="/main" element={<MainFeedPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/homenofeed" element={<Home_no_feed />} />
+        <Route path="/homenofeed" element={<HomeNofeed />} />
         <Route path="/chat" element={<ChattingListPage />} />
-        <Route path="/write" element={<Write />} /> 
+        <Route path="/write" element={<Write />} />
         <Route path="/post" element={<PostEdit />} />
         <Route path="/recruit/edit" element={<RecruitEdit />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}

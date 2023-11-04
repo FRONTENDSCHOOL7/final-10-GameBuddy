@@ -37,7 +37,6 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from "../../Profile/MyPostList/MoreModal/MoreModal";
 
 function CommonDetailModal() {
-  console.log("현재 페이지 이거 맞음??");
   const location = useRecoilValue(currentLocation);
   const [postData, setPostData] = useRecoilState(
     location.includes("/profile") ? userPostListAtom : postListDataAtom
@@ -58,8 +57,6 @@ function CommonDetailModal() {
   const [selectedPostId, setSelectedPostId] = useState(null); // postId를 저장해서 moreModal에 넘겨주기 위함
   const isMyProfile =
     data.author.accountname === commentMyProfile.user.accountname;
-  // console.log(postData);
-  // console.log("데이터", data);
 
   const navigate = useNavigate();
 
@@ -196,6 +193,10 @@ function CommonDetailModal() {
             src={
               isValidImage(data.author.image) ? data.author.image : DefaultImage
             }
+            onClick={() => {
+              setIsPostModalVisible(false);
+              navigate(`/profile/${data.author.accountname}`);
+            }}
           />
           <S.PostDetailHeaderTextBox>
             <S.PostDetailHeaderUserName>

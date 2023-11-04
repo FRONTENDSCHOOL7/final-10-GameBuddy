@@ -14,6 +14,7 @@ const NoFeedContainer = styled.div`
   font-family: "Black Ops One", sans-serif;
   font-size: 14px;
   line-height: 14px; /* 100% */
+  background-color: #2c2f33;
 
   h3 {
     color: #767676;
@@ -40,7 +41,7 @@ const NoFeedContainer = styled.div`
   }
 `;
 
-export default function Home_no_feed() {
+function HomeNoFeed() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -61,3 +62,5 @@ export default function Home_no_feed() {
     </>
   );
 }
+
+export default HomeNoFeed;

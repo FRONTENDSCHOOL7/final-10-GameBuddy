@@ -13,11 +13,16 @@ const fillAnimation = keyframes`
 `;
 
 const Container = styled.div`
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1500;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   background-color: #282c32;
 `;
 
@@ -55,20 +60,20 @@ const LoadingText = styled.div`
 `;
 
 function LoadingPage() {
-  //   const text = "Loading...";
-  //   const [visibleText, setVisibleText] = useState("");
+    const text = "Loading...";
+    const [visibleText, setVisibleText] = useState("");
 
-  //   useEffect(() => {
-  //     let index = 0;
-  //     const interval = setInterval(() => {
-  //       setVisibleText(text.slice(0, index));
-  //       index++;
+    useEffect(() => {
+      let index = 0;
+      const interval = setInterval(() => {
+        setVisibleText(text.slice(0, index));
+        index++;
 
-  //       if (index > text.length) {
-  //         clearInterval(interval);
-  //       }
-  //     }, 200); // 글자가 나타나는 속도 (200ms마다)
-  //   }, []);
+        if (index > text.length) {
+          clearInterval(interval);
+        }
+      }, 200); // 글자가 나타나는 속도 (200ms마다)
+    }, []);
 
   return (
     <Container>
