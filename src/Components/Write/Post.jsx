@@ -45,10 +45,10 @@ function Post() {
 
   return (
     <>
-      <S.PTag>게시글</S.PTag>
-      <S.InputTag
+      <S.PTagpost>게시글</S.PTagpost>
+      <S.TextAreaTag
         type="text"
-        placeholder="게시글 내용을 입력해주세요."
+        placeholder=" 게시글 내용을 입력해주세요."
         value={postContent}
         onChange={onChangePostContent}
       />

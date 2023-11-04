@@ -37,7 +37,7 @@ body {
 
 button {
     font-family: "Roboto-Medium";
-    font-size: 12px;
+    font-size: 14px;
 }
 
 ::placeholder {

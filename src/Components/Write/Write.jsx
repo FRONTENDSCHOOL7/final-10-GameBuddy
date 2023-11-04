@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
 import Header from "../Commons/Header/Header";
+import Footer from "../Commons/Footer/Footer";
 import Post from "./Post";
 import GameRecruitPost from "./GameRecruitPost";
 import { uploadImageAtom } from "../../Store/Store";
@@ -51,35 +52,43 @@ export default function WritePage() {
     <S.WriteContainer>
       <Header type="profileMod" />
 
-      <S.ButtonImgContainer>
-        <S.Button onClick={handleButtonPostClick} selected={!selectedBtn}>
-          소통글 버튼
-        </S.Button>
-        <S.Button onClick={handleButtonGamePostClick} selected={selectedBtn}>
-          모집글 버튼
-        </S.Button>
-      </S.ButtonImgContainer>
+      <S.Divdiv>
+        <S.ContentContainer>
+          <S.ButtonImgContainer>
+            <S.Button onClick={handleButtonPostClick} selected={!selectedBtn}>
+              소통글 버튼
+            </S.Button>
+            <S.Button onClick={handleButtonGamePostClick} selected={selectedBtn}>
+              모집글 버튼
+            </S.Button>
+          </S.ButtonImgContainer>
+  
+          <S.InputContainer>
+            <S.ImageContainer>
+              <h5>이미지 등록</h5>
+    
+              <S.WriteImage
+                src={uploadImage}
+                alt="모집 게임 이미지"
+                onClick={handleWriteImageClick}
+              />
+            </S.ImageContainer>
+    
+            <S.WriteFormWrapper>
+              <input
+                type="file"
+                onChange={handleWriteImageChange}
+                ref={fileInputRef}
+                accept="image/jpeg, image/png"
+                style={{ display: "none" }}
+              />
+              {selectedBtn ? <GameRecruitPost /> : <Post />}
+            </S.WriteFormWrapper>
+          </S.InputContainer>
+        </S.ContentContainer>
+      </S.Divdiv>
 
-      <S.ImageContainer>
-        <h5>이미지 등록</h5>
-
-        <S.WriteImage
-          src={uploadImage}
-          alt="모집 게임 이미지"
-          onClick={handleWriteImageClick}
-        />
-      </S.ImageContainer>
-
-      <S.WriteFormWrapper>
-        <input
-          type="file"
-          onChange={handleWriteImageChange}
-          ref={fileInputRef}
-          accept="image/jpeg, image/png"
-          style={{ display: "none" }}
-        />
-        {selectedBtn ? <GameRecruitPost /> : <Post />}
-      </S.WriteFormWrapper>
+      <Footer />
     </S.WriteContainer>
   );
 }
