@@ -49,17 +49,18 @@ const scaleAnimation = keyframes`
 `;
 
 export const LoadingContainer = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  position: fixed; /* 화면 전체에 고정된 요소로 설정 */
   top: 0;
   left: 0;
-  color: #8ea1e1;
-  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 1); /* 로딩 페이지 배경 색상 및 투명도 설정 */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1500; /* 다른 요소 위로 표시하려면 z-index 설정 */
+  background-color: #2c2f33;
 `;
 
 export const CharacterContainer = styled.div`
