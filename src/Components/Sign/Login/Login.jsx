@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import loginAPI from "../../../API/loginAPI"
 import * as S from "./LoginStyle";
 import CharImg from "../../../assets/image/main_char.png"
+import gbLogo from "../../../assets/image/GAMEBUDDY.svg"
 import KakaoLogin from "../../../assets/image/kakao-login.png"
 import GoogleLogin from "../../../assets/image/google-login.png"
 import FbLogin from "../../../assets/image/fb-login.png"
@@ -42,16 +43,17 @@ function Login() {
       <S.Container>
         <S.LoginForm onSubmit={onSubmitHandler}>
           <S.LogoImg src={CharImg} />
-            <S.PTag>아이디</S.PTag>
-            <S.InputTag type="text" onChange={onChangeEmail} />
-            <S.PTag>비밀번호</S.PTag>
-            <S.InputTag type="password" onChange={onChangePassword} />
-            <S.LoginBtn type="submit" disabled={!email || password.length < 6} >로그인</S.LoginBtn>
-            <S.SnsLoginGroup>
-              <S.SnsLoginBtn src={KakaoLogin}/>
-              <S.SnsLoginBtn src={GoogleLogin}/>
-              <S.SnsLoginBtn src={FbLogin}/>
-            </S.SnsLoginGroup>
+          <S.LogoTitle><img src={gbLogo} style={{width: "300px", margin: "25px 0 10px"}}></img></S.LogoTitle>
+          <S.PTag>아이디</S.PTag>
+          <S.InputTag type="text" onChange={onChangeEmail} />
+          <S.PTag>비밀번호</S.PTag>
+          <S.InputTag type="password" onChange={onChangePassword} />
+          <S.LoginBtn type="submit" disabled={!email || password.length < 6} >로그인</S.LoginBtn>
+          <S.SnsLoginGroup>
+            <S.SnsLoginBtn src={KakaoLogin}/>
+            <S.SnsLoginBtn src={GoogleLogin}/>
+            <S.SnsLoginBtn src={FbLogin}/>
+          </S.SnsLoginGroup>
 
           <S.SignupLink onClick={nextPage}>이메일로 회원가입</S.SignupLink>
         </S.LoginForm>

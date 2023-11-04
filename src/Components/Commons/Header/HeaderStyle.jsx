@@ -61,7 +61,8 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.btnColor};
+  color: #efefef;
   padding: 20px;
   border-radius: 5px;
   width: 300px;
