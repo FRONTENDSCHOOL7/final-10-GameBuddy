@@ -12,17 +12,32 @@ function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
   const [recruit, setRecruit] = useState([]);
   const [modalOn, setModalOn] = useState(false);
+  const [theJoined, setTheJoined] = useState(false);
   const [recruitId, setRecruitId] = useState(0);
 
   const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
   const [myAccountName, setMyAccountName] = useState("");
   
+  // 모집글 내부, 현재 참여중인 인원의 정보(모집 참여자들)
+  const [theJoinedData, setTheJoinedData] = useState([]);
+  const [theJoinedAccountName, setTheJoinedAccountName] = useState([]);
+  
+  // 모집글 상세페이지의 유저 정보(모집게시자)
   const [targetUserName, setTargetUserName] = useState("");
   const [targetAccountName, setTargetAccountName] = useState("");
   const [targetImage, setTargetImage] = useState("");
 
   const navigate = useNavigate();
+
+  async function getTheJoinedData(theJoinedData) {
+    for(let i = 0; i < theJoinedAccountName.length; i++) {
+      const copy = theJoinedData;
+      copy.push(await userInfoAPI(theJoinedAccountName[i]))
+      console.log("카피:",)
+      setTheJoinedData(copy)
+    }
+  }
 
   async function fetchData() {
     const myAccountName = await myAccountNameAPI();
@@ -37,8 +52,12 @@ function Recruit({ isMyProfile }) {
   }, [accountname]);
 
   useEffect(() => {
+    getTheJoinedData(theJoinedData);
+  }, [theJoinedAccountName])
+
+  useEffect(() => {
     if (modalOn) {
-      // 모달이 열릴 때 스크롤 막기
+      // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
       document.body.style.overflow = 'hidden';
     } else {
       // 모달이 닫힐 때 스크롤 해제
@@ -50,11 +69,12 @@ function Recruit({ isMyProfile }) {
       document.body.style.overflow = 'auto';
     };
   }, [modalOn]);
-  
-  function reportRecruit() {
-    alert("신고되었습니다!")
-    console.log("신고됨")
-  }
+
+  // 신고버튼 삭제로 주석처리
+  // function reportRecruit() {
+  //   alert("신고되었습니다!")
+  //   console.log("신고됨")
+  // }
 
   async function getUserInfo(targetAccountName) {
     const result = await userInfoAPI(targetAccountName);
@@ -74,6 +94,8 @@ function Recruit({ isMyProfile }) {
 
   // 모달창 아래 X버튼을 눌러 모달창을 나가는 함수
   function closeModal() {
+    setTheJoinedData([]);
+    setTheJoined(false);
     setModalOn(false);
   }
 
@@ -99,6 +121,7 @@ function Recruit({ isMyProfile }) {
                 setRecruitId(id);
                 getUserInfo(JSON.parse(recruit.itemName)[1]);
                 setModalOn(true);
+                setTheJoinedAccountName(JSON.parse(recruit.link)[2])
               }}>
               {/* 모집글 상세 */}
               {console.log("아이템이미지: ", recruit.itemImage)}
@@ -130,33 +153,58 @@ function Recruit({ isMyProfile }) {
                 }>
                   <S.UpdateIcon />
                 </S.ModalControlBtn>
-              ) : (
-                <S.ModalControlBtn onClick={reportRecruit}>
-                  <S.SirenIcon />
-                </S.ModalControlBtn>
-              )}
+              ) : <></>}
             </S.ModalProfile>
             <S.ModalImage src={recruit[recruitId].itemImage} />
             <S.ModalIntro>{JSON.parse(recruit[recruitId].link)[1]}</S.ModalIntro>
-            <S.ModalRecruitNumber>{`${recruit[recruitId].price}명 / ${JSON.parse(recruit[recruitId].link)[0]}명`}</S.ModalRecruitNumber>
-            {
-              // console.log(JSON.parse(recruit[recruitId].link)[2], myAccountName)
-              isMyProfile ? (
-                <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
-              ) : (
-                (JSON.parse(recruit[recruitId].link)[2]).includes(myAccountName) ? (
-                  <S.ModalBtn onClick={() => {
-                    leaveRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
-                  }} btnColor={"red"}>모집 떠나기!</S.ModalBtn>
-                ) : ( 
-                  recruit[recruitId].price < JSON.parse(recruit[recruitId].link)[0] ? (
+            
+            <S.ModalBtnCover>
+              <div style={{width: "20%", height:"10px"}}></div>
+              {
+                // console.log(JSON.parse(recruit[recruitId].link)[2], myAccountName)
+                isMyProfile ? (
+                  <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
+                ) : (
+                  (JSON.parse(recruit[recruitId].link)[2]).includes(myAccountName) ? (
                     <S.ModalBtn onClick={() => {
-                      joinRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
-                    }} btnColor={"green"}>모집 참여하기!</S.ModalBtn>
-                  ) : <S.ModalBtn btnColor={"orange"}>Full방입니다~!</S.ModalBtn>
+                      leaveRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
+                    }} btnColor={"red"}>모집 떠나기!</S.ModalBtn>
+                  ) : ( 
+                    recruit[recruitId].price < JSON.parse(recruit[recruitId].link)[0] ? (
+                      <S.ModalBtn onClick={() => {
+                        joinRecruit(recruit[recruitId].id, myAccountName, recruit[recruitId]);
+                      }} btnColor={"green"}>모집 참여하기!</S.ModalBtn>
+                    ) : <S.ModalBtn btnColor={"orange"}>Full방입니다~!</S.ModalBtn>
+                  )
                 )
-              )
-            }
+              }
+              <div style={{display: "flex", cursor: "pointer", width: "20%"}} onClick={() => {
+                setTheJoined(true);
+              }}>
+                <S.UserIcon />
+                <S.ModalRecruitNumber>{`${recruit[recruitId].price}/${JSON.parse(recruit[recruitId].link)[0]}`}</S.ModalRecruitNumber>
+              </div>
+              {theJoined && (<>
+                <S.ModalTheJoined style={{backgroundColor: "#101010"}}>
+                  {theJoinedData.map((theJoinedData, id) => {          
+                    return (
+                      <S.ProfileDetail key={id} style={{marginBottom:"10px"}}>
+                      <S.ModalProfileImage src={theJoinedData.profile.image} />
+                        <S.ModalArticle>
+                          <S.ModalUsername>
+                            {theJoinedData.profile.username}
+                          </S.ModalUsername>
+                          <S.ModalAccountname>
+                            {theJoinedData.profile.accountname}
+                          </S.ModalAccountname>
+                        </S.ModalArticle>
+                      </S.ProfileDetail>
+                    )
+                  })}
+                </S.ModalTheJoined>
+                <S.CloseModalTheJoined onClick={() => setTheJoined(false)}>X</S.CloseModalTheJoined></>)
+              } 
+            </S.ModalBtnCover>
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
         </S.ModalContainer>
