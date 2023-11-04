@@ -53,19 +53,21 @@ export const ModalContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 2000; //다른 요소보다 항상 앞에 있어야함
 `;
 
 export const ModalContent = styled.div`
-  background-color: ${props => props.btnColor};
-  color: #efefef;
+  background-color: #282c32;
+  color: white;
   padding: 20px;
-  border-radius: 5px;
-  width: 300px;
+  border-radius: 15px;
+  width: 30%;
+  max-width: 280px;
+  max-height: 90%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -76,9 +78,13 @@ export const ModalItem = styled.p`
   width: 100%;
   text-align: center;
   padding: 10px;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid #5c5c5c;
 
   &:last-child {
     border-bottom: none;
+  }
+
+  &:hover {
+    background-color: #3a3d42;
   }
 `;

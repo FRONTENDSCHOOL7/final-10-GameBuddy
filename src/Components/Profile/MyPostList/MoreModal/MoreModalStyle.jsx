@@ -13,32 +13,49 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  position: fixed;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-  background: white;
+  background: #282c32;
   padding: 20px;
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  transform: translateY(100%);
-  animation: slideUp 0.3s forwards;
+  width: 40%;
+  height: auto;
+  max-width: 280px;
+  max-height: 90%;
 
-  @keyframes slideUp {
-    to {
-      transform: translateY(0);
-    }
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-out;
 `;
 
 export const ModalButton = styled.button`
-  background-color: #fff;
-  border: none;
+  background-color: #282c32;
+  color: white;
   padding: 10px;
   cursor: pointer;
+  flex: 1;
+  text-align: center;
+  transition: background-color 0.3s;
+  border: none;
+
+  // 첫 번째 버튼(수정하기)에만 하단 테두리 적용
+  &:nth-of-type(1) {
+    border-bottom: 1px solid #5c5c5c;
+  }
+
+  // 마지막 버튼(삭제하기)에는 하단 테두리 없음
+  &:nth-of-type(2) {
+    border-bottom: none;
+  }
+
+  // 호버 상태에서의 배경색 변경
+  &:hover {
+    background-color: #3a3d42;
+  }
 `;
 
 // 정말 삭제하시겠습니까?
@@ -47,7 +64,7 @@ export const ConfirmDeleteContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #282c32;
   padding: 23px 0 14px 0; // 좌우 패딩 제거
   border-radius: 10px;
   z-index: 100;
@@ -66,7 +83,7 @@ export const ConfirmContainer = styled.div`
     top: 55px;
     bottom: 0;
     width: 1px;
-    background-color: #dbdbdb;
+    background-color: #5c5c5c;
     transform: translateX(-50%);
   }
 `;
@@ -75,20 +92,21 @@ export const ConfirmMessage = styled.p`
   font-size: 16px;
   text-align: center;
   margin-bottom: 14px;
-  color: #333;
-  border-bottom: 1px solid #dbdbdb;
+  color: #ffffff;
+  border-bottom: 1px solid #5c5c5c;
   padding-bottom: 15px;
 `;
 
 export const ConfirmButton = styled.button`
-  background-color: #fff;
+  background-color: #282c32;
+  color: white;
   border: none;
   cursor: pointer;
   flex: 1;
   text-align: center;
 
   &:last-child {
-    color: var(--color-purple);
+    color: #f35858;
     font-weight: 700;
   }
 `;

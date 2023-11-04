@@ -10,6 +10,7 @@ export const NoPostsMessage = styled.div`
   padding-bottom: 40px;
   @media screen and (min-width: 768px) {
     padding-left: 50px;
+    height: 70vh;
   }
 `;
 /* min-height: 60vh;
