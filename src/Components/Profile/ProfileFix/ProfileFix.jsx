@@ -113,6 +113,7 @@ function Profile() {
 
   return (
     <S.ProfileContainer>
+      <S.ProfileLogo>프로필 수정</S.ProfileLogo>
       <Header type={"profileMod"} />
       <S.ProfileImage
         src={selectedImage === "" ? DefaultImage : selectedImage}
@@ -120,15 +121,15 @@ function Profile() {
         onClick={handleImageClick} // 이미지 클릭 시 파일 선택 창이 열림
       />
 
-      <S.ProfileInput>
-        <input
-          type="file"
-          onChange={handleImageChange}
-          ref={fileInputRef}
-          accept="image/jpeg,image/png"
-          style={{ display: "none" }}
-        />
+      <input
+        type="file"
+        onChange={handleImageChange}
+        ref={fileInputRef}
+        accept="image/jpeg,image/png"
+        style={{ display: "none" }}
+      />
 
+      <S.ProfileWriteContainer>
         <S.PTag>사용자이름</S.PTag>
         <S.InputTag
           type="text"
@@ -140,7 +141,9 @@ function Profile() {
           style={isSignUp === 2 ? { display: "block" } : { display: "none" }}>
           *유저이름은 2~10자 이내여야 합니다.
         </S.Warning>
+      </S.ProfileWriteContainer>
 
+      <S.ProfileWriteContainer>
         <S.PTag>계정 ID</S.PTag>
         <S.InputTag
           type="text"
@@ -152,7 +155,9 @@ function Profile() {
           style={isSignUp === 1 ? { display: "block" } : { display: "none" }}>
           *영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.
         </S.Warning>
+      </S.ProfileWriteContainer>
 
+      <S.ProfileWriteContainer>
         <S.PTag>소개</S.PTag>
         <S.InputTag
           type="text"
@@ -160,11 +165,11 @@ function Profile() {
           value={writeIntro}
           onChange={onChangeIntro}
         />
+      </S.ProfileWriteContainer>
 
-        <S.SubmitBtn type="submit" onClick={handleClick}>
-          프로필 정보 변경하기
-        </S.SubmitBtn>
-      </S.ProfileInput>
+      <S.SubmitBtn type="submit" onClick={handleClick}>
+        프로필 정보 변경하기
+      </S.SubmitBtn>
     </S.ProfileContainer>
   );
 }
