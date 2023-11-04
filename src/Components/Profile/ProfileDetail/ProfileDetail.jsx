@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DefaultImage from "../../../assets/image/char_inactive.png";
 import * as S from "./ProfileDetailStyle";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -7,6 +8,7 @@ import { userPostListAtom } from "../../../Store/Store";
 import { myDataAtom } from "../../../Store/Store";
 import followAPI from "../../../API/followAPI/followingAPI";
 import unFollowAPI from "../../../API/followAPI/unFollowAPI";
+import { isValidImage } from "../../../Functional/isValidImageFunction";
 
 function Profile({ isMyProfile, accountname }) {
   const [userData] = useRecoilState(userDataAtom);
@@ -39,13 +41,19 @@ function Profile({ isMyProfile, accountname }) {
         <S.AccountName>{userData.accountname}</S.AccountName>
         <S.ProfileSection>
           {/* 프로필 사진 */}
-          <S.ProfileImage src={userData.image} alt="" />
+          {isValidImage(userData.image) ? (
+            <S.ProfileImage src={userData.image} alt="Profile Image" />
+          ) : (
+            <S.ProfileImage src={DefaultImage} alt="Default Image" />
+          )}
           <S.ProfileStat>
             <S.StatContent>
               <S.StatButton
                 onClick={() => navigate(`/profile/${accountname}/follower`)}>
                 {/* 팔로워 수 */}
-                <strong style={{color: "#dfdfdf"}}>{userData.followerCount}</strong>
+                <strong style={{ color: "#dfdfdf" }}>
+                  {userData.followerCount}
+                </strong>
                 <div>followers</div>
               </S.StatButton>
             </S.StatContent>
@@ -60,7 +68,9 @@ function Profile({ isMyProfile, accountname }) {
               <S.StatButton
                 onClick={() => navigate(`/profile/${accountname}/following`)}>
                 {/* 팔로잉 수 */}
-                <strong style={{color: "#dfdfdf"}}>{userData.followingCount}</strong>
+                <strong style={{ color: "#dfdfdf" }}>
+                  {userData.followingCount}
+                </strong>
                 <div>followings</div>
               </S.StatButton>
             </S.StatContent>
