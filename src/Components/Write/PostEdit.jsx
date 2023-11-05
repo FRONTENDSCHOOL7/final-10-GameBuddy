@@ -30,6 +30,7 @@ function PostEdit() {
 
   useEffect(() => {
     const fetchPostContent = async () => {
+      resetRecoilState();
       const post = await getPostAPI(post_id);
       if (post) {
         setPostContent(post.content);
@@ -73,7 +74,6 @@ function PostEdit() {
     );
     if (result.includes("완료")) {
       setAlertModal({ message: result, isOpen: true, navigation: myLocation });
-      resetRecoilState();
     } else {
       setAlertModal({ message: result, isOpen: true });
     }
