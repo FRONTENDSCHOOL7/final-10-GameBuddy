@@ -43,10 +43,9 @@ export const Divdiv = styled.div`
   align-items: center;
   height: 100%;
   margin: auto;
-
-  @media screen and (max-width: 768px) {
-  }
+  box-sizing: border-box;
 `;
+
 
 
 
@@ -55,9 +54,9 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   padding: 0;
   box-sizing: border-box;
-  padding: 60px 50px 50px 50px;
+  width: 100%;
   border-radius: 8px;
-  background-color: rgb(255, 255, 255);
+  background-color: #2c2f33;
   height: 100%;
 
   @media screen and (min-width: 768px) {
@@ -109,15 +108,16 @@ export const ImageContainer = styled.div`
 
   h5 {
     text-align: left;
-    margin: 0 0 18px 0;
+    margin-bottom: 18px;
     font-size: 18px;
     font-weight: bold;
+    color: white;
   }
 
   @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #dbdbdb;
+    border-right: 2px solid #a4a4a4ff;
     padding-right: 50px;
   }
 `;
@@ -152,6 +152,7 @@ export const PTag = styled.p`
   margin-bottom: 18px;
   font-size: 18px;
   font-weight: bold;
+  color: white;
 `;
 
 export const PTagpost = styled.p`
