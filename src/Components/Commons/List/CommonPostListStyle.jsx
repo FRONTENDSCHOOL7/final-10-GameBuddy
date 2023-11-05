@@ -20,7 +20,7 @@ export const Article = styled.article`
   overflow-y: hidden;
   box-sizing: border-box;
   @media screen and (min-width: 768px) {
-    padding-left: 200px;
+    padding-left: 72px;
   }
 `;
 
