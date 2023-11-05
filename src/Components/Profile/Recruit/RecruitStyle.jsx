@@ -118,6 +118,7 @@ export const ModalContent = styled.div`
   height: 120vw;
   max-width: 600px;
   max-height: 800px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -132,7 +133,9 @@ export const ModalProfile = styled.div`
 `;
 export const ProfileDetail = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
 `;
 export const ModalProfileImage = styled.img`
   width: 70px;
@@ -217,12 +220,13 @@ export const ModalBtnCover = styled.div`
   }
 `
 export const ModalTheJoined = styled.div`
-  width: 95%;
+  width: 90%;
+  max-width: 640px;
   height: 150px;
   display: flex;
   position: absolute;
   background-color: #202020;
-  right: 20px;
+  right: 0px;
   bottom: 45px;
   border: none;
   border-radius: 15px;

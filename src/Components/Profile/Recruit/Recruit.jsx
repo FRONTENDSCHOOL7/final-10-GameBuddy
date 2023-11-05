@@ -29,39 +29,39 @@ function Recruit({ isMyProfile }) {
   const [targetAccountName, setTargetAccountName] = useState("");
   const [targetImage, setTargetImage] = useState("");
 
-   // 스크롤 컨테이너의 ref 생성
-   const scrollContainerRef = useRef(null);
-
-   // 왼쪽 화살표 클릭 핸들러
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
-    }
-  };
-
-  // 오른쪽 화살표 클릭 핸들러
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
-    }
-  };
-
-
+  
+  
   const navigate = useNavigate();
+  
+  // 스크롤 컨테이너의 ref 생성
+  const scrollContainerRef = useRef(null);
+
+  // 왼쪽 화살표 클릭 핸들러
+ const scrollLeft = () => {
+   if (scrollContainerRef.current) {
+     scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+   }
+ };
+ // 오른쪽 화살표 클릭 핸들러
+ const scrollRight = () => {
+   if (scrollContainerRef.current) {
+     scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+   }
+ };
 
   function checkScroll() {
-    const element = document.getElementById('your-scrollable-element-id');
+    const element = document.getElementById('scrollBar');
     const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     
     // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
     const leftBtn = document.getElementById('leftBtn');
-    if (hasHorizontalScrollbar && element.clientWidth > 500) {
+    if (hasHorizontalScrollbar && (window.innerWidth > 768)) {
       leftBtn.style.display = 'block';
     } else {
       leftBtn.style.display = 'none';
     }
     const rightBtn = document.getElementById('rightBtn');
-    if (hasHorizontalScrollbar && element.clientWidth > 500) {
+    if (hasHorizontalScrollbar && window.innerWidth > 768) {
       rightBtn.style.display = 'block';
     } else {
       rightBtn.style.display = 'none';
@@ -95,16 +95,22 @@ function Recruit({ isMyProfile }) {
   }, [accountname]);
 
   useEffect(() => {
+    checkScroll();
+  }, [recruit])
+
+  useEffect(() => {
     getTheJoinedData(theJoinedData);
   }, [theJoinedAccountName])
 
   useEffect(() => {
     if (modalOn) {
       // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
+      checkScroll()
       document.body.style.overflow = 'hidden';
     } else {
       // 모달이 닫힐 때 스크롤 해제
       document.body.style.overflow = 'auto';
+      checkScroll()
     }
   
     // 컴포넌트가 언마운트될 때 스크롤 해제를 확실히 하기 위한 클린업 함수
@@ -157,7 +163,7 @@ function Recruit({ isMyProfile }) {
       <h2 style={{color: "#efefef", marginLeft: "40px"}}>모집 중인 게임</h2>
         <S.LeftBtn id="leftBtn" onClick={scrollLeft}></S.LeftBtn>
         <S.RightBtn id="rightBtn" onClick={scrollRight}></S.RightBtn>
-      <S.GameList ref={scrollContainerRef} id="your-scrollable-element-id">
+      <S.GameList ref={scrollContainerRef} id="scrollBar">
         {recruit.map((recruit, id) => {
           return (
             <S.GameCard
@@ -227,6 +233,7 @@ function Recruit({ isMyProfile }) {
                 <S.UserIcon />
                 <S.ModalRecruitNumber>{`${recruit[recruitId].price}/${JSON.parse(recruit[recruitId].link)[0]}`}</S.ModalRecruitNumber>
               </div>
+              <div>
               {theJoined && (<>
                 <S.ModalTheJoined className="theJoinedContainer">
                   {theJoinedData.map((theJoinedData, id) => {          
@@ -246,7 +253,8 @@ function Recruit({ isMyProfile }) {
                   })}
                 </S.ModalTheJoined>
                 </>)
-              } 
+              }
+              </div> 
             </S.ModalBtnCover>
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
