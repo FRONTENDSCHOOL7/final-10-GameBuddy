@@ -138,3 +138,13 @@ export const currentLocation = atom({
   key: "currentLocation",
   default: ""
 })
+
+//Alert를 사용하기 위해 만든 Atom
+export const alertStateAtom = atom({
+  key: 'alertStateAtom',
+  default: {
+    isOpen: false,
+    message: '',
+    navigation: ''
+  }
+});

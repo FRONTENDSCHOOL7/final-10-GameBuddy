@@ -58,22 +58,24 @@ export default function WritePage() {
             <S.Button onClick={handleButtonPostClick} selected={!selectedBtn}>
               소통글 버튼
             </S.Button>
-            <S.Button onClick={handleButtonGamePostClick} selected={selectedBtn}>
+            <S.Button
+              onClick={handleButtonGamePostClick}
+              selected={selectedBtn}>
               모집글 버튼
             </S.Button>
           </S.ButtonImgContainer>
-  
+
           <S.InputContainer>
             <S.ImageContainer>
               <h5>이미지 등록</h5>
-    
+
               <S.WriteImage
                 src={uploadImage}
                 alt="모집 게임 이미지"
                 onClick={handleWriteImageClick}
               />
             </S.ImageContainer>
-    
+
             <S.WriteFormWrapper>
               <input
                 type="file"
