@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #f2f2f2;
+  background-color: #2c2f33;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -62,6 +62,8 @@ export const InputContainer = styled.div`
   align-items: center;
   padding: 10px;
   border-top: 1px solid #e1e1e1;
+  border-radius:10px 10px 0 0;
+  
 
   position: fixed;
   bottom: 0;
@@ -99,9 +101,9 @@ export const ImageUploadButton = styled.div`
   cursor: pointer;
 
   label {
-    padding: 10px;
-    border-radius: 100%;
-    background-color: #c4c4c4;
+    /* padding: 10px; */
+    /* border-radius: 100%; */
+    /* background-color: #c4c4c4; */
   }
 `;
 

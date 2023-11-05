@@ -40,7 +40,7 @@ function Router() {
         <Route path="/profile/:accountname" element={<ProfilePage />} />
         <Route path="/fix" element={<ProfileFix />} />
         <Route path="/chat" element={<ChattingListPage />} />
-        <Route path="/chat/room" element={<ChattingRoom />} />
+        <Route path="/chat/room/:id" element={<ChattingRoom />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

@@ -8,10 +8,8 @@ function ChattingList() {
   const navigate = useNavigate();
 
   // 768px 이하일 때는 list를 클릭하면 /chat/room으로 이동
-  const handleChatItemClick = () => {
-    if (window.innerWidth < 768) {
-      navigate("/chat/room");
-    }
+  const handleChatItemClick = (id) => {
+      navigate(`/chat/room/${id}`);
     // 768px 이상일 때는 아무런 동작도 수행하지 않음
   };
 
@@ -19,7 +17,7 @@ function ChattingList() {
     <S.ChatListContainer>
       {DummyData.map((data, id) => {
         return (
-          <S.ChatListForm key={id} onClick={handleChatItemClick}>
+          <S.ChatListForm key={id} onClick={() => handleChatItemClick(data.id)}>
             <S.ChattingBox>
               <S.Image src={Image} />
               <S.Article>

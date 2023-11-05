@@ -1,37 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./ChattingRoomStyle";
 import Header from "../Commons/Header/Header";
 import Example from "../../assets/image/참쉽죠.jpg";
+import imgUploadBtn from "../../assets/image/img-upload-btn.svg";
+import { useParams } from 'react-router-dom';
+import DummyData from './ChattingDummy'; 
 
 function ChattingRoom() {
+  const { id } = useParams();
+  const roomData = DummyData.find(room => room.id === Number(id));
+  
   // 채팅창에 뜨는 메세지
-  const [messages, setMessages] = useState([
-    //고정 메세지를 설정
-    {
-      type: "text",
-      content: "안녕하세요 겜하고싶어요",
-      left: true, //왼쪽
-      time: "14:05"
-    },
-    {
-      type: "text",
-      content: "야야 나도 끼고싶다고",
-      left: true, //왼쪽
-      time: "14:06"
-    },
-    {
-      type: "text",
-      content: "앙대요 지금 자리 참",
-      left: false, //오른쪽
-      time: "14:30"
-    },
-    {
-      type: "image",
-      content: Example,
-      left: true, //왼쪽
-      time: "14:31"
-    }
-  ]);
+  const [messages, setMessages] = useState(roomData ? roomData.messages : []);
+useEffect(() => {
+  // useParams에서 가져온 id 값을 숫자로 변환
+  const roomId = Number(id);
+  // DummyData 배열에서 해당 id를 가진 객체를 찾음
+  const roomData = DummyData.find(room => room.id === roomId);
+
+  // 해당하는 데이터가 있으면 messages 상태를 업데이트
+  if (roomData) {
+    setMessages(roomData.messages);
+  } else {
+    // 찾는 데이터가 없는 경우, messages를 빈 배열로 설정
+    setMessages([]);
+  }
+}, [id]);
 
   // 사용자가 입력한 메세지 창
   const [inputMessage, setInputMessage] = useState("");
@@ -118,7 +112,9 @@ function ChattingRoom() {
                 style={{ display: "none" }}
                 id="imageUpload"
               />
-              <label htmlFor="imageUpload">📷</label>
+              <label htmlFor="imageUpload">
+                <img src={imgUploadBtn} alt="사진 업로드 이미지" />
+              </label>
             </S.ImageUploadButton>
             <input
               type="text"
