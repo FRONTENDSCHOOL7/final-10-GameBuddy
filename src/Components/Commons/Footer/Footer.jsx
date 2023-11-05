@@ -55,7 +55,7 @@ function Footer() {
     const matchedMenu = menus.find((menu) =>
       location.pathname.startsWith(menu.path)
     );
-    return matchedMenu ? matchedMenu.id : "home";
+    return matchedMenu ? matchedMenu.id : "profile"; // 매칭 안됐을 때 profile로 이동하게 함 (profile 색상 이동 오류를 막기 위해)
   };
 
   const [$active, setActive] = useState(getInitialActive);
