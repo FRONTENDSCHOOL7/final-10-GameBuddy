@@ -45,6 +45,12 @@ export const StyledIconButton = styled.button`
   @media screen and (min-width: 768px) {
     margin-left: 17px;
   }
+
+  &.search-icon {
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
 `;
 
 //모달

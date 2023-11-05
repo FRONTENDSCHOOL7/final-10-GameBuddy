@@ -16,7 +16,7 @@ export default function Header({ type }) {
   }
 
   // 헤더 검색 아이콘 : /search 페이지 이동
-  const handleSearchClick = () => {
+  const handleSearchIconClick = () => {
     navigate("/search");
   };
 
@@ -65,9 +65,12 @@ export default function Header({ type }) {
     main: (
       <S.HeaderContainer>
         <S.Logo>Game Buddy</S.Logo>
-        {/* <S.StyledIconButton type="button" onClick={handleSearchIconClick}>
+        <S.StyledIconButton
+          className="search-icon"
+          type="button"
+          onClick={handleSearchIconClick}>
           <SearchIcon />
-        </S.StyledIconButton> */}
+        </S.StyledIconButton>
       </S.HeaderContainer>
     ),
 
