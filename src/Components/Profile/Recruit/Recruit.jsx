@@ -106,10 +106,6 @@ const joinedRight = () => {
    }
   }
  }
- 
- // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
- window.onresize = checkJoinedScroll;
-  
 
   async function getTheJoinedData(theJoinedData) {
     for(let i = 0; i < theJoinedAccountName.length; i++) {
@@ -146,10 +142,14 @@ const joinedRight = () => {
 
   useEffect(() => {
     if (modalOn) {
+      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+      window.onresize = checkJoinedScroll;
       // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
       document.body.style.overflow = 'hidden';
       checkScroll();
     } else {
+      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+      window.onresize = checkScroll;
       // 모달이 닫힐 때 스크롤 해제
       document.body.style.overflow = 'auto';
       checkScroll();
