@@ -6,7 +6,6 @@ import { ReactComponent as MoreIcon } from "../../../assets/image/icon-more.svg"
 import { ReactComponent as SirenIcon } from "../../../assets/image/icon-siren.svg";
 import { ReactComponent as LogoutIcon } from "../../../assets/image/icon-logout.svg";
 import { useNavigate } from "react-router-dom";
-import SearchModal from "../../Search/SearchModal";
 
 export default function Header({ type }) {
   const navigate = useNavigate();
@@ -16,10 +15,10 @@ export default function Header({ type }) {
     navigate("/");
   }
 
-  // // 헤더 검색 아이콘 : /search 페이지 이동
-  // const handleSearchClick = () => {
-  //   navigate("/search");
-  // };
+  // 헤더 검색 아이콘 : /search 페이지 이동
+  const handleSearchClick = () => {
+    navigate("/search");
+  };
 
   // goBack 버튼: 이전 페이지로 이동
   const goBack = () => {
@@ -59,23 +58,6 @@ export default function Header({ type }) {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  // 검색 아이콘 클릭 시 동작을 설정
-  const handleSearchIconClick = () => {
-    if (window.innerWidth <= 768) {
-      navigate("/search"); // /search 페이지로 이동
-    } else {
-      setIsSearchModalOpen(!isSearchModalOpen); // SearchModal 모달 열기
-    }
-  };
-
-  const openSearchModal = () => {
-    setIsSearchModalOpen(true);
-  };
-
-  const closeSearchModal = () => {
-    setIsSearchModalOpen(false);
   };
 
   // 페이지별 헤더 레이아웃 (각 버튼 경로 재설정 필요)
@@ -170,9 +152,6 @@ export default function Header({ type }) {
           </S.ModalContent>
         </S.ModalContainer>
       )}
-
-      {/* 검색 모달 */}
-      {isSearchModalOpen && <SearchModal />}
     </div>
   );
 }

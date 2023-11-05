@@ -5,14 +5,13 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 13px 20px 12px 12px;
-  background-color: #25282d;
-  border-bottom: 1px solid #5c5c5c;
+  background-color: #2c2f33;
+  /* border-bottom: 1px solid #dbdbdb; */
 
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 55px;
   z-index: 1000;
 
   box-sizing: border-box;
@@ -37,7 +36,7 @@ export const GameBuddyText = styled.div`
     font-family: var(--Black-ops);
     font-size: 22px;
     color: var(--color-purple);
-    margin-left: 20px;
+    margin-left: 13px;
   }
 `;
 
@@ -59,4 +58,56 @@ export const Input = styled.input`
     margin-left: 150px;
     margin-right: 40px;
   }
+`;
+
+export const SearchUserContainer = styled.div`
+  padding-top: 62px;
+  @media screen and (min-width: 768px) {
+    margin-left: 270px;
+    padding-left: 30px;
+  }
+`;
+
+export const SearchResultForm = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 16px 16px 0;
+`;
+
+export const SearchUserBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Image = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+`;
+
+export const Article = styled.article`
+  margin-left: 12px;
+  line-height: 25px;
+`;
+
+export const UserName = styled.p`
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+`;
+
+export const Intro = styled.p`
+  color: #767676;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 180px;
 `;
