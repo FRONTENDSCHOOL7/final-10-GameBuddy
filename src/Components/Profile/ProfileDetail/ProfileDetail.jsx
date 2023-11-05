@@ -10,16 +10,11 @@ import followAPI from "../../../API/followAPI/followingAPI";
 import unFollowAPI from "../../../API/followAPI/unFollowAPI";
 import { isValidImage } from "../../../Functional/isValidImageFunction";
 
-function Profile({ isMyProfile, accountname }) {
+function Profile({ isMyProfile, isFollowing, setIsFollowing, accountname }) {
   const [userData] = useRecoilState(userDataAtom);
   const [userPostList] = useRecoilState(userPostListAtom);
   const [myData] = useRecoilState(myDataAtom);
   const navigate = useNavigate();
-
-  //팔로잉 여부
-  const [isFollowing, setIsFollowing] = useState(
-    myData.following.includes(userData._id)
-  );
 
   async function follow(accountName) {
     const result = await followAPI(accountName);

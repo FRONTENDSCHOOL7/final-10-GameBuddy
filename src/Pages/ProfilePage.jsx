@@ -27,6 +27,7 @@ function ProfilePage() {
   const setUserPostList = useSetRecoilState(userPostListAtom);
   const resetPostList = useResetRecoilState(userPostListAtom);
   const [myData] = useRecoilState(myDataAtom);
+  const [userData] = useRecoilState(userDataAtom);
   const { accountname } = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,6 +39,15 @@ function ProfilePage() {
 
   // 팔로우 상태
   const [isFollowing, setIsFollowing] = useState(true);
+
+  useEffect(() => {
+    // userData가 유효한지 확인하고 isFollowing 상태를 업데이트
+    if (userData && userData._id) {
+      setIsFollowing(myData.following.includes(userData._id));
+    }
+  }, [myData, userData]); // myData와 userData가 변경될 때마다 호출
+  
+  
 
   useEffect(() => {
     async function fetchData() {
