@@ -33,7 +33,7 @@ function Search() {
         </S.GoBackIconWrapper>
 
         {/* GameBuddy 텍스트는 768px 이상에서만 보임 */}
-        <S.GameBuddyText onClick={goMain}>GameBuddy</S.GameBuddyText>
+        <S.GameBuddyText onClick={goMain}>Game Buddy</S.GameBuddyText>
         <S.Input
           id="search"
           placeholder="계정 검색"

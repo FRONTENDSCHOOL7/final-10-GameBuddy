@@ -83,9 +83,9 @@ export default function Header({ type }) {
     main: (
       <S.HeaderContainer>
         <S.Logo>Game Buddy</S.Logo>
-        <S.StyledIconButton type="button" onClick={handleSearchIconClick}>
+        {/* <S.StyledIconButton type="button" onClick={handleSearchIconClick}>
           <SearchIcon />
-        </S.StyledIconButton>
+        </S.StyledIconButton> */}
       </S.HeaderContainer>
     ),
 
@@ -143,7 +143,7 @@ export default function Header({ type }) {
           <MoreIcon />
         </S.StyledIconButton>
       </S.HeaderContainer>
-    ), 
+    ),
     signUp: (
       <S.HeaderContainer>
         <S.StyledIconButton type="button" onClick={goBack}>
@@ -159,7 +159,9 @@ export default function Header({ type }) {
       {/* 버튼 클릭 시 나타나는 모달 */}
       {isModalOpen && (
         <S.ModalContainer onClick={closeModal}>
-          <S.ModalContent onClick={(e) => e.stopPropagation()} btnColor={"#2c2f33"}>
+          <S.ModalContent
+            onClick={(e) => e.stopPropagation()}
+            btnColor={"#2c2f33"}>
             {modalContent.map((item, index) => (
               <S.ModalItem key={index} onClick={() => item.action()}>
                 {item.text}

@@ -5,13 +5,14 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 13px 20px 12px 12px;
-  background-color: #2c2f33;
-  /* border-bottom: 1px solid #dbdbdb; */
+  background-color: #25282d;
+  border-bottom: 1px solid #5c5c5c;
 
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: 55px;
   z-index: 1000;
 
   box-sizing: border-box;
@@ -36,7 +37,7 @@ export const GameBuddyText = styled.div`
     font-family: var(--Black-ops);
     font-size: 22px;
     color: var(--color-purple);
-    margin-left: 13px;
+    margin-left: 20px;
   }
 `;
 

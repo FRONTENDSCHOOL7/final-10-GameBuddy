@@ -66,7 +66,7 @@ const SearchUserContainer = styled.div`
   }
 
   /* 모달의 크기에 따라 조정할 스타일 */
-  width: 100%; /* 모달 안에서 가득 차도록 */
+  width: calc(100vw-72px); /* 모달 안에서 가득 차도록 */
   max-height: calc(
     100% - 62px
   ); /* 모달 상단 헤더 높이 제외한 영역 내에서 스크롤 가능하도록 */

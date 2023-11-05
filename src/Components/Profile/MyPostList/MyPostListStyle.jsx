@@ -21,12 +21,13 @@ export const ListContainer = styled.div`
   background-color: #2c2f33;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
   min-height: 55vh;
   padding-bottom: 70px;
   /* padding-bottom: 100px; */
   @media screen and (min-width: 768px) {
-    padding-left: 50px;
+    margin-left: 72px;
     min-height: 60vh;
   }
 `;
@@ -49,7 +50,7 @@ export const AlbumContainer = styled.div`
   padding: 24px 20px;
   margin-bottom: 50px;
   @media screen and (min-width: 768px) {
-    padding-left: 200px;
+    margin-left: 72px;
   }
 `;
 
