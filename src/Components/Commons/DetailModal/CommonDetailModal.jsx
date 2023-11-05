@@ -9,6 +9,7 @@ import DefaultImage from "../../../assets/image/char_inactive.png";
 import more from "../../../assets/image/icon-more.svg";
 
 import {
+  alertStateAtom,
   checkMyInfo,
   commentListDataAtom,
   currentLocation,
@@ -35,6 +36,7 @@ import unheartPostAPI from "../../../API/unheartPostAPI";
 import heartPostAPI from "../../../API/heartPostAPI";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../Profile/MyPostList/MoreModal/MoreModal";
+import Alert from "../Alert/Alert";
 
 function CommonDetailModal() {
   const location = useRecoilValue(currentLocation);
@@ -57,6 +59,8 @@ function CommonDetailModal() {
   const [selectedPostId, setSelectedPostId] = useState(null); // postId를 저장해서 moreModal에 넘겨주기 위함
   const isMyProfile =
     data.author.accountname === commentMyProfile.user.accountname;
+
+  const [alertModal, setAlertModal] = useRecoilState(alertStateAtom);
 
   const navigate = useNavigate();
 
@@ -123,9 +127,13 @@ function CommonDetailModal() {
           setPostData([...copyData]);
         }
       }
-      alert(result);
+      setAlertModal({ message: result, isOpen: true });
+      // alert(result);
     } else if (commentImg.includes("icon-siren")) {
-      alert(await reportCommentAPI(data.id, commentId, username));
+      setAlertModal({
+        message: await reportCommentAPI(data.id, commentId, username),
+        isOpen: true
+      });
     }
   };
 
@@ -311,6 +319,7 @@ function CommonDetailModal() {
           setIsPostModalVisible={setIsPostModalVisible}
         />
       )}
+      {alertModal.isOpen && <Alert />}
     </S.PostDetailBackground>
   );
 }
