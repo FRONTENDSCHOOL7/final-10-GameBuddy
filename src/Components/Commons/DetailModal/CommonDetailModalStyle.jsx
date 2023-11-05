@@ -324,6 +324,7 @@ export const PostDetailBackButton = styled.button`
   border-color: white;
   color: white;
   background-color: transparent;
+  line-height: 1.6rem;
 
   position: absolute;
   bottom: 15px;
