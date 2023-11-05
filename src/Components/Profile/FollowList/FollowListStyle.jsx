@@ -4,20 +4,27 @@ export const FollowListContainer = styled.div`
   padding-top: 62px;
   background-color: #25282d;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const FollowListForm = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
   padding-top: 16px;
+  @media screen and (min-width: 500px) {
+    width: 450px;
+  }
 `;
 
 export const ProfileBox = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const Image = styled.img`
@@ -48,7 +55,7 @@ export const Intro = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 180px; /* 원하는 최대 너비로 조정 가능 */
+  width: 120px; /* 원하는 최대 너비로 조정 가능 */
 `;
 
 export const FollowBtn = styled.button`

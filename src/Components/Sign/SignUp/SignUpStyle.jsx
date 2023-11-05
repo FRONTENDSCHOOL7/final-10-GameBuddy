@@ -40,7 +40,7 @@ export const LogoTitle = styled.div`
   display: none;
   @media screen and (min-width: 768px) {
     display: block;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
   }
 `
 

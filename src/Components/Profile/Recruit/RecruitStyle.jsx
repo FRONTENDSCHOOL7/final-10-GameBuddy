@@ -21,22 +21,97 @@ export const RecruitContainer = styled.div`
 `;
 
 export const GameList = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-start; /* 게임 목록 왼쪽에서부터 시작 */
-  width: 100%;
-  overflow-x: auto; /* 가로 스크롤 */
-  -ms-overflow-style: none;
+  width: 85%;
+  margin-left: 40px;
   padding-bottom: 15px;
-
+  overflow-x: auto; /* 가로 스크롤 */
+  white-space: 'nowrap';
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
   }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
+`;
+
+export const LeftBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 45%;
+  transform: translateY(-50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-top: 0;
+  border-right: 0;
+  color: #ffffff;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+`;
+export const RightBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 45%;
+  right: 3%;
+  transform: translateY(-50%, -50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-bottom: 0;
+  border-left: 0;
+  color: #ffffff;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+`;
+export const LeftJoinedBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 40%;
+  left: 3%;
+  transform: translateY(-50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-top: 0;
+  border-right: 0;
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+`;
+export const RightJoinedBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 40%;
+  right: 3%;
+  transform: translateY(-50%, -50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-bottom: 0;
+  border-left: 0;
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 `;
 
 export const GameCard = styled.div`
   font-family: var(--Roboto);
   font-size: 12px;
   margin-right: 20px;
+  cursor: pointer;
 
   .gameName {
     font-weight: 700;
@@ -78,6 +153,7 @@ export const ModalContent = styled.div`
   height: 120vw;
   max-width: 600px;
   max-height: 800px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -90,9 +166,34 @@ export const ModalProfile = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+export const ModalTheJoinedContainer = styled.div`
+  position: absolute;
+  right: 0px;
+  bottom: 45px;
+  width: 100%;
+  max-width: 640px;
+  background-color: #202020;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+`;
+export const ModalTheJoined = styled.div`
+  width: 80%;
+  height: 150px;
+  display: flex;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
 export const ProfileDetail = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px;
+  width: 100px;
 `;
 export const ModalProfileImage = styled.img`
   width: 70px;
@@ -103,6 +204,7 @@ export const ModalProfileImage = styled.img`
 export const ModalArticle = styled.article`
   margin-left: 10px;
   line-height: 20px;
+  width: 90px;
   vertical-align: middle;
   display: flex;
   flex-direction: column;
@@ -175,36 +277,22 @@ export const ModalBtnCover = styled.div`
   @media screen and (min-width: 768px) {
     width: 90%;
   }
-`;
-export const ModalTheJoined = styled.div`
-  width: 200px;
-  height: 250px;
-  position: absolute;
-  background-color: white;
-  right: 20px;
-  bottom: 30px;
-  border: none;
-  border-radius: 15px;
-  overflow-y: auto;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-export const CloseModalTheJoined = styled.div`
-  position: absolute;
-  right: -35px;
-  top: -245px;
-  color: white;
-  font-size: 24px;
-  width: 25px;
-  height: 25px;
-  padding: 10px;
-  border: 1px solid white;
-  border-radius: 25px;
-  text-align: center;
-  cursor: pointer;
-`;
+`
+
+// export const CloseModalTheJoined = styled.div`
+//   position: absolute;
+//   right: -35px;
+//   top: -245px;
+//   color:white;
+//   font-size:24px;
+//   width: 25px;
+//   height: 25px;
+//   padding: 10px;
+//   border: 1px solid white;
+//   border-radius: 25px;
+//   text-align: center;
+//   cursor: pointer;
+// `
 export const ModalBtn = styled.button`
   width: 60%;
   height: 35px;
