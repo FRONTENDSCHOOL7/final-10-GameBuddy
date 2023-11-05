@@ -72,6 +72,40 @@ export const RightBtn = styled.button`
   height: 35px;
   cursor: pointer;
 `;
+export const LeftJoinedBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 40%;
+  left: 3%;
+  transform: translateY(-50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-top: 0;
+  border-right: 0;
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+`;
+export const RightJoinedBtn = styled.button`
+  position: absolute;
+  /* z-index: 9000; */
+  top: 40%;
+  right: 3%;
+  transform: translateY(-50%, -50%);
+  transform: rotate(45deg);
+  font-size: 20px;
+  background-color:transparent;
+  border: 3px solid #ffffff;
+  border-bottom: 0;
+  border-left: 0;
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+`;
 
 export const GameCard = styled.div`
   font-family: var(--Roboto);
@@ -132,11 +166,34 @@ export const ModalProfile = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+export const ModalTheJoinedContainer = styled.div`
+  position: absolute;
+  right: 0px;
+  bottom: 45px;
+  width: 100%;
+  max-width: 640px;
+  background-color: #202020;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+`;
+export const ModalTheJoined = styled.div`
+  width: 80%;
+  height: 150px;
+  display: flex;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
 export const ProfileDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 15px;
+  margin-left: 5px;
+  width: 100px;
 `;
 export const ModalProfileImage = styled.img`
   width: 70px;
@@ -147,6 +204,7 @@ export const ModalProfileImage = styled.img`
 export const ModalArticle = styled.article`
   margin-left: 10px;
   line-height: 20px;
+  width: 90px;
   vertical-align: middle;
   display: flex;
   flex-direction: column;
@@ -220,23 +278,7 @@ export const ModalBtnCover = styled.div`
     width: 90%
   }
 `
-export const ModalTheJoined = styled.div`
-  width: 90%;
-  max-width: 640px;
-  height: 150px;
-  display: flex;
-  position: absolute;
-  background-color: #202020;
-  right: 0px;
-  bottom: 45px;
-  border: none;
-  border-radius: 15px;
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`
+
 // export const CloseModalTheJoined = styled.div`
 //   position: absolute;
 //   right: -35px;

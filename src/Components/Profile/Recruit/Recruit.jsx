@@ -71,6 +71,44 @@ function Recruit({ isMyProfile }) {
   // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
   window.onload = checkScroll;
   window.onresize = checkScroll;
+
+
+  // 왼쪽 화살표 클릭 핸들러
+ const joinedLeft = () => {
+  if (scrollContainerRef.current) {
+    scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+};
+// 오른쪽 화살표 클릭 핸들러
+const joinedRight = () => {
+  if (scrollContainerRef.current) {
+    scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+  }
+};
+ function checkJoinedScroll() {
+   const element = document.getElementById('joinedBar');
+   if(element){
+   console.log("스크롤위드",element.scrollWidth)
+   const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+   
+   // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
+   const leftBtn = document.getElementById('leftJoinedBtn');
+   if (hasHorizontalScrollbar) {
+     leftBtn.style.display = 'block';
+   } else {
+     leftBtn.style.display = 'none';
+   }
+   const rightBtn = document.getElementById('rightJoinedBtn');
+   if (hasHorizontalScrollbar) {
+     rightBtn.style.display = 'block';
+   } else {
+     rightBtn.style.display = 'none';
+   }
+  }
+ }
+ 
+ // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+ window.onresize = checkJoinedScroll;
   
 
   async function getTheJoinedData(theJoinedData) {
@@ -93,14 +131,18 @@ function Recruit({ isMyProfile }) {
   useEffect(() => { 
     fetchData();
   }, [accountname]);
-
+  
   useEffect(() => {
     checkScroll();
   }, [recruit])
-
+  
   useEffect(() => {
     getTheJoinedData(theJoinedData);
   }, [theJoinedAccountName])
+  
+  useEffect(() => {
+    checkJoinedScroll();
+  }, [theJoined])
 
   useEffect(() => {
     if (modalOn) {
@@ -169,6 +211,7 @@ function Recruit({ isMyProfile }) {
             <S.GameCard
               key={id}
               onClick={() => {
+                setTheJoinedData([]);
                 setRecruitId(id);
                 getUserInfo(JSON.parse(recruit.itemName)[1]);
                 setModalOn(true);
@@ -233,28 +276,33 @@ function Recruit({ isMyProfile }) {
                 <S.UserIcon />
                 <S.ModalRecruitNumber>{`${recruit[recruitId].price}/${JSON.parse(recruit[recruitId].link)[0]}`}</S.ModalRecruitNumber>
               </div>
-              <div>
               {theJoined && (<>
-                <S.ModalTheJoined className="theJoinedContainer">
-                  {theJoinedData.map((theJoinedData, id) => {          
-                    return (
-                      <S.ProfileDetail key={id} style={{marginBottom:"10px"}}>
-                      <S.ModalProfileImage src={theJoinedData.profile.image} />
-                        <S.ModalArticle>
-                          <S.ModalUsername>
-                            {theJoinedData.profile.username}
-                          </S.ModalUsername>
-                          <S.ModalAccountname>
-                            {theJoinedData.profile.accountname}
-                          </S.ModalAccountname>
-                        </S.ModalArticle>
-                      </S.ProfileDetail>
-                    )
-                  })}
-                </S.ModalTheJoined>
+                <S.ModalTheJoinedContainer>
+                <S.LeftJoinedBtn id="leftJoinedBtn" onClick={joinedLeft}></S.LeftJoinedBtn>
+                <S.RightJoinedBtn id="rightJoinedBtn" onClick={joinedRight}></S.RightJoinedBtn>
+                  <S.ModalTheJoined ref={scrollContainerRef} id="joinedBar">
+                    {theJoinedData.map((theJoinedData, id) => {          
+                      return (
+                        <S.ProfileDetail key={id}>
+                        <S.ModalUsername>
+                          {id+1}
+                        </S.ModalUsername>
+                        <S.ModalProfileImage src={theJoinedData.profile.image} />
+                          <S.ModalArticle>
+                            <S.ModalUsername>
+                              {theJoinedData.profile.username}
+                            </S.ModalUsername>
+                            <S.ModalAccountname>
+                              {theJoinedData.profile.accountname}
+                            </S.ModalAccountname>
+                          </S.ModalArticle>
+                        </S.ProfileDetail>
+                      )
+                    })}
+                  </S.ModalTheJoined>
+                </S.ModalTheJoinedContainer>
                 </>)
               }
-              </div> 
             </S.ModalBtnCover>
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
