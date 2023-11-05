@@ -11,7 +11,7 @@ export const Article = styled.article`
     props.isMyProfile
       ? "15px"
       : "80px"}; //첫번째 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
-  padding-top: ${(props) =>
+  padding-bottom: ${(props) =>
     props.isMyProfile
       ? "15px"
       : "80px"}; //마지막 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
@@ -20,7 +20,7 @@ export const Article = styled.article`
   overflow-y: hidden;
   box-sizing: border-box;
   @media screen and (min-width: 768px) {
-    padding-left: 200px;
+    padding-left: 72px;
   }
 `;
 

@@ -5,36 +5,55 @@ import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
 import Footer from "../Components/Commons/Footer/Footer";
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState
+} from "recoil";
 import { checkMyInfo, isTouchFeed, userDataAtom } from "../Store/Store";
 import { myDataAtom } from "../Store/Store";
 import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
 import userPostListAPI from "../API/userPostListAPI";
-import MyPostDetailModal from "../Components/Profile/MyPostList/MyPostDetailModal/MyPostDetailModal";
+// import MyPostDetailModal from "../Components/Profile/MyPostList/MyPostDetailModal/MyPostDetailModal";
 import myInfoAPI from "../API/myInfoAPI";
 import CommonDetailModal from "../Components/Commons/DetailModal/CommonDetailModal";
+import Loading from "../Components/Commons/Loading";
 
 function ProfilePage() {
-  const [userData, setUserData] = useRecoilState(userDataAtom);
-  const [userPostList, setUserPostList] = useRecoilState(userPostListAtom);
+  const setUserData = useSetRecoilState(userDataAtom);
+  const resetUserData = useResetRecoilState(userDataAtom);
+  const setUserPostList = useSetRecoilState(userPostListAtom);
+  const resetPostList = useResetRecoilState(userPostListAtom);
   const [myData] = useRecoilState(myDataAtom);
   const { accountname } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const isVisible = useRecoilValue(isTouchFeed);
 
   const setMyInfo = useSetRecoilState(checkMyInfo);
+  // true면 마이 프로필
+  let isMyProfile = accountname === myData.accountname;
+
+  // 팔로우 상태
+  const [isFollowing, setIsFollowing] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
       const obj = await myInfoAPI();
       setMyInfo(obj);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      resetUserData();
+      resetPostList();
       const userInfo = await userInfoAPI(accountname);
       console.log(userInfo);
       setUserData({
@@ -47,17 +66,15 @@ function ProfilePage() {
         followingCount: userInfo.profile.followingCount
       });
       const userPostList = await userPostListAPI(accountname);
-      console.log(userPostList);
       setUserPostList(userPostList);
+      setIsLoading(false);
     };
     fetchData();
   }, [accountname]);
 
-  // true면 마이 프로필
-  let isMyProfile = accountname === myData.accountname;
-
-  // 팔로우 상태
-  const [isFollowing, setIsFollowing] = useState(true);
+  if (isLoading) {
+    return <Loading />; // 로딩 중일 때 <Loading/> 렌더링
+  }
 
   return (
     <div style={{ backgroundColor: "#3f4246", height: "100vh" }}>

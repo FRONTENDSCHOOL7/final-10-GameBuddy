@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { ReactComponent as SirenIconForStyle } from "../../../assets/image/icon-siren2.svg";
 import { ReactComponent as UpdateIconForStyle } from "../../../assets/image/icon-edit.svg";
+import { ReactComponent as UserIconForStyle } from "../../../assets/image/ProfileIcon.svg";
 
 export const RecruitContainer = styled.div`
   font-family: var(--Roboto-M);
   background-color: #2c2f33;
   margin-top: 8px;
   padding-left: 20px;
+  position: relative;
   @media screen and (min-width: 768px) {
-    margin-left: 200px;
+    margin-left: 72px;
   }
 
   h2 {
@@ -126,11 +127,15 @@ export const ModalControlBtn = styled.button`
     cursor: pointer;
   }
 `;
-export const SirenIcon = styled(SirenIconForStyle)`
-  width: 25px;
-  height: 25px;
-  fill: #ff0000;
-  cursor: pointer;
+export const UserIcon = styled(UserIconForStyle)`
+  width: 20px;
+  height: 20px;
+  fill: #dfdfdf;
+  margin-left: auto;
+  @media screen and (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 export const UpdateIcon = styled(UpdateIconForStyle)`
   width: 30px;
@@ -153,17 +158,61 @@ export const ModalIntro = styled.p`
 `;
 export const ModalRecruitNumber = styled.p`
   color: #f26e22;
-  font-size: 20px;
+  font-size: 18px;
+  margin-left: 3px;
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+  }
+`;
+export const ModalBtnCover = styled.div`
+  position: relative;
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  @media screen and (min-width: 768px) {
+    width: 90%;
+  }
+`;
+export const ModalTheJoined = styled.div`
+  width: 200px;
+  height: 250px;
+  position: absolute;
+  background-color: white;
+  right: 20px;
+  bottom: 30px;
+  border: none;
+  border-radius: 15px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+export const CloseModalTheJoined = styled.div`
+  position: absolute;
+  right: -35px;
+  top: -245px;
+  color: white;
+  font-size: 24px;
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
 `;
 export const ModalBtn = styled.button`
-  width: 75%;
+  width: 60%;
   height: 35px;
   font-size: 19px;
   color: #ffffff;
   border-radius: 24px;
   border: none;
-  background-color: ${props => props.btnColor};
-  margin-bottom: 0.8rem;
+  background-color: ${(props) => props.btnColor};
 `;
 export const ModalCloseBtn = styled.button`
   width: 2rem;

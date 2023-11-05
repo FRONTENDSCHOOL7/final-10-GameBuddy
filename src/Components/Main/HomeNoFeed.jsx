@@ -10,10 +10,12 @@ const NoFeedContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   height: 100vh;
   font-family: "Black Ops One", sans-serif;
   font-size: 14px;
   line-height: 14px; /* 100% */
+  background-color: #2c2f33;
 
   h3 {
     color: #767676;
@@ -31,16 +33,9 @@ const NoFeedContainer = styled.div`
     height: 44px;
     flex-shrink: 0;
   }
-
-  @font-face {
-    font-family: "Black Ops One";
-    src: url("../../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-  }
 `;
 
-export default function Home_no_feed() {
+function HomeNoFeed() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -51,7 +46,7 @@ export default function Home_no_feed() {
     <>
       <Header type="main" />
       <NoFeedContainer>
-        <img src={NoFeedImage} alt="gameBuddy 이미지 " />
+        <img src={NoFeedImage} alt="gameBuddy 이미지" />
         <h3>유저를 검색해 팔로우 해보세요!</h3>
         <button onClick={handleSearch} type="button">
           검색하기
@@ -61,3 +56,5 @@ export default function Home_no_feed() {
     </>
   );
 }
+
+export default HomeNoFeed;

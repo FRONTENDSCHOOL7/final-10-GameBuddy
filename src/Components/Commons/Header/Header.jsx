@@ -12,7 +12,7 @@ export default function Header({ type }) {
 
   function logout() {
     localStorage.removeItem("token");
-    navigate('/')
+    navigate("/");
   }
 
   // 헤더 검색 아이콘 : /search 페이지 이동
@@ -28,6 +28,7 @@ export default function Header({ type }) {
   // 더보기, 신고하기, 로그아웃 버튼 모달 (action 함수 수정 필요)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const openChatModal = () => {
     setModalContent([
@@ -64,9 +65,9 @@ export default function Header({ type }) {
     main: (
       <S.HeaderContainer>
         <S.Logo>Game Buddy</S.Logo>
-        <S.StyledIconButton type="button" onClick={handleSearchClick}>
+        {/* <S.StyledIconButton type="button" onClick={handleSearchIconClick}>
           <SearchIcon />
-        </S.StyledIconButton>
+        </S.StyledIconButton> */}
       </S.HeaderContainer>
     ),
 
@@ -124,6 +125,13 @@ export default function Header({ type }) {
           <MoreIcon />
         </S.StyledIconButton>
       </S.HeaderContainer>
+    ),
+    signUp: (
+      <S.HeaderContainer>
+        <S.StyledIconButton type="button" onClick={goBack}>
+          <GoBackIcon />
+        </S.StyledIconButton>
+      </S.HeaderContainer>
     )
   };
   return (
@@ -133,7 +141,9 @@ export default function Header({ type }) {
       {/* 버튼 클릭 시 나타나는 모달 */}
       {isModalOpen && (
         <S.ModalContainer onClick={closeModal}>
-          <S.ModalContent onClick={(e) => e.stopPropagation()}>
+          <S.ModalContent
+            onClick={(e) => e.stopPropagation()}
+            btnColor={"#2c2f33"}>
             {modalContent.map((item, index) => (
               <S.ModalItem key={index} onClick={() => item.action()}>
                 {item.text}

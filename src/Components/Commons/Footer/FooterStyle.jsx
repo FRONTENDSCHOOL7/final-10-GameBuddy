@@ -21,16 +21,12 @@ export const FooterContainer = styled.footer`
 
   @media screen and (min-width: 768px) {
     left: 0;
-    width: 260px;
+    width: 72px;
     height: calc(100vh - 55px);
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
-    /* border-right: 1px solid #dbdbdb; */
-
-    // 웹 화면에서 작은 footer 사용시 (ex. chat)
-    width: ${({ isSpecialPage }) => (isSpecialPage ? "72px" : "200px")};
   }
 `;
 
@@ -58,33 +54,32 @@ export const Item = styled.button`
   }
 
   @media screen and (min-width: 768px) {
-    font-size: 20px;
+    font-size: 0px;
     flex-direction: row;
     align-items: center;
     gap: 10px;
     height: auto;
-    padding: 50px 0 0 42px;
-    ${({ isSpecialPage }) =>
-      isSpecialPage &&
-      `
-        padding-left: 23px;
-      `}
-  }
+    padding: 50px 0 0 23px;
+    position: relative;
 
-  span {
-    padding-top: 2px;
-    ${({ $specificItem }) =>
-      $specificItem &&
-      `
-        margin-right: 5px;  
-        margin-top: 1px;
-      `}
-    @media screen and (min-width: 768px) {
-      ${({ isSpecialPage }) =>
-        isSpecialPage &&
-        `
-        font-size: 0; // 글자 사이즈를 0으로 설정하여 텍스트를 숨김
-      `}
+    span {
+      position: absolute;
+      top: 85%;
+      left: 100%; // 오른쪽으로 위치
+      transform: translateY(-50%); // 세로 가운데 정렬
+      opacity: 0;
+      background: var(--color-purple);
+      color: white;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12px;
+      white-space: nowrap; // 텍스트를 한 줄로 표시
+      transition: opacity 0.3s ease-in-out;
+      box-shadow: 0px 0px 8px #ffffff90;
+    }
+
+    &:hover span {
+      opacity: 1;
     }
   }
 `;
@@ -114,19 +109,6 @@ export const StyledChatIcon = styled(ChatIcon)`
   margin-right: 3px;
   path {
     stroke: ${({ $active }) => ($active ? "#5865F2" : "#a4a4a4")};
-  }
-  ${({ $specificItem }) =>
-    $specificItem &&
-    `
-      margin-right: 5px; 
-    `}
-
-  @media screen and (min-width: 768px) {
-    ${({ $specificItem }) =>
-      $specificItem &&
-      `
-        margin-right: 0px;  // 원래의 스타일로 복원합니다.
-      `}
   }
 `;
 

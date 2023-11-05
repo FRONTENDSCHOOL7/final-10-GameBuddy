@@ -4,38 +4,39 @@ export const FollowListContainer = styled.div`
   padding-top: 62px;
   background-color: #25282d;
   height: 100vh;
-`
+  width: 100vw;
+`;
 
 export const FollowListForm = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  padding: 16px 16px 0;
-`
+  width: 100%;
+  padding-top: 16px;
+`;
 
 export const ProfileBox = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 export const Image = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50px;
-`
+`;
 
 export const Article = styled.article`
   margin-left: 12px;
   line-height: 25px;
-`
+`;
 
 export const UserName = styled.p`
   color: #fff;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-`
+`;
 
 export const Intro = styled.p`
   color: #767676;
@@ -48,8 +49,7 @@ export const Intro = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 180px; /* 원하는 최대 너비로 조정 가능 */
-`
-
+`;
 
 export const FollowBtn = styled.button`
   background-color: #5865f2;
@@ -62,7 +62,7 @@ export const FollowBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 export const UnFollowBtn = styled.button`
   background-color: #dbdbdb;
   color: #000000;
@@ -74,7 +74,7 @@ export const UnFollowBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 export const ItsMeBtn = styled.button`
   background-color: #ff9900;
   color: #ffffff;
@@ -83,4 +83,4 @@ export const ItsMeBtn = styled.button`
   border-radius: 26px;
   border: none;
   text-align: center;
-`
+`;
