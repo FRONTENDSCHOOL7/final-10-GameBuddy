@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
-import { uploadImageAtom } from "../../Store/Store";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import {
+  alertStateAtom,
+  currentLocation,
+  uploadImageAtom
+} from "../../Store/Store";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import postAPI from "../../API/postAPI";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Alert from "../Commons/Alert/Alert";
 
 function Post() {
   const currentImage = useRecoilValue(uploadImageAtom);
@@ -14,7 +19,9 @@ function Post() {
   const [postContent, setPostContent] = useState("");
 
   const [isContentValid, setIsContentValid] = useState(true);
-  const navigate = useNavigate();
+  const location = useRecoilValue(currentLocation);
+
+  const [alertModal, setAlertModal] = useRecoilState(alertStateAtom);
 
   const onChangePostContent = (e) => {
     if (e.target.value === "") {
@@ -25,21 +32,20 @@ function Post() {
     setPostContent(e.target.value);
   };
 
-  const handlePostSubmit = async () => {
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
     let result = "";
     if (currentImage === DefaultImage) {
-      console.log("이거  실행");
       result = await postAPI(postContent);
     } else {
       result = await postAPI(postContent, currentImage);
     }
 
     if (result.includes("완료")) {
-      alert(result);
+      setAlertModal({ message: result, isOpen: true, navigation: location });
       resetRecoilState();
-      navigate("/main");
     } else {
-      alert(result);
+      setAlertModal({ message: result, isOpen: true });
     }
   };
 
@@ -56,9 +62,14 @@ function Post() {
         style={isContentValid ? { display: "none" } : { display: "block" }}>
         *게시글 내용을 입력해주세요.
       </S.Warning>
-      <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
+      <S.SubmitBtn
+        type="submit"
+        onClick={(e) => {
+          handlePostSubmit(e);
+        }}>
         저장하기
       </S.SubmitBtn>
+      {alertModal.isOpen && <Alert />}
     </>
   );
 }
