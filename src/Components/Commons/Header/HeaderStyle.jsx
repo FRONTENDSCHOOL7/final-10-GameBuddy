@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  height: 55px;
   z-index: 1000;
 
   box-sizing: border-box;

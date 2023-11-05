@@ -16,54 +16,67 @@ export const WriteContainer = styled.div`
   margin: 0 auto;
 
   @media screen and (min-width: 768px) {
-    width: auto;
     height: auto;
     text-align: center;
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
     font-size: 16px;
-    padding: 0 16px;
+    box-sizing: border-box;
   }
 `;
 
 export const Divdiv = styled.div`
-  flex-grow: 1;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   margin: auto;
+  padding: 0;
+  margin: 0; 
+  box-sizing: border-box;
+
+
+  @media screen and (min-width: 768px) {
+    max-width: none;
+    margin-left: 30%;
+    box-sizing: border-box;
+  }
 `;
 
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  max-width: 322px; 
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
-  padding: 60px 50px 50px 50px;
+  padding-top: 90px;
   border-radius: 8px;
-  background-color: rgb(255, 255, 255);
+  background-color: #2c2f33;
   height: 100%;
+
 
   @media screen and (min-width: 768px) {
     padding: 0 10px 45px 30px;
+  box-sizing: border-box;
+
   }
 `;
 
 export const ButtonImgContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-left: 0;
+  box-sizing: border-box;
 
   img {
     margin: 6px;
+  }
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
   }
 `;
 
@@ -78,18 +91,20 @@ export const InputContainer = styled.div`
 export const Button = styled.button`
   width: 145px;
   height: 35px;
-  margin: 50px 20px 33px 0;
+  margin: 0px 10px 33px 10px;
   border-radius: 44px;
   cursor: pointer;
   background-color: ${(props) => (props.selected ? "#5865f2" : "#8EA1E1")};
   color: white;
   border: none;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
 
   @media screen and (min-width: 768px) {
     margin-top: 30;
+    margin-right: 20px;
+    margin-left: 0;
   }
 `;
 
@@ -99,12 +114,13 @@ export const ImageContainer = styled.div`
   h5 {
     text-align: left;
     margin-left: 0;
+    color: white;
   }
 
   @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #dbdbdb;
+    border-right: 2px solid #a4a4a4ff;
     padding-right: 50px;
   }
 `;
@@ -121,28 +137,30 @@ export const WriteImage = styled.img`
 
 export const WriteFormWrapper = styled.div`
   width: 322px;
+  
   padding: 0;
 
   @media screen and (min-width: 768px) {
-    padding: 0 50px;
+    padding: 0 45px;
   }
 `;
 
 export const PTag = styled.p`
   text-align: left;
-  margin: 20px 0 18px 0;
+  margin: 20px 0 15px 0;
+  color: white;
 `;
 
 export const PTagpost = styled.p`
   text-align: left;
+  color: white;
 `
 
 export const InputTag = styled.input`
   min-width: 322px;
   width: 100%;
-  height: 23px;
+  height: 34px;
   border-width: 0px 0px 1px;
-  padding: 0 0 1px 0;
   font-size: 20px;
 
   &:focus {
@@ -153,11 +171,12 @@ export const InputTag = styled.input`
   &::placeholder {
     color: #dbdbdb;
     font-size: 14px;
+    text-indent: 1ch;
   }
 `;
 
 export const TextAreaTag = styled.textarea`
-  min-width: 308px;
+  min-width: 322px;
   width: 100%;
   height: 30px;
   border-width: 0px 0px 1px;
@@ -179,6 +198,7 @@ export const TextAreaTag = styled.textarea`
   &::placeholder {
     color: #dbdbdb;
     font-size: 14px;
+    text-indent: 1ch;
   }
 
   @media screen and (max-width: 768px) {

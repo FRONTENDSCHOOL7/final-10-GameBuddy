@@ -7,9 +7,9 @@ export const RecruitContainer = styled.div`
   background-color: #2c2f33;
   margin-top: 8px;
   padding-left: 20px;
-  position:relative;
+  position: relative;
   @media screen and (min-width: 768px) {
-    margin-left: 200px;
+    margin-left: 72px;
   }
 
   h2 {
@@ -275,7 +275,7 @@ export const ModalBtnCover = styled.div`
   align-items: center;
   margin-bottom: 0.8rem;
   @media screen and (min-width: 768px) {
-    width: 90%
+    width: 90%;
   }
 `
 
@@ -300,7 +300,7 @@ export const ModalBtn = styled.button`
   color: #ffffff;
   border-radius: 24px;
   border: none;
-  background-color: ${props => props.btnColor};
+  background-color: ${(props) => props.btnColor};
 `;
 export const ModalCloseBtn = styled.button`
   width: 2rem;

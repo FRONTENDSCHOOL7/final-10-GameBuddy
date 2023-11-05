@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
-import { useRecoilValue, useResetRecoilState } from "recoil";
-import { uploadImageAtom } from "../../Store/Store";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import {
+  alertStateAtom,
+  currentLocation,
+  uploadImageAtom
+} from "../../Store/Store";
 import gameRecruitAPI from "../../API/gameRecruitAPI/gameRecruitAPI";
 import myAccountNameAPI from "../../API/myAccountNameAPI";
 import { useNavigate } from "react-router-dom";
+import Alert from "../Commons/Alert/Alert";
 
 function GameRecruitPost() {
   const currentImage = useRecoilValue(uploadImageAtom);
@@ -20,6 +25,10 @@ function GameRecruitPost() {
   const [isGameTitleValid, setIsGameTitleValid] = useState(true);
   const [isPeopleValid, setIsPeopleValid] = useState(true);
   const [isDetailValid, setIsDetailValid] = useState(true);
+
+  const location = useRecoilValue(currentLocation);
+
+  const [alertModal, setAlertModal] = useRecoilState(alertStateAtom);
 
   const onChangeRecruitGameTitle = (e) => {
     const title = e.target.value;
@@ -53,9 +62,11 @@ function GameRecruitPost() {
   };
 
   const handlePostSubmit = async () => {
-    // console.log("현재 이미지", currentImage);
     if (currentImage === DefaultImage) {
-      alert("게임 모집 시, 이미지를 등록 해야합니다.");
+      setAlertModal({
+        message: "게임 모집 시, 이미지를 등록 해야합니다.",
+        isOpen: true
+      });
     } else {
       const myAccountName = await myAccountNameAPI();
       const result = await gameRecruitAPI(
@@ -65,20 +76,18 @@ function GameRecruitPost() {
         currentImage,
         myAccountName
       );
-      alert(result);
+      setAlertModal({
+        message: result,
+        isOpen: true,
+        navigation: location
+      });
       resetRecoilState();
-      navigate("/main");
     }
   };
 
-  const PTag = styled.p`
-    margin: 20px 0 18px 0;
-    text-align: left;
-  `;
-
   return (
     <>
-      <S.PTag>모집 게임</S.PTag>
+      <S.PTag style={{ marginTop: "0", marginBottom: "14px" }}>모집 게임</S.PTag>
       <S.InputTag
         type="text"
         placeholder=" 2~15자 이내여야 합니다."
@@ -116,6 +125,7 @@ function GameRecruitPost() {
       <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
         저장하기
       </S.SubmitBtn>
+      {alertModal.isOpen && <Alert />}
     </>
   );
 }

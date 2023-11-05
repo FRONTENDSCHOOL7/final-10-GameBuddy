@@ -4,14 +4,19 @@ import ProfileDetail from "../Components/Profile/ProfileDetail/ProfileDetail";
 import Recruit from "../Components/Profile/Recruit/Recruit";
 import MyPostList from "../Components/Profile/MyPostList/MyPostList";
 import Footer from "../Components/Commons/Footer/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
   useRecoilState,
   useRecoilValue,
   useResetRecoilState,
   useSetRecoilState
 } from "recoil";
-import { checkMyInfo, isTouchFeed, userDataAtom } from "../Store/Store";
+import {
+  checkMyInfo,
+  currentLocation,
+  isTouchFeed,
+  userDataAtom
+} from "../Store/Store";
 import { myDataAtom } from "../Store/Store";
 import { userPostListAtom } from "../Store/Store";
 import userInfoAPI from "../API/userInfoAPI";
@@ -39,6 +44,7 @@ function ProfilePage() {
 
   // 팔로우 상태
   const [isFollowing, setIsFollowing] = useState(true);
+  const [location, setLocation] = useRecoilState(currentLocation);
 
   useEffect(() => {
     // userData가 유효한지 확인하고 isFollowing 상태를 업데이트
@@ -54,6 +60,7 @@ function ProfilePage() {
       setIsLoading(true);
       const obj = await myInfoAPI();
       setMyInfo(obj);
+      setLocation("/profile/" + obj.user.accountname);
       setIsLoading(false);
     }
     fetchData();
@@ -62,8 +69,8 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      resetUserData();
-      resetPostList();
+      // resetUserData();
+      // resetPostList();
       const userInfo = await userInfoAPI(accountname);
       console.log(userInfo);
       setUserData({

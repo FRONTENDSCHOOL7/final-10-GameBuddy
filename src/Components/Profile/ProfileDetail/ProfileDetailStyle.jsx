@@ -11,7 +11,7 @@ export const ProfileContainer = styled.div`
   /* border-bottom: 1px solid #dbdbdb; */
   margin-top: 52px;
   @media screen and (min-width: 768px) {
-    margin-left: 200px;
+    margin-left: 72px;
   }
 `;
 
