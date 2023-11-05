@@ -91,12 +91,12 @@ function ProfilePage() {
       <Header type={isMyProfile ? "myProfile" : "userProfile"} />
       <ProfileDetail
         isMyProfile={isMyProfile}
-        isFollowing={isFollowing}
+        isFollowingParam={isFollowing}
         setIsFollowing={setIsFollowing}
         accountname={accountname}
       />
       {/* 팔로우가 되어있을 때만 Recruit, MyPostList 컴포넌트가 렌더링 됨 */}
-      {isFollowing && (
+      {(isFollowing || isMyProfile) && (
         <>
           <Recruit isMyProfile={isMyProfile} />
           <MyPostList isMyProfile={isMyProfile} accountname={accountname} />
