@@ -94,7 +94,7 @@ export const Article = styled.article`
 `;
 
 export const UserName = styled.p`
-  color: #000;
+  color: #ffffff;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

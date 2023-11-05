@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import * as S from "./RecruitStyle";
 import { useNavigate, useParams } from "react-router-dom";
 import gameRecruitListAPI from "../../../API/gameRecruitAPI/gameRecruitListAPI";
@@ -7,6 +7,7 @@ import myAccountNameAPI from "../../../API/myAccountNameAPI";
 import joinRecruitAPI from "../../../API/gameRecruitAPI/joinRecruitAPI";
 import leaveRecruitAPI from "../../../API/gameRecruitAPI/leaveRecruitAPI";
 import userInfoAPI from "../../../API/userInfoAPI"
+
 
 function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
@@ -28,7 +29,83 @@ function Recruit({ isMyProfile }) {
   const [targetAccountName, setTargetAccountName] = useState("");
   const [targetImage, setTargetImage] = useState("");
 
+  
+  
   const navigate = useNavigate();
+  
+  // 스크롤 컨테이너의 ref 생성
+  const scrollContainerRef = useRef(null);
+
+  // 왼쪽 화살표 클릭 핸들러
+ const scrollLeft = () => {
+   if (scrollContainerRef.current) {
+     scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+   }
+ };
+ // 오른쪽 화살표 클릭 핸들러
+ const scrollRight = () => {
+   if (scrollContainerRef.current) {
+     scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+   }
+ };
+
+  function checkScroll() {
+    const element = document.getElementById('scrollBar');
+    const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+    
+    // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
+    const leftBtn = document.getElementById('leftBtn');
+    if (hasHorizontalScrollbar && (window.innerWidth > 768) && !modalOn) {
+      leftBtn.style.display = 'block';
+    } else {
+      leftBtn.style.display = 'none';
+    }
+    const rightBtn = document.getElementById('rightBtn');
+    if (hasHorizontalScrollbar && window.innerWidth > 768 && !modalOn) {
+      rightBtn.style.display = 'block';
+    } else {
+      rightBtn.style.display = 'none';
+    }
+  }
+  
+  // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+  window.onload = checkScroll;
+  window.onresize = checkScroll;
+
+
+  // 왼쪽 화살표 클릭 핸들러
+ const joinedLeft = () => {
+  if (scrollContainerRef.current) {
+    scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+};
+// 오른쪽 화살표 클릭 핸들러
+const joinedRight = () => {
+  if (scrollContainerRef.current) {
+    scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+  }
+};
+ function checkJoinedScroll() {
+   const element = document.getElementById('joinedBar');
+   if(element){
+   console.log("스크롤위드",element.scrollWidth)
+   const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+   
+   // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
+   const leftBtn = document.getElementById('leftJoinedBtn');
+   if (hasHorizontalScrollbar) {
+     leftBtn.style.display = 'block';
+   } else {
+     leftBtn.style.display = 'none';
+   }
+   const rightBtn = document.getElementById('rightJoinedBtn');
+   if (hasHorizontalScrollbar) {
+     rightBtn.style.display = 'block';
+   } else {
+     rightBtn.style.display = 'none';
+   }
+  }
+ }
 
   async function getTheJoinedData(theJoinedData) {
     for(let i = 0; i < theJoinedAccountName.length; i++) {
@@ -50,18 +127,32 @@ function Recruit({ isMyProfile }) {
   useEffect(() => { 
     fetchData();
   }, [accountname]);
-
+  
+  useEffect(() => {
+    checkScroll();
+  }, [recruit])
+  
   useEffect(() => {
     getTheJoinedData(theJoinedData);
   }, [theJoinedAccountName])
+  
+  useEffect(() => {
+    checkJoinedScroll();
+  }, [theJoined])
 
   useEffect(() => {
     if (modalOn) {
+      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+      window.onresize = checkJoinedScroll;
       // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
       document.body.style.overflow = 'hidden';
+      checkScroll();
     } else {
+      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+      window.onresize = checkScroll;
       // 모달이 닫힐 때 스크롤 해제
       document.body.style.overflow = 'auto';
+      checkScroll();
     }
   
     // 컴포넌트가 언마운트될 때 스크롤 해제를 확실히 하기 위한 클린업 함수
@@ -111,20 +202,22 @@ function Recruit({ isMyProfile }) {
 
   return (
     <S.RecruitContainer>
-      <h2 style={{color: "#efefef"}}>모집 중인 게임</h2>
-      <S.GameList>
+      <h2 style={{color: "#efefef", marginLeft: "40px"}}>모집 중인 게임</h2>
+        <S.LeftBtn id="leftBtn" onClick={scrollLeft}></S.LeftBtn>
+        <S.RightBtn id="rightBtn" onClick={scrollRight}></S.RightBtn>
+      <S.GameList ref={scrollContainerRef} id="scrollBar">
         {recruit.map((recruit, id) => {
           return (
             <S.GameCard
               key={id}
               onClick={() => {
+                setTheJoinedData([]);
                 setRecruitId(id);
                 getUserInfo(JSON.parse(recruit.itemName)[1]);
                 setModalOn(true);
                 setTheJoinedAccountName(JSON.parse(recruit.link)[2])
               }}>
               {/* 모집글 상세 */}
-              {console.log("아이템이미지: ", recruit.itemImage)}
               <S.GameImage src={recruit.itemImage} alt="게임 스크린샷" />
               <p className="gameName" style={{color: "#cfcfcf"}}>{JSON.parse(recruit.itemName)[0]}</p>
               <p className="playerCount">{`${recruit.price}명 / ${JSON.parse(recruit.link)[0]}명`}</p>
@@ -161,7 +254,6 @@ function Recruit({ isMyProfile }) {
             <S.ModalBtnCover>
               <div style={{width: "20%", height:"10px"}}></div>
               {
-                // console.log(JSON.parse(recruit[recruitId].link)[2], myAccountName)
                 isMyProfile ? (
                   <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
                 ) : (
@@ -179,31 +271,38 @@ function Recruit({ isMyProfile }) {
                 )
               }
               <div style={{display: "flex", cursor: "pointer", width: "20%"}} onClick={() => {
-                setTheJoined(true);
+                setTheJoined(!theJoined);
               }}>
                 <S.UserIcon />
                 <S.ModalRecruitNumber>{`${recruit[recruitId].price}/${JSON.parse(recruit[recruitId].link)[0]}`}</S.ModalRecruitNumber>
               </div>
               {theJoined && (<>
-                <S.ModalTheJoined style={{backgroundColor: "#101010"}}>
-                  {theJoinedData.map((theJoinedData, id) => {          
-                    return (
-                      <S.ProfileDetail key={id} style={{marginBottom:"10px"}}>
-                      <S.ModalProfileImage src={theJoinedData.profile.image} />
-                        <S.ModalArticle>
-                          <S.ModalUsername>
-                            {theJoinedData.profile.username}
-                          </S.ModalUsername>
-                          <S.ModalAccountname>
-                            {theJoinedData.profile.accountname}
-                          </S.ModalAccountname>
-                        </S.ModalArticle>
-                      </S.ProfileDetail>
-                    )
-                  })}
-                </S.ModalTheJoined>
-                <S.CloseModalTheJoined onClick={() => setTheJoined(false)}>X</S.CloseModalTheJoined></>)
-              } 
+                <S.ModalTheJoinedContainer>
+                <S.LeftJoinedBtn id="leftJoinedBtn" onClick={joinedLeft}></S.LeftJoinedBtn>
+                <S.RightJoinedBtn id="rightJoinedBtn" onClick={joinedRight}></S.RightJoinedBtn>
+                  <S.ModalTheJoined ref={scrollContainerRef} id="joinedBar">
+                    {theJoinedData.map((theJoinedData, id) => {          
+                      return (
+                        <S.ProfileDetail key={id}>
+                        <S.ModalUsername>
+                          {id+1}
+                        </S.ModalUsername>
+                        <S.ModalProfileImage src={theJoinedData.profile.image} />
+                          <S.ModalArticle>
+                            <S.ModalUsername>
+                              {theJoinedData.profile.username}
+                            </S.ModalUsername>
+                            <S.ModalAccountname>
+                              {theJoinedData.profile.accountname}
+                            </S.ModalAccountname>
+                          </S.ModalArticle>
+                        </S.ProfileDetail>
+                      )
+                    })}
+                  </S.ModalTheJoined>
+                </S.ModalTheJoinedContainer>
+                </>)
+              }
             </S.ModalBtnCover>
           </S.ModalContent>
           <S.ModalCloseBtn onClick={closeModal}>X</S.ModalCloseBtn>
@@ -215,7 +314,7 @@ function Recruit({ isMyProfile }) {
             모집을 종료하면, 모집글도 삭제됩니다.<br />
             정말 모집을 끝낼까요?
             <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)} btnColor={"#5865f2"}>
-              이제 됐어요 종료합시다!
+              종료합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
         </S.ModalContainer>
