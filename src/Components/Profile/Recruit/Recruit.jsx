@@ -55,13 +55,13 @@ function Recruit({ isMyProfile }) {
     
     // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
     const leftBtn = document.getElementById('leftBtn');
-    if (hasHorizontalScrollbar && (window.innerWidth > 768)) {
+    if (hasHorizontalScrollbar && (window.innerWidth > 768) && !modalOn) {
       leftBtn.style.display = 'block';
     } else {
       leftBtn.style.display = 'none';
     }
     const rightBtn = document.getElementById('rightBtn');
-    if (hasHorizontalScrollbar && window.innerWidth > 768) {
+    if (hasHorizontalScrollbar && window.innerWidth > 768 && !modalOn) {
       rightBtn.style.display = 'block';
     } else {
       rightBtn.style.display = 'none';
@@ -105,12 +105,12 @@ function Recruit({ isMyProfile }) {
   useEffect(() => {
     if (modalOn) {
       // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
-      checkScroll()
       document.body.style.overflow = 'hidden';
+      checkScroll();
     } else {
       // 모달이 닫힐 때 스크롤 해제
       document.body.style.overflow = 'auto';
-      checkScroll()
+      checkScroll();
     }
   
     // 컴포넌트가 언마운트될 때 스크롤 해제를 확실히 하기 위한 클린업 함수

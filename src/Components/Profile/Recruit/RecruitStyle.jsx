@@ -41,7 +41,7 @@ export const GameList = styled.div`
 
 export const LeftBtn = styled.button`
   position: absolute;
-  z-index: 9000;
+  /* z-index: 9000; */
   top: 45%;
   transform: translateY(-50%);
   transform: rotate(45deg);
@@ -57,7 +57,7 @@ export const LeftBtn = styled.button`
 `;
 export const RightBtn = styled.button`
   position: absolute;
-  z-index: 9000;
+  /* z-index: 9000; */
   top: 45%;
   right: 3%;
   transform: translateY(-50%, -50%);
@@ -77,6 +77,7 @@ export const GameCard = styled.div`
   font-family: var(--Roboto);
   font-size: 12px;
   margin-right: 20px;
+  cursor: pointer;
 
   .gameName {
     font-weight: 700;
