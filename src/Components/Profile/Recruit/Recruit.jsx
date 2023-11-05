@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import * as S from "./RecruitStyle";
 import { useNavigate, useParams } from "react-router-dom";
 import gameRecruitListAPI from "../../../API/gameRecruitAPI/gameRecruitListAPI";
@@ -7,6 +7,7 @@ import myAccountNameAPI from "../../../API/myAccountNameAPI";
 import joinRecruitAPI from "../../../API/gameRecruitAPI/joinRecruitAPI";
 import leaveRecruitAPI from "../../../API/gameRecruitAPI/leaveRecruitAPI";
 import userInfoAPI from "../../../API/userInfoAPI"
+
 
 function Recruit({ isMyProfile }) {
   const { accountname } = useParams();
@@ -28,7 +29,49 @@ function Recruit({ isMyProfile }) {
   const [targetAccountName, setTargetAccountName] = useState("");
   const [targetImage, setTargetImage] = useState("");
 
+   // 스크롤 컨테이너의 ref 생성
+   const scrollContainerRef = useRef(null);
+
+   // 왼쪽 화살표 클릭 핸들러
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  // 오른쪽 화살표 클릭 핸들러
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
+
   const navigate = useNavigate();
+
+  function checkScroll() {
+    const element = document.getElementById('your-scrollable-element-id');
+    const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+    
+    // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
+    const leftBtn = document.getElementById('leftBtn');
+    if (hasHorizontalScrollbar && element.clientWidth > 500) {
+      leftBtn.style.display = 'block';
+    } else {
+      leftBtn.style.display = 'none';
+    }
+    const rightBtn = document.getElementById('rightBtn');
+    if (hasHorizontalScrollbar && element.clientWidth > 500) {
+      rightBtn.style.display = 'block';
+    } else {
+      rightBtn.style.display = 'none';
+    }
+  }
+  
+  // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
+  window.onload = checkScroll;
+  window.onresize = checkScroll;
+  
 
   async function getTheJoinedData(theJoinedData) {
     for(let i = 0; i < theJoinedAccountName.length; i++) {
@@ -111,8 +154,10 @@ function Recruit({ isMyProfile }) {
 
   return (
     <S.RecruitContainer>
-      <h2 style={{color: "#efefef"}}>모집 중인 게임</h2>
-      <S.GameList>
+      <h2 style={{color: "#efefef", marginLeft: "40px"}}>모집 중인 게임</h2>
+        <S.LeftBtn id="leftBtn" onClick={scrollLeft}></S.LeftBtn>
+        <S.RightBtn id="rightBtn" onClick={scrollRight}></S.RightBtn>
+      <S.GameList ref={scrollContainerRef} id="your-scrollable-element-id">
         {recruit.map((recruit, id) => {
           return (
             <S.GameCard
@@ -124,7 +169,6 @@ function Recruit({ isMyProfile }) {
                 setTheJoinedAccountName(JSON.parse(recruit.link)[2])
               }}>
               {/* 모집글 상세 */}
-              {console.log("아이템이미지: ", recruit.itemImage)}
               <S.GameImage src={recruit.itemImage} alt="게임 스크린샷" />
               <p className="gameName" style={{color: "#cfcfcf"}}>{JSON.parse(recruit.itemName)[0]}</p>
               <p className="playerCount">{`${recruit.price}명 / ${JSON.parse(recruit.link)[0]}명`}</p>
@@ -161,7 +205,6 @@ function Recruit({ isMyProfile }) {
             <S.ModalBtnCover>
               <div style={{width: "20%", height:"10px"}}></div>
               {
-                // console.log(JSON.parse(recruit[recruitId].link)[2], myAccountName)
                 isMyProfile ? (
                   <S.ModalBtn onClick={() => setCloseRecruitModal(true)} btnColor={"#5865f2"}>모집 종료하기</S.ModalBtn>
                 ) : (
@@ -179,13 +222,13 @@ function Recruit({ isMyProfile }) {
                 )
               }
               <div style={{display: "flex", cursor: "pointer", width: "20%"}} onClick={() => {
-                setTheJoined(true);
+                setTheJoined(!theJoined);
               }}>
                 <S.UserIcon />
                 <S.ModalRecruitNumber>{`${recruit[recruitId].price}/${JSON.parse(recruit[recruitId].link)[0]}`}</S.ModalRecruitNumber>
               </div>
               {theJoined && (<>
-                <S.ModalTheJoined style={{backgroundColor: "#101010"}}>
+                <S.ModalTheJoined className="theJoinedContainer">
                   {theJoinedData.map((theJoinedData, id) => {          
                     return (
                       <S.ProfileDetail key={id} style={{marginBottom:"10px"}}>
@@ -202,7 +245,7 @@ function Recruit({ isMyProfile }) {
                     )
                   })}
                 </S.ModalTheJoined>
-                <S.CloseModalTheJoined onClick={() => setTheJoined(false)}>X</S.CloseModalTheJoined></>)
+                </>)
               } 
             </S.ModalBtnCover>
           </S.ModalContent>
@@ -215,7 +258,7 @@ function Recruit({ isMyProfile }) {
             모집을 종료하면, 모집글도 삭제됩니다.<br />
             정말 모집을 끝낼까요?
             <S.ModalBtn onClick={() => closeRecruit(recruit[recruitId].id)} btnColor={"#5865f2"}>
-              이제 됐어요 종료합시다!
+              종료합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
         </S.ModalContainer>

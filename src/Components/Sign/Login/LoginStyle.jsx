@@ -40,7 +40,7 @@ export const LogoTitle = styled.div`
 `
 
 export const PTag = styled.p`
-  margin:16px 0 2px 0;
+  margin:14px 0 8px 0;
   text-align:left;
 `
 
@@ -59,7 +59,7 @@ export const InputTag = styled.input`
 export const LoginBtn = styled.button`
   width: 100%;
   height: 44px;
-  margin-top: 28px;
+  margin-top: 40px;
   border-radius: 44px;
   border: none;
   background-color: ${props => props.disabled ? '#8EA1E1' : '#5865f2'};

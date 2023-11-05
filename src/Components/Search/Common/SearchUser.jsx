@@ -47,7 +47,7 @@ function SearchUser({ modalStyle }) {
                 src={isValidImage(data.image) ? data.image : DefaultImage}
               />
               <Article>
-                <UserName modalStyle={modalStyle}>{data.username}</UserName>
+                <UserName style={{color: "#ffffff"}} modalStyle={modalStyle}>{data.username}</UserName>
                 <Intro>@{data.accountname}</Intro>
               </Article>
             </SearchUserBox>
