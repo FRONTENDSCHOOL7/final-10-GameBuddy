@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import * as S from "./WriteStyle";
 import DefaultImage from "../../assets/image/WriteDefault.svg";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   alertStateAtom,
   currentLocation,
@@ -10,13 +9,10 @@ import {
 } from "../../Store/Store";
 import gameRecruitAPI from "../../API/gameRecruitAPI/gameRecruitAPI";
 import myAccountNameAPI from "../../API/myAccountNameAPI";
-import { useNavigate } from "react-router-dom";
 import Alert from "../Commons/Alert/Alert";
 
 function GameRecruitPost() {
   const currentImage = useRecoilValue(uploadImageAtom);
-  const navigate = useNavigate();
-  const resetRecoilState = useResetRecoilState(uploadImageAtom);
 
   const [recruitGameTitle, setRecruitGameTitle] = useState("");
   const [recruitPeople, setRecruitPeople] = useState("");
@@ -81,13 +77,14 @@ function GameRecruitPost() {
         isOpen: true,
         navigation: location
       });
-      resetRecoilState();
     }
   };
 
   return (
     <>
-      <S.PTag style={{ marginTop: "0", marginBottom: "14px" }}>모집 게임</S.PTag>
+      <S.PTag style={{ marginTop: "0", marginBottom: "14px" }}>
+        모집 게임
+      </S.PTag>
       <S.InputTag
         type="text"
         placeholder=" 2~15자 이내여야 합니다."
