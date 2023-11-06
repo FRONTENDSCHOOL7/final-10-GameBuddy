@@ -50,9 +50,9 @@ function GameRecruitPost() {
     const detail = e.target.value;
 
     if (recruitDetail === "") {
-      setIsDetailValid(true);
-    } else {
       setIsDetailValid(false);
+    } else {
+      setIsDetailValid(true);
     }
     setRecruitDetail(detail);
   };
@@ -101,46 +101,56 @@ function GameRecruitPost() {
 
   return (
     <>
-      <S.PTag style={{ marginTop: "0", marginBottom: "14px" }}>
-        모집 게임
-      </S.PTag>
-      <S.InputTag
-        type="text"
-        placeholder=" 2~15자 이내여야 합니다."
-        value={recruitGameTitle}
-        onChange={onChangeRecruitGameTitle}
-      />
-      <S.Warning
-        style={isGameTitleValid ? { display: "none" } : { display: "block" }}>
-        *2~15자 이내여야 합니다.
-      </S.Warning>
+      <S.InputWrapper>
+        <S.PTag>
+        {/* style={{ marginTop: "0", marginBottom: "14px" }} */}
+          모집 게임
+        </S.PTag>
+        <S.InputTag
+          type="text"
+          placeholder=" 2~15자 이내여야 합니다."
+          value={recruitGameTitle}
+          onChange={onChangeRecruitGameTitle}
+        />
+        <S.Warning
+          style={isGameTitleValid ? { display: "none" } : { display: "block" }}>
+          *2~15자 이내여야 합니다.
+        </S.Warning>
+      </S.InputWrapper>
 
-      <S.PTag>모집 인원</S.PTag>
-      <S.InputTag
-        type="number"
-        placeholder=" 숫자만 입력 가능합니다. "
-        value={recruitPeople}
-        onChange={onChangeRecruitPeople}
-      />
-      <S.Warning
-        style={isPeopleValid ? { display: "none" } : { display: "block" }}>
-        *숫자만 입력 가능합니다.
-      </S.Warning>
+      <S.InputWrapper>
+        <S.PTag>모집 인원</S.PTag>
+        <S.InputTag
+          type="number"
+          placeholder=" 숫자만 입력 가능합니다. "
+          value={recruitPeople}
+          onChange={onChangeRecruitPeople}
+        />
+        <S.Warning
+          style={isPeopleValid ? { display: "none" } : { display: "block" }}>
+          *숫자만 입력 가능합니다.
+        </S.Warning>
+      </S.InputWrapper>
 
-      <S.PTag>모집 상세</S.PTag>
-      <S.InputTag
-        type="text"
-        placeholder=" 포지션, 티어 등 상세 내용을 입력해주세요."
-        value={recruitDetail}
-        onChange={onChangeRecruitDetail}
-      />
-      <S.Warning
-        style={isDetailValid ? { display: "none" } : { display: "block" }}>
-        *포지션, 티어 등 상세 내용을 입력해주세요.
-      </S.Warning>
-      <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
-        저장하기
-      </S.SubmitBtn>
+      <S.InputWrapper>
+        <S.PTag>모집 상세</S.PTag>
+        <S.InputTag
+          type="text"
+          placeholder=" 포지션, 티어 등 상세 내용을 입력해주세요."
+          value={recruitDetail}
+          onChange={onChangeRecruitDetail}
+        />
+        <S.Warning
+          style={isDetailValid ? { display: "none" } : { display: "block" }}>
+          *포지션, 티어 등 상세 내용을 입력해주세요.
+        </S.Warning>
+      </S.InputWrapper>
+      
+      <S.ButtonContainer>
+        <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
+          저장하기
+        </S.SubmitBtn>
+    </S.ButtonContainer>
       {alertModal.isOpen && <Alert />}
     </>
   );
