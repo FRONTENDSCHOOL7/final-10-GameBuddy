@@ -14,6 +14,7 @@ import {
 import {
   checkMyInfo,
   currentLocation,
+  isFollowAtom,
   isTouchFeed,
   userDataAtom
 } from "../Store/Store";
@@ -43,7 +44,7 @@ function ProfilePage() {
   let isMyProfile = accountname === myData.accountname;
 
   // 팔로우 상태
-  const [isFollowing, setIsFollowing] = useState(true);
+  const [isFollowing, setIsFollowing] = useRecoilState(isFollowAtom);
   const [location, setLocation] = useRecoilState(currentLocation);
 
   useEffect(() => {
@@ -52,8 +53,6 @@ function ProfilePage() {
       setIsFollowing(myData.following.includes(userData._id));
     }
   }, [myData, userData]); // myData와 userData가 변경될 때마다 호출
-  
-  
 
   useEffect(() => {
     async function fetchData() {
@@ -69,8 +68,8 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      // resetUserData();
-      // resetPostList();
+      resetUserData();
+      resetPostList();
       const userInfo = await userInfoAPI(accountname);
       // console.log(userInfo);
       setUserData({
@@ -96,12 +95,7 @@ function ProfilePage() {
   return (
     <div style={{ backgroundColor: "#3f4246", height: "100vh" }}>
       <Header type={isMyProfile ? "myProfile" : "userProfile"} />
-      <ProfileDetail
-        isMyProfile={isMyProfile}
-        isFollowingParam={isFollowing}
-        setIsFollowing={setIsFollowing}
-        accountname={accountname}
-      />
+      <ProfileDetail isMyProfile={isMyProfile} accountname={accountname} />
       {/* 팔로우가 되어있을 때만 Recruit, MyPostList 컴포넌트가 렌더링 됨 */}
       {(isFollowing || isMyProfile) && (
         <>
