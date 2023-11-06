@@ -172,11 +172,6 @@ function CommonDetailModal() {
     }
   };
 
-  //   const moveProfilePage = (userAccountName) => {
-  //     setIsPostModalVisible(false);
-  //     navigate(`/profile/${userAccountName}`);
-  //   };
-
   const [isContentExpanded, setIsContentExpanded] = useState(false);
 
   const getDisplayedContent = () => {

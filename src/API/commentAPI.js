@@ -11,7 +11,6 @@ async function commentAPI(post_id) {
         const postCommentList = await commentList.data.comments;
         return postCommentList;
     } catch (error) {
-        // console.log("PostList Error", error)
         return [];
     }
 };

@@ -19,8 +19,6 @@ async function postEditAPI(post_id, content, image = "") {
             }
         );
 
-        // console.log(response);
-
         return "게시글 수정 완료"
     } catch (e) {
         const ErrorMessage = await e.response.data.message;

@@ -13,9 +13,6 @@ async function getPostAPI(post_id) {
       }
     );
 
-    console.log(response);
-
-    // 게시글 내용을 반환합니다.
     return response.data.post;
   } catch (e) {
     const ErrorMessage = await e.response.data.message;

@@ -11,7 +11,6 @@ async function followingPostAPI() {
         const post = await result.data.posts
         return post
     } catch (error) {
-        console.log("PostList Error", error)
         return [];
     }
 };

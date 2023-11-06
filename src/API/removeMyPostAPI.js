@@ -11,11 +11,8 @@ async function removeMyPostAPI(post_id) {
         }
       }
     );
-    console.log("성공", result);
-
     return "게시글 삭제 성공";
   } catch (e) {
-    console.log("실패", e.message);
     return "게시글 삭제 실패";
   }
 }

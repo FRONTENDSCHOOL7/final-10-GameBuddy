@@ -5,14 +5,14 @@ async function userInfoAPI(accountName) {
   const token = localStorage.getItem("token");
   try {
     let result = await axios.get(`https://api.mandarin.weniv.co.kr/profile/${accountName}`,
-    {
-      headers: {
-        "Authorization": `Bearer ${token}`
-      }
-    })
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
     const userInfo = result.data;
     return userInfo
-  } catch(error) {
+  } catch (error) {
     console.log("유저 데이터를 가져오지 못했습니다: ", error)
   }
 }
