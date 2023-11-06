@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import MainChar from "../../assets/image/main_char.svg";
+import BgImg from "../../assets/image/ground.jpg";
 
 // 로딩 바에 대한 애니메이션
 const fillAnimation = keyframes`
@@ -13,9 +14,9 @@ const fillAnimation = keyframes`
 `;
 
 const Container = styled.div`
-  position:fixed;
-  top:0;
-  left:0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1500;
@@ -23,7 +24,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #282c32;
+  background-image: url(${BgImg});
+  background-size: contain;
 `;
 
 const CharacterImage = styled.div`
@@ -32,7 +34,7 @@ const CharacterImage = styled.div`
   background-repeat: no-repeat;
   width: 180px;
   height: 100px;
-  background-color: #282c32; /* 캐릭터 색상 예시 */
+  background-color: none; /* 캐릭터 색상 예시 */
 `;
 
 const LoadingBar = styled.div`
@@ -60,20 +62,20 @@ const LoadingText = styled.div`
 `;
 
 function LoadingPage() {
-    const text = "Loading...";
-    const [visibleText, setVisibleText] = useState("");
+  const text = "Loading...";
+  const [visibleText, setVisibleText] = useState("");
 
-    useEffect(() => {
-      let index = 0;
-      const interval = setInterval(() => {
-        setVisibleText(text.slice(0, index));
-        index++;
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setVisibleText(text.slice(0, index));
+      index++;
 
-        if (index > text.length) {
-          clearInterval(interval);
-        }
-      }, 200); // 글자가 나타나는 속도 (200ms마다)
-    }, []);
+      if (index > text.length) {
+        clearInterval(interval);
+      }
+    }, 200); // 글자가 나타나는 속도 (200ms마다)
+  }, []);
 
   return (
     <Container>

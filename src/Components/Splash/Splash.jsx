@@ -1,26 +1,60 @@
-
 import React, { useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+import BgImg from "../../assets/image/ground.jpg";
+import CharImg from "../../assets/image/main_char.svg";
 import { useNavigate } from "react-router-dom";
-import mainChar from "../../assets/image/main_char.png";
-import styles from "./splash.module.css";
 
-export default function Splash() {
-    const navigate = useNavigate();
+const moveBackground = keyframes`
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+`;
 
-    useEffect(() => {
-      setTimeout(() => {
-        navigate("/main");
-      }, 2000);
-    }, []);
+const SplashContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${BgImg});
+  background-size: contain;
+  animation: ${moveBackground} 15s linear infinite;
+`;
+
+const SplashCharImg = styled.img`
+  width: 180px;
+  height: 100px;
+`;
+
+const SplashLogo = styled.h1`
+  color: white;
+  font-size: 24px;
+  margin-top: 20px;
+  font-family: var(--Black-ops);
+`;
+
+function Splash() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/main");
+    }, 2000);
+  }, []);
 
   return (
-    <div className={styles["splash-container"]}>
-      <h1 className={styles["a11y-hidden"]}>splash 화면</h1>
-      <img src={mainChar} alt="메인캐릭터" className={styles["splash-char"]} />
-      <div className={styles["splash-logo"]}>
-        Game <br /> Buddy
-      </div>
-    </div>
+    <SplashContainer>
+      <SplashCharImg src={CharImg} alt="메인 캐릭터" />
+      <SplashLogo>Gamd Buddy</SplashLogo>
+    </SplashContainer>
   );
 }
-
+export default Splash;
