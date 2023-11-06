@@ -32,7 +32,7 @@ async function ifProfileEditedAPI(prevMyAccountName, newMyAccountName) {
           isChange++;
         }
 
-        console.log("데이터!!!!!!:",data)
+        // console.log("데이터!!!!!!:",data)
 
         if(isChange !== 0) {
           await gameRecruitEditAPI(
@@ -47,7 +47,8 @@ async function ifProfileEditedAPI(prevMyAccountName, newMyAccountName) {
         return data;
       });
 
-      console.log("프로필이 변경됨에 따라 각 모집글 내부의 유저 계정명도 변경되었습니다!", response);
+      // console.log("프로필이 변경됨에 따라 각 모집글 내부의 유저 계정명도 변경되었습니다!", response);
+      console.log("프로필이 변경됨에 따라 각 모집글 내부의 유저 계정명도 변경되었습니다!");
       return response;
   } catch (e) {
       console.log("에러발생 계정명이 변경되지 않았다", e);

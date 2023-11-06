@@ -21,14 +21,14 @@ function Profile({ isMyProfile, isFollowingParam, accountname }) {
 
   async function follow(accountName) {
     const result = await followAPI(accountName);
-    console.log(myData.following);
-    console.log(userData._id);
+    // console.log(myData.following);
+    // console.log(userData._id);
     if (result) setIsFollowing(!isFollowing);
   }
   async function unFollow(accountName) {
     const result = await unFollowAPI(accountName);
-    console.log(myData.following);
-    console.log(userData._id);
+    // console.log(myData.following);
+    // console.log(userData._id);
     if (result) setIsFollowing(!isFollowing);
   }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as S from "./RecruitStyle";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import gameRecruitListAPI from "../../../API/gameRecruitAPI/gameRecruitListAPI";
 import gameRecruitDeleteAPI from "../../../API/gameRecruitAPI/gameRecruitDeleteAPI";
 import myAccountNameAPI from "../../../API/myAccountNameAPI";
@@ -29,6 +29,7 @@ function Recruit({ isMyProfile }) {
   const [targetImage, setTargetImage] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 스크롤 컨테이너의 ref 생성
   const scrollContainerRef = useRef(null);
@@ -80,18 +81,17 @@ function Recruit({ isMyProfile }) {
   function checkJoinedScroll() {
     const element = document.getElementById("joinedBar");
     if (element) {
-      console.log("스크롤위드", element.scrollWidth);
       const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
 
       // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
       const leftBtn = document.getElementById("leftJoinedBtn");
-      if (hasHorizontalScrollbar) {
+      if (hasHorizontalScrollbar && window.innerWidth > 768) {
         leftBtn.style.display = "block";
       } else {
         leftBtn.style.display = "none";
       }
       const rightBtn = document.getElementById("rightJoinedBtn");
-      if (hasHorizontalScrollbar) {
+      if (hasHorizontalScrollbar && window.innerWidth > 768) {
         rightBtn.style.display = "block";
       } else {
         rightBtn.style.display = "none";
@@ -103,7 +103,7 @@ function Recruit({ isMyProfile }) {
     for (let i = 0; i < theJoinedAccountName.length; i++) {
       const copy = theJoinedData;
       copy.push(await userInfoAPI(theJoinedAccountName[i]));
-      console.log("카피:");
+      // console.log("카피:");
       setTheJoinedData(copy);
     }
   }
@@ -112,18 +112,23 @@ function Recruit({ isMyProfile }) {
     const myAccountName = await myAccountNameAPI();
     setMyAccountName(myAccountName);
     const list = await gameRecruitListAPI(accountname);
-    console.log("리스트", list);
+    // console.log("필터링 후 불러온 리스트", list);
     setRecruit(list);
   }
+
+  useEffect(() => {
+  }, [location])
 
   useEffect(() => {
     // 이벤트 리스너를 등록하는 함수
     function handleResize() {
       checkScroll();
+      checkJoinedScroll();
     }
 
     function handleLoad() {
       checkScroll();
+      checkJoinedScroll();
     }
   
     // 이벤트 리스너 등록
@@ -255,7 +260,7 @@ function Recruit({ isMyProfile }) {
                   <S.UpdateIcon />
                 </S.ModalControlBtn>
               ) : (
-                <></>
+                <div></div>
               )}
             </S.ModalProfile>
             <S.ModalImage src={recruit[recruitId].itemImage} />
@@ -268,7 +273,7 @@ function Recruit({ isMyProfile }) {
               {isMyProfile ? (
                 <S.ModalBtn
                   onClick={() => setCloseRecruitModal(true)}
-                  btnColor={"#5865f2"}>
+                  >
                   모집 종료하기
                 </S.ModalBtn>
               ) : JSON.parse(recruit[recruitId].link)[2].includes(
@@ -282,7 +287,7 @@ function Recruit({ isMyProfile }) {
                       recruit[recruitId]
                     );
                   }}
-                  btnColor={"red"}>
+                  style={{backgroundColor: "red"}}>
                   모집 떠나기!
                 </S.ModalBtn>
               ) : recruit[recruitId].price <
@@ -295,11 +300,11 @@ function Recruit({ isMyProfile }) {
                       recruit[recruitId]
                     );
                   }}
-                  btnColor={"green"}>
+                  style={{backgroundColor: "green"}}>
                   모집 참여하기!
                 </S.ModalBtn>
               ) : (
-                <S.ModalBtn btnColor={"orange"}>Full방입니다~!</S.ModalBtn>
+                <S.ModalBtn style={{backgroundColor: "orange"}}>Full방입니다~!</S.ModalBtn>
               )}
               <div
                 style={{ display: "flex", cursor: "pointer", width: "20%" }}
@@ -323,20 +328,26 @@ function Recruit({ isMyProfile }) {
                     <S.ModalTheJoined ref={scrollContainerRef} id="joinedBar">
                       {theJoinedData.map((theJoinedData, id) => {
                         return (
-                          <S.ProfileDetail key={id}>
-                            <S.ModalUsername>{id + 1}</S.ModalUsername>
-                            <S.ModalProfileImage
+                          <S.ProfileRecruitDetail 
+                          key={id} 
+                          onClick={() => {
+                            navigate(`/profile/${theJoinedData.profile.accountname}`)
+                          }}
+                          >
+                            {id == 0 ? <S.ModalUsername style={{color:"orange"}}>★</S.ModalUsername>
+                              : <S.ModalUsername>{id+1}</S.ModalUsername>}        
+                            <S.ModalRecruitProfileImage
                               src={theJoinedData.profile.image}
                             />
                             <S.ModalArticle>
-                              <S.ModalUsername>
+                              <S.ModalRecruitUsername>
                                 {theJoinedData.profile.username}
-                              </S.ModalUsername>
+                              </S.ModalRecruitUsername>
                               <S.ModalAccountname>
                                 {theJoinedData.profile.accountname}
                               </S.ModalAccountname>
                             </S.ModalArticle>
-                          </S.ProfileDetail>
+                          </S.ProfileRecruitDetail>
                         );
                       })}
                     </S.ModalTheJoined>
@@ -356,7 +367,7 @@ function Recruit({ isMyProfile }) {
             정말 모집을 끝낼까요?
             <S.ModalBtn
               onClick={() => closeRecruit(recruit[recruitId].id)}
-              btnColor={"#5865f2"}>
+              >
               종료합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
@@ -373,7 +384,7 @@ function Recruit({ isMyProfile }) {
                   state: { recruitData: recruit[recruitId] }
                 });
               }}
-              btnColor={"#5865f2"}>
+              >
               네 수정합시다!
             </S.ModalBtn>
           </S.CloseModalContent>

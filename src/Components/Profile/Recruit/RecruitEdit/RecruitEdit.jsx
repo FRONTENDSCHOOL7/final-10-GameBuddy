@@ -28,7 +28,7 @@ export default function RecruitEdit() {
 
   const [alertModal, setAlertModal] = useRecoilState(alertStateAtom);
 
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
     setUploadImage(state.recruitData.itemImage);
