@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import BgImg from "../../assets/image/BgStar.jpg";
+import BgImg from "../../assets/image/ground.jpg";
 import CharImg from "../../assets/image/main_char.svg";
 import { useNavigate } from "react-router-dom";
 
 const moveBackground = keyframes`
   0% {
-    background-position: 0% 100%;
+    background-position: 100% 0%;
   }
   100% {
-    background-position: 100% 0%;
+    background-position: 0% 100%;
   }
 `;
 
@@ -26,7 +26,7 @@ const SplashContainer = styled.div`
   justify-content: center;
   background-image: url(${BgImg});
   background-size: contain;
-  animation: ${moveBackground} 12s linear infinite;
+  animation: ${moveBackground} 15s linear infinite;
 `;
 
 const SplashCharImg = styled.img`
@@ -44,11 +44,11 @@ const SplashLogo = styled.h1`
 function Splash() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setTimeout(() => {
-      navigate("/main");
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigate("/main");
+  //   }, 2000);
+  // }, []);
 
   return (
     <SplashContainer>

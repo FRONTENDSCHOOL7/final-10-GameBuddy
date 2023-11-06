@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import MainChar from "../../assets/image/main_char.svg";
-import BgImg from "../../assets/image/BgStar.jpg";
+import BgImg from "../../assets/image/ground.jpg";
 
 // 로딩 바에 대한 애니메이션
 const fillAnimation = keyframes`
