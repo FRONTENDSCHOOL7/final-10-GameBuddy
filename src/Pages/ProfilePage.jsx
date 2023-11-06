@@ -68,8 +68,8 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      resetUserData();
-      resetPostList();
+      // resetUserData();
+      // resetPostList();
       const userInfo = await userInfoAPI(accountname);
       // console.log(userInfo);
       setUserData({
