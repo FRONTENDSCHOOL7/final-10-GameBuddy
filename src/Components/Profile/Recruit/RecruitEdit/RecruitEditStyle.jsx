@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const WriteContainer = styled.div`
-  background-color: #ffffff;
+  background-color: #2c2f33;
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -40,9 +40,10 @@ export const ImageContainer = styled.div`
   display: block;
 
   h5 {
-    margin-top: 12px;
-    text-align: left;
-    margin-left: 34px;
+    padding-top: 100px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #dfdfdf;
   }
 `;
 
@@ -51,17 +52,20 @@ export const WriteImage = styled.img`
 
   width: 322px;
   height: 204px;
-  margin-top: 18px;
+  margin-top: 35px;
   margin-bottom: 30px;
 `;
 
 export const WriteFormWrapper = styled.div`
   padding: 0 32px;
+  width: 330px;
+  margin: 0 auto;
 `;
 
 export const PTag = styled.p`
   margin: 16px 0 6px 0;
   text-align: left;
+  color: #dfdfdf;
 `;
 
 export const InputTag = styled.input`
@@ -70,6 +74,9 @@ export const InputTag = styled.input`
   border-width: 0px 0px 1px;
   padding: 0 0 1px 0;
   font-size: 20px;
+  background-color: #171717;
+  border: none;
+  color: #efefef;
 
   &:focus {
     outline: none;
@@ -77,7 +84,7 @@ export const InputTag = styled.input`
   }
 
   &::placeholder {
-    color: #dbdbdb;
+    color: #505050;
     font-size: 14px;
   }
 `;
@@ -91,6 +98,9 @@ export const SubmitBtn = styled.button`
   background-color: #5865f2;
   color: #ffffff;
   padding: 0 32px;
+
+  background: ${props => props.disabled ? 'gray' : 'your original color'};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 `;
 
 export const Warning = styled.p`

@@ -40,7 +40,8 @@ export const Divdiv = styled.div`
 
   @media screen and (min-width: 768px) {
     max-width: none;
-    margin-left: 30%;
+    /* margin-left: 30%; */
+    margin: 0 auto;
     box-sizing: border-box;
   }
 `;
@@ -48,7 +49,7 @@ export const Divdiv = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 322px; 
+  /* max-width: 322px;  */
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -114,7 +115,7 @@ export const ImageContainer = styled.div`
   h5 {
     text-align: left;
     margin-left: 0;
-    color: white;
+    color: #dfdfdf;
   }
 
   @media screen and (min-width: 768px) {
@@ -148,12 +149,12 @@ export const WriteFormWrapper = styled.div`
 export const PTag = styled.p`
   text-align: left;
   margin: 20px 0 15px 0;
-  color: white;
+  color: #dfdfdf;
 `;
 
 export const PTagpost = styled.p`
   text-align: left;
-  color: white;
+  color: #dfdfdf;
 `
 
 export const InputTag = styled.input`
@@ -162,6 +163,9 @@ export const InputTag = styled.input`
   height: 34px;
   border-width: 0px 0px 1px;
   font-size: 20px;
+  background-color: #171717;
+  border: none;
+  color: #efefef;
 
   &:focus {
     outline: none;
@@ -169,7 +173,7 @@ export const InputTag = styled.input`
   }
 
   &::placeholder {
-    color: #dbdbdb;
+    color: #505050;
     font-size: 14px;
     text-indent: 1ch;
   }
@@ -184,6 +188,9 @@ export const TextAreaTag = styled.textarea`
   padding: 10px 0 1px 0;
   margin-top: 18px;
   font-size: 20px;
+  background-color: #171717;
+  border: none;
+  color: #efefef;
 
   overflow: hidden auto;
   resize: none;
@@ -196,7 +203,7 @@ export const TextAreaTag = styled.textarea`
   }
 
   &::placeholder {
-    color: #dbdbdb;
+    color: #505050;
     font-size: 14px;
     text-indent: 1ch;
   }
