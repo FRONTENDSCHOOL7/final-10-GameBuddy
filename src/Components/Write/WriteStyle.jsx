@@ -28,15 +28,16 @@ export const WriteContainer = styled.div`
 `;
 
 export const Divdiv = styled.div`
+  /* border: 2px solid white; */
+  height: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   margin: auto;
   padding: 0;
-  margin: 0; 
+  margin: 0;
   box-sizing: border-box;
-
 
   @media screen and (min-width: 768px) {
     max-width: none;
@@ -58,11 +59,9 @@ export const ContentContainer = styled.div`
   background-color: #2c2f33;
   height: 100%;
 
-
   @media screen and (min-width: 768px) {
-    padding: 0 10px 45px 30px;
-  box-sizing: border-box;
-
+    padding: 0 10px 45px 80px;
+    box-sizing: border-box;
   }
 `;
 
@@ -83,6 +82,7 @@ export const ButtonImgContainer = styled.div`
 
 export const InputContainer = styled.div`
   display: block;
+  margin: 0 auto;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -138,44 +138,47 @@ export const WriteImage = styled.img`
 
 export const WriteFormWrapper = styled.div`
   width: 322px;
-  
   padding: 0;
 
   @media screen and (min-width: 768px) {
+    height: 300px;
     padding: 0 45px;
   }
 `;
 
 export const PTag = styled.p`
+  margin: 14px 0 8px 0;
   text-align: left;
-  margin: 20px 0 15px 0;
   color: #dfdfdf;
 `;
 
 export const PTagpost = styled.p`
   text-align: left;
   color: #dfdfdf;
-`
+`;
 
 export const InputTag = styled.input`
-  min-width: 322px;
   width: 100%;
-  height: 34px;
-  border-width: 0px 0px 1px;
-  font-size: 20px;
-  background-color: #171717;
+  height: 40px;
+  box-sizing: border-box;
   border: none;
+  border-radius: 5px;
+  padding: 0 2%;
+  font-size: 16px;
+  background-color: #171717;
   color: #efefef;
-
   &:focus {
     outline: none;
-    border-color: #5865f2;
+    border-color: #dbdbdb;
   }
-
   &::placeholder {
     color: #505050;
     font-size: 14px;
-    text-indent: 1ch;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
 `;
 
@@ -185,9 +188,10 @@ export const TextAreaTag = styled.textarea`
   height: 30px;
   border-width: 0px 0px 1px;
   border: solid #dbdbdb 2px;
+  border-radius: 5px;
   padding: 10px 0 1px 0;
   margin-top: 18px;
-  font-size: 20px;
+  font-size: 16px;
   background-color: #171717;
   border: none;
   color: #efefef;
@@ -204,14 +208,14 @@ export const TextAreaTag = styled.textarea`
 
   &::placeholder {
     color: #505050;
-    font-size: 14px;
+    font-size: 16px;
     text-indent: 1ch;
   }
 
   @media screen and (max-width: 768px) {
     width: 80%;
-    height: 7rem; 
-    min-height: 7rem; 
+    height: 7rem;
+    min-height: 7rem;
     max-height: 7rem;
   }
 `;
@@ -219,7 +223,7 @@ export const TextAreaTag = styled.textarea`
 export const SubmitBtn = styled.button`
   width: calc(100% - 18px);
   height: 39px;
-  margin-top: 40px;
+  margin-top: 25px;
   border-radius: 32px;
   border: none;
   background-color: #5865f2;
@@ -231,5 +235,6 @@ export const Warning = styled.p`
   color: #ff0000;
   text-align: left;
   font-size: 12px;
+  padding-left: 5px;
   margin-top: 4px;
 `;

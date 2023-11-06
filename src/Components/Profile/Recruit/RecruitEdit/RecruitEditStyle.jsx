@@ -50,8 +50,8 @@ export const ImageContainer = styled.div`
 export const WriteImage = styled.img`
   cursor: pointer;
 
-  width: 322px;
-  height: 204px;
+  width: 320px;
+  height: 200px;
   margin-top: 35px;
   margin-bottom: 30px;
 `;
@@ -63,29 +63,33 @@ export const WriteFormWrapper = styled.div`
 `;
 
 export const PTag = styled.p`
-  margin: 16px 0 6px 0;
+  margin: 14px 0 8px 0;
   text-align: left;
   color: #dfdfdf;
 `;
 
 export const InputTag = styled.input`
   width: 100%;
-  height: 23px;
-  border-width: 0px 0px 1px;
-  padding: 0 0 1px 0;
-  font-size: 20px;
-  background-color: #171717;
+  height: 40px;
+  box-sizing: border-box;
   border: none;
+  border-radius: 5px;
+  padding: 0 2%;
+  font-size: 16px;
+  background-color: #171717;
   color: #efefef;
-
   &:focus {
     outline: none;
-    border-color: #5865f2;
+    border-color: #dbdbdb;
   }
-
   &::placeholder {
     color: #505050;
     font-size: 14px;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
 `;
 
@@ -99,8 +103,8 @@ export const SubmitBtn = styled.button`
   color: #ffffff;
   padding: 0 32px;
 
-  background: ${props => props.disabled ? 'gray' : 'your original color'};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  background: ${(props) => (props.disabled ? "gray" : "your original color")};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
 export const Warning = styled.p`

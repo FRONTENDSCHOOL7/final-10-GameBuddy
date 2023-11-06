@@ -15,12 +15,9 @@ async function uploadImageAPI(file) {
                     }
                 }
             );
-            // console.log(response);
             return await response.data.filename;
         } catch (error) {
             console.log(error);
-            // alert('지원되지 않는 파일 형식입니다. 이미지 파일을 선택해주세요.');
-
         }
     }
 }

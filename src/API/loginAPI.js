@@ -3,7 +3,7 @@ import emailValidAPI from "./emailValidAPI";
 
 async function loginAPI(email, password) {
   const isEmailSigned = await emailValidAPI(email) === "이미 가입된 이메일 주소 입니다." ? true : false
-  if(isEmailSigned) {
+  if (isEmailSigned) {
 
     try {
       let result = await axios.post("https://api.mandarin.weniv.co.kr/user/login",
@@ -14,9 +14,7 @@ async function loginAPI(email, password) {
           }
         }
       );
-  
-      // console.log(result.data)
-  
+
       const token = await result.data.user.token
       localStorage.setItem("token", token)
       return true;

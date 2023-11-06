@@ -14,7 +14,6 @@ async function userPostListAPI(accountName) {
     const userInfo = result.data.post;
     return userInfo;
   } catch (error) {
-    console.log("유저의 게시글 데이터를 가져오지 못했습니다: ", error);
     return [];
   }
 }

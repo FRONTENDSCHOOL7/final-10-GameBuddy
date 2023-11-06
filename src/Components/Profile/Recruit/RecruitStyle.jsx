@@ -28,7 +28,7 @@ export const GameList = styled.div`
   margin-left: 40px;
   padding-bottom: 15px;
   overflow-x: auto; /* 가로 스크롤 */
-  white-space: 'nowrap';
+  white-space: "nowrap";
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
@@ -46,7 +46,7 @@ export const LeftBtn = styled.button`
   transform: translateY(-50%);
   transform: rotate(45deg);
   font-size: 20px;
-  background-color:transparent;
+  background-color: transparent;
   border: 3px solid #ffffff;
   border-top: 0;
   border-right: 0;
@@ -63,7 +63,7 @@ export const RightBtn = styled.button`
   transform: translateY(-50%, -50%);
   transform: rotate(45deg);
   font-size: 20px;
-  background-color:transparent;
+  background-color: transparent;
   border: 3px solid #ffffff;
   border-bottom: 0;
   border-left: 0;
@@ -80,7 +80,7 @@ export const LeftJoinedBtn = styled.button`
   transform: translateY(-50%);
   transform: rotate(45deg);
   font-size: 20px;
-  background-color:transparent;
+  background-color: transparent;
   border: 3px solid #ffffff;
   border-top: 0;
   border-right: 0;
@@ -97,7 +97,7 @@ export const RightJoinedBtn = styled.button`
   transform: translateY(-50%, -50%);
   transform: rotate(45deg);
   font-size: 20px;
-  background-color:transparent;
+  background-color: transparent;
   border: 3px solid #ffffff;
   border-bottom: 0;
   border-left: 0;
@@ -188,9 +188,9 @@ export const ModalTheJoined = styled.div`
     display: none;
   }
   @media screen and (max-width: 768px) {
-    width: 90%; 
+    width: 90%;
   }
-`
+`;
 export const ProfileDetail = styled.div`
   display: flex;
   flex-direction: row;
@@ -200,8 +200,8 @@ export const ProfileDetail = styled.div`
   width: 100px;
 `;
 export const ModalProfileImage = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   margin-left: 30px;
   border-radius: 35px;
   align-items: center;
@@ -210,6 +210,7 @@ export const ModalArticle = styled.article`
   margin-left: 10px;
   line-height: 20px;
   width: 90px;
+  white-space: nowrap;
   vertical-align: middle;
   display: flex;
   flex-direction: column;
@@ -217,7 +218,7 @@ export const ModalArticle = styled.article`
 `;
 export const ModalUsername = styled.p`
   color: #efefef;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 `;
 export const ModalAccountname = styled.p`
@@ -300,7 +301,7 @@ export const ModalBtnCover = styled.div`
   @media screen and (min-width: 768px) {
     width: 90%;
   }
-`
+`;
 
 // export const CloseModalTheJoined = styled.div`
 //   position: absolute;

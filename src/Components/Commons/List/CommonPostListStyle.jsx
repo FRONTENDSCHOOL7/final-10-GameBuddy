@@ -37,11 +37,10 @@ export const Section = styled.section`
   margin: 0 auto;
   position: relative;
   /* border: 1px solid #fff; */
-  box-shadow: ${({ isHovered }) =>
-    isHovered
-      ? "0 0 20px rgba(0,0,0,0.25)" : "none"
-      // ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)" : "none"
-      };
+  box-shadow: ${
+    ({ isHovered }) => (isHovered ? "0 0 20px rgba(0,0,0,0.25)" : "none")
+    // ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)" : "none"
+  };
   @media screen and (min-width: 768px) {
     max-width: 550px;
     max-height: 700px;
@@ -131,6 +130,19 @@ export const PostContentImg = styled.img`
   @media screen and (min-width: 768px) {
     max-width: 470px;
     max-height: 300px;
+  }
+`;
+
+export const PostEmptyImg = styled.div`
+  background-color: transparent;
+  width: 100%;
+  min-width: 250px;
+  min-height: 50px;
+  margin-top: 0.5rem;
+  border-radius: 5%;
+  @media screen and (min-width: 768px) {
+    min-width: 200px;
+    min-height: 100px;
   }
 `;
 

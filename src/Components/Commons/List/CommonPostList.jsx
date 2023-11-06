@@ -138,15 +138,16 @@ function CommonPostList({
                 )}
               </S.PostHeader>
               {isValidImage(post.image) ? (
-                <S.PostContentImg src={post.image} alt="Post Content Image" />
+                <>
+                  <S.PostContentImg src={post.image} alt="Post Content Image" />
+                  <S.PostContent>{post.content}</S.PostContent>
+                </>
               ) : (
-                <S.PostContentImg
-                  src={transparentPlaceholder}
-                  alt="Post Content Image"
-                  style={post.image ? {} : { height: "10px" }}
-                />
+                <>
+                  <S.PostContent>{post.content}</S.PostContent>
+                  <S.PostEmptyImg />
+                </>
               )}
-              <S.PostContent>{post.content}</S.PostContent>
               <S.Footer>
                 <S.FooterImg
                   src={post.hearted ? heart : unheart}
