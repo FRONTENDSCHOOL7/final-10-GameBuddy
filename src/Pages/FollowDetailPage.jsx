@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 function FollowDetailPage() {
   const {accountName , type} = useParams()
-  console.log(type)
+
   return (
     <>
       <Header type={type}/>

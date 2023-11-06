@@ -9,7 +9,8 @@ async function gameRecruitDeleteAPI(_id) {
             headers: { "Authorization": `Bearer ${token}` }
         })
 
-        console.log("겜모집글삭제:", response);
+        console.log("겜모집글삭제:");
+        // console.log("겜모집글삭제:", response);
         return true
     } catch (e) {
         console.log("실패", e);

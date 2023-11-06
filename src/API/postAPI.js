@@ -19,7 +19,7 @@ async function postAPI(content, image = "") {
             }
         );
 
-        console.log(response);
+        // console.log(response);
 
         return "게시글 작성 완료"
     } catch (e) {

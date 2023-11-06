@@ -80,7 +80,6 @@ function Recruit({ isMyProfile }) {
   function checkJoinedScroll() {
     const element = document.getElementById("joinedBar");
     if (element) {
-      console.log("스크롤위드", element.scrollWidth);
       const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
 
       // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
@@ -103,7 +102,7 @@ function Recruit({ isMyProfile }) {
     for (let i = 0; i < theJoinedAccountName.length; i++) {
       const copy = theJoinedData;
       copy.push(await userInfoAPI(theJoinedAccountName[i]));
-      console.log("카피:");
+      // console.log("카피:");
       setTheJoinedData(copy);
     }
   }
@@ -112,7 +111,7 @@ function Recruit({ isMyProfile }) {
     const myAccountName = await myAccountNameAPI();
     setMyAccountName(myAccountName);
     const list = await gameRecruitListAPI(accountname);
-    console.log("리스트", list);
+    // console.log("필터링 후 불러온 리스트", list);
     setRecruit(list);
   }
 

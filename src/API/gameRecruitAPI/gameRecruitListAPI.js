@@ -9,15 +9,13 @@ async function gameRecruitListAPI(accountname) {
             }
         })
         const response = await res.data.product
-        console.log("원본 리스트", response)
-        // const result = response.map((data) => {
-        //     if(JSON.parse(data.itemName)[1] === accountname) return data
-        //   })
+        // console.log("원본 리스트", response)
         const result = response.filter((data) => {
             return JSON.parse(data.itemName)[1] === accountname;
         });
 
-        console.log("리스트 불러오기 성공", result);
+        // console.log("리스트 불러오기 성공", result);
+        console.log("리스트 불러오기 성공");
         return result;
     } catch (e) {
         console.log(e);

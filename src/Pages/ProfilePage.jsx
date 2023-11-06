@@ -72,7 +72,7 @@ function ProfilePage() {
       // resetUserData();
       // resetPostList();
       const userInfo = await userInfoAPI(accountname);
-      console.log(userInfo);
+      // console.log(userInfo);
       setUserData({
         _id: userInfo.profile._id,
         username: userInfo.profile.username,

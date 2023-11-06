@@ -19,7 +19,8 @@ async function gameRecruitAPI(gameTitle, people, detail, itemImage = "", account
             headers: { "Authorization": `Bearer ${token}` }
         })
 
-        console.log("모집글 게시 성공", response);
+        // console.log("모집글 게시 성공", response);
+        console.log("모집글 게시 성공");
 
         return "게임 모집글 게시되었습니다!"
     } catch (e) {

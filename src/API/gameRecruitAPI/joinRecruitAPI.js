@@ -25,7 +25,8 @@ async function joinRecruitAPI(_id, myAccountName, recruitData) {
             headers: { "Authorization": `Bearer ${token}` }
         })
 
-        console.log("겜참여 성공:", response);
+        // console.log("겜참여 성공:", response);
+        console.log("겜참여 성공:");
         return true
     } catch (e) {
         console.log("실패", e);
