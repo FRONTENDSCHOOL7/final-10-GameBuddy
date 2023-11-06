@@ -47,24 +47,27 @@ function Post() {
 
   return (
     <>
-      <S.PTagpost>게시글</S.PTagpost>
-      <S.TextAreaTag
-        type="text"
-        placeholder="게시글 내용을 입력해주세요."
-        value={postContent}
-        onChange={onChangePostContent}
-      />
-      <S.Warning
-        style={isContentValid ? { display: "none" } : { display: "block" }}>
-        *게시글 내용을 입력해주세요.
-      </S.Warning>
-      <S.SubmitBtn
-        type="submit"
-        onClick={(e) => {
-          handlePostSubmit(e);
-        }}>
-        저장하기
-      </S.SubmitBtn>
+      <S.InputWrapper>
+        <S.PTagpost>게시글</S.PTagpost>
+        <S.TextAreaTag
+          type="text"
+          placeholder="게시글 내용을 입력해주세요."
+          value={postContent}
+          onChange={onChangePostContent}
+        />
+        <S.Warning
+          style={isContentValid 
+            ? { display: "none", bottom: "-17px" } 
+            : { display: "block"}}>
+          *게시글 내용을 입력해주세요.
+        </S.Warning>
+      </S.InputWrapper>
+
+      <S.ButtonContainer>
+        <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
+          저장하기
+        </S.SubmitBtn>
+      </S.ButtonContainer>      
       {alertModal.isOpen && <Alert />}
     </>
   );

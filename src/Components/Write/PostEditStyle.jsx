@@ -172,7 +172,7 @@ export const TextAreaTag = styled.textarea`
 
   overflow: hidden auto;
   resize: none;
-  min-height: 12rem;
+  min-height: 12.3rem;
   max-height: calc(100vh - var(--size-header) - var(--size-tabBar) - 40rem);
 
   &:focus {
@@ -189,15 +189,15 @@ export const TextAreaTag = styled.textarea`
   @media screen and (max-width: 768px) {
     width: 80%;
     height: 7rem;
-    min-height: 7rem;
-    max-height: 7rem;
+    min-height: 10rem;
+    max-height: 10rem;
   }
 `;
 
 export const SubmitBtn = styled.button`
   width: calc(100% - 18px);
   height: 39px;
-  margin-top: 30px;
+  margin-top: 50px;
   border-radius: 32px;
   border: none;
   background-color: #5865f2;
@@ -207,8 +207,13 @@ export const SubmitBtn = styled.button`
 
 export const Warning = styled.p`
   color: #ff0000;
+  position: absolute;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   padding-left: 5px;
   margin-top: 4px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
 `;

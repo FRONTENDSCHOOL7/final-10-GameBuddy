@@ -107,19 +107,22 @@ function PostEdit() {
                 style={{ display: "none" }}
               />
 
-              <S.PTag>게시글 수정</S.PTag>
-              <S.TextAreaTag
-                type="text"
-                placeholder={" 게시글 내용을 입력해주세요."}
-                value={postContent}
-                onChange={onChangePostContent}
-              />
-              <S.Warning
-                style={
-                  isContentValid ? { display: "none" } : { display: "block" }
-                }>
-                *게시글 내용을 입력해주세요.
-              </S.Warning>
+              <S.InputWrapper>
+                <S.PTag>게시글 수정</S.PTag>
+                <S.TextAreaTag
+                  type="text"
+                  placeholder={" 게시글 내용을 입력해주세요."}
+                  value={postContent}
+                  onChange={onChangePostContent}
+                />
+                <S.Warning
+                  style={
+                    isContentValid ? { display: "none" } : { display: "block" }
+                  }>
+                  *게시글 내용을 입력해주세요.
+                </S.Warning>
+              </S.InputWrapper>
+              
               <S.SubmitBtn
                 type="submit"
                 onClick={(e) => {

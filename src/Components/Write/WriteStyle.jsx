@@ -147,7 +147,7 @@ export const WriteFormWrapper = styled.div`
 `;
 
 export const PTag = styled.p`
-  margin: 14px 0 8px 0;
+  /* margin: 14px 0 8px 0; */
   text-align: left;
   color: #dfdfdf;
 `;
@@ -167,6 +167,8 @@ export const InputTag = styled.input`
   font-size: 16px;
   background-color: #171717;
   color: #efefef;
+  margin: 18px 0 23px 0;
+
   &:focus {
     outline: none;
     border-color: #dbdbdb;
@@ -186,11 +188,11 @@ export const TextAreaTag = styled.textarea`
   min-width: 322px;
   width: 100%;
   height: 30px;
-  border-width: 0px 0px 1px;
+  /* border-width: 0px 0px 1px; */
   border: solid #dbdbdb 2px;
   border-radius: 5px;
   padding: 10px 0 1px 0;
-  margin-top: 18px;
+  margin: 18px 0 23px 0;
   font-size: 16px;
   background-color: #171717;
   border: none;
@@ -198,7 +200,7 @@ export const TextAreaTag = styled.textarea`
 
   overflow: hidden auto;
   resize: none;
-  min-height: 12rem;
+  min-height: 12.3rem;
   max-height: calc(100vh - var(--size-header) - var(--size-tabBar) - 40rem);
 
   &:focus {
@@ -215,15 +217,15 @@ export const TextAreaTag = styled.textarea`
   @media screen and (max-width: 768px) {
     width: 80%;
     height: 7rem;
-    min-height: 7rem;
-    max-height: 7rem;
+    min-height: 10rem;
+    max-height: 10rem;
   }
 `;
 
 export const SubmitBtn = styled.button`
   width: calc(100% - 18px);
   height: 39px;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   border-radius: 32px;
   border: none;
   background-color: #5865f2;
@@ -233,8 +235,18 @@ export const SubmitBtn = styled.button`
 
 export const Warning = styled.p`
   color: #ff0000;
-  text-align: left;
-  font-size: 12px;
-  padding-left: 5px;
-  margin-top: 4px;
+  position: absolute;
+  bottom: 7px; // Warning 메시지의 위치를 조절하세요.
+  left: 5px;
+  font-size: 11px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
+  /* margin-bottom: 30px; // 기존 PTag와 InputTag 사이의 간격을 조절하세요. */
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: 10px; // 원하는 버튼의 상단 마진 크기를 지정하세요.
+  /* margin-bottom: 16px; */
 `;

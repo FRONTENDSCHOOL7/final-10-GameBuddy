@@ -53,7 +53,7 @@ export const WriteImage = styled.img`
   width: 320px;
   height: 200px;
   margin-top: 35px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 export const WriteFormWrapper = styled.div`
@@ -63,7 +63,7 @@ export const WriteFormWrapper = styled.div`
 `;
 
 export const PTag = styled.p`
-  margin: 14px 0 8px 0;
+  margin: 30px 0 8px 0;
   text-align: left;
   color: #dfdfdf;
 `;
@@ -109,7 +109,12 @@ export const SubmitBtn = styled.button`
 
 export const Warning = styled.p`
   color: #ff0000;
+  position: absolute;
   text-align: left;
   font-size: 12px;
   margin-top: 4px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
 `;
