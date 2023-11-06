@@ -190,14 +190,16 @@ export const ModalTheJoined = styled.div`
 `
 export const ProfileDetail = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   margin-left: 5px;
+  margin-bottom: 5px;
   width: 100px;
 `;
 export const ModalProfileImage = styled.img`
   width: 70px;
   height: 70px;
+  margin-left: 30px;
   border-radius: 35px;
   align-items: center;
 `;
@@ -212,7 +214,7 @@ export const ModalArticle = styled.article`
 `;
 export const ModalUsername = styled.p`
   color: #efefef;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
 `;
 export const ModalAccountname = styled.p`
@@ -249,8 +251,8 @@ export const ModalImage = styled.img`
   width: 80vw;
   height: 55vw;
   border-radius: 20px;
-  max-width: 640px;
-  max-height: 360px;
+  max-width: 580px;
+  max-height: 340px;
 `;
 export const ModalIntro = styled.p`
   width: 95%;
@@ -307,6 +309,7 @@ export const ModalCloseBtn = styled.button`
   height: 2rem;
   margin-top: 1rem;
   font-size: 1.5rem;
+  line-height: 1.6rem;
   border-radius: 50%;
   border-color: white;
   color: white;
