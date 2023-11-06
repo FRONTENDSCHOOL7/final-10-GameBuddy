@@ -50,9 +50,9 @@ function GameRecruitPost() {
     const detail = e.target.value;
 
     if (recruitDetail === "") {
-      setIsDetailValid(false);
-    } else {
       setIsDetailValid(true);
+    } else {
+      setIsDetailValid(false);
     }
     setRecruitDetail(detail);
   };
@@ -61,6 +61,25 @@ function GameRecruitPost() {
     if (currentImage === DefaultImage) {
       setAlertModal({
         message: "게임 모집 시, 이미지를 등록 해야합니다.",
+        isOpen: true
+      });
+    } else if (recruitGameTitle.length < 2 || recruitGameTitle.length > 15) {
+      setAlertModal({
+        message: "모집 게임 제목을 다시 입력해주세요.",
+        isOpen: true
+      });
+    } else if (
+      !isPeopleValid ||
+      recruitPeople === "" ||
+      parseInt(recruitPeople) <= 0
+    ) {
+      setAlertModal({
+        message: "모집 인원을 다시 입력해주세요.",
+        isOpen: true
+      });
+    } else if (recruitDetail === "") {
+      setAlertModal({
+        message: "모집 상세 내용을 입력해주세요.",
         isOpen: true
       });
     } else {
@@ -98,7 +117,7 @@ function GameRecruitPost() {
 
       <S.PTag>모집 인원</S.PTag>
       <S.InputTag
-        type="text"
+        type="number"
         placeholder=" 숫자만 입력 가능합니다. "
         value={recruitPeople}
         onChange={onChangeRecruitPeople}

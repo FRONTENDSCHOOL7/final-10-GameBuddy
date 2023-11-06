@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const WriteContainer = styled.div`
   background-color: #2c2f33;
   width: 100%;
-  height: auto;
+  height: 100vh;
   min-height: 100vh;
   text-align: center;
   position: relative;
@@ -12,42 +12,41 @@ export const WriteContainer = styled.div`
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
-  margin: 0 auto;
+  padding-top: 100px;
 
   @media screen and (min-width: 768px) {
-    width: auto;
     height: auto;
     text-align: center;
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
     font-size: 16px;
-    padding: 0 16px;
-  }
-
-  @media screen and (max-width: 768px) {
-    padding-top: 50px;
-    padding-bottom: 10px;
+    box-sizing: border-box;
+    padding-top: 0;
   }
 `;
 
 export const Divdiv = styled.div`
-  flex-grow: 1;
-  display: flex;
+  /* border: 2px solid white; */
+  height: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   margin: auto;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+
+  @media screen and (min-width: 768px) {
+    max-width: none;
+    /* margin-left: 30%; */
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 `;
-
-
-
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -64,7 +63,6 @@ export const ContentContainer = styled.div`
     width: 100%;
   }
 `;
-
 
 export const ButtonImgContainer = styled.div`
   display: flex;
@@ -157,16 +155,20 @@ export const PTag = styled.p`
 
 export const PTagpost = styled.p`
   text-align: left;
-`
+`;
 
 export const TextAreaTag = styled.textarea`
-  min-width: 308px;
+  min-width: 322px;
   width: 100%;
   height: 30px;
   border-width: 0px 0px 1px;
   border: solid #dbdbdb 2px;
+  border-radius: 5px;
   padding: 10px 0 1px 0;
-  font-size: 20px;
+  font-size: 16px;
+  background-color: #171717;
+  border: none;
+  color: #efefef;
 
   overflow: hidden auto;
   resize: none;
@@ -179,15 +181,16 @@ export const TextAreaTag = styled.textarea`
   }
 
   &::placeholder {
-    color: #dbdbdb;
-    font-size: 14px;
+    color: #505050;
+    font-size: 16px;
+    text-indent: 1ch;
   }
 
   @media screen and (max-width: 768px) {
     width: 80%;
-    height: 10rem; 
-    min-height: 10rem; 
-    max-height: 10rem;
+    height: 7rem;
+    min-height: 7rem;
+    max-height: 7rem;
   }
 `;
 
@@ -206,5 +209,6 @@ export const Warning = styled.p`
   color: #ff0000;
   text-align: left;
   font-size: 12px;
+  padding-left: 5px;
   margin-top: 4px;
 `;
