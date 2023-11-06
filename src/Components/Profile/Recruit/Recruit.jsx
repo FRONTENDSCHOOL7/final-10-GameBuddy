@@ -65,10 +65,6 @@ function Recruit({ isMyProfile }) {
     }
   }
 
-  // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
-  window.onload = checkScroll;
-  window.onresize = checkScroll;
-
   // 왼쪽 화살표 클릭 핸들러
   const joinedLeft = () => {
     if (scrollContainerRef.current) {
@@ -121,6 +117,28 @@ function Recruit({ isMyProfile }) {
   }
 
   useEffect(() => {
+    // 이벤트 리스너를 등록하는 함수
+    function handleResize() {
+      checkScroll();
+    }
+
+    function handleLoad() {
+      checkScroll();
+    }
+  
+    // 이벤트 리스너 등록
+    window.addEventListener('resize', handleResize);
+    window.onload = handleLoad;
+  
+    // 클린업 함수에서 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.onload = null;
+    };
+  }, []);
+  
+
+  useEffect(() => {
     fetchData();
   }, [accountname]);
 
@@ -138,14 +156,10 @@ function Recruit({ isMyProfile }) {
 
   useEffect(() => {
     if (modalOn) {
-      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
-      window.onresize = checkJoinedScroll;
       // 모달이 열릴 때 스크롤 막고, 해당 모집글에 참여중인 유저 정보 가져오기
       document.body.style.overflow = "hidden";
       checkScroll();
     } else {
-      // 로드 시와 창 크기가 변경될 때마다 스크롤바 확인
-      window.onresize = checkScroll;
       // 모달이 닫힐 때 스크롤 해제
       document.body.style.overflow = "auto";
       checkScroll();
