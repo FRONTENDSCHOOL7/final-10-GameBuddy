@@ -15,11 +15,11 @@ const GlobalStyles = createGlobalStyle`
 
 ${reset}
 
-@font-face {
-    font-family: "Black Ops One";
-    src: url("../assets/font/BlackOpsOne-Regular.ttf") format("font/ttf");
-    font-weight: normal;
-    font-style: normal;
+/* @font-face {
+  font-family: "Black Ops One", sans-serif;
+  src: url("../assets/font/BlackOpsOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -27,16 +27,22 @@ ${reset}
     src: url("../assets/font/Roboto-Medium.ttf") format("font/ttf");
     font-weight: 500;
     font-style: normal;
+} */
+
+
+html {
+    font-family: "Roboto-Medium", sans-serif;
+    font-weight: 400;
 }
 
 
 body {
-    font-family: "Roboto-Medium";
+    font-family: "Roboto-Medium", sans-serif;
     font-weight: 400;
 }
 
 button {
-    font-family: "Roboto-Medium";
+    font-family: "Roboto-Medium", sans-serif;
     font-size: 14px;
 }
 
