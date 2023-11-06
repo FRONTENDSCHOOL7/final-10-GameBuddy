@@ -1,24 +1,26 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #f2f2f2;
+  background-color: #2c2f33;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   @media screen and (min-width: 768px) {
     width: 100%;
+    height: 100vh;
   }
 `;
 
 export const ChattingRoomContainer = styled.div`
   flex: 1;
   padding-bottom: 80px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-left: 1px solid #c4c4c4;
+  box-shadow: 0px 0px 8px #ffffff90;
+  background-color: #2c2f33;
 `;
 export const Message = styled.div`
   font-size: 14px;
@@ -29,7 +31,8 @@ export const Message = styled.div`
   border: ${(props) =>
     props.left ? "1px solid #c4c4c4" : "1px solid #5865F2"};
   margin: ${(props) => (props.left ? "10px 20px 10px 60px" : "10px 15px")};
-  background-color: ${(props) => (props.left ? "#ffffff" : "#4c8bf5")};
+  background-color: ${(props) =>
+    props.left ? "#ffffff" : "var(--color-purple)"};
   align-self: ${(props) => (props.left ? "flex-start" : "flex-end")};
   color: ${(props) => (props.left ? "#000" : "#fff")};
 
@@ -57,11 +60,11 @@ export const Message = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  background-color: #fff;
+  background-color: #1f1f1f;
   display: flex;
   align-items: center;
   padding: 10px;
-  border-top: 1px solid #e1e1e1;
+  /* border-top: 1px solid #e1e1e1; */
 
   position: fixed;
   bottom: 0;
@@ -74,22 +77,24 @@ export const InputContainer = styled.div`
   }
 
   input[type="text"] {
-    background-color: #fff;
+    background-color: #1f1f1f;
+    max-width: 100%;
     flex-grow: 1;
     padding: 10px;
     border-radius: 15px;
     border: none;
     margin-left: 10px;
-    color: #000000;
+    padding-right: 90px;
+    color: #ffffff;
   }
 
   button {
-    background-color: #fff;
+    background-color: #1f1f1f;
     padding: 10px 30px;
     border: none;
     border-radius: 15px;
     margin-left: 10px;
-    color: ${(props) => (props.inputValue ? "#5865f2" : "#c4c4c4")};
+    color: ${(props) => (props.inputValue ? "var(--color-purple)" : "#c4c4c4")};
   }
 `;
 
