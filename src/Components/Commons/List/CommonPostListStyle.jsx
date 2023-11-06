@@ -39,8 +39,9 @@ export const Section = styled.section`
   /* border: 1px solid #fff; */
   box-shadow: ${({ isHovered }) =>
     isHovered
-      ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"
-      : "none"};
+      ? "0 0 20px rgba(0,0,0,0.25)" : "none"
+      // ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)" : "none"
+      };
   @media screen and (min-width: 768px) {
     max-width: 550px;
     max-height: 700px;

@@ -169,7 +169,7 @@ export const ModalProfile = styled.div`
 export const ModalTheJoinedContainer = styled.div`
   position: absolute;
   right: 0px;
-  bottom: 45px;
+  bottom: 50px;
   width: 100%;
   max-width: 640px;
   background-color: #202020;
@@ -186,6 +186,9 @@ export const ModalTheJoined = styled.div`
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+  @media screen and (max-width: 768px) {
+    width: 90%; 
   }
 `
 export const ProfileDetail = styled.div`
@@ -219,7 +222,7 @@ export const ModalUsername = styled.p`
 `;
 export const ModalAccountname = styled.p`
   color: #a6a6a6;
-  font-size: 14px;
+  font-size: 12px;
 `;
 export const ModalControlBtn = styled.button`
   height: 50px;
@@ -267,6 +270,24 @@ export const ModalRecruitNumber = styled.p`
   @media screen and (min-width: 768px) {
     font-size: 24px;
   }
+`;
+export const ProfileRecruitDetail = styled.div`
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100px;
+`;
+export const ModalRecruitUsername = styled.p`
+  color: #efefef;
+  font-size: 16px;
+  font-weight: 500;
+`;
+export const ModalRecruitProfileImage = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  align-items: center;
 `;
 export const ModalBtnCover = styled.div`
   position: relative;

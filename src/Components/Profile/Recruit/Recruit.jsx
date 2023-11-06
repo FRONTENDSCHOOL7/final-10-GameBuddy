@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as S from "./RecruitStyle";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import gameRecruitListAPI from "../../../API/gameRecruitAPI/gameRecruitListAPI";
 import gameRecruitDeleteAPI from "../../../API/gameRecruitAPI/gameRecruitDeleteAPI";
 import myAccountNameAPI from "../../../API/myAccountNameAPI";
@@ -14,7 +14,7 @@ function Recruit({ isMyProfile }) {
   const [modalOn, setModalOn] = useState(false);
   const [theJoined, setTheJoined] = useState(false);
   const [recruitId, setRecruitId] = useState(0);
-console.log("isMyProfile",isMyProfile)
+
   const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
   const [myAccountName, setMyAccountName] = useState("");
@@ -29,6 +29,7 @@ console.log("isMyProfile",isMyProfile)
   const [targetImage, setTargetImage] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 스크롤 컨테이너의 ref 생성
   const scrollContainerRef = useRef(null);
@@ -84,13 +85,13 @@ console.log("isMyProfile",isMyProfile)
 
       // 버튼의 표시 여부를 결정하는 클래스를 토글합니다.
       const leftBtn = document.getElementById("leftJoinedBtn");
-      if (hasHorizontalScrollbar) {
+      if (hasHorizontalScrollbar && window.innerWidth > 768) {
         leftBtn.style.display = "block";
       } else {
         leftBtn.style.display = "none";
       }
       const rightBtn = document.getElementById("rightJoinedBtn");
-      if (hasHorizontalScrollbar) {
+      if (hasHorizontalScrollbar && window.innerWidth > 768) {
         rightBtn.style.display = "block";
       } else {
         rightBtn.style.display = "none";
@@ -116,13 +117,18 @@ console.log("isMyProfile",isMyProfile)
   }
 
   useEffect(() => {
+  }, [location])
+
+  useEffect(() => {
     // 이벤트 리스너를 등록하는 함수
     function handleResize() {
       checkScroll();
+      checkJoinedScroll();
     }
 
     function handleLoad() {
       checkScroll();
+      checkJoinedScroll();
     }
   
     // 이벤트 리스너 등록
@@ -322,20 +328,26 @@ console.log("isMyProfile",isMyProfile)
                     <S.ModalTheJoined ref={scrollContainerRef} id="joinedBar">
                       {theJoinedData.map((theJoinedData, id) => {
                         return (
-                          <S.ProfileDetail key={id}>
-                            <S.ModalUsername>{id + 1}</S.ModalUsername>
-                            <S.ModalProfileImage
+                          <S.ProfileRecruitDetail 
+                          key={id} 
+                          onClick={() => {
+                            navigate(`/profile/${theJoinedData.profile.accountname}`)
+                          }}
+                          >
+                            {id == 0 ? <S.ModalUsername style={{color:"orange"}}>★</S.ModalUsername>
+                              : <S.ModalUsername>{id+1}</S.ModalUsername>}        
+                            <S.ModalRecruitProfileImage
                               src={theJoinedData.profile.image}
                             />
                             <S.ModalArticle>
-                              <S.ModalUsername>
+                              <S.ModalRecruitUsername>
                                 {theJoinedData.profile.username}
-                              </S.ModalUsername>
+                              </S.ModalRecruitUsername>
                               <S.ModalAccountname>
                                 {theJoinedData.profile.accountname}
                               </S.ModalAccountname>
                             </S.ModalArticle>
-                          </S.ProfileDetail>
+                          </S.ProfileRecruitDetail>
                         );
                       })}
                     </S.ModalTheJoined>
