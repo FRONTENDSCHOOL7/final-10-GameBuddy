@@ -9,10 +9,7 @@ function ChattingList() {
 
   // 768px 이하일 때는 list를 클릭하면 /chat/room으로 이동
   const handleChatItemClick = () => {
-    if (window.innerWidth < 768) {
-      navigate("/chat/room");
-    }
-    // 768px 이상일 때는 아무런 동작도 수행하지 않음
+    navigate("/chat/room");
   };
 
   return (
@@ -34,5 +31,4 @@ function ChattingList() {
     </S.ChatListContainer>
   );
 }
-
 export default ChattingList;

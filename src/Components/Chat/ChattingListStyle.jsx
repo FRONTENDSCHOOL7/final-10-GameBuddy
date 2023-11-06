@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const ChatListContainer = styled.div`
-  padding-top: 62px;
+  height: 100vh;
+  padding-top: 60px;
+  background-color: #2c2f33;
   @media screen and (min-width: 768px) {
-    width: 30%;
-    margin-top: 20px;
-    margin-left: 80px;
-    margin-right: 10px;
-    background-color: #fff;
+    margin-top: 10px;
+    margin-left: 72px;
+    overflow: hidden;
   }
 `;
 
@@ -15,14 +15,14 @@ export const ChatListForm = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  padding: 16px 16px 0;
-  @media screen and (min-width: 768px) and (max-width: 998px) {
+  /* width: 90%; */
+  padding: 24px 16px 0;
+  /* @media screen and (min-width: 768px) and (max-width: 998px) {
     flex-direction: column;
     align-items: flex-end;
     gap: 2px;
     color: #a4a4a4;
-  }
+  } */
 `;
 
 export const ChattingBox = styled.div`
@@ -50,7 +50,7 @@ export const Article = styled.article`
 `;
 
 export const UserName = styled.p`
-  color: #000;
+  color: #ffffff;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -71,4 +71,11 @@ export const Intro = styled.p`
 
 export const TimeP = styled.p`
   font-size: 12px;
+  color: #767676;
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    color: #a4a4a4;
+  }
 `;
