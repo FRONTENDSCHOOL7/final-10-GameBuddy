@@ -15,7 +15,10 @@ export default function RecruitEdit() {
   const navigate = useNavigate();
   const [uploadImage, setUploadImage] = useState("");
 
-  const [isContentValid, setIsContentValid] = useState(true);
+  const [isGameNameValid, setIsGameNameValid] = useState(true);
+  const [isGameRecruitNumValid, setIsGameRecruitValid] = useState(true);
+  const [isGameDetailValid, setIsGameDetailValid] = useState(true);
+
   const [gameName, setGameName] = useState(
     JSON.parse(state.recruitData.itemName)[0]
   );
@@ -36,25 +39,28 @@ export default function RecruitEdit() {
 
   const onChangeGameName = (e) => {
     if (e.target.value === "") {
-      setIsContentValid(false);
+      setIsGameNameValid(false);
     } else {
-      setIsContentValid(true);
+      setIsGameNameValid(true);
     }
     setGameName(e.target.value);
   };
   const onChangeGameRecruitNum = (e) => {
-    if (e.target.value === "") {
-      setIsContentValid(false);
+    const value = e.target.value;
+    const number = parseInt(value, 10);
+
+    if (!isNaN(number) && number > 0) {
+      setIsGameRecruitValid(true);
     } else {
-      setIsContentValid(true);
+      setIsGameRecruitValid(false);
     }
-    setGameRecruitNum(e.target.value);
+    setGameRecruitNum(value);
   };
   const onChangeGameDetail = (e) => {
     if (e.target.value === "") {
-      setIsContentValid(false);
+      setIsGameDetailValid(false);
     } else {
-      setIsContentValid(true);
+      setIsGameDetailValid(true);
     }
     setGameDetail(e.target.value);
   };
@@ -103,7 +109,7 @@ export default function RecruitEdit() {
       <S.WriteContainer>
         <Header type="profileMod" />
         <S.ImageContainer>
-          <h5 style={{ paddingTop: "114px" }}>이미지 등록</h5>
+          <h5 style={{ paddingTop: "114px" }}>모집글 수정</h5>
           <S.WriteImage
             src={uploadImage}
             alt="게시글 이미지"
@@ -127,40 +133,51 @@ export default function RecruitEdit() {
           <S.PTag>모집게임</S.PTag>
           <S.InputTag
             type="text"
-            placeholder={gameName}
+            placeholder={"2~15자 이내여야 합니다."}
             value={gameName}
             onChange={onChangeGameName}
           />
           <S.Warning
-            style={isContentValid ? { display: "none" } : { display: "block" }}>
-            *게시글 내용을 입력해주세요.
+            style={
+              isGameNameValid ? { display: "none" } : { display: "block" }
+            }>
+            * 2~15자 이내여야 합니다.
           </S.Warning>
 
           <S.PTag>모집 인원</S.PTag>
           <S.InputTag
-            type="text"
-            placeholder={gameRecruitNum + "명"}
+            type="number"
+            placeholder={" 숫자만 입력 가능합니다. "}
             value={gameRecruitNum}
             onChange={onChangeGameRecruitNum}
           />
           <S.Warning
-            style={isContentValid ? { display: "none" } : { display: "block" }}>
-            *게시글 내용을 입력해주세요.
+            style={
+              isGameRecruitNumValid ? { display: "none" } : { display: "block" }
+            }>
+            * 숫자만 입력 가능합니다.
           </S.Warning>
 
           <S.PTag>모집 상세</S.PTag>
           <S.InputTag
             type="text"
-            placeholder={gameDetail}
+            placeholder={" 포지션, 티어 등 상세 내용을 입력해주세요."}
             value={gameDetail}
             onChange={onChangeGameDetail}
           />
           <S.Warning
-            style={isContentValid ? { display: "none" } : { display: "block" }}>
-            *게시글 내용을 입력해주세요.
+            style={
+              isGameDetailValid ? { display: "none" } : { display: "block" }
+            }>
+            * 포지션, 티어 등 상세 내용을 입력해주세요.
           </S.Warning>
 
-          <S.SubmitBtn type="submit" onClick={editRecruit}>
+          <S.SubmitBtn
+            type="submit"
+            onClick={editRecruit}
+            disabled={
+              !(isGameNameValid && isGameRecruitNumValid && isGameDetailValid)
+            }>
             수정하기
           </S.SubmitBtn>
         </S.WriteFormWrapper>
