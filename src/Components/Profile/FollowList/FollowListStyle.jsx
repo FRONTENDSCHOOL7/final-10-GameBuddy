@@ -14,11 +14,8 @@ export const FollowListForm = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 97%;
   padding-top: 16px;
-  @media screen and (min-width: 500px) {
-    width: 450px;
-  }
 `;
 
 export const ProfileBox = styled.div`

@@ -32,7 +32,7 @@ function Profile() {
   useEffect(() => {
     async function fetchData() {
       const result = await myInfoAPI();
-      console.log(result);
+      // console.log(result);
       setUserName(result.user.username);
       setAccountName(result.user.accountname);
       setIntro(result.user.intro);

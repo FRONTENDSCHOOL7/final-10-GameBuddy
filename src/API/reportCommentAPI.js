@@ -1,7 +1,7 @@
 import axios from "axios";
 
 async function reportCommentAPI(post_id, comment_id, username) {
-    console.log(post_id)
+    // console.log(post_id)
     try {
         const token = localStorage.getItem("token");
         const res = await axios.post(`https://api.mandarin.weniv.co.kr/post/${post_id}/comments/${comment_id}/report`, {}, {

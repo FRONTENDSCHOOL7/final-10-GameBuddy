@@ -17,23 +17,3 @@ async function unFollowAPI(accountName) {
 }
 
 export default unFollowAPI;
-
-// async function unFollowAPI(accountName) {
-//     try {
-//         const token = localStorage.getItem("token");
-//         let result = await axios({
-//             method: 'delete',
-//             url: `https://api.mandarin.weniv.co.kr/profile/${accountName}/unfollow`,
-//             headers: {
-//                 "Authorization": `Bearer ${token}`
-//             },
-//         })
-        
-//         console.log("언팔로우 완료")
-//         console.log(result)
-//         return true
-//     } catch (error) {
-//         console.log("언팔로우 api 에러: ", error)
-//         return false
-//     }
-// };

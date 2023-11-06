@@ -15,7 +15,7 @@ async function loginAPI(email, password) {
         }
       );
   
-      console.log(result.data)
+      // console.log(result.data)
   
       const token = await result.data.user.token
       localStorage.setItem("token", token)
