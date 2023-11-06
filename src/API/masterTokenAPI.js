@@ -10,7 +10,6 @@ async function masterTokenAPI() {
         }
       }
     );
-    // console.log(result.data)
 
     const token = await result.data.user.token
     return token;

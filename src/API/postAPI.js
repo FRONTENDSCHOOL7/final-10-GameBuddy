@@ -18,9 +18,6 @@ async function postAPI(content, image = "") {
                 }
             }
         );
-
-        // console.log(response);
-
         return "게시글 작성 완료"
     } catch (e) {
         const ErrorMessage = await e.response.data.message;

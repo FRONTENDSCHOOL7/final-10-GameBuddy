@@ -105,8 +105,6 @@ function ConfirmModal({
     try {
       const responseMessage = await removeMyPostAPI(postId);
       if (responseMessage === "게시글 삭제 성공") {
-        alert("게시물이 삭제되었습니다.");
-
         // 상태 갱신: 게시물 목록에서 삭제된 게시물 제거
         const updatedPostList = postList.filter((post) => post.id !== postId);
         setPostList(updatedPostList);
@@ -116,7 +114,6 @@ function ConfirmModal({
       }
     } catch (error) {
       console.error(error);
-      alert("잘못된 요청입니다. 로그인 정보를 확인하세요.");
     }
   };
 

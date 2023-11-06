@@ -13,10 +13,7 @@ export const NoPostsMessage = styled.div`
     height: 70vh;
   }
 `;
-/* min-height: 60vh;
-  padding-bottom: 70px; */
 
-// padding-bottom: 20px;
 export const ListContainer = styled.div`
   background-color: #2c2f33;
   display: flex;

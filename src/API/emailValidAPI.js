@@ -7,7 +7,6 @@ async function emailValidAPI(email) {
         "email": email
       }
     })
-    // console.log(result.data)
     return result.data.message
   } catch (error) {
     return 0
