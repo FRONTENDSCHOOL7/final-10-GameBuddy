@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Modalclose from "../../../assets/image/modalClose.svg";
 
 export const PostDetailBackground = styled.article`
   display: flex;
@@ -317,15 +318,16 @@ export const PostDetailWriteSendButton = styled.button`
 `;
 
 export const PostDetailBackButton = styled.button`
-  width: 2rem;
-  height: 2rem;
+  width: 2.3rem;
+  height: 2.3rem;
   font-size: 1.5rem;
   border-radius: 50%;
-  border-color: white;
-  color: white;
+  border: none;
+  /* display: none; */
+  background-image: url(${Modalclose});
+  background-repeat: no-repeat;
   background-color: transparent;
-  line-height: 1.6rem;
-
+  line-height: 1.6em;
   position: absolute;
   bottom: 15px;
   left: 50%;

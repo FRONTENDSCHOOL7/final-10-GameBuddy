@@ -7,6 +7,7 @@ import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
 import DefaultImage from "../../../assets/image/char_inactive.png";
 import more from "../../../assets/image/icon-more.svg";
+import Modalclose from "../../../assets/image/modalClose.svg";
 
 import {
   alertStateAtom,
@@ -304,7 +305,7 @@ function CommonDetailModal() {
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
+      <S.PostDetailBackButton onClick={closeModal}></S.PostDetailBackButton>
       {isMyProfile && (
         <Modal
           isMyProfile={isMyProfile}
