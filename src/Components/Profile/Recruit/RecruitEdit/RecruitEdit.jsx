@@ -12,7 +12,10 @@ export default function RecruitEdit() {
   const navigate = useNavigate();
   const [uploadImage, setUploadImage] = useState("");
 
+  const [isGameNameValid, setIsGameNameValid] = useState(true);
+  const [isPeopleValid, setIsPeopleValid] = useState(true);
   const [isContentValid, setIsContentValid] = useState(true);
+
   const [gameName, setGameName] = useState(JSON.parse(state.recruitData.itemName)[0]);
   const [gameRecruitNum, setGameRecruitNum] = useState(JSON.parse(state.recruitData.link)[0]);
   const [gameDetail, setGameDetail] = useState(JSON.parse(state.recruitData.link)[1]);
@@ -25,28 +28,33 @@ export default function RecruitEdit() {
   
 
   const onChangeGameName = (e) => {
-    if (e.target.value === "") {
-      setIsContentValid(false);
+    const title = e.target.value;
+    if (title.length < 2 || title.length > 15) {
+      setIsGameNameValid(false);
     } else {
-      setIsContentValid(true);
+      setIsGameNameValid(true);
     }
-    setGameName(e.target.value);
+    setGameName(title);
   };
+
   const onChangeGameRecruitNum = (e) => {
-    if (e.target.value === "") {
-      setIsContentValid(false);
+    const people = e.target.value;
+    if (!/^\d+$/.test(people)) {
+      setIsPeopleValid(false);
     } else {
-      setIsContentValid(true);
+      setIsPeopleValid(true);
     }
-    setGameRecruitNum(e.target.value);
+    setGameRecruitNum(people);
   };
+
   const onChangeGameDetail = (e) => {
-    if (e.target.value === "") {
+    const detail = e.target.value;
+    if (gameDetail === "") {
       setIsContentValid(false);
     } else {
       setIsContentValid(true);
     }
-    setGameDetail(e.target.value);
+    setGameDetail(detail);
   };
 
   const handleWriteImageChange = async (e) => {
@@ -65,6 +73,17 @@ export default function RecruitEdit() {
   };
 
   const editRecruit = async () => {
+
+    if(gameName.length < 2) {
+      alert('게임 이름은 2글자 이상이어야 합니다.');
+      return;
+    }
+
+    if(gameRecruitNum === "" || gameDetail === "") {
+      alert('모집 인원과 상세 내용을 모두 입력해주세요.');
+      return;
+    }
+
     const result = await gameRecruitEditAPI(state.recruitData.id, state.recruitData, gameName, gameRecruitNum, gameDetail, uploadImage)
     if(result) {
       const myAccountName = await myAccountNameAPI();
@@ -80,7 +99,7 @@ export default function RecruitEdit() {
     <S.WriteContainer>
       <Header type="profileMod" />
       <S.ImageContainer>
-        <h5 style={{paddingTop: '114px'}}>이미지 등록</h5>
+        <h5>이미지 등록</h5>
         <S.WriteImage
           src={uploadImage}
           alt="게시글 이미지"
@@ -101,40 +120,40 @@ export default function RecruitEdit() {
         <S.PTag>모집게임</S.PTag>
         <S.InputTag
           type="text"
-          placeholder={gameName}
+          placeholder=" 2~15자 이내여야 합니다."
           value={gameName}
           onChange={onChangeGameName}
         />
         <S.Warning
-          style={isContentValid ? { display: "none" } : { display: "block" }}
+          style={isGameNameValid ? { display: "none" } : { display: "block" }}
         >
-          *게시글 내용을 입력해주세요.
+          *2~15자 이내여야 합니다.
         </S.Warning>
 
         <S.PTag>모집 인원</S.PTag>
         <S.InputTag
           type="text"
-          placeholder={gameRecruitNum + "명"}
+          placeholder=" 숫자만 입력 가능합니다. "
           value={gameRecruitNum}
           onChange={onChangeGameRecruitNum}
         />
         <S.Warning
-          style={isContentValid ? { display: "none" } : { display: "block" }}
+          style={isPeopleValid ? { display: "none" } : { display: "block" }}
         >
-          *게시글 내용을 입력해주세요.
+          *숫자만 입력 가능합니다.
         </S.Warning>
 
         <S.PTag>모집 상세</S.PTag>
         <S.InputTag
           type="text"
-          placeholder={gameDetail}
+          placeholder=" 포지션, 티어 등 상세 내용을 입력해주세요."
           value={gameDetail}
           onChange={onChangeGameDetail}
         />
         <S.Warning
           style={isContentValid ? { display: "none" } : { display: "block" }}
         >
-          *게시글 내용을 입력해주세요.
+          *포지션, 티어 등 상세 내용을 입력해주세요.
         </S.Warning>
 
         <S.SubmitBtn type="submit" onClick={editRecruit}>
