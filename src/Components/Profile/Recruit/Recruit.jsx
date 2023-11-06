@@ -14,7 +14,7 @@ function Recruit({ isMyProfile }) {
   const [modalOn, setModalOn] = useState(false);
   const [theJoined, setTheJoined] = useState(false);
   const [recruitId, setRecruitId] = useState(0);
-
+console.log("isMyProfile",isMyProfile)
   const [editRecruitModal, setEditRecruitModal] = useState(false);
   const [closeRecruitModal, setCloseRecruitModal] = useState(false);
   const [myAccountName, setMyAccountName] = useState("");
@@ -254,7 +254,7 @@ function Recruit({ isMyProfile }) {
                   <S.UpdateIcon />
                 </S.ModalControlBtn>
               ) : (
-                <></>
+                <div></div>
               )}
             </S.ModalProfile>
             <S.ModalImage src={recruit[recruitId].itemImage} />
@@ -267,7 +267,7 @@ function Recruit({ isMyProfile }) {
               {isMyProfile ? (
                 <S.ModalBtn
                   onClick={() => setCloseRecruitModal(true)}
-                  btnColor={"#5865f2"}>
+                  >
                   모집 종료하기
                 </S.ModalBtn>
               ) : JSON.parse(recruit[recruitId].link)[2].includes(
@@ -281,7 +281,7 @@ function Recruit({ isMyProfile }) {
                       recruit[recruitId]
                     );
                   }}
-                  btnColor={"red"}>
+                  style={{backgroundColor: "red"}}>
                   모집 떠나기!
                 </S.ModalBtn>
               ) : recruit[recruitId].price <
@@ -294,11 +294,11 @@ function Recruit({ isMyProfile }) {
                       recruit[recruitId]
                     );
                   }}
-                  btnColor={"green"}>
+                  style={{backgroundColor: "green"}}>
                   모집 참여하기!
                 </S.ModalBtn>
               ) : (
-                <S.ModalBtn btnColor={"orange"}>Full방입니다~!</S.ModalBtn>
+                <S.ModalBtn style={{backgroundColor: "orange"}}>Full방입니다~!</S.ModalBtn>
               )}
               <div
                 style={{ display: "flex", cursor: "pointer", width: "20%" }}
@@ -355,7 +355,7 @@ function Recruit({ isMyProfile }) {
             정말 모집을 끝낼까요?
             <S.ModalBtn
               onClick={() => closeRecruit(recruit[recruitId].id)}
-              btnColor={"#5865f2"}>
+              >
               종료합시다!
             </S.ModalBtn>
           </S.CloseModalContent>
@@ -372,7 +372,7 @@ function Recruit({ isMyProfile }) {
                   state: { recruitData: recruit[recruitId] }
                 });
               }}
-              btnColor={"#5865f2"}>
+              >
               네 수정합시다!
             </S.ModalBtn>
           </S.CloseModalContent>

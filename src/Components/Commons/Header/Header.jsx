@@ -146,7 +146,7 @@ export default function Header({ type }) {
         <S.ModalContainer onClick={closeModal}>
           <S.ModalContent
             onClick={(e) => e.stopPropagation()}
-            btnColor={"#2c2f33"}>
+            >
             {modalContent.map((item, index) => (
               <S.ModalItem key={index} onClick={() => item.action()}>
                 {item.text}
