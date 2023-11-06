@@ -110,7 +110,7 @@ function PostEdit() {
               <S.PTag>게시글 수정</S.PTag>
               <S.TextAreaTag
                 type="text"
-                placeholder={postContent}
+                placeholder={" 게시글 내용을 입력해주세요."}
                 value={postContent}
                 onChange={onChangePostContent}
               />
