@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import bgimg from "../../../assets/image/ground.jpg";
 
 /* max-width: calc(100vw - 260px); */
 export const Article = styled.article`
@@ -38,14 +39,20 @@ export const Section = styled.section`
   position: relative;
   /* border: 1px solid #fff; */
   box-shadow: ${
-    ({ isHovered }) => (isHovered ? "0 0 20px rgba(0,0,0,0.25)" : "none")
+    ({ isHovered }) => (isHovered ? "0px 0px 5px #97797990" : "none")
     // ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)" : "none"
   };
+  /* border: 1px solid #5e5a5a90; */
   @media screen and (min-width: 768px) {
     max-width: 550px;
     max-height: 700px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 10px;
+    /* box-shadow: 0px 0px 20px #ffffff90; */
+    background-color: #2c2f33;
+    border: 1px solid #5e5a5a90;
+    cursor: pointer;
   }
 `;
 
