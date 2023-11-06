@@ -62,9 +62,12 @@ export const Input = styled.input`
 `;
 
 export const SearchUserContainer = styled.div`
-  padding-top: 62px;
+  height: 100%;
+  /* padding-top: 62px; */
+  margin-top: 55px;
+  overflow-y: auto;
   @media screen and (min-width: 768px) {
-    margin-left: 270px;
+    margin-left: 50px;
     padding-left: 30px;
   }
 `;

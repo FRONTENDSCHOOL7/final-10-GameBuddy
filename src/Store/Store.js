@@ -148,3 +148,8 @@ export const alertStateAtom = atom({
     navigation: ''
   }
 });
+
+export const isFollowAtom = atom({
+  key: 'isFollowAtom',
+  default: false
+})
