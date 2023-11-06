@@ -3,12 +3,13 @@ import axios from "axios";
 async function gameRecruitListAPI(accountname) {
     const token = localStorage.getItem("token");
     try {
-        const res = await axios.get(`https://api.mandarin.weniv.co.kr/product/gamerecruitmaster`, {
+        const res = await axios.get(`https://api.mandarin.weniv.co.kr/product/gamerecruitmaster?limit=50`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         })
         const response = await res.data.product
+        console.log("원본 리스트", response)
         // const result = response.map((data) => {
         //     if(JSON.parse(data.itemName)[1] === accountname) return data
         //   })
