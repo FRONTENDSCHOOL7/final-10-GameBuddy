@@ -33,6 +33,7 @@ ${reset}
 html {
     font-family: "Roboto-Medium", sans-serif;
     font-weight: 400;
+    font-size: 16px;
 }
 
 
@@ -60,6 +61,13 @@ button {
     overflow: hidden;
     padding: 0;
     position: absolute;
+}
+
+
+html {
+    font-family: "Roboto-Medium", sans-serif;
+    /* font-weight: 400; */
+    font-size: 16px;
 }
 `;
 

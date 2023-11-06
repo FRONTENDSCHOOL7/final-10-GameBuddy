@@ -44,11 +44,11 @@ const SplashLogo = styled.h1`
 function Splash() {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigate("/main");
-  //   }, 2000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/main");
+    }, 2000);
+  }, []);
 
   return (
     <SplashContainer>
