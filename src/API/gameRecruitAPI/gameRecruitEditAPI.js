@@ -20,7 +20,8 @@ async function gameRecruitEditAPI(_id, recruitData, gameName, gameRecruitNum, ga
             headers: { "Authorization": `Bearer ${token}` }
         })
 
-        console.log("겜모집글수정:", response);
+        console.log("겜모집글수정 성공:");
+        // console.log("겜모집글수정 성공:", response);
         return true
     } catch (e) {
         console.log("실패", e);

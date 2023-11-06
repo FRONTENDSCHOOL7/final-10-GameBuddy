@@ -28,7 +28,8 @@ async function leaveRecruitAPI(_id, myAccountName, recruitData) {
             headers: { "Authorization": `Bearer ${token}` }
         })
 
-        console.log("겜이탈 성공:", response);
+        // console.log("겜이탈 성공:", response);
+        console.log("겜이탈 성공:");
         return true
     } catch (e) {
         console.log("실패", e);

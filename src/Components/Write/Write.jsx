@@ -6,17 +6,19 @@ import Footer from "../Commons/Footer/Footer";
 import Post from "./Post";
 import GameRecruitPost from "./GameRecruitPost";
 import { uploadImageAtom } from "../../Store/Store";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import uploadImageAPI from "../../API/uploadImageAPI";
 
 export default function WritePage() {
   const [selectedBtn, setSelectedBtn] = useState(false);
   const [uploadImage, setUploadImage] = useRecoilState(uploadImageAtom);
+  const resetRecoilState = useResetRecoilState(uploadImageAtom);
 
   const fileInputRef = useRef();
 
   useEffect(() => {
     // 컴포넌트가 처음 마운트될 때 이미지 초기화
+    resetRecoilState();
     setUploadImage(DefaultImage);
   }, []);
 

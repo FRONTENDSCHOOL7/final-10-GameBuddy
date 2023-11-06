@@ -3,7 +3,7 @@ import DefaultImage from "../../../assets/image/char_inactive.png";
 import * as S from "./ProfileDetailStyle";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { userDataAtom } from "../../../Store/Store";
+import { isFollowAtom, userDataAtom } from "../../../Store/Store";
 import { userPostListAtom } from "../../../Store/Store";
 import { myDataAtom } from "../../../Store/Store";
 import followAPI from "../../../API/followAPI/followingAPI";
@@ -17,18 +17,18 @@ function Profile({ isMyProfile, isFollowingParam, accountname }) {
   const navigate = useNavigate();
 
   // 팔로잉 여부
-  const [isFollowing, setIsFollowing] = useState(isFollowingParam);
+  const [isFollowing, setIsFollowing] = useRecoilState(isFollowAtom);
 
   async function follow(accountName) {
     const result = await followAPI(accountName);
-    console.log(myData.following);
-    console.log(userData._id);
+    // console.log(myData.following);
+    // console.log(userData._id);
     if (result) setIsFollowing(!isFollowing);
   }
   async function unFollow(accountName) {
     const result = await unFollowAPI(accountName);
-    console.log(myData.following);
-    console.log(userData._id);
+    // console.log(myData.following);
+    // console.log(userData._id);
     if (result) setIsFollowing(!isFollowing);
   }
 

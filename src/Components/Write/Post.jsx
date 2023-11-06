@@ -6,15 +6,12 @@ import {
   currentLocation,
   uploadImageAtom
 } from "../../Store/Store";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import postAPI from "../../API/postAPI";
-import { useLocation, useNavigate } from "react-router-dom";
 import Alert from "../Commons/Alert/Alert";
 
 function Post() {
   const currentImage = useRecoilValue(uploadImageAtom);
-
-  const resetRecoilState = useResetRecoilState(uploadImageAtom);
 
   const [postContent, setPostContent] = useState("");
 
@@ -43,7 +40,6 @@ function Post() {
 
     if (result.includes("완료")) {
       setAlertModal({ message: result, isOpen: true, navigation: location });
-      resetRecoilState();
     } else {
       setAlertModal({ message: result, isOpen: true });
     }

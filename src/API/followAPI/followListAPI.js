@@ -10,7 +10,7 @@ async function followListAPI(accountName, isFollowerList) {
         "Authorization" : `Bearer ${token}`
       }
     })
-    console.log(result.data)
+    // console.log(result.data)
     return result.data
   } catch (error) {
     console.log(`팔로우 리스트를 불러오는데 실패했습니다...${error.response.data}`)
@@ -18,25 +18,3 @@ async function followListAPI(accountName, isFollowerList) {
 };
 
 export default followListAPI
-
-// async function followerAPI(accountName, isFollowerList) {
-//   const token = localStorage.getItem("token");
-//   try {
-//     let result = await axios({
-//       method: 'get',
-//       url: `https://api.mandarin.weniv.co.kr/profile/${accountName}/${isFollowerList}`,
-//       headers:{
-//         "Authorization" : `Bearer ${token}`
-//       },
-//       data: {
-//       }
-//     })
-
-//     console.log("성공")
-//     console.log(result.data)
-//     return result.data
-//   } catch (error) {
-//     console.log("실패")
-//     console.log(error.response.data)
-//   }
-// };

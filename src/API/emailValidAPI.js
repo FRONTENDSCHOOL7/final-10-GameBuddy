@@ -7,7 +7,7 @@ async function emailValidAPI(email) {
         "email": email
       }
     })
-    console.log(result.data)
+    // console.log(result.data)
     return result.data.message
   } catch (error) {
     return 0
@@ -15,22 +15,3 @@ async function emailValidAPI(email) {
 };
 
 export default emailValidAPI;
-
-// async function emailValidAPI(email) {
-//   try {
-//     let result = await axios({
-//       method: 'post',
-//       url: `https://api.mandarin.weniv.co.kr/user/emailvalid`,
-//       data: {
-//         "user": {
-//           "email": email
-//         }
-//       }
-//     })
-
-//     return result.data.message
-
-//   } catch (error) {
-//     return 0
-//   }
-// };

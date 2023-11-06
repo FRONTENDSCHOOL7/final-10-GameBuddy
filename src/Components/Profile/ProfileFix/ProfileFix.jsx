@@ -9,6 +9,9 @@ import myInfoAPI from "../../../API/myInfoAPI";
 import profileFixAPI from "../../../API/profileFixAPI";
 import ifProfileEditedAPI from "../../../API/gameRecruitAPI/ifProfileEditedAPI";
 import myAccountNameAPI from "../../../API/myAccountNameAPI";
+import { useRecoilState, useRecoilValue } from "recoil";
+import Alert from "../../Commons/Alert/Alert";
+import { alertStateAtom, currentLocation } from "../../../Store/Store";
 
 function Profile() {
   const [userName, setUserName] = useState("");
@@ -23,11 +26,13 @@ function Profile() {
   const [isSignUp, setIsSignUp] = useState(0);
   const navigate = useNavigate();
   const fileInputRef = useRef();
+  const [alertModal, setAlertModal] = useRecoilState(alertStateAtom);
+  const location = useRecoilValue(currentLocation);
 
   useEffect(() => {
     async function fetchData() {
       const result = await myInfoAPI();
-      console.log(result);
+      // console.log(result);
       setUserName(result.user.username);
       setAccountName(result.user.accountname);
       setIntro(result.user.intro);
@@ -101,76 +106,82 @@ function Profile() {
     const newMyAccountName = await myAccountNameAPI();
 
     if (result.includes("사용중")) {
-      alert(result);
+      setAlertModal({ message: result, isOpen: true });
     } else {
-      alert(result);
       await ifProfileEditedAPI(prevMyAccountName, newMyAccountName);
-      navigate("/main");
+      setAlertModal({
+        message: result,
+        isOpen: true,
+        navigation: `/profile/${updatedAccountName}`
+      });
     }
   };
 
   // API 코드 작성 (useEffect)
 
   return (
-    <S.ProfileContainer>
-      <S.ProfileLogo>프로필 수정</S.ProfileLogo>
-      <Header type={"profileMod"} />
-      <S.ProfileImage
-        src={selectedImage === "" ? DefaultImage : selectedImage}
-        alt="프로필 이미지"
-        onClick={handleImageClick} // 이미지 클릭 시 파일 선택 창이 열림
-      />
-
-      <input
-        type="file"
-        onChange={handleImageChange}
-        ref={fileInputRef}
-        accept="image/jpeg,image/png"
-        style={{ display: "none" }}
-      />
-
-      <S.ProfileWriteContainer>
-        <S.PTag>사용자이름</S.PTag>
-        <S.InputTag
-          type="text"
-          placeholder={userName}
-          value={writeUserName}
-          onChange={onChangeUserName}
+    <>
+      <S.ProfileContainer>
+        <S.ProfileLogo>프로필 수정</S.ProfileLogo>
+        <Header type={"profileMod"} />
+        <S.ProfileImage
+          src={selectedImage === "" ? DefaultImage : selectedImage}
+          alt="프로필 이미지"
+          onClick={handleImageClick} // 이미지 클릭 시 파일 선택 창이 열림
         />
-        <S.Warning
-          style={isSignUp === 2 ? { display: "block" } : { display: "none" }}>
-          *유저이름은 2~10자 이내여야 합니다.
-        </S.Warning>
-      </S.ProfileWriteContainer>
 
-      <S.ProfileWriteContainer>
-        <S.PTag>계정 ID</S.PTag>
-        <S.InputTag
-          type="text"
-          placeholder={accountName}
-          value={writeAccountName}
-          onChange={onChangeAccountName}
+        <input
+          type="file"
+          onChange={handleImageChange}
+          ref={fileInputRef}
+          accept="image/jpeg,image/png"
+          style={{ display: "none" }}
         />
-        <S.Warning
-          style={isSignUp === 1 ? { display: "block" } : { display: "none" }}>
-          *영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.
-        </S.Warning>
-      </S.ProfileWriteContainer>
 
-      <S.ProfileWriteContainer>
-        <S.PTag>소개</S.PTag>
-        <S.InputTag
-          type="text"
-          placeholder={intro}
-          value={writeIntro}
-          onChange={onChangeIntro}
-        />
-      </S.ProfileWriteContainer>
+        <S.ProfileWriteContainer>
+          <S.PTag>사용자이름</S.PTag>
+          <S.InputTag
+            type="text"
+            placeholder={userName}
+            value={writeUserName}
+            onChange={onChangeUserName}
+          />
+          <S.Warning
+            style={isSignUp === 2 ? { display: "block" } : { display: "none" }}>
+            *유저이름은 2~10자 이내여야 합니다.
+          </S.Warning>
+        </S.ProfileWriteContainer>
 
-      <S.SubmitBtn type="submit" onClick={handleClick}>
-        프로필 정보 변경하기
-      </S.SubmitBtn>
-    </S.ProfileContainer>
+        <S.ProfileWriteContainer>
+          <S.PTag>계정 ID</S.PTag>
+          <S.InputTag
+            type="text"
+            placeholder={accountName}
+            value={writeAccountName}
+            onChange={onChangeAccountName}
+          />
+          <S.Warning
+            style={isSignUp === 1 ? { display: "block" } : { display: "none" }}>
+            *영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.
+          </S.Warning>
+        </S.ProfileWriteContainer>
+
+        <S.ProfileWriteContainer>
+          <S.PTag>소개</S.PTag>
+          <S.InputTag
+            type="text"
+            placeholder={intro}
+            value={writeIntro}
+            onChange={onChangeIntro}
+          />
+        </S.ProfileWriteContainer>
+
+        <S.SubmitBtn type="submit" onClick={handleClick}>
+          프로필 정보 변경하기
+        </S.SubmitBtn>
+      </S.ProfileContainer>
+      {alertModal.isOpen && <Alert />}
+    </>
   );
 }
 

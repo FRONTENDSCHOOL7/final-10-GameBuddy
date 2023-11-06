@@ -217,7 +217,7 @@ export const PostDetailCommentWrapper = styled.ul`
     grid-row: 2 / 4;
     align-self: start;
     padding-top: 0;
-    height: 85%;
+    height: 350px;
     border-top: none;
     /* border-left: 1px solid #555454; */
   }
