@@ -119,7 +119,7 @@ export const PostDetailContentImg = styled.img`
   display: block;
   border-radius: 5%;
   max-height: 60%;
-  object-fit: fill;
+  object-fit: cover;
   @media (min-width: 768px) {
     margin-top: 1rem;
     width: 25rem;
@@ -225,7 +225,7 @@ export const PostDetailCommentWrapper = styled.ul`
   }
 
   // 화면 높이에 따라 댓글이 차지하는 높이 설정
-  @media (min-height: 760px) {
+  @media (min-width: 768px) and (min-height: 768px) {
     max-height: 38vh;
   }
 `;
