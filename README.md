@@ -4,9 +4,7 @@
 
 ![GameBuddy](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/63f1196f-d412-493e-a0d8-0b18b59b8104)
 
-<b>GameBuddy는 게임을 좋아하는 어느 누구나 이용가능한 커뮤니티 플랫폼 입니다.</b>
-
-- 게임 게시글을 이용하여
+<b>GameBuddy</b>는 원하는 동료를 쉽게 찾아보고 함께 게임할 수 있는, 또 그 사람을 팔로잉하여 게임 후에도 지속적인 관계를 형성할 수 있는 게임 커뮤니티입니다.
 
 ```
 // 테스트용 계정
@@ -58,6 +56,8 @@ Password: qwer1234
 </table>
 
 ## **4. Covention Rules**
+
+<details><summary>컨벤션 규칙</summary>
 
 ### **4-1. Branch Convention**
 
@@ -178,6 +178,8 @@ ex) Header.jsx의 css파일은 Header.module.css
 ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 ```
 
+</details>
+
 ## **5. GameBuddy 프로젝트 구조**
 
 ```
@@ -218,6 +220,141 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 ## **6. GameBuddy 구현 기능**
 
 ## **7. 핵심 코드**
+
+- stringify
+- masterToken
+
+#### Footer 미디어 쿼리
+
+<details><summary>Footer미디어 쿼리 코드</summary>
+
+```jsx title="footer.jsx"
+  const menus = [
+    { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
+    { name: "검색", icon: StyledSearchIcon, path: "/search", id: "search" },
+    { name: "채팅", icon: StyledChatIcon, path: "/chat", id: "chat" },
+    { name: "게시글 작성", icon: StyledWriteIcon, path: "/write", id: "write" },
+    {
+      name: "프로필",
+      icon: StyledProfileIcon,
+      path: `/profile/${myData.accountname}`,
+      id: "profile"
+    }
+  ];
+
+  const getInitialActive = () => {
+    const matchedMenu = menus.find((menu) =>
+      location.pathname.startsWith(menu.path)
+    );
+    return matchedMenu ? matchedMenu.id : "profile";
+  };
+
+  const [$active, setActive] = useState(getInitialActive);
+
+  return (
+    <S.FooterContainer>
+      {menus.map((menu) => {
+        const Icon = menu.icon;
+        return (
+          <S.Item
+            id={menu.id}
+            key={menu.id}
+            onClick={() => {
+              setActive(menu.id);
+              navigate(menu.path);
+            }}
+            $active={$active === menu.id}>
+            <Icon $active={$active === menu.id} />
+            <span>{menu.name}</span>
+          </S.Item>
+        );
+      })}
+    </S.FooterContainer>
+  );
+}
+```
+
+```jsx
+export const FooterContainer = styled.footer`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #25282d;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 900;
+  border-top: 1px solid #5c5c5c;
+
+  @media screen and (min-width: 768px) {
+    left: 0;
+    width: 72px;
+    height: calc(100vh - 55px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+  }
+`;
+
+export const Item = styled.button`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 10px 6px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: ${({ $active }) => ($active ? "#5865F2" : "#a4a4a4ff")};
+
+  &:hover {
+    transform: scale(1.2);
+  }
+  @media screen and (max-width: 767px) {
+    // 검색 아이콘에 해당하는 항목만 숨깁니다.
+    ${({ id }) =>
+      id === "search" &&
+      `
+        display: none;
+      `}
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 0px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+    padding: 50px 0 0 23px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: 85%;
+      left: 100%; // 오른쪽으로 위치
+      transform: translateY(-50%); // 세로 가운데 정렬
+      opacity: 0;
+      background: var(--color-purple);
+      color: white;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12px;
+      white-space: nowrap; // 텍스트를 한 줄로 표시
+      transition: opacity 0.3s ease-in-out;
+      box-shadow: 0px 0px 8px #ffffff90;
+    }
+
+    &:hover span {
+      opacity: 1;
+    }
+  }
+`;
+```
+
+</details>
 
 ## **8. 트러블 슈팅**
 
