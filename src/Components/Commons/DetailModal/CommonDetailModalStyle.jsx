@@ -32,7 +32,7 @@ export const PostDetailBox = styled.section`
   position: relative;
 
   @media (min-width: 768px) {
-    height: 70vh;
+    height: 60vh;
     width: 100vw;
     max-width: 750px;
     min-width: 380px;
@@ -189,7 +189,7 @@ export const PostDetailFooterCount = styled.span`
   font-size: 1rem;
   width: 1.1rem;
   height: 1.1rem;
-  line-height: 1.7rem;
+  line-height: 1.5rem;
 `;
 
 export const PostDetailFooterDate = styled.span`
