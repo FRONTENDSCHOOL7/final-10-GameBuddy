@@ -106,7 +106,7 @@ export const PostDetailContentWrapper = styled(PostDetailHeaderWrapper)`
     grid-row: 2 / 4;
     align-self: start;
     overflow-y: auto;
-    max-height: 30vh;
+    max-height: 40vh;
   }
 `;
 
