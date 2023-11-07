@@ -16,12 +16,12 @@ Password: qwer1234
 
 #### 2023년 10월 16일 ~ 2023년 10월 7일
 
-|         **주차**          | **내용**                                                                                                                                                  |
-| :-----------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   1주차 (10/16 -10/21)    | - 주제 선정 및 기획 <br/> - 기술 스택 조사<br/> - 목업 디자인 및 기술 리스트 작성<br/> - git 사용법 공부 <br/> - 프로젝트 초기 셋팅(prettier, convention) |
-| 2주차 <br> (10/22 -10/28) | - 디자인 및 기능 개발 시작 <br/>                                                                                                                          |
-| 3주차 <br> (10/29 -11/03) | - 1차 점검 후, 코드 수정 및 예외처리 작업<br/> - 필수 기능 구현 완료<br/> - 반응형                                                                        |
-| 4주차 <br> (11/04 -11/06) | -                                                                                                                                                         |
+|         **주차**          | **내용**                                                                                                                                                   |
+| :-----------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1주차<br/> (10/16 -10/21) | - 주제 선정 및 기획 <br/> - 기술 스택 조사<br/> - 목업 디자인 및 기술 리스트 작성<br/> - GIT 협업 공부 <br/> - 프로젝트 초기 셋팅(Prettier, Convention 등) |
+| 2주차 <br> (10/22 -10/28) | - 디자인 및 기능 개발 시작 <br/>                                                                                                                           |
+| 3주차 <br> (10/29 -11/03) | - 1차 점검 후, 코드 수정 및 예외처리 작업<br/> - 필수 기능 구현 완료<br/> - 웹 반응형 작업 <br/> - 부가 기능 구현(상품 판매 API 커스텀)                    |
+| 4주차 <br> (11/04 -11/06) | - 디자인 보완 및 코드 리팩토링 작업 <br/> - README.md 작성<br/> - 서비스 배포(AWS)                                                                         |
 
 ## **2. 팀 소개 & 역할 분담**
 
@@ -31,7 +31,9 @@ Password: qwer1234
 |                            [Hajin-Bang](https://github.com/Hajin-Bang)                            |                               [GedFlow](https://github.com/GedFlow)                               |                         [yeonjeonge-e](https://github.com/yeonjeonge-e)                          |                               [JJamVa](https://github.com/JJamVa)                                |
 |                                               팀원                                                |                                               팀원                                                |                                               팀원                                               |                                               팀장                                               |
 
-## **3. 개발 환경**
+## **3. 개발 환경 & 핵심 기술 설명**
+
+### **3-1 개발 환경**
 
 <table>
 <tr>
@@ -65,6 +67,15 @@ Password: qwer1234
     <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white"/>&nbsp
 </tr>
 </table>
+
+### **3-2 핵심 기술 사용 이유**
+
+|     **기술**      |                                       **설명**                                        |
+| :---------------: | :-----------------------------------------------------------------------------------: |
+|      Recoil       |              상태 관리의 편리성 및 컴포넌트 간 상태 공유가 가능하여 사용              |
+| Styled-Components |           Props를 기반으로 동적 스타일 적용 및 스타일 상속이 가능하여 사용            |
+|       Axios       | 데이터를 자동으로 JSON 변화가 가능하며, HTTP 메서드가 이용해 CRUD작업이 가능하여 사용 |
+| Image Compressor  |                  이미지의 크기 조절 및 파일 용량을 줄이기 위해 사용                   |
 
 ## **4. Covention Rules**
 
@@ -230,30 +241,27 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 ## **6. GameBuddy 구현 기능**
 
-| 스플래시 | 로그인 & 회원가입 | 메인 |
-|-----|-----|-----|
-|![모_스플래시2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/16df122e-46e8-464b-86cf-636a80ef31b9)|![모_회원가입로그인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/6b85b8a9-2a59-40e7-b78f-ac3fbc65a9f5)|![모_노메인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/d00304c0-d326-4db3-88ba-e95075c95e71)|
+| 스플래시                                                                                                                    | 로그인 & 회원가입                                                                                                                 | 메인                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ![모_스플래시2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/16df122e-46e8-464b-86cf-636a80ef31b9) | ![모_회원가입로그인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/6b85b8a9-2a59-40e7-b78f-ac3fbc65a9f5) | ![모_노메인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/d00304c0-d326-4db3-88ba-e95075c95e71) |
 
-| 검색 | 프로필 수정 | 팔로워/팔로잉 |
-|------|------|------|
-|![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c19878df-4714-4126-b065-498e86f13b61)|![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/68f0e94a-9c0b-4208-8946-5ede991576f3)|![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/319e6475-473e-4ca0-bf5e-1a209c02b42c)|
+| 검색                                                                                                                    | 프로필 수정                                                                                                                   | 팔로워/팔로잉                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| ![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c19878df-4714-4126-b065-498e86f13b61) | ![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/68f0e94a-9c0b-4208-8946-5ede991576f3) | ![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/319e6475-473e-4ca0-bf5e-1a209c02b42c) |
 
-| My profile | 게시글 작성&수정 | 모집글 작성&수정 |
-|------|------|------|
-|![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4150f2a8-e142-461b-8943-be0c327d9f45)|![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/ee74da5f-b452-49bb-b093-2f14f354b268)|![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/497cd809-5621-46ee-9f16-31aa33f16ee4)|
+| My profile                                                                                                                  | 게시글 작성&수정                                                                                                                  | 모집글 작성&수정                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4150f2a8-e142-461b-8943-be0c327d9f45) | ![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/ee74da5f-b452-49bb-b093-2f14f354b268) | ![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/497cd809-5621-46ee-9f16-31aa33f16ee4) |
 
-| 좋아요 | 댓글 삭제&신고 | 모집인원 |
-|------|------|------|
-|![모_좋아요](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/be0ed8e5-83a2-42ac-9a3b-02ef2d9eac51)|![모_댓글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/26abc209-2428-4de6-8646-d4bbc57afa98)|![모_모집인원](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/84c013ff-b5af-4840-8a90-6767eee55e53)|
+| 좋아요                                                                                                                   | 댓글 삭제&신고                                                                                                         | 모집인원                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ![모_좋아요](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/be0ed8e5-83a2-42ac-9a3b-02ef2d9eac51) | ![모_댓글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/26abc209-2428-4de6-8646-d4bbc57afa98) | ![모_모집인원](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/84c013ff-b5af-4840-8a90-6767eee55e53) |
 
-| 채팅 | 404 페이지 | 로그아웃 |
-|------|------|------|
-|![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/7a2def46-938a-4cb2-a501-2bee866a8a10)|![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/28b82f4d-48f5-4896-bef8-8270f71737d8)|![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/364493d8-776f-474b-8afb-18e005d86839)|
-
+| 채팅                                                                                                                    | 404 페이지                                                                                                            | 로그아웃                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/7a2def46-938a-4cb2-a501-2bee866a8a10) | ![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/28b82f4d-48f5-4896-bef8-8270f71737d8) | ![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/364493d8-776f-474b-8afb-18e005d86839) |
 
 ## **7. 핵심 코드**
-
-#### 게임 모집 수정 API 커스텀
 
 <details><summary>게임 모집 수정 API 커스텀 코드</summary>
 
@@ -299,54 +307,51 @@ export default gameRecruitAPI;
 
 </details>
 
-#### Footer 미디어 쿼리
-
 <details><summary>Footer미디어 쿼리 코드</summary>
 
 ```jsx title="footer.jsx"
-  const menus = [
-    { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
-    { name: "검색", icon: StyledSearchIcon, path: "/search", id: "search" },
-    { name: "채팅", icon: StyledChatIcon, path: "/chat", id: "chat" },
-    { name: "게시글 작성", icon: StyledWriteIcon, path: "/write", id: "write" },
-    {
-      name: "프로필",
-      icon: StyledProfileIcon,
-      path: `/profile/${myData.accountname}`,
-      id: "profile"
-    }
-  ];
+const menus = [
+  { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
+  { name: "검색", icon: StyledSearchIcon, path: "/search", id: "search" },
+  { name: "채팅", icon: StyledChatIcon, path: "/chat", id: "chat" },
+  { name: "게시글 작성", icon: StyledWriteIcon, path: "/write", id: "write" },
+  {
+    name: "프로필",
+    icon: StyledProfileIcon,
+    path: `/profile/${myData.accountname}`,
+    id: "profile"
+  }
+];
 
-  const getInitialActive = () => {
-    const matchedMenu = menus.find((menu) =>
-      location.pathname.startsWith(menu.path)
-    );
-    return matchedMenu ? matchedMenu.id : "profile";
-  };
-
-  const [$active, setActive] = useState(getInitialActive);
-
-  return (
-    <S.FooterContainer>
-      {menus.map((menu) => {
-        const Icon = menu.icon;
-        return (
-          <S.Item
-            id={menu.id}
-            key={menu.id}
-            onClick={() => {
-              setActive(menu.id);
-              navigate(menu.path);
-            }}
-            $active={$active === menu.id}>
-            <Icon $active={$active === menu.id} />
-            <span>{menu.name}</span>
-          </S.Item>
-        );
-      })}
-    </S.FooterContainer>
+const getInitialActive = () => {
+  const matchedMenu = menus.find((menu) =>
+    location.pathname.startsWith(menu.path)
   );
-}
+  return matchedMenu ? matchedMenu.id : "profile";
+};
+
+const [$active, setActive] = useState(getInitialActive);
+
+return (
+  <S.FooterContainer>
+    {menus.map((menu) => {
+      const Icon = menu.icon;
+      return (
+        <S.Item
+          id={menu.id}
+          key={menu.id}
+          onClick={() => {
+            setActive(menu.id);
+            navigate(menu.path);
+          }}
+          $active={$active === menu.id}>
+          <Icon $active={$active === menu.id} />
+          <span>{menu.name}</span>
+        </S.Item>
+      );
+    })}
+  </S.FooterContainer>
+);
 ```
 
 ```jsx
@@ -443,13 +448,19 @@ export const Item = styled.button`
 - 박준홍
 
 ```
-  안녕하세요! 10조 팀장 박준홍입니다. 이번 팀프로젝트를 통해 많은 것을 배웠습니다. 시간이 된다면 추후 개발을 진행했으면 좋겠습니다. 다들 고생하셨습니다.
+이번 팀 프로젝트를 진행하며 팀장으로서 팀을 이끌어 나가는 리더십과 프로젝트의 방향 설정에 대한 중요한 교훈을 얻었습니다.
+협업 과정에서 개발 환경에 대한 세심한 주의, 컴포넌트의 세분화, 그리고 코드 재사용의 중요성을 체감할 수 있었습니다.
+이후 프로젝트의 개선해야할 부분을 의논하고 개발하여 같이 성장했으면 좋겠습니다.
+플젝10조? 팀원들 프로젝트를 위해 노력해주셔서 너무 감사합니다.
 ```
+
+<div style="background-color: #ffff00">Your content here</div>
 
 - 박태준
 
 ```
-  전반적인 프론트엔드 개발에 대한 감을 익힐 수 있었고 자신감이 생겼습니다! 교육 수료 후에도 팀원들과 함께 프로젝트를 개선해 나가고 싶습니다.
+  전반적인 프론트엔드 개발에 대한 감을 익힐 수 있었고 자신감이 생겼습니다!
+  교육 수료 후에도 팀원들과 함께 프로젝트를 개선해 나가고 싶습니다.
 ```
 
 - 방하진
