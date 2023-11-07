@@ -4,7 +4,9 @@
 
 ![GameBuddy](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/63f1196f-d412-493e-a0d8-0b18b59b8104)
 
-GameBuddy는 어느 누구나 소통할 수 있고
+<b color='red' >GameBuddy는 게임을 좋아하는 어느 누구나 이용가능한 커뮤니티 입니다.</b>
+
+-
 
 ```
 // 테스트용 계정
