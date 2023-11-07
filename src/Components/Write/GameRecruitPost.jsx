@@ -49,7 +49,7 @@ function GameRecruitPost() {
   const onChangeRecruitDetail = (e) => {
     const detail = e.target.value;
 
-    if (recruitDetail === "") {
+    if (detail === "") {
       setIsDetailValid(false);
     } else {
       setIsDetailValid(true);
@@ -103,7 +103,7 @@ function GameRecruitPost() {
     <>
       <S.InputWrapper>
         <S.PTag>
-        {/* style={{ marginTop: "0", marginBottom: "14px" }} */}
+          {/* style={{ marginTop: "0", marginBottom: "14px" }} */}
           모집 게임
         </S.PTag>
         <S.InputTag
@@ -145,12 +145,15 @@ function GameRecruitPost() {
           *포지션, 티어 등 상세 내용을 입력해주세요.
         </S.Warning>
       </S.InputWrapper>
-      
+
       <S.ButtonContainer>
-        <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
+        <S.SubmitBtn
+          type="submit"
+          onClick={handlePostSubmit}
+          disabled={!(isGameTitleValid && isPeopleValid && isDetailValid)}>
           저장하기
         </S.SubmitBtn>
-    </S.ButtonContainer>
+      </S.ButtonContainer>
       {alertModal.isOpen && <Alert />}
     </>
   );

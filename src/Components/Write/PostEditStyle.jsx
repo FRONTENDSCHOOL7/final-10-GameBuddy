@@ -203,6 +203,8 @@ export const SubmitBtn = styled.button`
   background-color: #5865f2;
   color: #ffffff;
   padding: 0 32px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background: ${(props) => (props.disabled ? "gray" : "your original color")};
 `;
 
 export const Warning = styled.p`
