@@ -1,6 +1,12 @@
 <h1 align='center'><b>GameBuddy</b></h1>
 
-## **1. 서비스 소개**
+## **1. GameBuddy 소개**
+
+![GameBuddy](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/63f1196f-d412-493e-a0d8-0b18b59b8104)
+
+<b>GameBuddy는 게임을 좋아하는 어느 누구나 이용가능한 커뮤니티 플랫폼 입니다.</b>
+
+- 게임 게시글을 이용하여
 
 ```
 // 테스트용 계정
@@ -8,17 +14,48 @@ Email: gbtestcomeon@buddy.com
 Password: qwer1234
 ```
 
-## **2. 개발 일정**
-
-2023.10.12 ~ 2023.11.07
-
-## **3. GameBuddy 프로젝트 팀원**
+## **2. 팀 소개 & 역할 분담**
 
 |                                              방하진                                               |                                              박태준                                               |                                              최연정                                              |                                              박준홍                                              |
 | :-----------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
 | <img width="180" alt="프로필_방하진" src="https://avatars.githubusercontent.com/u/138538168?v=4"> | <img width="180" alt="프로필_박태준" src="https://avatars.githubusercontent.com/u/126474575?v=4"> | <img width="180" alt="프로필_최연정" src="https://avatars.githubusercontent.com/u/62794884?v=4"> | <img width="180" alt="프로필_박준홍" src="https://avatars.githubusercontent.com/u/80045006?v=4"> |
-|                              [Hajin-Bang](https://github.com/Hajin-Bang)                               |                              [GedFlow](https://github.com/GedFlow)                              |                          [yeonjeonge-e](https://github.com/yeonjeonge-e)                           |                               [JJamVa](https://github.com/JJamVa)                                |
+|                            [Hajin-Bang](https://github.com/Hajin-Bang)                            |                               [GedFlow](https://github.com/GedFlow)                               |                         [yeonjeonge-e](https://github.com/yeonjeonge-e)                          |                               [JJamVa](https://github.com/JJamVa)                                |
 |                                               팀원                                                |                                               팀원                                                |                                               팀원                                               |                                               팀장                                               |
+
+## **3. 개발 환경**
+
+<table>
+<tr>
+ <td align="center">Front-End</td>
+ <td>
+   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/>&nbsp 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>&nbsp
+  <img src="https://img.shields.io/badge/styled--Components-db7093?style=for-the-badge&logo=styled-Components&logoColor=black"/>&nbsp 
+  <img src="https://img.shields.io/badge/Recoil-61dafb?style=for-the-badge&logo=Recoil&logoColor=black"/>&nbsp
+  <img src="https://img.shields.io/badge/Axios-white?style=for-the-badge&logo=Axios&logoColor=black"/>&nbsp 
+ </td>
+</tr>
+<tr>
+ <td align="center">협업</td>
+ <td>
+    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>&nbsp
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"/>&nbsp 
+    <img src="https://img.shields.io/badge/Notion-5a5d69?style=for-the-badge&logo=Notion&logoColor=white"/>&nbsp
+    <img src="https://img.shields.io/badge/Discord-4263f5?style=for-the-badge&logo=Discord&logoColor=white"/>&nbsp 
+ </td>
+</tr>
+<tr>
+ <td align="center">디자인</td>
+ <td>
+    <img src="https://img.shields.io/badge/Figma-d90f42?style=for-the-badge&logo=Figma&logoColor=white"/>&nbsp  
+ </td>
+</tr>
+<tr>
+ <td align="center">IDE</td>
+ <td>
+    <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white"/>&nbsp
+</tr>
+</table>
 
 ## **4. Covention Rules**
 
@@ -32,19 +69,18 @@ ex) feature-#17-로그인 화면 구현
 
 ### **4-2. Commit Convention**
 
-| Commit Convention |                       Content                       |
-| :---------------: | :-------------------------------------------------: |
-|     `[Feat]-`     |                기능 추가, 삭제, 변경                |
-|     `[Fix]-`      |                   버그, 오류 수정                   |
-|     `[Docs]-`     |    README.md, json 파일 등 수정, 라이브러리 설치    |
-|    `[Style]-`     |            CSS 등 사용자 UI 디자인 변경             |
-|  `[Refactory]-`   |                    코드 리팩토링                    |
-|     `[Test]-`     |            테스트 코드 추가, 삭제, 변경             |
-|    `[Config]-`    |                  npm 모듈 설치 등                   |
-|    `[Chore]-`     |              패키지 매니저 설정할 경우              |
-|   `[Comment]-`    |              필요한 주석 추가 및 변경               |
-|    `[Rename]-`    | 파일 또는 폴더 명을 수정하거나 옮기는 작업만인 경우 |
-|    `[Remove]-`    |         파일을 삭제하는 작업만 수행한 경우          |
+| Commit Convention |                    Content                    |
+| :---------------: | :-------------------------------------------: |
+|     `[Feat]-`     |             기능 추가, 삭제, 변경             |
+|     `[Fix]-`      |                버그, 오류 수정                |
+|     `[Docs]-`     | README.md, json 파일 등 수정, 라이브러리 설치 |
+|    `[Style]-`     |                UI 디자인 변경                 |
+|  `[Refactory]-`   |                 코드 리팩토링                 |
+|     `[Test]-`     |         테스트 코드 추가, 삭제, 변경          |
+|    `[Config]-`    |               npm 모듈 설치 등                |
+|    `[Chore]-`     |           패키지 매니저 설정할 경우           |
+|   `[Comment]-`    |           필요한 주석 추가 및 변경            |
+|     `[Init]-`     |               초기 설정할 경우                |
 
 - 예시: 버튼 기능을 구현했을 경우
 
@@ -52,7 +88,7 @@ ex) feature-#17-로그인 화면 구현
 ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 ```
 
-### **4-3. Github Issue Template**
+### **4-3. Github Issue**
 
 - Issue Title Convention
 
@@ -62,6 +98,8 @@ ex) git commit -m "[Feat]-로그인 화면 버튼 기능 추가"
 |  `[Design]-`  | 디자인 요소 추가, 삭제, 변경 |
 | `[Refactor]-` |        코드 리팩토링         |
 |   `[Bug]-`    |          버그 수정           |
+
+- Issue Template
 
 ```md
 # Title
@@ -124,12 +162,11 @@ module.exports = {
 1. 컴포넌트 분리된 파일은 `PasCalCase` 적용
 ex) Header.jsx, Footer.jsx
 
-2. 컴포넌트 아닌 파일은 `camelCase` 적용
+2. 컴포넌트 아닌 파일은 `lower CamelCase` 적용
 ex) loginApi.jsx, store.js
 
-3. CSS파일은 적용할 파일명과 일치
+3. CSS파일 사용 시, 적용할 파일명과 일치
 ex) Header.jsx의 css파일은 Header.module.css
-
 ```
 
 ### **4-7. Code Convention**
@@ -137,67 +174,56 @@ ex) Header.jsx의 css파일은 Header.module.css
 ```
 1. var 변수 사용 금지
 
-2. 변수명 및 함수명은 `CamelCase`로 작성
+2. 변수명 및 함수명은 `lower CamelCase`로 작성
 ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
-
 ```
 
 ## **5. GameBuddy 프로젝트 구조**
 
 ```
-GameBuddy file structure
+🎮 GameBuddy
 ├─ .github
-  ├─ Issue_template
-    └─ ISSUE_TEMPLATE.md ──────── 이슈템플릿.md
-  └─ PULL_REQUEST_TEMPLATE.MD ─── PR템플릿.md
-├─ public ─────────────────────── Public 폴더
-  └─ index.html
-├─ src
-  ├─ API ────────────────────── API 호출 함수 모음
-  ├─ Components ─────────────── 컴포넌트 모음
-    ├─ Commons ───────────────── 기본 컴포넌트 폴더
-      ├─ Header.jsx
-      ├─ Footer.jsx
-      └─ Error404.jsx
-    ├─ Login
-      └─ Login.jsx ──────────── 로그인
-    ├─ Splash
-      └─ Splash.jsx ─────────── 스플래시
-    ├─ SignUp
-      └─ SignUp.jsx ────────── 회원가입
-    ├─ Main
-      ├─ SwitchMode.jsx ─────── 모드 변경 토글
-      ├─ PostList.jsx ───────── 피드에 올라올 글 리스트
-      └─ PostDetail.jsx ─────── 게시글 누르면 나오는 모달
-    ├─ Chat
-      ├─ ChatList.jsx ───────── 채팅 목록
-      └─ DmChat.jsx ─────────── 채팅창 누르면 나오는 채팅화면
-    ├─ Write
-      └─ Write.jsx ──────────── 게시글 작성
-    └─ Profile
-      ├─ Profile.jsx ────────── 프로필 상세 부분
-      ├─ Recruit.jsx ────────── 작성한 게임 모집글 리스트
-      └─ Post.jsx ───────────── 작성한 소통글 리스트
-  ├─ Pages ─────────────────── 라우터로 이동할 페이지 모음
-    ├─ SignUpPage.jsx ─────── 로그인화면에서 회원가입 할 때
-    ├─ MainFeedPage.jsx ─────── 로그인 성공시
-    ├─ ChattingListPage.jsx ───────── 채팅 목록 클릭시
-    ├─ WritePage.jsx ────────── 게시글 작성시
-    ├─ FollowDetailPage.jsx ─── 유저의 팔로워를 눌렀을 때
-    └─ ProfilePage.jsx ──────── 유저 프로필 눌렀을 때
-  ├─ assets ─────────────────── 각종 정적 파일 모음
-    ├─ font
-    └─ image
-  ├─ Router
-    └─ Router.jsx ──────── 라우터로 이동할 페이지 경로 지정
-  ├─ styles
-    └─ GlobalStyled.js ──────── reset css 작업 파일
-  ├─ App.js
-  ├─ index.js
-  └─ Store
-    └─ Store.js ───────────────── 전역 상태 관리파일
-├─ .gitignore
-├─ package-lock.json
-├─ package.json
-└─ README.md
+|  ├─ Issue_template ────────────── 이슈템플릿.md
+|  └─ PULL_REQUEST_TEMPLATE.MD ──── PR템플릿.md
+├─ public ───────────────────────── Public 폴더
+|  └─ index.html
+└─ 📂 src
+	 ├─ 📂 API ────────────────────── API 호출 함수 모음
+	 ├─ 📂 assets ─────────────────── 폰트, 이미지 등 각종 정적 파일 모음
+	 ├─ 📂 Components ─────────────── 컴포넌트 모음
+	 |  ├─ 📂 Chat ────────────────── 채팅
+	 |  ├─ 📂 Commons ─────────────── 공용으로 사용되는 컴포넌트
+	 |  ├─ 📂 Main ────────────────── 메인 화면
+	 |  ├─ 📂 Profile ─────────────── 프로필
+	 |  ├─ 📂 Search ──────────────── 회원 검색
+	 |  ├─ 📂 Sign
+	 |  |  ├─ 📂 Login ─────────────── 로그인
+	 |  |  ├─ 📂 SignUp ───────────── 회원가입
+	 |  ├─ 📂 Splash ──────────────── 스플래시
+	 |  ├─ 📂 Write ───────────────── 게시글 작성
+	 ├─ 📂 Functional ───────────────── 데이터 파싱 함수 모음
+	 ├─ 📂 Pages
+	 ├─ Router ──────────────────── 이동할 페이지 경로 지정
+	 ├─ Store ───────────────────── 전역 상태 관리 공간
+	 ├─ styles
+	 ├─── App.js
+	 ├─── index.js
+	 ├─ .gitignore
+	 ├─ .prettierrc.js
+	 ├─ package-lock.json
+	 ├─ package.json
+	 └─ README.md
 ```
+
+## **6. GameBuddy 구현 기능**
+
+## **7. 핵심 코드**
+
+## **8. 트러블 슈팅**
+
+- 가독성이 좋은 코드
+- 충분히 재사용될만 컴포넌트
+- 웹버전 구현시, 초기 환경 설정
+- 낭비되는 비동기 처리
+
+## **9. 소감**

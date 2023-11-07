@@ -17,6 +17,9 @@ export const RecruitContainer = styled.div`
     font-weight: 700;
     padding-top: 21px;
     padding-bottom: 6px;
+    @media screen and (min-width: 768px) {
+      margin-left: 42px;
+    }
   }
 `;
 
