@@ -37,14 +37,13 @@ export const PostItem = styled.div`
 export const AlbumContainer = styled.div`
   background-color: #2c2f33;
   display: grid;
-  min-height: 60vh;
   grid-template-columns: repeat(
     3,
     minmax(0, 250px)
   ); // 각 칼럼의 최대 너비 220px
   justify-content: center; // 중앙 정렬
   gap: 8px;
-  padding: 24px 20px;
+  padding: 24px 20px 70px 20px;
   margin-bottom: 50px;
   @media screen and (min-width: 768px) {
     margin-left: 72px;

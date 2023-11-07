@@ -28,11 +28,11 @@ Password: qwer1234
 <tr>
  <td align="center">Front-End</td>
  <td>
-   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">&nbsp
-    <img src="https://img.shields.io/badge/styled--Components-db7093?style=for-the-badge&logo=styled-Components&logoColor=black">&nbsp 
-        <img src="https://img.shields.io/badge/Recoil-61dafb?style=for-the-badge&logo=Recoil&logoColor=black">&nbsp
-                <img src="https://img.shields.io/badge/Axios-white?style=for-the-badge&logo=Axios&logoColor=black">&nbsp 
+   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/>&nbsp 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>&nbsp
+  <img src="https://img.shields.io/badge/styled--Components-db7093?style=for-the-badge&logo=styled-Components&logoColor=black"/>&nbsp 
+  <img src="https://img.shields.io/badge/Recoil-61dafb?style=for-the-badge&logo=Recoil&logoColor=black"/>&nbsp
+  <img src="https://img.shields.io/badge/Axios-white?style=for-the-badge&logo=Axios&logoColor=black"/>&nbsp 
  </td>
 </tr>
 <tr>
@@ -217,6 +217,13 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 ## **6. GameBuddy 구현 기능**
 
-## **7. 추후 진행 방식**
+## **7. 핵심 코드**
 
-## **8. 소감**
+## **8. 트러블 슈팅**
+
+- 가독성이 좋은 코드
+- 충분히 재사용될만 컴포넌트
+- 웹버전 구현시, 초기 환경 설정
+- 낭비되는 비동기 처리
+
+## **9. 소감**

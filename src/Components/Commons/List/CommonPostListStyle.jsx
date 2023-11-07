@@ -120,7 +120,7 @@ export const PostContent = styled.p`
   overflow: hidden; /* 추가된 내용을 숨김 */
   text-overflow: ellipsis;
   white-space: normal;
-  line-height: 15px;
+  line-height: 20px;
   @media screen and (min-width: 768px) {
     max-width: 470px;
     max-height: 300px;
