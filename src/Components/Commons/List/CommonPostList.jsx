@@ -94,9 +94,6 @@ function CommonPostList({
     }
   };
 
-  const transparentPlaceholder =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1024px-HD_transparent_picture.png";
-
   return (
     <S.Article isMyProfile={isMyProfile}>
       {postData.map((post, index) => {
@@ -105,7 +102,7 @@ function CommonPostList({
             key={index}
             onMouseEnter={() => setHoveredId(index)}
             onMouseLeave={() => setHoveredId(null)}
-            isHovered={hoveredId === index}
+            ishovered={hoveredId === index}
             onClick={(e) => {
               if (Location.includes("/profile")) {
                 e.stopPropagation();

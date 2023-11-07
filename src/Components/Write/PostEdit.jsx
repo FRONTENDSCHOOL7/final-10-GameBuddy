@@ -122,12 +122,13 @@ function PostEdit() {
                   *게시글 내용을 입력해주세요.
                 </S.Warning>
               </S.InputWrapper>
-              
+
               <S.SubmitBtn
                 type="submit"
                 onClick={(e) => {
                   handlePostSubmit(e);
-                }}>
+                }}
+                disabled={!isContentValid}>
                 수정하기
               </S.SubmitBtn>
             </S.WriteFormWrapper>

@@ -56,18 +56,23 @@ function Post() {
           onChange={onChangePostContent}
         />
         <S.Warning
-          style={isContentValid 
-            ? { display: "none", bottom: "-17px" } 
-            : { display: "block"}}>
+          style={
+            isContentValid
+              ? { display: "none", bottom: "-17px" }
+              : { display: "block" }
+          }>
           *게시글 내용을 입력해주세요.
         </S.Warning>
       </S.InputWrapper>
 
       <S.ButtonContainer>
-        <S.SubmitBtn type="submit" onClick={handlePostSubmit}>
+        <S.SubmitBtn
+          type="submit"
+          onClick={handlePostSubmit}
+          disabled={!isContentValid}>
           저장하기
         </S.SubmitBtn>
-      </S.ButtonContainer>      
+      </S.ButtonContainer>
       {alertModal.isOpen && <Alert />}
     </>
   );

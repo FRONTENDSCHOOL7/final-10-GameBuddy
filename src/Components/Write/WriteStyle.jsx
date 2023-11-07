@@ -167,7 +167,7 @@ export const InputTag = styled.input`
   font-size: 16px;
   background-color: #171717;
   color: #efefef;
-  margin: 18px 0 23px 0;
+  margin: 5px 0 23px 0;
 
   &:focus {
     outline: none;
@@ -231,6 +231,8 @@ export const SubmitBtn = styled.button`
   background-color: #5865f2;
   color: #ffffff;
   padding: 0 32px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background: ${(props) => (props.disabled ? "gray" : "your original color")};
 `;
 
 export const Warning = styled.p`
