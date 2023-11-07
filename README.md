@@ -225,15 +225,19 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 | 검색 | 프로필 수정 | 팔로워/팔로잉 |
 |------|------|------|
-|![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c19878df-4714-4126-b065-498e86f13b61)|![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/68f0e94a-9c0b-4208-8946-5ede991576f3)|![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/f4055389-496b-4136-9f23-dbfc532e5547)|
+|![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c19878df-4714-4126-b065-498e86f13b61)|![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/68f0e94a-9c0b-4208-8946-5ede991576f3)|![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/319e6475-473e-4ca0-bf5e-1a209c02b42c)|
 
 | My profile | 게시글 작성&수정 | 모집글 작성&수정 |
 |------|------|------|
-|![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4150f2a8-e142-461b-8943-be0c327d9f45)|![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/19ca0252-cc6e-4029-9696-235f16464d0b)|![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/ff1e23b8-7f7e-424b-992c-3572f8c42cc1)|
+|![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4150f2a8-e142-461b-8943-be0c327d9f45)|![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/ee74da5f-b452-49bb-b093-2f14f354b268)|![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/497cd809-5621-46ee-9f16-31aa33f16ee4)|
 
-| 채팅 | 그 외 기능 | 로그아웃 |
+| 좋아요 | 댓글 삭제&신고 | 모집인원 |
 |------|------|------|
-|![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/7a2def46-938a-4cb2-a501-2bee866a8a10)|![모_댓글2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/891722a5-2b1d-45dd-bcf4-b1d74357f83c)|![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/364493d8-776f-474b-8afb-18e005d86839)|
+|![모_좋아요](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/be0ed8e5-83a2-42ac-9a3b-02ef2d9eac51)|![모_댓글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/26abc209-2428-4de6-8646-d4bbc57afa98)|![모_모집인원](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/84c013ff-b5af-4840-8a90-6767eee55e53)|
+
+| 채팅 | 404 페이지 | 로그아웃 |
+|------|------|------|
+|![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/7a2def46-938a-4cb2-a501-2bee866a8a10)|![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/28b82f4d-48f5-4896-bef8-8270f71737d8)|![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/364493d8-776f-474b-8afb-18e005d86839)|
 
 
 ## **7. 핵심 코드**
