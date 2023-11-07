@@ -37,9 +37,10 @@ export const Section = styled.section`
   max-height: 300px;
   margin: 0 auto;
   position: relative;
+  border-radius: 10px;
   /* border: 1px solid #fff; */
   box-shadow: ${
-    ({ isHovered }) => (isHovered ? "0px 0px 5px #97797990" : "none")
+    ({ ishovered }) => (ishovered ? "0px 0px 5px #97797990" : "none")
     // ? "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)" : "none"
   };
   /* border: 1px solid #5e5a5a90; */
@@ -178,7 +179,7 @@ export const FooterCount = styled.span`
   font-size: 0.9rem;
   width: 0.9rem;
   height: 0.9rem;
-  line-height: 1.1rem;
+  line-height: 0.8rem;
 `;
 
 export const Date = styled.span`
@@ -195,9 +196,3 @@ export const Date = styled.span`
     left: 50px; // 왼쪽에서 위치 조정
   }
 `;
-
-// export const Input = styled.input.attrs(() => ({
-//   placeholder: "안뇽",
-//   type: "text"
-// }))``;
-// 이거 input 입력할 때, 좋은거 같습니다 일단 코드 주석으로 킵해둘게요
