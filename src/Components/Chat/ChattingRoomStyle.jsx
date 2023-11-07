@@ -44,7 +44,7 @@ export const Message = styled.div`
     font-size: 10px;
     position: absolute;
     bottom: 1px;
-    right: ${(props) => (props.left ? "-28px" : "140px")};
+    right: ${(props) => (props.left ? "-28px" : "160px")};
     color: #767676;
   }
 
@@ -90,7 +90,8 @@ export const InputContainer = styled.div`
 
   button {
     background-color: #1f1f1f;
-    padding: 10px 30px;
+    padding: 10px 20px;
+    white-space: nowrap;
     border: none;
     border-radius: 15px;
     margin-left: 10px;

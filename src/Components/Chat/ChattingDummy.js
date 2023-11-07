@@ -1,30 +1,24 @@
 const data = [
   {
-    username: "테스트머신1과의 채팅",
-    intro: "동해물과",
+    username: "무야호GB의 채팅방",
+    intro: "나도 껴줘 ㅋㅋㅋ",
     time: "2023.10.26"
   },
   {
-    username: "테스트머신2와의 채팅",
-    intro: "백두산이",
+    username: "머신건의 채팅방",
+    intro: "오늘 피시방 ㄱ?",
     time: "2023.10.25"
   },
   {
-    username: "테스트머신3과의 채팅",
-    intro: "마르고",
+    username: "기르밍의 채팅방",
+    intro: "기르미기르밍밍밍",
     time: "2023.10.11"
   },
   {
-    username: "테스트머신4와의 채팅",
-    intro: "닳도록",
+    username: "Haru와의 채팅방",
+    intro: "오늘 몇시에 겜할래?",
     time: "2023.09.30"
   },
-  {
-    username: "테스트머신5와의 채팅",
-    intro: "둥둥",
-    time: "2023.09.16"
-  },
-
 ]
 
 export default data
