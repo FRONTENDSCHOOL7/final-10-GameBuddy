@@ -38,7 +38,7 @@ export const PostDetailBox = styled.section`
     min-width: 380px;
     display: grid;
     grid-template-columns: 2fr 2fr;
-    grid-template-rows: auto;
+    grid-template-rows: auto 1fr 1fr 0.1fr;
   }
 `;
 
@@ -93,7 +93,7 @@ export const PostDetailContentWrapper = styled(PostDetailHeaderWrapper)`
   flex-direction: column;
   gap: 0.1rem;
   max-width: 100%;
-  max-height: auto;
+  max-height: 50vh;
   padding: 0 2rem 0.2rem 2rem;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -106,7 +106,7 @@ export const PostDetailContentWrapper = styled(PostDetailHeaderWrapper)`
     grid-row: 2 / 4;
     align-self: start;
     overflow-y: auto;
-    max-height: 390px;
+    max-height: 40vh;
   }
 `;
 
@@ -119,7 +119,7 @@ export const PostDetailContentImg = styled.img`
   display: block;
   border-radius: 5%;
   max-height: 60%;
-  object-fit: fill;
+  object-fit: cover;
   @media (min-width: 768px) {
     margin-top: 1rem;
     width: 25rem;
@@ -203,9 +203,10 @@ export const PostDetailFooterDate = styled.span`
 export const PostDetailCommentWrapper = styled.ul`
   grid-area: comments;
   padding: 1.5rem 1rem 1rem 1rem;
-  height: 75%;
+  height: auto;
   overflow-y: scroll;
   -ms-overflow-style: none;
+  max-height: 25vh;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -217,9 +218,15 @@ export const PostDetailCommentWrapper = styled.ul`
     grid-row: 2 / 4;
     align-self: start;
     padding-top: 0;
-    height: 350px;
+    /* height: 350px; */
     border-top: none;
+    max-height: 30vh;
     /* border-left: 1px solid #555454; */
+  }
+
+  // 화면 높이에 따라 댓글이 차지하는 높이 설정
+  @media (min-width: 768px) and (min-height: 768px) {
+    max-height: 38vh;
   }
 `;
 
