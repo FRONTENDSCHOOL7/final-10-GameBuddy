@@ -221,8 +221,51 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 ## **7. 핵심 코드**
 
-- stringify
-- masterToken
+#### 게임 모집 수정 API 커스텀
+
+<details><summary>게임 모집 수정 API 커스텀 코드</summary>
+
+```jsx
+import axios from "axios";
+import masterTokenAPI from "../masterTokenAPI";
+
+async function gameRecruitAPI(
+  gameTitle,
+  people,
+  detail,
+  itemImage = "",
+  accountName
+) {
+  try {
+    const token = await masterTokenAPI();
+
+    const itemName = [gameTitle, accountName];
+    const link = [people, detail, [accountName]];
+
+    const response = await axios.post(
+      "https://api.mandarin.weniv.co.kr/product",
+      {
+        product: {
+          itemName: JSON.stringify(itemName),
+          price: 1,
+          link: JSON.stringify(link),
+          itemImage: itemImage
+        }
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    return "게임 모집글 게시되었습니다!";
+  } catch (e) {
+    return false;
+  }
+}
+
+export default gameRecruitAPI;
+```
+
+</details>
 
 #### Footer 미디어 쿼리
 
