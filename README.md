@@ -64,7 +64,6 @@ Password: gamebuddytest
   - [GameBuddy Figma](https://www.figma.com/file/G3Ft0tEBByKXmf3iKSHBON/Game-Buddy?type=design&node-id=56%3A1893&mode=design&t=wcgJPehcOAENWIFD-1)
 
 - 데일리 스크럼
-
   - 매일 오전 10시, 오후 6시 회의
   - 회의 주제 진행 상황 공유 및 문제 해결
 
