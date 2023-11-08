@@ -35,10 +35,10 @@ Password: gamebuddytest
     <th style="text-align:center;">최연정</th>
   </tr>
   <tr>
-    <td style="text-align:left;vertical-align:top;"><b>UI</b><br/>- 메인(프로필) 게시글 리스트<br/>- 메인(프로필) 게시글 상세보기 모달(모바일 버전)<br/>- 공용 확인 Alert 모달창<br/><br/><b>기능</b><br/>- 게시글 댓글 추가/삭제/신고<br/>- 게시글 좋아요 / 좋아요 취소하기<br/>- 게시글 리스트 불러오기<br/>- 게시글 수정<br/>- 프로필 수정<br/>- 프로필 페이지의 모집중인 게임 데이터 호출<br/>- 팔로우 / 언팔로우에 따른 화면 표현 기능<br/><br/><b>기타</b><br/>- PR리뷰 및 Merge 관리<br/>- 프로젝트 초기 설정<br/>- 각종 컴포넌트 테스트 및 예외처리 작업<br/>- 중복 컴포넌트 코드 리팩토링<br/>- README.md 작성</td>
-    <td style="text-align:left;vertical-align:top;"><b>UI</b><br/>- 로그인 및 회원가입<br/>- 팔로워 및 팔로잉 리스트<br/>- 게임 모집글 모달창<br/>- 게임 참가자 리스트 모달창<br/><br/><b>기능</b><br/>- 로그인 및 회원가입<br/>- 프로필 페이지의 ProfileDetail 부분<br/>- 팔로워 리스트, 팔로잉 리스트<br/>- 게임 모집글 상세 모달<br/>- 게임 참여, 떠나기 기능<br/>- 게임 참가자 리스트<br/>- 로그아웃<br/><br/><b>기타</b><br/>- AWS 배포<br/>- 메인 포스터 작업</td>
-    <td style="text-align:left;vertical-align:top;"><b>UI</b><br/>- Splash<br/>- Loading<br/>- Header<br/>- Footer<br/>- Menu Modal<br/>- 검색<br/>- 채팅<br/>- 메인 피드<br/>- 프로필 상세<br/>- 프로필 게시글 리스트<br/>- 게시글 상세모달<br/><br/><b>기능</b><br/>- 검색<br/>- 프로필 게시글 리스트<br/>- 메뉴 모달<br/>- 채팅<br/><br/><b>기타</b><br/>-디자인 목업<br/>- 기능 명세서 작성<br/>- 와이어프레임 설계<br/>- GlobalStyle(Reset.css) / Font.css 설정</td>
-    <td style="text-align:left;vertical-align:top;"><b>UI</b><br/>- 404 에러 페이지<br/>- 팔로잉 없을 시 메인피드 페이지<br/>- 프로필 수정 페이지<br/>- 게임 게시글<br/>- 게임 모집글<br/><br/><b>기능</b><br/>- 프로필 수정 페이지<br/>- 게임 게시글 작성 / 수정<br/>- 게임 모집글 작성<br/><br/><b>기타</b><br/>- 노션 페이지 작성<br/>- 회고록 작성</td>
+    <td style="text-align:left; vertical-align:top; width:25%;"><b>UI</b><br/>- 메인(프로필) 게시글 리스트<br/>- 메인(프로필) 게시글 상세보기 모달(모바일 버전)<br/>- 공용 확인 Alert 모달창<br/><br/><b>기능</b><br/>- 게시글 댓글 추가/삭제/신고<br/>- 게시글 좋아요 / 좋아요 취소하기<br/>- 게시글 리스트 불러오기<br/>- 게시글 수정<br/>- 프로필 수정<br/>- 프로필 페이지의 모집중인 게임 데이터 호출<br/>- 팔로우 / 언팔로우에 따른 화면 표현 기능<br/><br/><b>기타</b><br/>- PR리뷰 및 Merge 관리<br/>- 프로젝트 초기 설정<br/>- 각종 컴포넌트 테스트 및 예외처리 작업<br/>- 중복 컴포넌트 코드 리팩토링<br/>- README.md 작성</td>
+    <td style="text-align:left; vertical-align:top; width:25%;"><b>UI</b><br/>- 로그인 및 회원가입<br/>- 팔로워 및 팔로잉 리스트<br/>- 게임 모집글 모달창<br/>- 게임 참가자 리스트 모달창<br/><br/><b>기능</b><br/>- 로그인 및 회원가입<br/>- 프로필 페이지의 ProfileDetail 부분<br/>- 팔로워 리스트, 팔로잉 리스트<br/>- 게임 모집글 상세 모달<br/>- 게임 참여, 떠나기 기능<br/>- 게임 참가자 리스트<br/>- 로그아웃<br/><br/><b>기타</b><br/>- AWS 배포<br/>- 메인 포스터 작업</td>
+    <td style="text-align:left; vertical-align:top; width:25%;"><b>UI</b><br/>- Splash<br/>- Loading<br/>- Header<br/>- Footer<br/>- Menu Modal<br/>- 검색<br/>- 채팅<br/>- 메인 피드<br/>- 프로필 상세<br/>- 프로필 게시글 리스트<br/>- 게시글 상세모달<br/><br/><b>기능</b><br/>- 검색<br/>- 프로필 게시글 리스트<br/>- 메뉴 모달<br/>- 채팅<br/><br/><b>기타</b><br/>-디자인 목업<br/>- 기능 명세서 작성<br/>- 와이어프레임 설계<br/>- GlobalStyle(Reset.css) / Font.css 설정</td>
+    <td style="text-align:left; vertical-align:top; width:25%;"><b>UI</b><br/>- 404 에러 페이지<br/>- 팔로잉 없을 시 메인피드 페이지<br/>- 프로필 수정 페이지<br/>- 게임 게시글<br/>- 게임 모집글<br/><br/><b>기능</b><br/>- 프로필 수정 페이지<br/>- 게임 게시글 작성 / 수정<br/>- 게임 모집글 작성<br/><br/><b>기타</b><br/>- 노션 페이지 작성<br/>- 회고록 작성</td>
   </tr>
 </table>
 
@@ -64,6 +64,7 @@ Password: gamebuddytest
   - [GameBuddy Figma](https://www.figma.com/file/G3Ft0tEBByKXmf3iKSHBON/Game-Buddy?type=design&node-id=56%3A1893&mode=design&t=wcgJPehcOAENWIFD-1)
 
 - 데일리 스크럼
+
   - 매일 오전 10시, 오후 6시 회의
   - 회의 주제 진행 상황 공유 및 문제 해결
 
@@ -558,10 +559,10 @@ export const Item = styled.button`
 
 <b style="font-size:17px">박준홍</b><br/>
 
-> 이번 팀 프로젝트를 진행하며 팀장으로서 팀을 이끌어 나가는 리더십과 프로젝트의 방향 설정에 대한 교훈을 얻었습니다.
-> 협업 과정에서 개발 환경에 대한 세심한 주의, 컴포넌트의 세분화, 그리고 코드 재사용의 중요성을 체감할 수 있었습니다.
-> 이후 프로젝트의 개선해야할 부분을 의논하고 개발하여 같이 성장했으면 좋겠습니다.
-> 플젝10조? 팀원들 프로젝트를 위해 노력해주셔서 너무 감사합니다.
+> 이번 팀 프로젝트를 진행하며 팀장으로서 팀을 이끌어 나가는 리더십과 프로젝트의 방향 설정에 대해 많이 배웠습니다.
+> 더구나 팀프로젝트 협업 과정에서 개발 환경에 대한 세심한 주의, 컴포넌트의 세분화, 그리고 코드 재사용의 중요성을 체감할 수 있었습니다.
+> 수료이후에 팀원들과 개선해야할 부분에 대해 의논하고 개발하여 프로젝트의 완성도를 더 높혔으면 좋겠습니다.
+> 한달이라는 시간동안 플젝10조? 팀원들과 프로젝트를 진행해서 즐거웠고 노력해주셔서 너무 감사합니다.
 
 <b style="font-size:17px">박태준</b><br/>
 
