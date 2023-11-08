@@ -4,7 +4,10 @@
 
 ![GameBuddy](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/63f1196f-d412-493e-a0d8-0b18b59b8104)
 
-<b>GameBuddy</b>는 원하는 동료를 쉽게 찾아보고 함께 게임할 수 있는, 또 그 사람을 팔로잉하여 게임 후에도 지속적인 관계를 형성할 수 있는 게임 커뮤니티입니다.
+Game Buddy는 실시간으로 게임 참여자를 모집하며, 다양한 유저들과 소통할 수 있는 공간입니다.
+Game Buddy를 통해 진정한 BUDDY를 만나보세요!
+
+[🎮 GameBuddy 배포 URL 🎮](https://gamebuddy.xyz/login)
 
 ```
 // 테스트용 계정
@@ -12,7 +15,7 @@ Email: gbtestcomeon@buddy.com
 Password: qwer1234
 ```
 
-## **2. 개발 기간 및 단계**
+## **2. 개발 일정**
 
 #### 2023년 10월 16일 ~ 2023년 10월 7일
 
@@ -20,7 +23,7 @@ Password: qwer1234
 | :-----------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1주차<br/> (10/16 -10/21) | - 주제 선정 및 기획 <br/> - 기술 스택 조사<br/> - 목업 디자인 및 기술 리스트 작성<br/> - GIT 협업 공부 <br/> - 프로젝트 초기 셋팅(Prettier, Convention 등) |
 | 2주차 <br> (10/22 -10/28) | - 디자인 및 기능 개발 시작 <br/>                                                                                                                           |
-| 3주차 <br> (10/29 -11/03) | - 1차 점검 후, 코드 수정 및 예외처리 작업<br/> - 필수 기능 구현 완료<br/> - 웹 반응형 작업 <br/> - 부가 기능 구현(상품 판매 API 커스텀)                    |
+| 3주차 <br> (10/29 -11/03) | - 1차 점검 후, 코드 수정 및 예외처리 작업 시작<br/> - 필수 기능 구현 완료<br/> - 웹 반응형 작업 <br/> - 부가 기능 구현(상품 판매 API 커스텀)               |
 | 4주차 <br> (11/04 -11/06) | - 디자인 보완 및 코드 리팩토링 작업 <br/> - README.md 작성<br/> - 서비스 배포(AWS)                                                                         |
 
 ## **3. 팀 소개 & 역할 분담**
@@ -55,7 +58,6 @@ UI
 - 프로필 수정
 - 프로필 페이지의 모집중인 게임 데이터 호출
 - 팔로우/언팔로우에 따른 화면 표현 기능
-
 
 기타
 - 각종 컴포넌트 테스트 및 예외처리 작업
@@ -115,7 +117,7 @@ UI
 - GlobalStyle(Reset.css) / Font.css 설정
 ```
 
--방하진
+- 최연정
 
 ```
 
@@ -155,6 +157,11 @@ UI
  <td align="center">IDE</td>
  <td>
     <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white"/>&nbsp
+</tr>
+<tr>
+ <td align="center">배포</td>
+ <td>
+    <img src="https://img.shields.io/badge/Amazon%20AWS-gray?style=for-the-badge&logo=AmazonAWS&logoColor=white"/>&nbsp
 </tr>
 </table>
 
@@ -355,6 +362,8 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 <details><summary>게임 모집 수정 API 커스텀 코드</summary>
 
+- API 요청 시, 객체를 JSON으로 변환하여 데이터 등록
+
 ```jsx
 import axios from "axios";
 import masterTokenAPI from "../masterTokenAPI";
@@ -397,9 +406,14 @@ export default gameRecruitAPI;
 
 </details>
 
-<details><summary>Footer미디어 쿼리 코드</summary>
+<details><summary>Footer 미디어 쿼리 코드</summary>
+<br/>
 
-```jsx title="footer.jsx"
+![반응형 화면](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/250e28a9-a0bf-4643-8c3e-f1926e6a96d0)
+
+- Footer Icon을 할당하는 코드
+
+```jsx
 const menus = [
   { name: "홈", icon: StyledHomeIcon, path: "/main", id: "home" },
   { name: "검색", icon: StyledSearchIcon, path: "/search", id: "search" },
@@ -444,6 +458,8 @@ return (
 );
 ```
 
+- 화면 너비에 따라 Footer의 위치를 변경해주는 FooterContainer 코드
+
 ```jsx
 export const FooterContainer = styled.footer`
   display: flex;
@@ -468,7 +484,11 @@ export const FooterContainer = styled.footer`
     gap: 20px;
   }
 `;
+```
 
+- 화면 너비에 따라 Footer Icon을 배치
+
+```jsx
 export const Item = styled.button`
   width: 100%;
   display: flex;
@@ -484,7 +504,6 @@ export const Item = styled.button`
     transform: scale(1.2);
   }
   @media screen and (max-width: 767px) {
-    // 검색 아이콘에 해당하는 항목만 숨깁니다.
     ${({ id }) =>
       id === "search" &&
       `
@@ -504,15 +523,15 @@ export const Item = styled.button`
     span {
       position: absolute;
       top: 85%;
-      left: 100%; // 오른쪽으로 위치
-      transform: translateY(-50%); // 세로 가운데 정렬
+      left: 100%;
+      transform: translateY(-50%);
       opacity: 0;
       background: var(--color-purple);
       color: white;
       border-radius: 4px;
       padding: 4px 8px;
       font-size: 12px;
-      white-space: nowrap; // 텍스트를 한 줄로 표시
+      white-space: nowrap;
       transition: opacity 0.3s ease-in-out;
       box-shadow: 0px 0px 8px #ffffff90;
     }
