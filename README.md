@@ -2,7 +2,7 @@
 
 ## **1. GameBuddy 소개**
 
-![GameBuddy](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/63f1196f-d412-493e-a0d8-0b18b59b8104)
+![GameBuddy Poster](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/f6156e63-9a8d-4af4-aab5-4b0ad3da53e3)
 
 Game Buddy는 실시간으로 게임 참여자를 모집하며, 다양한 유저들과 소통할 수 있는 공간입니다.
 Game Buddy를 통해 진정한 BUDDY를 만나보세요!
@@ -139,7 +139,13 @@ UI
 
 ## **4. 진행 방식**
 
-[기능 명세서 및 와이어 프레임](https://www.figma.com/file/G3Ft0tEBByKXmf3iKSHBON/Game-Buddy?type=design&node-id=56%3A1893&mode=design&t=wcgJPehcOAENWIFD-1)
+- 커뮤니케이션
+
+  - [GameBuddy Notion](https://mammoth-sassafras-ff5.notion.site/10-10-95d035c5c9894842951c12901adc204e?pvs=4)
+
+- 기능 명세서 및 와이어 프레임
+
+  - [GameBuddy Figma](https://www.figma.com/file/G3Ft0tEBByKXmf3iKSHBON/Game-Buddy?type=design&node-id=56%3A1893&mode=design&t=wcgJPehcOAENWIFD-1)
 
 - 데일리 스크럼
 
@@ -388,12 +394,6 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | ![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/2f63d9a4-d982-4a52-ba53-39516b0518d0) | ![모_로딩](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/1ebe2f8d-84db-4154-a4fd-50610c82f613) | ![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/d69630e7-f2d7-4e33-bad5-516387dd2d10) |
 
-**7-2. 웹 반응형**
-|웹 반응형|
-| :---: |
-|![웹_메인](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/2a7d25de-874d-4426-a7bb-d1f8a6a97521)|
-|![웹_게시글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/efe7d5cd-21a6-4326-9f1b-67601565524c)|
-
 ## **8. 핵심 코드**
 
 <details><summary>게임 모집 수정 API 커스텀 코드</summary>
@@ -445,7 +445,10 @@ export default gameRecruitAPI;
 <details><summary>Footer 미디어 쿼리 코드</summary>
 <br/>
 
-![반응형 화면](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/80045006/250e28a9-a0bf-4643-8c3e-f1926e6a96d0)
+|                                                        웹 반응형                                                         |
+| :----------------------------------------------------------------------------------------------------------------------: |
+|  ![웹_메인](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/2a7d25de-874d-4426-a7bb-d1f8a6a97521)  |
+| ![웹_게시글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/efe7d5cd-21a6-4326-9f1b-67601565524c) |
 
 - Footer Icon을 할당하는 코드
 
