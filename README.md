@@ -115,10 +115,24 @@ UI
 - GlobalStyle(Reset.css) / Font.css 설정
 ```
 
--방하진
+- 최연정
 
 ```
+UI
+- 404 에러 페이지
+- 팔로잉 없을 시 메인피드 페이지
+- 프로필 수정 페이지
+- 게임 게시글
+- 게임 모집글
 
+기능
+- 프로필 수정 페이지
+- 게임 게시글 작성 / 수정
+- 게임 모집글 작성
+
+기타
+- 노션 페이지 작성
+- 회고록 작성
 ```
 
 ## **4. 개발 환경 & 핵심 기술 설명**
@@ -331,25 +345,35 @@ ex) 변수: let isTrue = true; 함수: onClickHanlder() => {}
 
 ## **7. GameBuddy 기능**
 
-| 스플래시                                                                                                                    | 로그인 & 회원가입                                                                                                                 | 메인                                                                                                                      |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| ![모_스플래시2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/16df122e-46e8-464b-86cf-636a80ef31b9) | ![모_회원가입로그인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/6b85b8a9-2a59-40e7-b78f-ac3fbc65a9f5) | ![모_노메인2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/d00304c0-d326-4db3-88ba-e95075c95e71) |
+| 스플래시 | 회원가입/프로필 설정 | 로그인/메인 |
+| --- | --- | --- |
+|![모_스플래시2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/16df122e-46e8-464b-86cf-636a80ef31b9)|![모_회원가입프로필](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4cb61160-43c8-40fb-8ab0-58a31d5bb27f)|![모_로그인메인](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/1b3c8342-9c16-4c44-9412-8e9f0d37a009)|
 
-| 검색                                                                                                                    | 프로필 수정                                                                                                                   | 팔로워/팔로잉                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| ![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c19878df-4714-4126-b065-498e86f13b61) | ![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/68f0e94a-9c0b-4208-8946-5ede991576f3) | ![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/319e6475-473e-4ca0-bf5e-1a209c02b42c) |
+| 검색 | 메인 피드 |
+| --- | --- |
+|![모_검색2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/12312213-4578-4cc6-8c7e-eff2200387cc)|![모_메인](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/cbfdf831-aaf8-42de-a8bf-1bd8c67e2415)|
 
-| My profile                                                                                                                  | 게시글 작성&수정                                                                                                                  | 모집글 작성&수정                                                                                                                  |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| ![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4150f2a8-e142-461b-8943-be0c327d9f45) | ![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/ee74da5f-b452-49bb-b093-2f14f354b268) | ![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/497cd809-5621-46ee-9f16-31aa33f16ee4) |
+| 좋아요 | 댓글 삭제/신고 | 모달 닫기 |
+| --- | --- | --- |
+|![모_좋아요](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/56e490b8-0aca-4495-b519-f3cf04d5c4af)|![모_댓글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/c5ce8ecf-3883-4f06-a8a2-c4702bcf4a75)|![모_모달닫기](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/3135619e-efe8-448f-a57e-d97c80a6f728)|
 
-| 좋아요                                                                                                                   | 댓글 삭제&신고                                                                                                         | 모집인원                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| ![모_좋아요](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/be0ed8e5-83a2-42ac-9a3b-02ef2d9eac51) | ![모_댓글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/26abc209-2428-4de6-8646-d4bbc57afa98) | ![모_모집인원](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/84c013ff-b5af-4840-8a90-6767eee55e53) |
+| 채팅 | myprofile | 팔로워/팔로잉 | 프로필 수정 |
+| --- | --- | --- | --- |
+|![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/da4e14b4-36c9-4a08-8931-8fccc41e2900)|![모_myprofile](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/04d3b30a-4a44-4b3c-97f4-31ca1c398dce)|![모_팔로잉팔로우2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/0f52cd76-4e3f-4cb0-881e-e282ccd1f230)|![모_프로필수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/4ea9849b-adcb-46cc-99a8-0c78e9b7be25)|
 
-| 채팅                                                                                                                    | 404 페이지                                                                                                            | 로그아웃                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| ![모_채팅2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/7a2def46-938a-4cb2-a501-2bee866a8a10) | ![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/28b82f4d-48f5-4896-bef8-8270f71737d8) | ![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/364493d8-776f-474b-8afb-18e005d86839) |
+| 게시글 | 모집글 | 모집인원 |
+| --- | --- | --- |
+|![모_게시글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/062c7017-77ac-4035-8af2-463a04b4d4b9)|![모_모집글작성수정2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/130d01cd-fb88-4d87-94dd-63a6df6840d4)|![모_모집인원](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/b9f864e5-cc66-491b-9103-c9803bd54ed1)|
+
+| 404 | 로딩 | 로그아웃 |
+| --- | --- | --- |
+|![모_404](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/2f63d9a4-d982-4a52-ba53-39516b0518d0)|![모_로딩](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/1ebe2f8d-84db-4154-a4fd-50610c82f613)|![모_로그아웃2](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/d69630e7-f2d7-4e33-bad5-516387dd2d10)|
+
+**7-2. 웹 반응형**
+| --- |
+|![웹_메인](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/2a7d25de-874d-4426-a7bb-d1f8a6a97521)|
+|![웹_게시글](https://github.com/FRONTENDSCHOOL7/final-10-GameBuddy/assets/62794884/efe7d5cd-21a6-4326-9f1b-67601565524c)|
+
 
 ## **8. 핵심 코드**
 
@@ -558,3 +582,7 @@ export const Item = styled.button`
 ```
 
 - 최연정
+
+```
+처음 배운 리액트와 깃허브에 대해 조금이나마 익숙해진 시간이었습니다. 사실 수업에서 배운 내용을 제대로 소화하지 못했고 실력도 많이 부족해서 UI나 기능 구현에 있어서 제 역할을 잘 해냈다고는 생각하지 않지만, 좋은 팀원분들 덕분에 프로젝트 발표까지 마무리 할 수 있었다고 생각합니다. 한달 남짓한 기간동안 고생했던 팀원분들 모두에게 감사하다고 말하고 싶습니다 !
+```
