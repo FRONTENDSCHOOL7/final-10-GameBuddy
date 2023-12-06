@@ -37,8 +37,9 @@ function CommonPostList({
       : postListDataIndexAtom
   );
 
-  // Modal의 상태에 따라 스크롤을 제어합니다.
   const location = useLocation();
+  //경로에 profile이 포함되어있는지에 따라 스타일을 다르게 하기 위해 생성
+  const isProfileRoute = location.pathname.includes("/profile");
 
   useEffect(() => {
     // setCurrentLocation(currentLocation);
@@ -95,7 +96,7 @@ function CommonPostList({
   };
 
   return (
-    <S.Article isMyProfile={isMyProfile}>
+    <S.Article isProfileRoute={isProfileRoute}>
       {postData.map((post, index) => {
         return (
           <S.Section
