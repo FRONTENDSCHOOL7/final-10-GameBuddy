@@ -190,10 +190,6 @@ function CommonDetailModal() {
   return (
     <S.PostDetailBackground onClick={closeModal}>
       <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
-        {/* <S.ModalTopBar>
-          <S.CloseButton onClick={closeModal}>닫기</S.CloseButton>
-        </S.ModalTopBar> */}
-        {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile
             src={
@@ -241,7 +237,7 @@ function CommonDetailModal() {
             {getDisplayedContent()}
           </S.PostDetailContent>
           <S.TextButtonContainer>
-            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
+            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시
               <S.ShowMoreButton onClick={toggleContent}>
                 {isContentExpanded ? "접기" : "더보기"}
               </S.ShowMoreButton>
@@ -311,9 +307,6 @@ function CommonDetailModal() {
           <S.PostDetailWriteInput onChange={typingComment} value={writing} />
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
-        {/* <S.PostDetailBackButton onClick={closeModal}>
-          <img src={cancel} alt="Back" />
-        </S.PostDetailBackButton> */}
       </S.PostDetailBox>
       {isMyProfile && (
         <Modal

@@ -15,29 +15,10 @@ export const PostDetailBackground = styled.article`
   z-index: 2000;
 `;
 
-// export const ModalTopBar = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-//   padding-right: 10px;
-//   height: 40px;
-//   grid-area: modalTopBar;
-//   background-color: #2b2b32;
-//   border-radius: 15px 15px 0 0;
-//   /* border-bottom: 1px solid #635d5d; */
-//   // 필요한 경우 추가 스타일링
-// `;
-// export const CloseButton = styled.button`
-//   background: none;
-//   border: none;
-//   color: #5865f2; // 색상 조정
-//   cursor: pointer;
-//   // 기타 스타일...
-// `;
-
 export const PostDetailBox = styled.section`
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr 1fr 0.1fr; // 첫 번째 행을 ModalTopBar를 위해 추가
+  grid-template-rows: auto 1fr 1fr 0.1fr;
   grid-template-areas:
     "header"
     "content"
@@ -161,7 +142,7 @@ export const PostDetailContent = styled.p`
   line-height: 20px;
   &.isContentExpanded {
     -webkit-line-clamp: unset;
-    overflow: scroll; /* 스크롤바가 필요한 경우에만 나타나게 */
+    overflow: scroll;
     max-height: 20px;
   }
 `;
@@ -169,21 +150,21 @@ export const PostDetailContent = styled.p`
 // 더보기 버튼 구현
 export const TextButtonContainer = styled.div`
   display: flex;
-  position: relative; // 이 컨테이너에 대해 상대적 위치 설정
+  position: relative;
   align-items: center;
   max-width: 100%;
 `;
 
 export const ShowMoreButton = styled.button`
-  background: none; // 버튼 배경을 투명하게 설정
-  color: #a4a4a4; // 버튼 글자 색상 설정
-  border: none; // 테두리 없앰
-  cursor: pointer; // 마우스 오버시 포인터 모양 변경
-  font-size: 0.7rem; // 글자 크기 설정
-  text-align: center; // 글자 가운데 정렬
-  position: absolute; // 버튼을 절대 위치로 설정
+  background: none;
+  color: #a4a4a4;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  text-align: center;
+  position: absolute;
   right: 1.3rem;
-  top: 0.3rem; // 바닥에 붙여서 맞춤
+  top: 0.3rem;
 
   &:hover {
     text-decoration: underline; // 호버시 밑줄 표시
