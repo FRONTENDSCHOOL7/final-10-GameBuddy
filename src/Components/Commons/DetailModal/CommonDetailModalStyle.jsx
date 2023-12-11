@@ -15,12 +15,34 @@ export const PostDetailBackground = styled.article`
   z-index: 2000;
 `;
 
+// export const ModalTopBar = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   padding-right: 10px;
+//   height: 40px;
+//   grid-area: modalTopBar;
+//   background-color: #2b2b32;
+//   border-radius: 15px 15px 0 0;
+//   /* border-bottom: 1px solid #635d5d; */
+//   // 필요한 경우 추가 스타일링
+// `;
+// export const CloseButton = styled.button`
+//   background: none;
+//   border: none;
+//   color: #5865f2; // 색상 조정
+//   cursor: pointer;
+//   // 기타 스타일...
+// `;
+
 export const PostDetailBox = styled.section`
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr 1fr 0.1fr;
-  grid-template-areas: "header" "content" "comments" "write";
-
+  grid-template-rows: auto 1fr 1fr 0.1fr; // 첫 번째 행을 ModalTopBar를 위해 추가
+  grid-template-areas:
+    "header"
+    "content"
+    "comments"
+    "write";
   width: 90vw;
   height: 85vh;
   max-width: 350px;
@@ -324,21 +346,25 @@ export const PostDetailWriteSendButton = styled.button`
 `;
 
 export const PostDetailBackButton = styled.button`
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  border-color: white;
-  color: white;
+  width: 15px;
+  height: 5px;
   background-color: transparent;
-  line-height: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
 
   position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 50%;
+  bottom: -4%;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
 
   @media (min-width: 768px) {
-    bottom: 50px;
+    right: 50%;
+    bottom: -8%;
   }
 `;

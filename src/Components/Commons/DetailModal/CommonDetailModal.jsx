@@ -7,6 +7,7 @@ import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
 import DefaultImage from "../../../assets/image/char_inactive.png";
 import more from "../../../assets/image/icon-more.svg";
+import cancel from "../../../assets/image/icon-cancel.svg";
 
 import {
   alertStateAtom,
@@ -187,9 +188,11 @@ function CommonDetailModal() {
   };
 
   return (
-    <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
-      {/* 뒷배경 */}
+    <S.PostDetailBackground onClick={closeModal}>
       <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
+        {/* <S.ModalTopBar>
+          <S.CloseButton onClick={closeModal}>닫기</S.CloseButton>
+        </S.ModalTopBar> */}
         {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile
@@ -221,6 +224,11 @@ function CommonDetailModal() {
           ) : (
             <></>
           )}
+          <S.PostDetailHeaderImg
+            src={cancel}
+            alt="Close"
+            onClick={closeModal}
+          />
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
@@ -303,8 +311,10 @@ function CommonDetailModal() {
           <S.PostDetailWriteInput onChange={typingComment} value={writing} />
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
+        {/* <S.PostDetailBackButton onClick={closeModal}>
+          <img src={cancel} alt="Back" />
+        </S.PostDetailBackButton> */}
       </S.PostDetailBox>
-      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
       {isMyProfile && (
         <Modal
           isMyProfile={isMyProfile}
