@@ -7,6 +7,7 @@ import comment from "../../../assets/image/icon-comment.svg";
 import close from "../../../assets/image/icon-close.svg";
 import DefaultImage from "../../../assets/image/char_inactive.png";
 import more from "../../../assets/image/icon-more.svg";
+import cancel from "../../../assets/image/icon-cancel.svg";
 
 import {
   alertStateAtom,
@@ -187,10 +188,8 @@ function CommonDetailModal() {
   };
 
   return (
-    <S.PostDetailBackground onClick={() => setIsOptionModalVisible(false)}>
-      {/* 뒷배경 */}
+    <S.PostDetailBackground onClick={closeModal}>
       <S.PostDetailBox onClick={(e) => e.stopPropagation()}>
-        {/* 내용 표시할 화면 */}
         <S.PostDetailHeaderWrapper>
           <S.PostDetailHeaderProfile
             src={
@@ -221,6 +220,11 @@ function CommonDetailModal() {
           ) : (
             <></>
           )}
+          <S.PostDetailHeaderImg
+            src={cancel}
+            alt="Close"
+            onClick={closeModal}
+          />
         </S.PostDetailHeaderWrapper>
 
         <S.PostDetailContentWrapper>
@@ -233,7 +237,7 @@ function CommonDetailModal() {
             {getDisplayedContent()}
           </S.PostDetailContent>
           <S.TextButtonContainer>
-            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시합니다.
+            {data.content.length > 37 && ( // 글자 수가 100을 초과하는 경우에만 "더보기" 버튼을 표시
               <S.ShowMoreButton onClick={toggleContent}>
                 {isContentExpanded ? "접기" : "더보기"}
               </S.ShowMoreButton>
@@ -304,7 +308,6 @@ function CommonDetailModal() {
           <S.PostDetailWriteSendButton>게시</S.PostDetailWriteSendButton>
         </S.PostDetailWriteForm>
       </S.PostDetailBox>
-      <S.PostDetailBackButton onClick={closeModal}>X</S.PostDetailBackButton>
       {isMyProfile && (
         <Modal
           isMyProfile={isMyProfile}

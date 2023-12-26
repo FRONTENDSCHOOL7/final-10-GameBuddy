@@ -19,8 +19,11 @@ export const PostDetailBox = styled.section`
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr 1fr 0.1fr;
-  grid-template-areas: "header" "content" "comments" "write";
-
+  grid-template-areas:
+    "header"
+    "content"
+    "comments"
+    "write";
   width: 90vw;
   height: 85vh;
   max-width: 350px;
@@ -139,7 +142,7 @@ export const PostDetailContent = styled.p`
   line-height: 20px;
   &.isContentExpanded {
     -webkit-line-clamp: unset;
-    overflow: scroll; /* 스크롤바가 필요한 경우에만 나타나게 */
+    overflow: scroll;
     max-height: 20px;
   }
 `;
@@ -147,21 +150,21 @@ export const PostDetailContent = styled.p`
 // 더보기 버튼 구현
 export const TextButtonContainer = styled.div`
   display: flex;
-  position: relative; // 이 컨테이너에 대해 상대적 위치 설정
+  position: relative;
   align-items: center;
   max-width: 100%;
 `;
 
 export const ShowMoreButton = styled.button`
-  background: none; // 버튼 배경을 투명하게 설정
-  color: #a4a4a4; // 버튼 글자 색상 설정
-  border: none; // 테두리 없앰
-  cursor: pointer; // 마우스 오버시 포인터 모양 변경
-  font-size: 0.7rem; // 글자 크기 설정
-  text-align: center; // 글자 가운데 정렬
-  position: absolute; // 버튼을 절대 위치로 설정
+  background: none;
+  color: #a4a4a4;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  text-align: center;
+  position: absolute;
   right: 1.3rem;
-  top: 0.3rem; // 바닥에 붙여서 맞춤
+  top: 0.3rem;
 
   &:hover {
     text-decoration: underline; // 호버시 밑줄 표시
@@ -324,21 +327,25 @@ export const PostDetailWriteSendButton = styled.button`
 `;
 
 export const PostDetailBackButton = styled.button`
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  border-color: white;
-  color: white;
+  width: 15px;
+  height: 5px;
   background-color: transparent;
-  line-height: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
 
   position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 50%;
+  bottom: -4%;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
 
   @media (min-width: 768px) {
-    bottom: 50px;
+    right: 50%;
+    bottom: -8%;
   }
 `;

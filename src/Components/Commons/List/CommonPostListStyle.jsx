@@ -9,11 +9,11 @@ export const Article = styled.article`
   align-items: center;
   gap: 18px;
   padding-top: ${(props) =>
-    props.isMyProfile
+    props.isProfileRoute
       ? "15px"
       : "80px"}; //첫번째 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   padding-bottom: ${(props) =>
-    props.isMyProfile
+    props.isProfileRoute
       ? "15px"
       : "80px"}; //마지막 게시글 바닥이 잘리는 문제를 해결하기 위해 넣음
   width: 100%;
